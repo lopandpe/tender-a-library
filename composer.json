@@ -1,0 +1,17 @@
+{
+    "name": "pedro/tender-a-library",
+    "autoload": {
+        "psr-4": {
+            "Pedro\\TenderALibrary\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Pedro López",
+            "email": "pedrolopez@andradas.es"
+        }
+    ],
+    "require": {
+        "htmlburger/carbon-fields": "^3.6"
+    }
+}
