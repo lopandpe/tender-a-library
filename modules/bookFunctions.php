@@ -15,6 +15,7 @@ function mgd_disable_gutenberg($current_status, $post_type)
 
 
 
+//Generate signature
 add_action('carbon_fields_post_meta_container_saved', 'save_tender_book_signature_on_creation');
 function save_tender_book_signature_on_creation($post_id)
 {
@@ -46,10 +47,49 @@ function generate_tender_sig1($author)
 	$signature = mb_substr($author, 0, 3);
 	return strtoupper($signature);
 }
+
 function generate_tender_sig2($title)
 {
 	$title = remove_accents($title);
 	$shortened_title = preg_replace("/^(el|lo|la|los|las|un|una|uno|unos|un|the|a|si)\b\ */i", "", strtolower($title));
 	$signature = substr($shortened_title, 0, 3);
 	return strtolower($signature);
+}
+
+add_action('carbon_fields_post_meta_container_saved', 'save_tender_taxonomies_to_categories', 10, 2);
+
+function save_tender_taxonomies_to_categories($post_id, $container)
+{
+	$association_field = "tender_book_section"; //your association field
+	$custom_tax = "tender_section"; //your taxonomy
+	// Check if this is an autosave
+	if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+		return;
+	}
+
+	// Check if current user can edit post
+	if (!current_user_can('edit_post', $post_id)) {
+		return;
+	}
+
+	update_tender_term_association($post_id, "tender_book_section", "tender_section");
+	update_tender_term_association($post_id, "tender_book_language", "tender_language");
+}
+
+function update_tender_term_association($post_id, $association_field, $custom_tax)
+{
+
+	$bnc_terms = carbon_get_post_meta($post_id, $association_field);
+	$terms = [];
+	if (is_array($bnc_terms) && count($bnc_terms)) {
+		foreach ($bnc_terms as $term) {
+			$terms[] = (int) $term['id'];
+		}
+
+
+		// Update post categories with BNC terms
+		wp_set_object_terms($post_id, $terms, $custom_tax);
+	} else {
+		wp_set_object_terms($post_id, [], $custom_tax);
+	}
 }

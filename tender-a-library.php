@@ -15,7 +15,10 @@ use Carbon_Fields\Carbon_Fields;
  * @package         Tender_A_Library
  */
 
-// Your code starts here.
+
+
+require_once  __DIR__ . '/modules/db/installDBFunctions.php';
+register_activation_hook(__FILE__, 'tender_create_database_tables');
 
 function tender_bootstrap()
 {
@@ -27,6 +30,7 @@ function tender_bootstrap()
 	if (file_exists(__DIR__ . '/bootstrap/TenderBootstrap.php')) {
 		require_once  __DIR__ . '/bootstrap/TenderBootstrap.php';
 		require_once __DIR__ . '/vendor/autoload.php';
+		require_once('carbon-fields/vendor/autoload.php');
 		Carbon_Fields::boot();
 
 		$bootstrapApp = new TenderBootstrap(array(
@@ -36,6 +40,17 @@ function tender_bootstrap()
 			"modules/bookCapabilities",
 			"modules/openerUserFunctions",
 			"modules/tender-book/tenderBookFields",
+			"modules/tender-book/tenderBookTaxonomiesFields",
+			"modules/adminStyles",
+			"modules/profile/profilePage",
+			"modules/profile/editProfilePage",
+			"modules/permalinks",
+			"modules/restrictDashboard",
+			"modules/lendings/lendingFunctions",
+			"modules/lendings/tenderMenu",
+			"modules/lendings/tenderMenuCover",
+			"modules/lendings/tenderMenuLendings",
+			"modules/lendings/tenderMenuNewLending",
 		));
 
 		$bootstrapApp->start();
