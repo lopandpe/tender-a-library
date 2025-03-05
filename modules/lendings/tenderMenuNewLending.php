@@ -25,10 +25,13 @@ function tender_new_lending_page()
 			<button type="submit">Registrar Préstamo</button>
 		</form>
 		<div id="response-message"></div>
+		<a href="http://localhost:10008/wp-admin/user-new.php" target="_blank">Crear nuevo usuario</a>
 	</div>
 
 	<script>
 		jQuery(document).ready(function($) {
+			$('#return-date').val(new Date().toISOString().split('T')[0]);
+
 			function searchBooks(query) {
 				$.post(ajaxurl, {
 					action: 'tender_search_books',

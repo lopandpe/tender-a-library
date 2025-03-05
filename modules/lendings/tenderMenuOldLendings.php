@@ -5,11 +5,11 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
-function tender_lendings_page()
+function tender_old_lendings_page()
 {
 ?>
 	<div class="wrap">
-		<h1>Préstamos Activos</h1>
+		<h1>Préstamos Pasados</h1>
 		<input type="text" id="search-lendings" placeholder="Buscar por usuario o libro..." style="width: 300px;">
 		<div id="lendings-list"></div>
 	</div>
@@ -18,7 +18,7 @@ function tender_lendings_page()
 		jQuery(document).ready(function($) {
 			function loadLendings(query = '') {
 				$.post(ajaxurl, {
-					action: 'tender_search_lendings',
+					action: 'tender_search_old_lendings',
 					query: query
 				}, function(response) {
 					$('#lendings-list').html(response);
@@ -37,7 +37,7 @@ function tender_lendings_page()
 }
 
 
-function tender_search_lendings()
+function tender_search_old_lendings()
 {
 	global $wpdb;
 	$query = isset($_POST['query']) ? sanitize_text_field($_POST['query']) : '';
@@ -46,7 +46,7 @@ function tender_search_lendings()
             FROM {$wpdb->prefix}tender_lendings l
             JOIN {$wpdb->prefix}posts b ON l.book_id = b.ID
             JOIN {$wpdb->prefix}users u ON l.user_id = u.ID
-            WHERE l.returned = 0";
+            WHERE l.returned = 1";
 
 	if (!empty($query)) {
 		$sql .= " AND (b.post_title LIKE '%$query%' OR u.display_name LIKE '%$query%')";
@@ -58,29 +58,9 @@ function tender_search_lendings()
 
 	if ($results) {
 		echo '<table class="widefat">';
-		echo '
-			<thead>
-				<tr>
-					<th>Libro</th>
-					<th>Usuario</th>
-					<th>Fecha Préstamo</th>
-					<th>Fecha Límite</th>
-					<th>Acciones</th>
-				</tr>
-			</thead>
-			<tbody>';
+		echo '<thead><tr><th>Libro</th><th>Usuario</th><th>Fecha Préstamo</th><th>Fecha Límite</th></tr></thead><tbody>';
 		foreach ($results as $row) {
-			echo "
-				<tr id='{$row->id}'>
-					<td>{$row->post_title}</td>
-					<td>{$row->display_name}</td>
-					<td>{$row->lending_date}</td>
-					<td>{$row->stimated_return_date}</td>
-					<td>
-						<button class='lending-action lending-return' id='lending-{$row->id}'>Devolver</button>
-						<button class='lending-action lending-renew''>Renovar</button>
-					</td>
-				</tr>";
+			echo "<tr><td>{$row->post_title}</td><td>{$row->display_name}</td><td>{$row->lending_date}</td><td>{$row->stimated_return_date}</td></tr>";
 		}
 		echo '</tbody></table>';
 	} else {

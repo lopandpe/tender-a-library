@@ -32,6 +32,14 @@ function tender_library_menu()
 		'tender-lendings',
 		'tender_lendings_page'
 	);
+	add_submenu_page(
+		'tender-library',
+		'Préstamos Pasados',
+		'Préstamos terminados',
+		'read',
+		'tender-old-lendings',
+		'tender_old_lendings_page'
+	);
 
 	add_submenu_page(
 		'tender-library',

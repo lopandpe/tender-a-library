@@ -170,7 +170,10 @@ function tender_search_books()
 
 	$options = '';
 	foreach ($books as $book) {
-		$options .= "<option value='{$book->ID}'>{$book->post_title}</option>";
+		$author = carbon_get_post_meta($book->ID, 'tender_book_author');
+		$year = carbon_get_post_meta($book->ID, 'tender_book_year');
+		$year = $year ? "[$year]" : '';
+		$options .= "<option value='{$book->ID}'>{$book->post_title} ({$author} {$year})</option>";
 	}
 
 	echo $options;

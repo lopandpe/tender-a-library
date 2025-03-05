@@ -51,6 +51,7 @@ function tender_bootstrap()
 			"modules/lendings/tenderMenuCover",
 			"modules/lendings/tenderMenuLendings",
 			"modules/lendings/tenderMenuNewLending",
+			"modules/lendings/tenderMenuOldLendings",
 		));
 
 		$bootstrapApp->start();
