@@ -41,7 +41,7 @@ function tender_bootstrap()
 			"modules/openerUserFunctions",
 			"modules/tender-book/tenderBookFields",
 			"modules/tender-book/tenderBookTaxonomiesFields",
-			"modules/adminStyles",
+			"modules/tenderStyles",
 			"modules/profile/profilePage",
 			"modules/profile/editProfilePage",
 			"modules/permalinks",

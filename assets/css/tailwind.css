@@ -1,0 +1,5 @@
+@import "tailwindcss";
+
+.tender-button{
+	@apply text-center mr-2 cursor-pointer rounded-md py-2 px-3 font-sans !text-xs font-bold uppercase text-white hover:opacity-[0.95] active:opacity-[0.85];
+}

@@ -1,17 +1,36 @@
-
 {
   "name": "tender-a-library",
   "version": "0.1.0",
   "main": "Gruntfile.js",
   "author": "Local Anarquista Magdalena",
-  "scripts" : {
-    "start" : "grunt default" ,
-    "readme" : "grunt readme",
-    "i18n" : "grunt i18n"
+  "scripts": {
+    "build": "npx tailwindcss -i ./assets/css/tailwind.css -o ./css/tender-public.css --minify && npx tailwindcss -i ./assets/css/tailwind.css -o ./css/tender-admin.css --minify",
+    "watch": "npx tailwindcss -i ./assets/css/tailwind.css -o ./css/tender-public.css --minify && npx tailwindcss -i ./assets/css/tailwind.css -o ./css/tender-admin.css --watch"
   },
   "devDependencies": {
+    "autoprefixer": "^10.4.20",
     "grunt": "~0.4.5",
     "grunt-wp-i18n": "~0.5.0",
-    "grunt-wp-readme-to-markdown": "~1.0.0"
+    "grunt-wp-readme-to-markdown": "~1.0.0",
+    "postcss": "^8.5.3",
+    "tailwindcss": "^4.0.9"
+  },
+  "description": "=== Plugin Biblioteca (A) === Contributors: (this should be a list of wordpress.org userid's) Donate link: https://example.com/ Tags: comments, spam Requires at least: 4.5 Tested up to: 6.7.1 Requires PHP: 5.6 Stable tag: 0.1.0 License: GPLv2 or later License URI: https://www.gnu.org/licenses/gpl-2.0.html",
+  "directories": {
+    "test": "tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/lopandpe-personal-projects/tender-a-library.git"
+  },
+  "keywords": [],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://bitbucket.org/lopandpe-personal-projects/tender-a-library/issues"
+  },
+  "homepage": "https://bitbucket.org/lopandpe-personal-projects/tender-a-library#readme",
+  "dependencies": {
+    "@tailwindcss/cli": "^4.0.9",
+    "@tailwindcss/postcss": "^4.0.9"
   }
 }

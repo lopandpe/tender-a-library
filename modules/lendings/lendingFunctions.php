@@ -27,9 +27,14 @@ function tender_create_lending($book_id, $user_id, $stimated_return_date, $old_l
 }
 
 
-function tender_register_renewal($lending_id, $new_return_date)
+function tender_register_renewal($lending_id, $new_return_date = null)
 {
 	global $wpdb;
+
+	// Si no se ha proporcionado una nueva fecha de retorno, calculamos 21 días a partir de hoy
+	if (empty($new_return_date)) {
+		$new_return_date = date('Y-m-d', strtotime('+21 days'));  // Calcula la fecha 21 días después de hoy
+	}
 
 	// Obtener el número de extensiones previas
 	$extensions = $wpdb->get_var($wpdb->prepare(
@@ -42,8 +47,7 @@ function tender_register_renewal($lending_id, $new_return_date)
 		TENDER_TABLE_RENEWALS,
 		[
 			'lending_id' => $lending_id,
-			'extensions' => $extensions + 1,
-			'extension_date' => $new_return_date
+			'renewal_date' => $new_return_date
 		],
 		['%d', '%d', '%s']
 	);
@@ -51,7 +55,10 @@ function tender_register_renewal($lending_id, $new_return_date)
 	// Actualizar fecha estimada de devolución en `tender_lendings`
 	$wpdb->update(
 		TENDER_TABLE_LENDINGS,
-		['stimated_return_date' => $new_return_date],
+		[
+			'stimated_return_date' => $new_return_date,
+			'extensions' => $extensions + 1,
+		],
 		['id' => $lending_id],
 		['%s'],
 		['%d']
@@ -59,6 +66,7 @@ function tender_register_renewal($lending_id, $new_return_date)
 
 	return $wpdb->insert_id;
 }
+
 
 /**
  * Marcar préstamo como devuelto
@@ -248,3 +256,38 @@ function tender_create_lending_ajax()
 		wp_send_json_error(['message' => 'Error al registrar el préstamo']);
 	}
 }
+
+function tender_handle_lending_action()
+{
+	global $wpdb;
+
+	$lending_id = isset($_POST['lending_id']) ? intval($_POST['lending_id']) : 0;
+	$action_type = isset($_POST['action_type']) ? sanitize_text_field($_POST['action_type']) : '';
+
+	if ($lending_id && in_array($action_type, ['return', 'renew'])) {
+		if ($action_type == 'return') {
+			// Marcar como devuelto
+			// Actualizar el campo "returned" a 1
+			if (tender_mark_as_returned($lending_id)) {
+				$message = 'Préstamo devuelto correctamente.';
+			} else {
+				$message = 'No se pudo devolver el préstamo.';
+			}
+		} elseif ($action_type == 'renew') {
+			// Obtener la fecha actual de "stimated_return_date" y sumarle 3 semanas
+			if (tender_register_renewal($lending_id)) {
+				$new_date = date('d/m/Y', strtotime('+21 days'));
+				$message = 'Préstamo renovado correctamente. Nueva fecha de devolución: ' . $new_date;
+			} else {
+				$message = 'No se pudo renovar el préstamo.';
+			}
+		}
+
+		wp_send_json_success(['message' => $message]);
+	} else {
+		wp_send_json_error(['message' => 'No se pudo realizar la acción.']);
+	}
+
+	wp_die();
+}
+add_action('wp_ajax_tender_handle_lending_action', 'tender_handle_lending_action');
