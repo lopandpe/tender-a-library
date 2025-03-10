@@ -29,6 +29,8 @@ function tender_create_lending($book_id, $user_id, $stimated_return_date, $old_l
 
 function tender_register_renewal($lending_id, $new_return_date = null)
 {
+
+
 	global $wpdb;
 
 	// Si no se ha proporcionado una nueva fecha de retorno, calculamos 21 días a partir de hoy

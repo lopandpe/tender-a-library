@@ -124,6 +124,8 @@ function tender_render_lending_page($args)
 					$('#confirmation-modal').show();
 					$('#modal-message').text(message);
 					$('#confirm-action').data('lending-id', lendingId).data('action', action);
+					console.log($('#confirm-action'));
+
 				});
 
 				// Confirmar acción en el modal
@@ -189,23 +191,33 @@ function tender_old_lendings_page()
  */
 function tender_search_lendings()
 {
-	if (! defined('ABSPATH')) {
-		wp_send_json_error('Acceso no autorizado');
-		wp_die();
-	}
+	tender_search_lendings_common('tender_search_lendings', 0);
+}
+add_action('wp_ajax_tender_search_lendings', 'tender_search_lendings');
 
+/**
+ * AJAX: Buscar préstamos finalizados.
+ */
+function tender_search_old_lendings()
+{
+	tender_search_lendings_common('tender_search_old_lendings', 1);
+}
+add_action('wp_ajax_tender_search_old_lendings', 'tender_search_old_lendings');
+
+function tender_search_lendings_common($action, $returned)
+{
 	global $wpdb;
 
 	$query    = isset($_POST['query']) ? sanitize_text_field($_POST['query']) : '';
 	$page     = max(1, isset($_POST['page']) ? intval($_POST['page']) : 1);
 	$per_page = 25;
 
-	$sql    = "SELECT l.id, u.ID as user_id, u.user_nicename, u.display_name, b.post_title, l.lending_date, l.stimated_return_date
+	$sql    = "SELECT l.id, u.ID as user_id, u.user_nicename, u.display_name, b.post_title, l.lending_date, l.stimated_return_date, l.extensions as renewals
                FROM {$wpdb->prefix}tender_lendings l
                JOIN {$wpdb->prefix}posts b ON l.book_id = b.ID
                JOIN {$wpdb->prefix}users u ON l.user_id = u.ID
-               WHERE l.returned = 0";
-	$params = array();
+               WHERE l.returned = %d";
+	$params = array($returned);
 
 	if (! empty($query)) {
 		$sql      .= " AND (b.post_title LIKE %s OR u.display_name LIKE %s)";
@@ -231,8 +243,8 @@ function tender_search_lendings()
                      FROM {$wpdb->prefix}tender_lendings l
                      JOIN {$wpdb->prefix}posts b ON l.book_id = b.ID
                      JOIN {$wpdb->prefix}users u ON l.user_id = u.ID
-                     WHERE l.returned = 0";
-	$count_params = array();
+                     WHERE l.returned = %d";
+	$count_params = array($returned);
 
 	if (! empty($query)) {
 		$count_sql     .= " AND (b.post_title LIKE %s OR u.display_name LIKE %s)";
@@ -245,85 +257,14 @@ function tender_search_lendings()
 	$total_pages        = ceil($total_items / $per_page);
 
 	if ($results) {
-		echo render_lendings_table($results);
+		echo $action === 'tender_search_lendings' ? render_lendings_table($results) : render_old_lendings_table($results);
 		echo render_pagination($page, $total_pages);
 	} else {
-		echo '<p class="text-gray-500">' . esc_html__('No active loans found.', 'tender-plugin') . '</p>';
+		echo '<p class="text-gray-500">' . esc_html__('No loans found.', 'tender-plugin') . '</p>';
 	}
 
 	wp_die();
 }
-add_action('wp_ajax_tender_search_lendings', 'tender_search_lendings');
-
-/**
- * AJAX: Buscar préstamos finalizados.
- */
-function tender_search_old_lendings()
-{
-	if (! defined('ABSPATH')) {
-		wp_send_json_error('Acceso no autorizado');
-		wp_die();
-	}
-
-	global $wpdb;
-
-	$query    = isset($_POST['query']) ? sanitize_text_field($_POST['query']) : '';
-	$page     = max(1, isset($_POST['page']) ? intval($_POST['page']) : 1);
-	$per_page = 25;
-
-	$sql    = "SELECT l.id, u.ID as user_id, u.user_nicename, u.display_name, b.post_title, l.lending_date, l.stimated_return_date, l.extensions as renewals
-               FROM {$wpdb->prefix}tender_lendings l
-               JOIN {$wpdb->prefix}posts b ON l.book_id = b.ID
-               JOIN {$wpdb->prefix}users u ON l.user_id = u.ID
-               WHERE l.returned = 1";
-	$params = array();
-
-	if (! empty($query)) {
-		$sql      .= " AND (b.post_title LIKE %s OR u.display_name LIKE %s)";
-		$like_term = '%' . $wpdb->esc_like($query) . '%';
-		$params[]  = $like_term;
-		$params[]  = $like_term;
-	}
-
-	$sql      .= " ORDER BY l.stimated_return_date DESC LIMIT %d OFFSET %d";
-	$params[]  = $per_page;
-	$params[]  = ($page - 1) * $per_page;
-
-	$prepared_sql = $wpdb->prepare($sql, $params);
-	$results      = $wpdb->get_results($prepared_sql);
-
-	if ($wpdb->last_error) {
-		wp_send_json_error('Database error: ' . $wpdb->last_error);
-		wp_die();
-	}
-
-	$count_sql    = "SELECT COUNT(*)
-                     FROM {$wpdb->prefix}tender_lendings l
-                     JOIN {$wpdb->prefix}posts b ON l.book_id = b.ID
-                     JOIN {$wpdb->prefix}users u ON l.user_id = u.ID
-                     WHERE l.returned = 1";
-	$count_params = array();
-
-	if (! empty($query)) {
-		$count_sql     .= " AND (b.post_title LIKE %s OR u.display_name LIKE %s)";
-		$count_params[] = $like_term;
-		$count_params[] = $like_term;
-	}
-
-	$prepared_count_sql = $wpdb->prepare($count_sql, $count_params);
-	$total_items        = $wpdb->get_var($prepared_count_sql);
-	$total_pages        = ceil($total_items / $per_page);
-
-	if ($results) {
-		echo render_old_lendings_table($results);
-		echo render_pagination($page, $total_pages);
-	} else {
-		echo '<p class="text-gray-500">' . esc_html__('No active loans found.', 'tender-plugin') . '</p>';
-	}
-
-	wp_die();
-}
-add_action('wp_ajax_tender_search_old_lendings', 'tender_search_old_lendings');
 
 /**
  * Renderizar la paginación.

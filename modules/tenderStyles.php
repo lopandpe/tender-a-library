@@ -5,33 +5,29 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
-function tender_load_admin_styles()
+function tender_load_styles()
 {
-	wp_enqueue_style(
-		'tender-admin-style', // Unique identifier
-		plugin_dir_url(__FILE__) . '../css/admin-style.css', // Path to the CSS file
-		array(), // Dependencies (if any)
-		'1.0', // Version
-		'all' // Media type
-	);
-	wp_enqueue_style(
-		'tender-admin-tailwind-style', // Unique identifier
-		plugin_dir_url(__FILE__) . '../css/tender-admin.css', // Path to the CSS file
-		array(), // Dependencies (if any)
-		'1.0', // Version
-		'all' // Media type
-	);
-}
-add_action('admin_enqueue_scripts', 'tender_load_admin_styles', 1);
+	$styles = [
+		'admin' => [
+			'tender-admin-style' => 'css/admin-style.css',
+			'tender-admin-tailwind-style' => 'css/tender-admin.css',
+		],
+		'public' => [
+			'tender-public-style-tailwind' => 'css/tender-public.css',
+		],
+	];
 
-function tender_load_public_styles()
-{
-	wp_enqueue_style(
-		'tender-public-style-tailwind', // Unique identifier
-		plugin_dir_url(__FILE__) . '../css/tender-public.css', // Path to the CSS file
-		array(), // Dependencies (if any)
-		'1.0', // Version
-		'all' // Media type
-	);
+	foreach ($styles as $context => $style_set) {
+		foreach ($style_set as $handle => $path) {
+			wp_enqueue_style(
+				$handle,
+				plugin_dir_url(__FILE__) . '../' . $path,
+				[],
+				'1.0',
+				'all'
+			);
+		}
+	}
 }
-add_action('wp_enqueue_scripts', 'tender_load_public_styles', 1);
+add_action('admin_enqueue_scripts', 'tender_load_styles', 1);
+add_action('wp_enqueue_scripts', 'tender_load_styles', 1);
