@@ -84,8 +84,7 @@ function tender_save_permalink_settings()
 	$fields = ['permalink_structure', 'tender_book_slug', 'tender_section_slug', 'tender_language_slug', 'tal_profile_page', 'tal_edit_profile_page'];
 	$isAnyFieldSet = false;
 
-
-
+	// Verificar si se ha establecido algún campo
 	foreach ($fields as $field) {
 		if (isset($_POST[$field])) {
 			if (!isset($_POST['_wpnonce']) || !wp_verify_nonce($_POST['_wpnonce'], 'update-permalink')) {
@@ -95,11 +94,14 @@ function tender_save_permalink_settings()
 			update_option($field, sanitize_text_field($_POST[$field]));
 		}
 	}
+
+	// Si se ha actualizado algún campo, actualizar las reglas de reescritura
 	if ($isAnyFieldSet) {
 		flush_rewrite_rules();
 	}
 }
 add_action('admin_init', 'tender_save_permalink_settings', 20);
+
 
 // Callback para mostrar el selector de páginas
 function tal_profile_page_callback()

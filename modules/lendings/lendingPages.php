@@ -124,8 +124,6 @@ function tender_render_lending_page($args)
 					$('#confirmation-modal').show();
 					$('#modal-message').text(message);
 					$('#confirm-action').data('lending-id', lendingId).data('action', action);
-					console.log($('#confirm-action'));
-
 				});
 
 				// Confirmar acción en el modal
@@ -212,7 +210,7 @@ function tender_search_lendings_common($action, $returned)
 	$page     = max(1, isset($_POST['page']) ? intval($_POST['page']) : 1);
 	$per_page = 25;
 
-	$sql    = "SELECT l.id, u.ID as user_id, u.user_nicename, u.display_name, b.post_title, l.lending_date, l.stimated_return_date, l.extensions as renewals
+	$sql    = "SELECT l.id, u.ID as user_id, u.user_nicename, u.display_name, b.post_title, l.lending_date, l.stimated_return_date
                FROM {$wpdb->prefix}tender_lendings l
                JOIN {$wpdb->prefix}posts b ON l.book_id = b.ID
                JOIN {$wpdb->prefix}users u ON l.user_id = u.ID
@@ -355,21 +353,21 @@ function render_lendings_table($results)
 				} catch (Exception $e) {
 					$formatted_date = 'Fecha inválida';
 				}
-				$user_profile = get_author_posts_url($row->user_id, $row->user_nicename);
+				$user_profile = get_user_profile_url_by_id($row->user_id);
 			?>
-				<tr id="<?php echo esc_attr($row->id); ?>">
-					<td class="p-2 border-b border-slate-200"><?php echo esc_html($row->post_title); ?></td>
-					<td class="p-2 border-b border-slate-200"><a href="<?php echo esc_url($user_profile); ?>"><?php echo esc_html($row->display_name); ?></a></td>
-					<td class="p-2 border-b border-slate-200"><?php echo esc_html($row->lending_date); ?></td>
-					<td class="p-2 border-b border-slate-200"><?php echo esc_html($formatted_date); ?></td>
-					<td class="p-2 border-b border-slate-200">
-						<button class="bg-red-500 lending-action lending-return tender-button" data-action="return" data-id="<?php echo esc_attr($row->id); ?>">
-							Devolver
-						</button>
-						<button class="bg-orange-500 lending-action lending-renew tender-button" data-action="renew" data-id="<?php echo esc_attr($row->id); ?>">
-							Renovar
-						</button>
-					</td>
+				<tr id="<?php echo esc_attr($row->id); ?>"></tr>
+				<td class="p-2 border-b border-slate-200"><?php echo esc_html($row->post_title); ?></td>
+				<td class="p-2 border-b border-slate-200"><a href="<?php echo esc_url($user_profile); ?>"><?php echo esc_html($row->display_name); ?></a></td>
+				<td class="p-2 border-b border-slate-200"><?php echo esc_html($row->lending_date); ?></td>
+				<td class="p-2 border-b border-slate-200"><?php echo esc_html($formatted_date); ?></td>
+				<td class="p-2 border-b border-slate-200">
+					<button class="bg-red-500 lending-action lending-return tender-button" data-action="return" data-id="<?php echo esc_attr($row->id); ?>">
+						Devolver
+					</button>
+					<button class="bg-orange-500 lending-action lending-renew tender-button" data-action="renew" data-id="<?php echo esc_attr($row->id); ?>">
+						Renovar
+					</button>
+				</td>
 				</tr>
 			<?php endforeach; ?>
 		</tbody>
@@ -413,7 +411,7 @@ function render_old_lendings_table($results)
 				} catch (Exception $e) {
 					$formatted_date = 'Fecha inválida';
 				}
-				$user_profile = get_author_posts_url($row->user_id, $row->user_nicename);
+				$user_profile = get_user_profile_url_by_id($row->user_id);
 			?>
 				<tr id="<?php echo esc_attr($row->id); ?>">
 					<td class="p-2 border-b border-slate-200"><?php echo esc_html($row->post_title); ?></td>
