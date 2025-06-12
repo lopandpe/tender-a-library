@@ -8,16 +8,16 @@ function tender_add_permalink_settings()
 {
 	add_settings_section(
 		'tender_permalink_section',
-		__('Configuración de la biblioteca', 'tender-a-library'),
+		__('Library settings', 'tender-a-library'),
 		function () {
-			echo '<p>' . __('Configura los slugs para los libros y sus taxonomías.', 'tender-a-library') . '</p>';
+			echo '<p>' . __('Set up slugs for books and their taxonomies.', 'tender-a-library') . '</p>';
 		},
 		'permalink'
 	);
 
 	add_settings_field(
 		'tender_book_slug',
-		__('Slug para los libros', 'tender-a-library'),
+		__('Slug for books', 'tender-a-library'),
 		function () {
 			$value = get_option('tender_book_slug', 'libro');
 			echo '<input type="text" name="tender_book_slug" value="' . esc_attr($value) . '" class="regular-text" />';
@@ -28,7 +28,7 @@ function tender_add_permalink_settings()
 
 	add_settings_field(
 		'tender_section_slug',
-		__('Slug para las secciones de la biblioteca', 'tender-a-library'),
+		__('Slug for library sections', 'tender-a-library'),
 		function () {
 			$value = get_option('tender_section_slug', 'seccion-biblioteca');
 			echo '<input type="text" name="tender_section_slug" value="' . esc_attr($value) . '" class="regular-text" />';
@@ -39,7 +39,7 @@ function tender_add_permalink_settings()
 
 	add_settings_field(
 		'tender_language_slug',
-		__('Slug para los idiomas', 'tender-a-library'),
+		__('Slug for languages', 'tender-a-library'),
 		function () {
 			$value = get_option('tender_language_slug', 'idioma-biblioteca');
 			echo '<input type="text" name="tender_language_slug" value="' . esc_attr($value) . '" class="regular-text" />';
@@ -138,3 +138,28 @@ function tender_deactivate()
 	flush_rewrite_rules(); // Flush rewrite rules
 }
 register_deactivation_hook(__FILE__, 'tender_deactivate');
+
+function tender_add_body_classes($classes)
+{
+	// Obtener la página de perfil y de edición de perfil desde la configuración
+	$profile_page_id = get_option('tal_profile_page');
+	$edit_profile_page_id = get_option('tal_edit_profile_page');
+
+	// Verificar si es la página de perfil o la de edición de perfil
+	if (is_page($profile_page_id)) {
+		$classes[] = 'tender-page tender-profile-page';
+	}
+
+	if (is_page($edit_profile_page_id)) {
+		$classes[] = 'tender-page tender-edit-profile-page';
+	}
+
+	// Verificar si estamos en un CPT de libros
+	$book_slug = get_option('tender_book_slug', 'libro');
+	if (is_singular('tender_book') || is_post_type_archive('tender_section')) {
+		$classes[] = 'tender-page tender-book-page';
+	}
+
+	return $classes;
+}
+add_filter('body_class', 'tender_add_body_classes');

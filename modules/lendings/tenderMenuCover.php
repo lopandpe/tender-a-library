@@ -7,7 +7,7 @@ if (!defined('ABSPATH')) {
 function tender_library_dashboard()
 {
 	if (!tender_user_can_access_library()) {
-		wp_die(__('No tienes permiso para acceder a esta página.'));
+		wp_die(__('You do not have permission to access this page.', 'tender-a-library'));
 	}
 ?>
 	<div class="wrap">

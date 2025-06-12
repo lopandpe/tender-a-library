@@ -357,7 +357,7 @@ function render_lendings_table($results)
 			?>
 				<tr id="<?php echo esc_attr($row->id); ?>"></tr>
 				<td class="p-2 border-b border-slate-200"><?php echo esc_html($row->post_title); ?></td>
-				<td class="p-2 border-b border-slate-200"><a href="<?php echo esc_url($user_profile); ?>"><?php echo esc_html($row->display_name); ?></a></td>
+				<td class="p-2 border-b border-slate-200"><a href="<?php echo esc_url(is_array($user_profile) ? $user_profile['profile'] : ''); ?>"><?php echo esc_html($row->display_name); ?></a></td>
 				<td class="p-2 border-b border-slate-200"><?php echo esc_html($row->lending_date); ?></td>
 				<td class="p-2 border-b border-slate-200"><?php echo esc_html($formatted_date); ?></td>
 				<td class="p-2 border-b border-slate-200">
@@ -415,7 +415,7 @@ function render_old_lendings_table($results)
 			?>
 				<tr id="<?php echo esc_attr($row->id); ?>">
 					<td class="p-2 border-b border-slate-200"><?php echo esc_html($row->post_title); ?></td>
-					<td class="p-2 border-b border-slate-200"><a href="<?php echo esc_url($user_profile); ?>"><?php echo esc_html($row->display_name); ?></a></td>
+					<td class="p-2 border-b border-slate-200"><a href="<?php echo esc_url(is_array($user_profile) ? $user_profile['profile'] : ''); ?>"><?php echo esc_html($row->display_name); ?></a></td>
 					<td class="p-2 border-b border-slate-200"><?php echo esc_html($row->lending_date); ?></td>
 					<td class="p-2 border-b border-slate-200"><?php echo esc_html($formatted_date); ?></td>
 					<td class="p-2 border-b border-slate-200"><?php echo esc_html($row->renewals); ?></td>

@@ -94,7 +94,7 @@ function tender_get_renewals_by_lending($lending_id)
 	global $wpdb;
 
 	return $wpdb->get_results($wpdb->prepare(
-		"SELECT * FROM " . TENDER_TABLE_RENEWALS . " WHERE lending_id = %d ORDER BY extension_date ASC",
+		"SELECT * FROM " . TENDER_TABLE_RENEWALS . " WHERE lending_id = %d ORDER BY renewal_date ASC",
 		$lending_id
 	));
 }
@@ -113,6 +113,32 @@ function tender_get_lendings_by_user($user_id)
 }
 
 /**
+ * Obtener los préstamos activos de un usuario
+ */
+function tender_get_active_lendings_by_user($user_id)
+{
+	global $wpdb;
+
+	return $wpdb->get_results($wpdb->prepare(
+		"SELECT * FROM " . TENDER_TABLE_LENDINGS . " WHERE user_id = %d AND returned = 0",
+		$user_id
+	));
+}
+
+/**
+ * Obtener los préstamos pasados de un usuario
+ */
+function tender_get_past_lendings_by_user($user_id)
+{
+	global $wpdb;
+
+	return $wpdb->get_results($wpdb->prepare(
+		"SELECT * FROM " . TENDER_TABLE_LENDINGS . " WHERE user_id = %d AND returned = 1",
+		$user_id
+	));
+}
+
+/**
  * Verifica si un usuario puede solicitar más préstamos
  *
  * @param int $user_id ID del usuario
@@ -122,10 +148,7 @@ function tender_can_user_borrow_more($user_id)
 {
 	global $wpdb;
 
-	$active_lendings_count = $wpdb->get_var($wpdb->prepare(
-		"SELECT COUNT(*) FROM " . TENDER_TABLE_LENDINGS . " WHERE user_id = %d AND returned = 0",
-		$user_id
-	));
+	$active_lendings_count = count(tender_get_active_lendings_by_user($user_id));
 
 	return $active_lendings_count < 2; // Puede pedir más si tiene menos de 2 préstamos activos
 }
@@ -293,3 +316,4 @@ function tender_handle_lending_action()
 	wp_die();
 }
 add_action('wp_ajax_tender_handle_lending_action', 'tender_handle_lending_action');
+add_action("wp_ajax_nopriv_tender_handle_lending_action", "tender_handle_lending_action");

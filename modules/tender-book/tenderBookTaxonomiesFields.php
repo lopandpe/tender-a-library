@@ -8,13 +8,13 @@ if (!defined('ABSPATH')) {
 use Carbon_Fields\Field;
 use Carbon_Fields\Container;
 
-Container::make('term_meta', __('Datos de la sección', 'tender-a-library'))
+Container::make('term_meta', __('Section data', 'tender-a-library'))
 	->where('term_taxonomy', '=', 'tender_section')
 	->add_fields(array(
-		Field::make('text', 'tender_section_number', __('Número de la sección', 'tender-a-library'))
+		Field::make('text', 'tender_section_number', __('Section number', 'tender-a-library'))
 			->set_required(true)
 			->set_attribute('placeholder', 'X.X.X')
-			->set_help_text('El formato es una secuencia de los números de las secciones madres, por orden, separadas por puntos, incluyendo al final el número de la sección actual. Ej: "2.5.1"'),
+			->set_help_text(__('The format is a sequence of parent section numbers, in order, separated by dots, including the current section number at the end. Ex: ‘2.5.1’.', 'tender-a-library')),
 	));
 
 
@@ -26,7 +26,7 @@ add_action('pre_get_terms', 'order_by_tender_section_number');
 
 function edit_tender_section_columns($columns)
 {
-	$columns['tender_section_number'] = __('Número', 'tender-a-library');
+	$columns['tender_section_number'] = __('Number', 'tender-a-library');
 	unset($columns['description']);
 	return $columns;
 }

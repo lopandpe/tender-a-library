@@ -1,0 +1,34 @@
+:root {
+	--primary-color: var(--wp--preset--color--primary, #c4017b);
+	--secondary-color: var(--wp--preset--color--secondary, #6c757d);
+	--success-color: var(--wp--preset--color--success, #28a745);
+	--info-color: var(--wp--preset--color--info, #17a2b8);
+	--warning-color: var(--wp--preset--color--warning, #ffc107);
+	--danger-color: var(--wp--preset--color--danger, #dc3545);
+	--light-color: var(--wp--preset--color--light, #f8f9fa);
+	--dark-color: var(--wp--preset--color--dark, #343a40);
+	--white-color: var(--wp--preset--color--white, #ffffff);
+	--black-color: var(--wp--preset--color--black, #000000);
+	--gray-color: var(--wp--preset--color--gray, #5c5c5c);
+	--gray-dark-color: var(--wp--preset--color--gray-dark, #343a40);
+	--gray-light-color: var(--wp--preset--color--gray-light, #f8f9fa);
+	--gray-lighter-color: var(--wp--preset--color--gray-lighter, #f1f1f1);
+	--gray-lightest-color: var(--wp--preset--color--gray-lightest, #f1f1f1);
+}
+
+// Colores base
+$primary-color: var(--primary-color) !default;
+$secondary-color: var(--secondary-color) !default;
+$success-color: var(--success-color) !default;
+$info-color: var(--info-color) !default;
+$warning-color: var(--warning-color) !default;
+$danger-color: var(--danger-color) !default;
+$light-color: var(--light-color) !default;
+$dark-color: var(--dark-color) !default;
+$white-color: var(--white-color) !default;
+$black-color: var(--black-color) !default;
+$gray-color: var(--gray-color) !default;
+$gray-dark-color: var(--gray-dark-color) !default;
+$gray-light-color: var(--gray-light-color) !default;
+$gray-lighter-color: var(--gray-lighter-color) !default;
+$gray-lightest-color: var(--gray-lightest-color) !default;

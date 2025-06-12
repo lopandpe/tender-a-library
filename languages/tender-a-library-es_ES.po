@@ -1,0 +1,289 @@
+# Copyright (C) 2025 Local Anarquista Magdalena
+# This file is distributed under the same license as the Tender (A) Library plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: Tender (A) Library 0.1.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/tender-a-"
+"library\n"
+"POT-Creation-Date: 2025-03-23T17:59:57+00:00\n"
+"PO-Revision-Date: 2025-03-23 19:08+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es_ES\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+"X-Domain: tender-a-library\n"
+
+#. Plugin Name of the plugin
+msgid "Tender (A) Library"
+msgstr "Plugin Biblioteca (A)"
+
+#. Plugin URI of the plugin
+#. Author URI of the plugin
+msgid "https://localanarquistamagdalena.org"
+msgstr ""
+
+#. Description of the plugin
+msgid ""
+"Adds library functionality to the wordpress core, including books, readers, "
+"loans, etc."
+msgstr ""
+"Añade la funcionalidad de biblioteca al core de wordpress, incluyendo "
+"libros, lectores, préstamos, etc."
+
+#. Author of the plugin
+msgid "Local Anarquista Magdalena"
+msgstr ""
+
+#: modules/customPostBook.php:16
+msgctxt "Post Type General Name"
+msgid "Books"
+msgstr "Libros"
+
+#: modules/customPostBook.php:17
+msgctxt "Post Type Singular Name"
+msgid "Book"
+msgstr "Libro"
+
+#: modules/customPostBook.php:18
+msgid "Books"
+msgstr "Libros\t"
+
+#: modules/customPostBook.php:19
+msgid "All books"
+msgstr "Todos los libros"
+
+#: modules/customPostBook.php:20
+msgid "Add new book"
+msgstr "Añadir nuevo libro"
+
+#: modules/customPostBook.php:21
+msgid "Edit book"
+msgstr "Editar libro"
+
+#: modules/customPostBook.php:22
+msgid "View book"
+msgstr "Ver libro"
+
+#: modules/customPostBook.php:44
+msgid "Book"
+msgstr "Libro"
+
+#: modules/customPostBook.php:45
+msgid "Library book"
+msgstr "Libro de la biblioteca"
+
+#: modules/customPostBook.php:61
+msgctxt "Taxonomy General Name"
+msgid "Library sections"
+msgstr "Secciones de la biblioteca"
+
+#: modules/customPostBook.php:62
+msgctxt "Taxonomy Singular Name"
+msgid "Library section"
+msgstr "Sección de la biblioteca"
+
+#: modules/customPostBook.php:63
+msgid "Library sections"
+msgstr "Secciones de la biblioteca"
+
+#: modules/customPostBook.php:64
+msgid "All sections"
+msgstr "Todas las secciones"
+
+#: modules/customPostBook.php:65
+msgid "Parent section"
+msgstr "Sección madre"
+
+#: modules/customPostBook.php:66
+msgid "Parent Item:"
+msgstr "Elemento superior"
+
+#: modules/customPostBook.php:67
+msgid "New section"
+msgstr "Nueva sección"
+
+#: modules/customPostBook.php:68
+msgid "Add new section"
+msgstr "Añadir nueva sección"
+
+#: modules/customPostBook.php:84
+msgctxt "Taxonomy General Name"
+msgid "Languages"
+msgstr "Idiomas"
+
+#: modules/customPostBook.php:85
+msgctxt "Taxonomy Singular Name"
+msgid "Language"
+msgstr "Idioma"
+
+#: modules/customPostBook.php:86
+msgid "Languages"
+msgstr "Idiomas"
+
+#: modules/customPostBook.php:87
+msgid "All languages"
+msgstr "Todos los idiomas"
+
+#: modules/customPostBook.php:88
+msgid "New language"
+msgstr "Nuevo idioma"
+
+#: modules/customPostBook.php:89
+msgid "Add new language"
+msgstr "Añadir idioma nuevo"
+
+#: modules/lendings/tenderMenuCover.php:10
+msgid "You do not have permission to access this page."
+msgstr "No tienes permisos para acceder a esta página."
+
+#: modules/permalinks.php:11
+msgid "Library settings"
+msgstr "Configuración de la biblioteca"
+
+#: modules/permalinks.php:13
+msgid "Set up slugs for books and their taxonomies."
+msgstr "Configurar slugs para los libros y sus taxonomías."
+
+#: modules/permalinks.php:20
+msgid "Slug for books"
+msgstr "Slug para los libros"
+
+#: modules/permalinks.php:31
+msgid "Slug for library sections"
+msgstr "Slug para las secciones de la biblioteca"
+
+#: modules/permalinks.php:42
+msgid "Slug for languages"
+msgstr "Slug para los idiomas"
+
+#: modules/profile/profilePage.php:46
+msgid "Edit profile"
+msgstr "Editar perfil"
+
+#: modules/profile/profilePage.php:49
+msgid "Logout"
+msgstr "Cerrar sesión"
+
+#: modules/profile/profilePage.php:54
+msgid "Contact information"
+msgstr "Información de contacto"
+
+#: modules/profile/profilePage.php:79 modules/profile/profilePage.php:90
+msgid "Active lendings"
+msgstr "Préstamos activos"
+
+#: modules/profile/profilePage.php:113
+msgid "Lending date"
+msgstr "Fecha del préstamo"
+
+#: modules/profile/profilePage.php:114
+msgid "Estimated return date"
+msgstr "Fecha estimada de devolución"
+
+#: modules/tender-book/tenderBookFields.php:15
+msgid "Cover"
+msgstr "Portada"
+
+#: modules/tender-book/tenderBookFields.php:17
+msgid "Authors"
+msgstr "Autoría"
+
+#: modules/tender-book/tenderBookFields.php:19
+msgid "Surname, First name"
+msgstr "Apellido, Nombre"
+
+#: modules/tender-book/tenderBookFields.php:20
+msgid ""
+"This value determines the call sign. It must begin with at least three "
+"letters."
+msgstr ""
+"Este valor determina la signatura. Debe comenzar con al menos tres letras."
+
+#: modules/tender-book/tenderBookFields.php:22
+msgid "Otras autoras"
+msgstr "Otras autoras"
+
+#: modules/tender-book/tenderBookFields.php:24
+msgid "Publisher"
+msgstr "Editorial"
+
+#: modules/tender-book/tenderBookFields.php:27
+msgid "Copies"
+msgstr "Copias"
+
+#: modules/tender-book/tenderBookFields.php:37
+msgid "Language"
+msgstr "Idioma"
+
+#: modules/tender-book/tenderBookFields.php:49
+msgid "Year of publication"
+msgstr "Año de publicación"
+
+#: modules/tender-book/tenderBookFields.php:51
+msgid "Edition number"
+msgstr "Número de edición"
+
+#: modules/tender-book/tenderBookFields.php:56
+msgid "Summary"
+msgstr "Resumen"
+
+#: modules/tender-book/tenderBookFields.php:58
+msgid "Review"
+msgstr "Reseña"
+
+#: modules/tender-book/tenderBookFields.php:70
+msgid "Library section"
+msgstr "Sección de la biblioteca"
+
+#: modules/tender-book/tenderBookFields.php:90
+msgid "Author"
+msgstr "Autor(a)"
+
+#: modules/tender-book/tenderBookFields.php:93
+msgid "First three letters of the author's first surname."
+msgstr "Tres primeras letras del primer apellido de la autora"
+
+#: modules/tender-book/tenderBookFields.php:94
+msgid "Title"
+msgstr "Título"
+
+#: modules/tender-book/tenderBookFields.php:97
+msgid ""
+"Three first letters of the first word of more than three characters in the "
+"title, avoiding articles."
+msgstr ""
+"Las tres primeras letras de la primera palabra de más de tres caracteres en "
+"el título, evitando artículos."
+
+#: modules/tender-book/tenderBookTaxonomiesFields.php:11
+msgid "Section data"
+msgstr "Datos de la sección"
+
+#: modules/tender-book/tenderBookTaxonomiesFields.php:14
+msgid "Section number"
+msgstr "Número de sección"
+
+#: modules/tender-book/tenderBookTaxonomiesFields.php:17
+msgid ""
+"The format is a sequence of parent section numbers, in order, separated by "
+"dots, including the current section number at the end. Ex: ‘2.5.1’."
+msgstr ""
+"El formato es una secuencia de números de la sección padre, en orden, "
+"separados por puntos, incluyendo el número de sección actual al final. Ej: "
+"'2.5.1'."
+
+#: modules/tender-book/tenderBookTaxonomiesFields.php:29
+msgid "Number"
+msgstr "Número"
+
+#: modules/tenderRoles.php:13
+msgid "Opener"
+msgstr "Abridor(a)"
+
+#: modules/tenderRoles.php:49
+msgid "Reader"
+msgstr "Lector(a)"

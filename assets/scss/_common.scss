@@ -1,0 +1,70 @@
+.no-results {
+	color: $primary-color;
+}
+.text-primary {
+	color: $primary-color;
+}
+.text-white {
+	color: $white-color;
+}
+.text-black {
+	color: $black-color;
+}
+.bg-primary {
+	background-color: $primary-color;
+}
+.text-success {
+	color: $success-color;
+}
+.bg-success {
+	background-color: $success-color;
+}
+.tender-page {
+	h1 {
+		font-size: 16px;
+		color: #000;
+		text-transform: uppercase;
+		text-decoration: underline;
+	}
+}
+.tender-book-preview {
+	font-size: 16px;
+	width: 160px;
+	text-decoration: none;
+	color: #000;
+	.cover {
+		position: relative;
+		min-height: 160px;
+		img {
+			width: 100%;
+			height: auto;
+		}
+		.dates {
+			font-size: 12px;
+			background-color: #fff;
+			position: absolute;
+			bottom: 20px;
+			right: 10px;
+			left: 10px;
+			display: flex;
+			flex-direction: column;
+			flex-wrap: wrap;
+			justify-content: center;
+			align-items: center;
+			text-align: center;
+
+			.return-date {
+				color: $primary-color;
+			}
+		}
+	}
+	.book-info {
+		.title {
+			color: $primary-color;
+			text-decoration: none;
+		}
+		.author {
+			color: $gray-color;
+		}
+	}
+}

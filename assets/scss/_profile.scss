@@ -1,0 +1,163 @@
+.profile {
+	font-size: 16px;
+	.user-info {
+		ul {
+			display: flex;
+			padding: 0px;
+			list-style: none;
+			flex-direction: column;
+			gap: 10px;
+			li {
+				display: flex;
+				gap: 10px;
+				.data {
+					color: $primary-color;
+				}
+			}
+		}
+	}
+	.profile-actions {
+		display: flex;
+		gap: 20px;
+		a {
+			&.edit-profile {
+				background-color: $primary-color;
+				color: #fff;
+			}
+			&.logout {
+				color: $danger-color;
+				background-color: transparent;
+				&:hover {
+					opacity: 1;
+					background-color: #f8d7da;
+				}
+			}
+		}
+	}
+	.form-row {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 20px;
+		align-items: center;
+	}
+}
+.profile-lendings {
+	.active-lendings {
+		list-style: none;
+		display: grid;
+		gap: 20px;
+		padding: 0px;
+		grid-template-columns: 1fr 1fr;
+	}
+	.past-lendings {
+		list-style: none;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 20px;
+		padding: 0px;
+		.lending {
+			&:hover {
+				h3 {
+					color: $primary-color;
+				}
+				box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+			}
+		}
+	}
+	.lending {
+		box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+		border-radius: 5px;
+		padding: 20px;
+		transition: all 0.3s;
+		display: flex;
+		gap: 20px;
+		position: relative;
+		text-decoration: none;
+		font-size: 16px;
+		.lending-info {
+			color: #000;
+			.dates {
+				.lending-date {
+					margin-bottom: 20px;
+					span {
+						color: $primary-color;
+					}
+				}
+			}
+			.lending-actions {
+				display: flex;
+				flex-direction: column;
+				gap: 20px;
+				align-items: flex-start;
+				button {
+					color: #fff;
+				}
+				.lending-renewal-limit {
+					color: $primary-color;
+				}
+				.lending-return {
+					background-color: #000;
+				}
+			}
+		}
+		.delayed {
+			position: absolute;
+			top: 10px;
+			right: 10px;
+			color: $warning-color;
+			width: 20px;
+			height: 20px;
+			img {
+				width: 100%;
+			}
+		}
+		&.delayed {
+			box-shadow: 0px 0px 5px rgba(255, 0, 0, 0.5);
+		}
+	}
+}
+.tal-confirmation-modal {
+	position: fixed;
+	inset: 0px;
+	background-color: rgba(0, 0, 0, 0.6);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	max-width: 100% !important;
+	.wrapper {
+		background-color: #fff;
+		padding: 20px;
+		border-radius: 5px;
+		width: 300px;
+		max-width: 100%;
+		h3 {
+			font-size: 20px;
+		}
+		#confirm-action {
+			background-color: $success-color;
+			color: #fff;
+			margin-right: 10px;
+		}
+		#cancel-action {
+			background-color: $danger-color;
+			color: #fff;
+		}
+		#accept-action {
+			background-color: $primary-color;
+			color: #fff;
+		}
+	}
+}
+@media screen and (max-width: 768px) {
+	.profile-lendings {
+		.active-lendings {
+			grid-template-columns: 1fr;
+		}
+		.past-lendings {
+			grid-template-columns: 1fr 1fr;
+		}
+		.lending {
+			width: 100%;
+		}
+	}
+}

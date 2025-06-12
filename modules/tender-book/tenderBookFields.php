@@ -10,64 +10,76 @@ use Carbon_Fields\Container;
 
 Container::make('post_meta', 'Datos del libro')
 	->where('post_type', '=', 'tender_book')
-	->add_fields(array(
-		Field::make('image', 'tender_book_cover', __('Portada')),
+	->add_fields(
+		array(
+			Field::make('image', 'tender_book_cover', __('Cover', 'tender-a-library')),
 
-		Field::make('text', 'tender_book_author', __('Autoría'))
-			->set_required(true)
-			->set_attribute('placeholder', 'Apellido, Nombre')
-			->set_help_text('Este valor determina la signatura. Es necesario que empiece mínimo por tres letras.'),
+			Field::make('text', 'tender_book_author', __('Authors', 'tender-a-library'))
+				->set_required(true)
+				->set_attribute('placeholder', __('Surname, First name', 'tender-a-library'))
+				->set_help_text(__('This value determines the call sign. It must begin with at least three letters.', 'tender-a-library')),
 
-		Field::make('textarea', 'tender_book_other_authors', __('Otras autoras')),
+			Field::make('textarea', 'tender_book_other_authors', __('Otras autoras', 'tender-a-library')),
 
-		Field::make('text', 'tender_book_publisher', __('Editorial'))
-			->set_required(true),
+			Field::make('text', 'tender_book_publisher', __('Publisher', 'tender-a-library'))
+				->set_required(true),
 
-		Field::make('text', 'tender_book_units', __('Ejemplares'))
-			->set_attribute('type', 'number')
-			->set_attribute('min', 0)
-			->set_required(true)
-			->set_default_value(1),
-
-
-		Field::make('association', 'tender_book_language', __('Idioma'))
-			->set_types(array(
-				array(
-					'type' => 'term',
-					'taxonomy' => 'tender_language',
-				)
-			))
-			->set_max(1)
-			->set_min(1)
-			->set_required(true),
-
-		Field::make('text', 'tender_book_year', __('Año de publicación')),
-
-		Field::make('text', 'tender_book_edition', __('Número de edición')),
-
-		Field::make('text', 'tender_book_isbn', __('ISBN')),
+			Field::make('text', 'tender_book_units', __('Copies', 'tender-a-library'))
+				->set_attribute('type', 'number')
+				->set_attribute('min', 0)
+				->set_required(true)
+				->set_default_value(1),
 
 
-		Field::make('rich_text', 'tender_book_excerpt', __('Resumen')),
+			Field::make(
+				'association',
+				'tender_book_language',
+				__('Language', 'tender-a-library')
+			)
+				->set_types(array(
+					array(
+						'type' => 'term',
+						'taxonomy' => 'tender_language',
+					)
+				))
+				->set_max(1)
+				->set_min(1)
+				->set_required(true),
 
-		Field::make('rich_text', 'tender_book_review', __('Reseña')),
-	));
+			Field::make('text', 'tender_book_year', __('Year of publication', 'tender-a-library')),
+
+			Field::make('text', 'tender_book_edition', __('Edition number', 'tender-a-library')),
+
+			Field::make('text', 'tender_book_isbn', __('ISBN')),
+
+
+			Field::make('rich_text', 'tender_book_excerpt', __('Summary', 'tender-a-library')),
+
+			Field::make('rich_text', 'tender_book_review', __('Review', 'tender-a-library')),
+		)
+	);
 
 
 Container::make('post_meta', 'Categoría')
 	->where('post_type', '=', 'tender_book')
-	->add_fields(array(
-		Field::make('association', 'tender_book_section', __('Sección de la biblioteca'))
-			->set_types(array(
-				array(
-					'type' => 'term',
-					'taxonomy' => 'tender_section',
-				)
-			))
-			->set_max(1)
-			->set_min(1)
-			->set_required(true),
-	));
+	->add_fields(
+		array(
+			Field::make(
+				'association',
+				'tender_book_section',
+				__('Library section', 'tender-a-library')
+			)
+				->set_types(array(
+					array(
+						'type' => 'term',
+						'taxonomy' => 'tender_section',
+					)
+				))
+				->set_max(1)
+				->set_min(1)
+				->set_required(true),
+		)
+	);
 
 // Solo registrar campos cuando el post está publicado
 Container::make('post_meta', 'Signatura')
@@ -75,12 +87,12 @@ Container::make('post_meta', 'Signatura')
 	->where('post_status', '=', 'publish')
 	->add_fields(array(
 
-		Field::make('text', 'tender_book_sig1', __('Autor(a)'))
+		Field::make('text', 'tender_book_sig1', __('Author', 'tender-a-library'))
 			->set_required(true)
 			->set_attribute('placeholder', 'XXX')
-			->set_help_text('Tres primeras letras del primer apellido del autor(a).'),
-		Field::make('text', 'tender_book_sig2', __('Título'))
+			->set_help_text(__('First three letters of the author\'s first surname.', 'tender-a-library')),
+		Field::make('text', 'tender_book_sig2', __('Title', 'tender-a-library'))
 			->set_required(true)
 			->set_attribute('placeholder', 'yyy')
-			->set_help_text('Tres primeras letras de la primera palabra de más de tres caracteres del título, evitando artículos.'),
+			->set_help_text(__('Three first letters of the first word of more than three characters in the title, avoiding articles.', 'tender-a-library')),
 	));

@@ -13,13 +13,13 @@ function tender_book()
 	$language_slug = get_option('tender_language_slug', 'idioma-biblioteca'); // Valor por defecto
 
 	$labels = array(
-		'name'                  => _x('Libros', 'Post Type General Name', 'tender-a-library'),
-		'singular_name'         => _x('Libro', 'Post Type Singular Name', 'tender-a-library'),
-		'menu_name'             => __('Libros', 'tender-a-library'),
-		'all_items'             => __('Todos los libros', 'tender-a-library'),
-		'add_new_item'          => __('Añadir nuevo libro', 'tender-a-library'),
-		'edit_item'             => __('Editar libro', 'tender-a-library'),
-		'view_item'             => __('Ver libro', 'tender-a-library'),
+		'name'                  => _x('Books', 'Post Type General Name', 'tender-a-library'),
+		'singular_name'         => _x('Book', 'Post Type Singular Name', 'tender-a-library'),
+		'menu_name'             => __('Books', 'tender-a-library'),
+		'all_items'             => __('All books', 'tender-a-library'),
+		'add_new_item'          => __('Add new book', 'tender-a-library'),
+		'edit_item'             => __('Edit book', 'tender-a-library'),
+		'view_item'             => __('View book', 'tender-a-library'),
 		// ...el resto de labels...
 	);
 
@@ -41,11 +41,11 @@ function tender_book()
 	);
 
 	$args = array(
-		'label'                 => __('Libro', 'tender-a-library'),
-		'description'           => __('Libro en la biblioteca', 'tender-a-library'),
+		'label'                 => __('Book', 'tender-a-library'),
+		'description'           => __('Library book', 'tender-a-library'),
 		'labels'                => $labels,
 		'supports'              => array('title', 'thumbnail'),
-		'taxonomies'            => array('tender-section'),
+		'taxonomies'            => array('tender_section'),
 		'public'                => true,
 		'has_archive'           => true,
 		'rewrite'               => array('slug' => $book_slug),
@@ -58,14 +58,14 @@ function tender_book()
 	register_post_type('tender_book', $args);
 
 	$tender_section_labels = array(
-		'name'                       => _x('Secciones de la biblioteca', 'Taxonomy General Name', 'tender-a-library'),
-		'singular_name'              => _x('Sección de la biblioteca', 'Taxonomy Singular Name', 'tender-a-library'),
-		'menu_name'                  => __('Secciones de la biblioteca', 'tender-a-library'),
-		'all_items'                  => __('Todas las secciones', 'tender-a-library'),
-		'parent_item'                => __('Sección madre', 'tender-a-library'),
+		'name'                       => _x('Library sections', 'Taxonomy General Name', 'tender-a-library'),
+		'singular_name'              => _x('Library section', 'Taxonomy Singular Name', 'tender-a-library'),
+		'menu_name'                  => __('Library sections', 'tender-a-library'),
+		'all_items'                  => __('All sections', 'tender-a-library'),
+		'parent_item'                => __('Parent section', 'tender-a-library'),
 		'parent_item_colon'          => __('Parent Item:', 'tender-a-library'),
-		'new_item_name'              => __('Nueva sección', 'tender-a-library'),
-		'add_new_item'               => __('Añadir nueva sección', 'tender-a-library'),
+		'new_item_name'              => __('New section', 'tender-a-library'),
+		'add_new_item'               => __('Add new section', 'tender-a-library'),
 	);
 	$tender_section_args = array(
 		'labels'                     => $tender_section_labels,
@@ -81,12 +81,12 @@ function tender_book()
 	register_taxonomy('tender_section', array('tender_book'), $tender_section_args);
 
 	$tender_language_labels = array(
-		'name'                       => _x('Idiomas', 'Taxonomy General Name', 'tender-a-library'),
-		'singular_name'              => _x('Idioma', 'Taxonomy Singular Name', 'tender-a-library'),
-		'menu_name'                  => __('Idiomas', 'tender-a-library'),
-		'all_items'                  => __('Todos los idiomas', 'tender-a-library'),
-		'new_item_name'              => __('Nuevo idioma', 'tender-a-library'),
-		'add_new_item'               => __('Añadir nuevo idioma', 'tender-a-library'),
+		'name'                       => _x('Languages', 'Taxonomy General Name', 'tender-a-library'),
+		'singular_name'              => _x('Language', 'Taxonomy Singular Name', 'tender-a-library'),
+		'menu_name'                  => __('Languages', 'tender-a-library'),
+		'all_items'                  => __('All languages', 'tender-a-library'),
+		'new_item_name'              => __('New language', 'tender-a-library'),
+		'add_new_item'               => __('Add new language', 'tender-a-library'),
 	);
 	$tender_language_args = array(
 		'labels'                     => $tender_language_labels,

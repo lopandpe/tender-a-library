@@ -1,5 +1,7 @@
 <?php
 
+use Carbon_Fields\Container;
+use Carbon_Fields\Field;
 // Exit if accessed directly
 if (!defined('ABSPATH')) {
 	exit;
@@ -89,3 +91,28 @@ function restrict_opener_edit_non_reader($allcaps, $caps, $args, $user)
 	return $allcaps;
 }
 add_filter('user_has_cap', 'restrict_opener_edit_non_reader', 10, 4);
+
+function tal_current_user_opener_or_admin()
+{
+	// Si el usuario actual es "Opener" o "Administrador"
+	if (current_user_can('opener') || current_user_can('administrator')) {
+		return true;
+	}
+	return false;
+}
+
+
+add_action('carbon_fields_register_fields', 'tal_attach_user_fields');
+
+function tal_attach_user_fields()
+{
+	Container::make('user_meta', __('More info', 'tender-a-library'))
+		->add_fields(array(
+			Field::make('checkbox', 'newsletter', __('Receive newsletter by e-mail', 'tender-a-library'))
+				->set_option_value('1'),
+			Field::make('text', 'phone_number', __('Phone number', 'tender-a-library'))
+				->set_attribute('placeholder', '+34 XXX XX XX XX')
+				->set_required(true)
+		));
+}
+add_action('after_setup_theme', 'crb_load');

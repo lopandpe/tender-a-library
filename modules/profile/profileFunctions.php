@@ -1,5 +1,8 @@
 <?php
 // Evitar acceso directo
+
+use ParagonIE\Sodium\Core\Curve25519\Fe;
+
 if (!defined('ABSPATH')) {
 	exit;
 }
@@ -57,18 +60,21 @@ function tal_exclude_author_queries($query)
 add_action('pre_get_posts', 'tal_exclude_author_queries');
 
 
-function tal_register_profile_route()
+function tal_register_profile_routes()
 {
-	// Obtener la URL base de la página de perfil desde la opción 'tal_profile_page'
-	$profile_id = get_option('tal_profile_page', 'perfil'); // Asigna un valor predeterminado si no está configurado
-	$profile_page = get_post($profile_id);
-	$slug = $profile_page->post_name;
-	// Registra la regla de reescritura personalizada para '/perfil/xxxxx' -> 'index.php?tender_profile_user=$matches[1]'
-	add_rewrite_rule('^' . $slug . '/([^/]+)/?$', 'index.php?page_id=' . $profile_id . '&tal_profile_user=$matches[1]', 'top');
+	tal_rewrite_profile_route('tal_profile_page'); // Registra la ruta para la página de perfil
+	tal_rewrite_profile_route('tal_edit_profile_page'); // Registra la ruta para la página de edición de perfil
 }
-add_action('init', 'tal_register_profile_route', 20);
+add_action('init', 'tal_register_profile_routes', 20);
 
+function tal_rewrite_profile_route($option)
+{
+	$page_id = get_option($option, $option); // Asigna un valor predeterminado si no está configurado
+	$page = get_post($page_id);
+	$slug = $page->post_name;
 
+	add_rewrite_rule('^' . $slug . '/([^/]+)/?$', 'index.php?page_id=' . $page_id . '&tal_profile_user=$matches[1]', 'top');
+}
 
 function tal_add_perfil_query_var($vars)
 {
@@ -85,22 +91,27 @@ function get_user_profile_url_by_id($user_id)
 	$user = get_user_by('id', $user_id);
 
 	if ($user) {
-		// Obtener el slug del usuario
-		$user_slug = $user->user_nicename;
+		$profile_url = false;
+		$edit_profile_url = false;
 
-		// Obtener la ID de la página configurada como 'tal_profile_page'
+		$user_slug = $user->user_nicename;
 		$profile_page_id = get_option('tal_profile_page');
+		$edit_profile_page_id = get_option('tal_edit_profile_page');
 
 		if ($profile_page_id) {
-			// Obtener el permalink de la página de perfil
 			$profile_page_url = get_permalink($profile_page_id);
-
-			// Asegurarnos de que la URL tiene el formato adecuado
 			$profile_url = trailingslashit($profile_page_url) . $user_slug;
-
-			return $profile_url;
 		}
+		if ($edit_profile_page_id) {
+			$edit_profile_page_url = get_permalink($edit_profile_page_id);
+			$edit_profile_url = trailingslashit($edit_profile_page_url) . $user_slug;
+		}
+
+		return array(
+			'profile' => $profile_url,
+			'edit' => $edit_profile_url
+		);
 	}
 
-	return false; // Retornar false si no se encuentra el usuario o no se puede obtener la URL
+	return false;
 }

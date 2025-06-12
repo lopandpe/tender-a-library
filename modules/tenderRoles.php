@@ -10,7 +10,7 @@ function create_opener_role()
 {
 	add_role(
 		'opener',
-		__('Abridor(x)', 'tender-a-library'),  // Nombre que aparecerá en WP
+		__('Opener', 'tender-a-library'),  // Nombre que aparecerá en WP
 		array(
 			// Para acceder al Dashboard, ver su perfil
 			'read' => true,
@@ -46,7 +46,7 @@ function create_reader_role()
 {
 	add_role(
 		'reader',        // Identificador interno del rol
-		__('Lector(x)', 'tender-a-library'),  // Nombre que aparecerá en WP
+		__('Reader', 'tender-a-library'),  // Nombre que aparecerá en WP
 		array(
 			'read' => true,  // Puede iniciar sesión y ver su propio perfil
 			// No añadimos más capacidades, así no podrá editar posts/páginas ni contenidos

@@ -1,0 +1,225 @@
+/*!*************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./assets/scss/tender-styles.scss ***!
+  \*************************************************************************************************************************/
+:root {
+  --primary-color: var(--wp--preset--color--primary, #c4017b);
+  --secondary-color: var(--wp--preset--color--secondary, #6c757d);
+  --success-color: var(--wp--preset--color--success, #28a745);
+  --info-color: var(--wp--preset--color--info, #17a2b8);
+  --warning-color: var(--wp--preset--color--warning, #ffc107);
+  --danger-color: var(--wp--preset--color--danger, #dc3545);
+  --light-color: var(--wp--preset--color--light, #f8f9fa);
+  --dark-color: var(--wp--preset--color--dark, #343a40);
+  --white-color: var(--wp--preset--color--white, #ffffff);
+  --black-color: var(--wp--preset--color--black, #000000);
+  --gray-color: var(--wp--preset--color--gray, #5c5c5c);
+  --gray-dark-color: var(--wp--preset--color--gray-dark, #343a40);
+  --gray-light-color: var(--wp--preset--color--gray-light, #f8f9fa);
+  --gray-lighter-color: var(--wp--preset--color--gray-lighter, #f1f1f1);
+  --gray-lightest-color: var(--wp--preset--color--gray-lightest, #f1f1f1); }
+
+.tal-button {
+  background-color: var(--primary-color);
+  padding: 5px 10px;
+  font-size: 16px;
+  border-radius: 0px;
+  text-decoration: none;
+  color: #fff;
+  transition: all 0.3s;
+  cursor: pointer;
+  border: none;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  display: flex; }
+  .tal-button i {
+    display: flex;
+    align-items: center;
+    vertical-align: baseline; }
+    .tal-button i svg {
+      width: 1em; }
+  .tal-button:hover {
+    opacity: 0.9; }
+
+.no-results {
+  color: var(--primary-color); }
+
+.text-primary {
+  color: var(--primary-color); }
+
+.text-white {
+  color: var(--white-color); }
+
+.text-black {
+  color: var(--black-color); }
+
+.bg-primary {
+  background-color: var(--primary-color); }
+
+.text-success {
+  color: var(--success-color); }
+
+.bg-success {
+  background-color: var(--success-color); }
+
+.tender-page h1 {
+  font-size: 16px;
+  color: #000;
+  text-transform: uppercase;
+  text-decoration: underline; }
+
+.tender-book-preview {
+  font-size: 16px;
+  width: 160px;
+  text-decoration: none;
+  color: #000; }
+  .tender-book-preview .cover {
+    position: relative;
+    min-height: 160px; }
+    .tender-book-preview .cover img {
+      width: 100%;
+      height: auto; }
+    .tender-book-preview .cover .dates {
+      font-size: 12px;
+      background-color: #fff;
+      position: absolute;
+      bottom: 20px;
+      right: 10px;
+      left: 10px;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      text-align: center; }
+      .tender-book-preview .cover .dates .return-date {
+        color: var(--primary-color); }
+  .tender-book-preview .book-info .title {
+    color: var(--primary-color);
+    text-decoration: none; }
+  .tender-book-preview .book-info .author {
+    color: var(--gray-color); }
+
+.profile {
+  font-size: 16px; }
+  .profile .user-info ul {
+    display: flex;
+    padding: 0px;
+    list-style: none;
+    flex-direction: column;
+    gap: 10px; }
+    .profile .user-info ul li {
+      display: flex;
+      gap: 10px; }
+      .profile .user-info ul li .data {
+        color: var(--primary-color); }
+  .profile .profile-actions {
+    display: flex;
+    gap: 20px; }
+    .profile .profile-actions a.edit-profile {
+      background-color: var(--primary-color);
+      color: #fff; }
+    .profile .profile-actions a.logout {
+      color: var(--danger-color);
+      background-color: transparent; }
+      .profile .profile-actions a.logout:hover {
+        opacity: 1;
+        background-color: #f8d7da; }
+  .profile .form-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    align-items: center; }
+
+.profile-lendings .active-lendings {
+  list-style: none;
+  display: grid;
+  gap: 20px;
+  padding: 0px;
+  grid-template-columns: 1fr 1fr; }
+
+.profile-lendings .past-lendings {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 0px; }
+  .profile-lendings .past-lendings .lending:hover {
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3); }
+    .profile-lendings .past-lendings .lending:hover h3 {
+      color: var(--primary-color); }
+
+.profile-lendings .lending {
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  padding: 20px;
+  transition: all 0.3s;
+  display: flex;
+  gap: 20px;
+  position: relative;
+  text-decoration: none;
+  font-size: 16px; }
+  .profile-lendings .lending .lending-info {
+    color: #000; }
+    .profile-lendings .lending .lending-info .dates .lending-date {
+      margin-bottom: 20px; }
+      .profile-lendings .lending .lending-info .dates .lending-date span {
+        color: var(--primary-color); }
+    .profile-lendings .lending .lending-info .lending-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      align-items: flex-start; }
+      .profile-lendings .lending .lending-info .lending-actions button {
+        color: #fff; }
+      .profile-lendings .lending .lending-info .lending-actions .lending-renewal-limit {
+        color: var(--primary-color); }
+      .profile-lendings .lending .lending-info .lending-actions .lending-return {
+        background-color: #000; }
+  .profile-lendings .lending .delayed {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: var(--warning-color);
+    width: 20px;
+    height: 20px; }
+    .profile-lendings .lending .delayed img {
+      width: 100%; }
+  .profile-lendings .lending.delayed {
+    box-shadow: 0px 0px 5px rgba(255, 0, 0, 0.5); }
+
+.tal-confirmation-modal {
+  position: fixed;
+  inset: 0px;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 100% !important; }
+  .tal-confirmation-modal .wrapper {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    width: 300px;
+    max-width: 100%; }
+    .tal-confirmation-modal .wrapper h3 {
+      font-size: 20px; }
+    .tal-confirmation-modal .wrapper #confirm-action {
+      background-color: var(--success-color);
+      color: #fff;
+      margin-right: 10px; }
+    .tal-confirmation-modal .wrapper #cancel-action {
+      background-color: var(--danger-color);
+      color: #fff; }
+    .tal-confirmation-modal .wrapper #accept-action {
+      background-color: var(--primary-color);
+      color: #fff; }
+
+@media screen and (max-width: 768px) {
+  .profile-lendings .active-lendings {
+    grid-template-columns: 1fr; }
+  .profile-lendings .past-lendings {
+    grid-template-columns: 1fr 1fr; }
+  .profile-lendings .lending {
+    width: 100%; } }
+
