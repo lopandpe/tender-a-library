@@ -1,1 +1,0 @@
-{"version":3,"file":"book-summary/index.css","mappings":";;;AACC;EACC;AAAF,C","sources":["webpack://tender-a-library/./src/book-summary/editor.scss"],"sourcesContent":[".wp-block-tender-a-library-book-summary {\n\th2 {\n\t\tmargin-top: 0px;\n\t}\n}\n"],"names":[],"sourceRoot":""}

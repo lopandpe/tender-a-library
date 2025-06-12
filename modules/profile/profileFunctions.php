@@ -71,9 +71,10 @@ function tal_rewrite_profile_route($option)
 {
 	$page_id = get_option($option, $option); // Asigna un valor predeterminado si no está configurado
 	$page = get_post($page_id);
-	$slug = $page->post_name;
-
-	add_rewrite_rule('^' . $slug . '/([^/]+)/?$', 'index.php?page_id=' . $page_id . '&tal_profile_user=$matches[1]', 'top');
+	if($page){
+		$slug = $page->post_name;
+		add_rewrite_rule('^' . $slug . '/([^/]+)/?$', 'index.php?page_id=' . $page_id . '&tal_profile_user=$matches[1]', 'top');
+	}
 }
 
 function tal_add_perfil_query_var($vars)
