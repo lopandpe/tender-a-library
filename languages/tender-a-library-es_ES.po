@@ -1,42 +1,28 @@
-# Copyright (C) 2025 Local Anarquista Magdalena
-# This file is distributed under the same license as the Tender (A) Library plugin.
 msgid ""
 msgstr ""
 "Project-Id-Version: Tender (A) Library 0.1.0\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/tender-a-"
-"library\n"
-"POT-Creation-Date: 2025-03-23T17:59:57+00:00\n"
-"PO-Revision-Date: 2025-03-23 19:08+0100\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/tender-a-library\n"
 "Last-Translator: \n"
 "Language-Team: \n"
-"Language: es_ES\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2025-03-23T17:59:57+00:00\n"
+"PO-Revision-Date: 2025-03-23 19:08+0100\n"
+"Language: es_ES\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 "X-Domain: tender-a-library\n"
 
-#. Plugin Name of the plugin
-msgid "Tender (A) Library"
-msgstr "Plugin Biblioteca (A)"
-
-#. Plugin URI of the plugin
 #. Author URI of the plugin
+#: tender-a-library.php
 msgid "https://localanarquistamagdalena.org"
-msgstr ""
-
-#. Description of the plugin
-msgid ""
-"Adds library functionality to the wordpress core, including books, readers, "
-"loans, etc."
-msgstr ""
-"Añade la funcionalidad de biblioteca al core de wordpress, incluyendo "
-"libros, lectores, préstamos, etc."
+msgstr "https://localanarquistamagdalena.org"
 
 #. Author of the plugin
+#: tender-a-library.php
 msgid "Local Anarquista Magdalena"
-msgstr ""
+msgstr "Local Anarquista Magdalena"
 
 #: modules/customPostBook.php:16
 msgctxt "Post Type General Name"
@@ -160,27 +146,23 @@ msgstr "Slug para las secciones de la biblioteca"
 msgid "Slug for languages"
 msgstr "Slug para los idiomas"
 
-#: modules/profile/profilePage.php:46
+#: modules/profile/profilePage.php:73
 msgid "Edit profile"
 msgstr "Editar perfil"
 
-#: modules/profile/profilePage.php:49
+#: modules/profile/profilePage.php:81
 msgid "Logout"
 msgstr "Cerrar sesión"
 
-#: modules/profile/profilePage.php:54
-msgid "Contact information"
-msgstr "Información de contacto"
-
-#: modules/profile/profilePage.php:79 modules/profile/profilePage.php:90
+#: modules/profile/profilePage.php:87
 msgid "Active lendings"
 msgstr "Préstamos activos"
 
-#: modules/profile/profilePage.php:113
+#: modules/profile/profilePage.php:124
 msgid "Lending date"
 msgstr "Fecha del préstamo"
 
-#: modules/profile/profilePage.php:114
+#: modules/profile/profilePage.php:127
 msgid "Estimated return date"
 msgstr "Fecha estimada de devolución"
 
@@ -197,17 +179,17 @@ msgid "Surname, First name"
 msgstr "Apellido, Nombre"
 
 #: modules/tender-book/tenderBookFields.php:20
-msgid ""
-"This value determines the call sign. It must begin with at least three "
-"letters."
-msgstr ""
-"Este valor determina la signatura. Debe comenzar con al menos tres letras."
+msgid "This value determines the call sign. It must begin with at least three letters."
+msgstr "Este valor determina la signatura. Debe comenzar con al menos tres letras."
 
 #: modules/tender-book/tenderBookFields.php:22
 msgid "Otras autoras"
 msgstr "Otras autoras"
 
+#: blocks/includes/book-data-functions.php:23
 #: modules/tender-book/tenderBookFields.php:24
+#: blocks/build/book-data/index.js:1
+#: blocks/src/book-data/edit.js:13
 msgid "Publisher"
 msgstr "Editorial"
 
@@ -235,11 +217,17 @@ msgstr "Resumen"
 msgid "Review"
 msgstr "Reseña"
 
+#: blocks/includes/book-data-functions.php:29
 #: modules/tender-book/tenderBookFields.php:70
+#: blocks/build/book-data/index.js:1
+#: blocks/src/book-data/edit.js:17
 msgid "Library section"
 msgstr "Sección de la biblioteca"
 
+#: blocks/includes/book-data-functions.php:21
 #: modules/tender-book/tenderBookFields.php:90
+#: blocks/build/book-data/index.js:1
+#: blocks/src/book-data/edit.js:11
 msgid "Author"
 msgstr "Autor(a)"
 
@@ -252,12 +240,8 @@ msgid "Title"
 msgstr "Título"
 
 #: modules/tender-book/tenderBookFields.php:97
-msgid ""
-"Three first letters of the first word of more than three characters in the "
-"title, avoiding articles."
-msgstr ""
-"Las tres primeras letras de la primera palabra de más de tres caracteres en "
-"el título, evitando artículos."
+msgid "Three first letters of the first word of more than three characters in the title, avoiding articles."
+msgstr "Las tres primeras letras de la primera palabra de más de tres caracteres en el título, evitando artículos."
 
 #: modules/tender-book/tenderBookTaxonomiesFields.php:11
 msgid "Section data"
@@ -268,13 +252,8 @@ msgid "Section number"
 msgstr "Número de sección"
 
 #: modules/tender-book/tenderBookTaxonomiesFields.php:17
-msgid ""
-"The format is a sequence of parent section numbers, in order, separated by "
-"dots, including the current section number at the end. Ex: ‘2.5.1’."
-msgstr ""
-"El formato es una secuencia de números de la sección padre, en orden, "
-"separados por puntos, incluyendo el número de sección actual al final. Ej: "
-"'2.5.1'."
+msgid "The format is a sequence of parent section numbers, in order, separated by dots, including the current section number at the end. Ex: ‘2.5.1’."
+msgstr "El formato es una secuencia de números de la sección padre, en orden, separados por puntos, incluyendo el número de sección actual al final. Ej: '2.5.1'."
 
 #: modules/tender-book/tenderBookTaxonomiesFields.php:29
 msgid "Number"
@@ -287,3 +266,201 @@ msgstr "Abridor(a)"
 #: modules/tenderRoles.php:49
 msgid "Reader"
 msgstr "Lector(a)"
+
+#. Plugin Name of the plugin
+#: tender-a-library.php
+msgid "Plugin Biblioteca (A)"
+msgstr "Plugin Biblioteca (A)"
+
+#. Description of the plugin
+#: tender-a-library.php
+msgid "Adds library functionality to the WordPress core, including books, readers, lendings, etc."
+msgstr "Añade la funcionalidad de biblioteca al core de wordpress, incluyendo libros, lectores, préstamos, etc""
+
+#: blocks/includes/book-data-functions.php:19
+#: blocks/build/book-data/index.js:1
+#: blocks/src/book-data/edit.js:9
+msgid "Book data"
+msgstr "Datos del libro"
+
+#: blocks/includes/book-data-functions.php:38
+#: blocks/build/book-data/index.js:1
+#: blocks/src/book-data/edit.js:22
+msgid "Publication year"
+msgstr "Año de publicación"
+
+#: blocks/includes/book-data-functions.php:45
+#: blocks/build/book-data/index.js:1
+#: blocks/src/book-data/edit.js:24
+msgid "Signature"
+msgstr "Signatura"
+
+#: blocks/includes/book-data-functions.php:61
+#: blocks/includes/book-data-functions.php:79
+msgid "Available for loan."
+msgstr "Disponible para préstamo"
+
+#: blocks/includes/book-data-functions.php:62
+#: blocks/includes/book-data-functions.php:72
+#: blocks/includes/book-data-functions.php:82
+msgid "Not available."
+msgstr "No disponible"
+
+#: blocks/includes/book-data-functions.php:70
+msgid "Lend this book"
+msgstr "Prestar libro"
+
+#: blocks/includes/book-data-functions.php:73
+#: blocks/includes/book-data-functions.php:80
+#: blocks/includes/book-data-functions.php:83
+msgid "Reserve this book"
+msgstr "Reservar este libro"
+
+#: blocks/includes/book-data-functions.php:77
+msgid "Renew this lending from your profile"
+msgstr "Renueva este préstamo desde tu perfil"
+
+#: blocks/includes/book-data-functions.php:94
+msgid "Current active lendings"
+msgstr "Préstamos activos"
+
+#: blocks/includes/book-data-functions.php:96
+msgid "Current active lending"
+msgstr "Préstamo activo"
+
+#. translators: Number of current lendings
+#: blocks/includes/book-data-functions.php:107
+#, php-format
+msgid "Lending #%d"
+msgstr "Préstamo #%d"
+
+#: blocks/includes/book-data-functions.php:109
+msgid "Estimated return"
+msgstr "Fecha estimada de devolución"
+
+#: blocks/includes/book-summary-functions.php:17
+msgid "There is no summary"
+msgstr "No hay resumen"
+
+#: blocks/tender-blocks.php:18
+msgid "Tender Blocks"
+msgstr "Bloques Tender (A)"
+
+#: modules/openerUserFunctions.php:109
+msgid "More info"
+msgstr "Más info"
+
+#: modules/openerUserFunctions.php:111
+msgid "Receive newsletter by e-mail"
+msgstr "Recibir novedades por e-mail"
+
+#: modules/openerUserFunctions.php:113
+msgid "Phone number"
+msgstr "Número de teléfono"
+
+#: modules/profile/editProfilePage.php:28
+msgid "Invalid email address."
+msgstr "E-mail incorrecto"
+
+#: modules/profile/editProfilePage.php:30
+msgid "This email is already in use."
+msgstr "Este correo ya está en uso"
+
+#: modules/profile/editProfilePage.php:41
+msgid "Profile updated successfully."
+msgstr "El perfil se ha actualizado correctamente"
+
+#: modules/profile/editProfilePage.php:55
+#: modules/profile/profilePage.php:53
+msgid "Name"
+msgstr "Nombre"
+
+#: modules/profile/editProfilePage.php:59
+msgid "Last Name"
+msgstr "Apellidos"
+
+#: modules/profile/editProfilePage.php:63
+#: modules/profile/profilePage.php:57
+msgid "E-mail"
+msgstr "E-mail"
+
+#: modules/profile/editProfilePage.php:67
+#: modules/profile/profilePage.php:61
+msgid "Phone"
+msgstr "Teléfono"
+
+#: modules/profile/editProfilePage.php:71
+#: modules/profile/profilePage.php:65
+msgid "Consents to receive news by e-mail:"
+msgstr "Acepta el envío de novedades por e-mail:"
+
+#: modules/profile/editProfilePage.php:75
+msgid "Save Changes"
+msgstr "Guardar cambios"
+
+#: modules/profile/editProfilePage.php:81
+msgid "Back to Profile"
+msgstr "Volver al perfil"
+
+#: modules/profile/profilePage.php:39
+msgid "There is no user with this information"
+msgstr "No hay ningún usuario con esta información"
+
+#: modules/profile/profilePage.php:66
+msgid "Yes"
+msgstr "Sí"
+
+#: modules/profile/profilePage.php:66
+msgid "No"
+msgstr "No"
+
+#: modules/profile/profilePage.php:131
+msgid "This loan cannot be extended"
+msgstr "Este préstamo no puede prorrogarse"
+
+#: modules/profile/profilePage.php:134
+msgid "Loan renewal"
+msgstr "Renovar préstamo"
+
+#: modules/profile/profilePage.php:141
+msgid "Return"
+msgstr "Devolver"
+
+#: modules/profile/profilePage.php:157
+msgid "There are no active lendings right now"
+msgstr "No hay préstamos activos en este momento"
+
+#: modules/profile/profilePage.php:166
+msgid "Past lendings"
+msgstr "Préstamos pasados"
+
+#: modules/tender-book/tenderBookTemplate.php:45
+msgid "Libro individual"
+msgstr ""
+
+#: modules/tender-book/tenderBookTemplate.php:46
+msgid "Plantilla personalizada para libros (CPT)."
+msgstr ""
+
+#: blocks/build/book-summary/index.js:1
+#: blocks/src/book-summary/edit.js:9
+msgid "Book summary"
+msgstr "Resumen del libro"
+
+#: blocks/build/book-cover/block.json
+#: blocks/src/book-cover/block.json
+msgctxt "block title"
+msgid "Book Cover"
+msgstr "Portada"
+
+#: blocks/build/book-data/block.json
+#: blocks/src/book-data/block.json
+msgctxt "block title"
+msgid "Book Data"
+msgstr "Datos del libro"
+
+#: blocks/build/book-summary/block.json
+#: blocks/src/book-summary/block.json
+msgctxt "block title"
+msgid "Book Summary"
+msgstr "Resumen del libro"

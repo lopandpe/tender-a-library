@@ -28,7 +28,7 @@ function tender_bootstrap()
 		Carbon_Fields::boot();
 
 		$modules = [
-			"blocks/tender-blocks",
+			"modules/tender-blocks",
 			"modules/localization",
 			"modules/customPostBook",
 			"modules/bookFunctions",

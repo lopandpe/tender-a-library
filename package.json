@@ -1,23 +1,39 @@
 {
   "name": "tender-a-library",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "Gruntfile.js",
   "author": "Local Anarquista Magdalena",
   "scripts": {
-    "build": "npx tailwindcss -i ./assets/css/tailwind.css -o ./css/tender-public.css --minify && npx tailwindcss -i ./assets/css/tailwind.css -o ./css/tender-admin.css --minify",
-    "watch": "npx tailwindcss -i ./assets/css/tailwind.css -o ./css/tender-public.css --minify && npx tailwindcss -i ./assets/css/tailwind.css -o ./css/tender-admin.css --watch"
+    "build": "npm run build:tailwind && npm run build:blocks",
+    "build:tailwind": "npx tailwindcss -i ./assets/css/tailwind.css -o ./css/tender-public.css --minify && npx tailwindcss -i ./assets/css/tailwind.css -o ./css/tender-admin.css --minify",
+    "watch:tailwind": "npx tailwindcss -i ./assets/css/tailwind.css -o ./css/tender-public.css --minify && npx tailwindcss -i ./assets/css/tailwind.css -o ./css/tender-admin.css --watch",
+    "webpack": "webpack --config webpack.config.js",
+    "build:blocks": "wp-scripts build --config webpack.blocks.config.js",
+    "start:blocks": "wp-scripts start --config webpack.blocks.config.js"
   },
   "devDependencies": {
+    "@wordpress/scripts": "^30.18.0",
     "autoprefixer": "^10.4.20",
+    "css-loader": "^7.1.2",
+    "eslint": "^8.18.0",
+    "eslint-plugin-react": "^7.30.1",
+    "fs-extra": "^11.3.0",
+    "glob": "^11.0.3",
     "grunt": "~0.4.5",
     "grunt-wp-i18n": "~0.5.0",
     "grunt-wp-readme-to-markdown": "~1.0.0",
+    "mini-css-extract-plugin": "^2.9.2",
     "postcss": "^8.5.3",
-    "tailwindcss": "^4.0.9"
+    "sass": "^1.89.2",
+    "sass-loader": "^16.0.5",
+    "tailwindcss": "^4.0.9",
+    "webpack": "^5.99.9",
+    "webpack-cli": "^4.10.0"
   },
-  "description": "=== Plugin Biblioteca (A) === Contributors: (this should be a list of wordpress.org userid's) Donate link: https://example.com/ Tags: comments, spam Requires at least: 4.5 Tested up to: 6.7.1 Requires PHP: 5.6 Stable tag: 0.1.0 License: GPLv2 or later License URI: https://www.gnu.org/licenses/gpl-2.0.html",
-  "directories": {
-    "test": "tests"
+  "description": "=== Plugin Biblioteca (A)",
+  "dependencies": {
+    "@tailwindcss/cli": "^4.0.9",
+    "@tailwindcss/postcss": "^4.0.9"
   },
   "repository": {
     "type": "git",
@@ -28,9 +44,5 @@
   "bugs": {
     "url": "https://bitbucket.org/lopandpe-personal-projects/tender-a-library/issues"
   },
-  "homepage": "https://bitbucket.org/lopandpe-personal-projects/tender-a-library#readme",
-  "dependencies": {
-    "@tailwindcss/cli": "^4.0.9",
-    "@tailwindcss/postcss": "^4.0.9"
-  }
+  "homepage": "https://bitbucket.org/lopandpe-personal-projects/tender-a-library#readme"
 }

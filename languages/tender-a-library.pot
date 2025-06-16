@@ -1,34 +1,127 @@
 # Copyright (C) 2025 Local Anarquista Magdalena
-# This file is distributed under the same license as the Tender (A) Library plugin.
+# This file is distributed under the same license as the Plugin Biblioteca (A) plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Tender (A) Library 0.1.0\n"
+"Project-Id-Version: Plugin Biblioteca (A) 0.1.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/tender-a-library\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-03-23T17:59:57+00:00\n"
+"POT-Creation-Date: 2025-06-13T09:49:41+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.7.1\n"
+"X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: tender-a-library\n"
 
 #. Plugin Name of the plugin
-msgid "Tender (A) Library"
-msgstr ""
-
-#. Plugin URI of the plugin
-#. Author URI of the plugin
-msgid "https://localanarquistamagdalena.org"
+#: tender-a-library.php
+msgid "Plugin Biblioteca (A)"
 msgstr ""
 
 #. Description of the plugin
-msgid "Adds library functionality to the wordpress core, including books, readers, loans, etc."
+#: tender-a-library.php
+msgid "Añade la funcionalidad de biblioteca al core de wordpress, incluyendo libros, lectores, préstamos, etc"
 msgstr ""
 
 #. Author of the plugin
+#: tender-a-library.php
 msgid "Local Anarquista Magdalena"
+msgstr ""
+
+#. Author URI of the plugin
+#: tender-a-library.php
+msgid "https://localanarquistamagdalena.org"
+msgstr ""
+
+#: blocks/includes/book-data-functions.php:19
+#: blocks/build/book-data/index.js:1
+#: blocks/src/book-data/edit.js:9
+msgid "Book data"
+msgstr ""
+
+#: blocks/includes/book-data-functions.php:21
+#: modules/tender-book/tenderBookFields.php:90
+#: blocks/build/book-data/index.js:1
+#: blocks/src/book-data/edit.js:11
+msgid "Author"
+msgstr ""
+
+#: blocks/includes/book-data-functions.php:23
+#: modules/tender-book/tenderBookFields.php:24
+#: blocks/build/book-data/index.js:1
+#: blocks/src/book-data/edit.js:13
+msgid "Publisher"
+msgstr ""
+
+#: blocks/includes/book-data-functions.php:29
+#: modules/tender-book/tenderBookFields.php:70
+#: blocks/build/book-data/index.js:1
+#: blocks/src/book-data/edit.js:17
+msgid "Library section"
+msgstr ""
+
+#: blocks/includes/book-data-functions.php:38
+#: blocks/build/book-data/index.js:1
+#: blocks/src/book-data/edit.js:22
+msgid "Publication year"
+msgstr ""
+
+#: blocks/includes/book-data-functions.php:45
+#: blocks/build/book-data/index.js:1
+#: blocks/src/book-data/edit.js:24
+msgid "Signature"
+msgstr ""
+
+#: blocks/includes/book-data-functions.php:61
+#: blocks/includes/book-data-functions.php:79
+msgid "Available for loan."
+msgstr ""
+
+#: blocks/includes/book-data-functions.php:62
+#: blocks/includes/book-data-functions.php:72
+#: blocks/includes/book-data-functions.php:82
+msgid "Not available."
+msgstr ""
+
+#: blocks/includes/book-data-functions.php:70
+msgid "Lend this book"
+msgstr ""
+
+#: blocks/includes/book-data-functions.php:73
+#: blocks/includes/book-data-functions.php:80
+#: blocks/includes/book-data-functions.php:83
+msgid "Reserve this book"
+msgstr ""
+
+#: blocks/includes/book-data-functions.php:77
+msgid "Renew this lending from your profile"
+msgstr ""
+
+#: blocks/includes/book-data-functions.php:94
+msgid "Current active lendings"
+msgstr ""
+
+#: blocks/includes/book-data-functions.php:96
+msgid "Current active lending"
+msgstr ""
+
+#. translators: Number of current lendings
+#: blocks/includes/book-data-functions.php:107
+#, php-format
+msgid "Lending #%d"
+msgstr ""
+
+#: blocks/includes/book-data-functions.php:109
+msgid "Estimated return"
+msgstr ""
+
+#: blocks/includes/book-summary-functions.php:17
+msgid "There is no summary"
+msgstr ""
+
+#: blocks/tender-blocks.php:18
+msgid "Tender Blocks"
 msgstr ""
 
 #: modules/customPostBook.php:16
@@ -133,6 +226,18 @@ msgstr ""
 msgid "You do not have permission to access this page."
 msgstr ""
 
+#: modules/openerUserFunctions.php:109
+msgid "More info"
+msgstr ""
+
+#: modules/openerUserFunctions.php:111
+msgid "Receive newsletter by e-mail"
+msgstr ""
+
+#: modules/openerUserFunctions.php:113
+msgid "Phone number"
+msgstr ""
+
 #: modules/permalinks.php:11
 msgid "Library settings"
 msgstr ""
@@ -153,29 +258,100 @@ msgstr ""
 msgid "Slug for languages"
 msgstr ""
 
-#: modules/profile/profilePage.php:46
+#: modules/profile/editProfilePage.php:28
+msgid "Invalid email address."
+msgstr ""
+
+#: modules/profile/editProfilePage.php:30
+msgid "This email is already in use."
+msgstr ""
+
+#: modules/profile/editProfilePage.php:41
+msgid "Profile updated successfully."
+msgstr ""
+
+#: modules/profile/editProfilePage.php:55
+#: modules/profile/profilePage.php:53
+msgid "Name"
+msgstr ""
+
+#: modules/profile/editProfilePage.php:59
+msgid "Last Name"
+msgstr ""
+
+#: modules/profile/editProfilePage.php:63
+#: modules/profile/profilePage.php:57
+msgid "E-mail"
+msgstr ""
+
+#: modules/profile/editProfilePage.php:67
+#: modules/profile/profilePage.php:61
+msgid "Phone"
+msgstr ""
+
+#: modules/profile/editProfilePage.php:71
+#: modules/profile/profilePage.php:65
+msgid "Consents to receive news by e-mail:"
+msgstr ""
+
+#: modules/profile/editProfilePage.php:75
+msgid "Save Changes"
+msgstr ""
+
+#: modules/profile/editProfilePage.php:81
+msgid "Back to Profile"
+msgstr ""
+
+#: modules/profile/profilePage.php:39
+msgid "There is no user with this information"
+msgstr ""
+
+#: modules/profile/profilePage.php:66
+msgid "Yes"
+msgstr ""
+
+#: modules/profile/profilePage.php:66
+msgid "No"
+msgstr ""
+
+#: modules/profile/profilePage.php:73
 msgid "Edit profile"
 msgstr ""
 
-#: modules/profile/profilePage.php:49
+#: modules/profile/profilePage.php:81
 msgid "Logout"
 msgstr ""
 
-#: modules/profile/profilePage.php:54
-msgid "Contact information"
-msgstr ""
-
-#: modules/profile/profilePage.php:79
-#: modules/profile/profilePage.php:90
+#: modules/profile/profilePage.php:87
 msgid "Active lendings"
 msgstr ""
 
-#: modules/profile/profilePage.php:113
+#: modules/profile/profilePage.php:124
 msgid "Lending date"
 msgstr ""
 
-#: modules/profile/profilePage.php:114
+#: modules/profile/profilePage.php:127
 msgid "Estimated return date"
+msgstr ""
+
+#: modules/profile/profilePage.php:131
+msgid "This loan cannot be extended"
+msgstr ""
+
+#: modules/profile/profilePage.php:134
+msgid "Loan renewal"
+msgstr ""
+
+#: modules/profile/profilePage.php:141
+msgid "Return"
+msgstr ""
+
+#: modules/profile/profilePage.php:157
+msgid "There are no active lendings right now"
+msgstr ""
+
+#: modules/profile/profilePage.php:166
+msgid "Past lendings"
 msgstr ""
 
 #: modules/tender-book/tenderBookFields.php:15
@@ -196,10 +372,6 @@ msgstr ""
 
 #: modules/tender-book/tenderBookFields.php:22
 msgid "Otras autoras"
-msgstr ""
-
-#: modules/tender-book/tenderBookFields.php:24
-msgid "Publisher"
 msgstr ""
 
 #: modules/tender-book/tenderBookFields.php:27
@@ -224,14 +396,6 @@ msgstr ""
 
 #: modules/tender-book/tenderBookFields.php:58
 msgid "Review"
-msgstr ""
-
-#: modules/tender-book/tenderBookFields.php:70
-msgid "Library section"
-msgstr ""
-
-#: modules/tender-book/tenderBookFields.php:90
-msgid "Author"
 msgstr ""
 
 #: modules/tender-book/tenderBookFields.php:93
@@ -262,10 +426,41 @@ msgstr ""
 msgid "Number"
 msgstr ""
 
+#: modules/tender-book/tenderBookTemplate.php:45
+msgid "Libro individual"
+msgstr ""
+
+#: modules/tender-book/tenderBookTemplate.php:46
+msgid "Plantilla personalizada para libros (CPT)."
+msgstr ""
+
 #: modules/tenderRoles.php:13
 msgid "Opener"
 msgstr ""
 
 #: modules/tenderRoles.php:49
 msgid "Reader"
+msgstr ""
+
+#: blocks/build/book-summary/index.js:1
+#: blocks/src/book-summary/edit.js:9
+msgid "Book summary"
+msgstr ""
+
+#: blocks/build/book-cover/block.json
+#: blocks/src/book-cover/block.json
+msgctxt "block title"
+msgid "Book Cover"
+msgstr ""
+
+#: blocks/build/book-data/block.json
+#: blocks/src/book-data/block.json
+msgctxt "block title"
+msgid "Book Data"
+msgstr ""
+
+#: blocks/build/book-summary/block.json
+#: blocks/src/book-summary/block.json
+msgctxt "block title"
+msgid "Book Summary"
 msgstr ""

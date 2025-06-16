@@ -1,0 +1,16 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "tender-a-library/book-summary",
+  "version": "0.1.0",
+  "title": "Book Summary",
+  "category": "tender-blocks",
+  "icon": "media-text",
+  "supports": {
+    "html": true
+  },
+  "textdomain": "tender-a-library",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
+}

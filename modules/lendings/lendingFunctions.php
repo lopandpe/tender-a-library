@@ -126,6 +126,47 @@ function tender_get_active_lendings_by_user($user_id)
 }
 
 /**
+ * Obtener los préstamos activos de un libro
+ */
+function tender_get_active_lendings_by_book($book_id)
+{
+	global $wpdb;
+
+	return $wpdb->get_results($wpdb->prepare(
+		"SELECT * FROM " . TENDER_TABLE_LENDINGS . " WHERE book_id = %d AND returned = 0",
+		$book_id
+	));
+}
+
+/**
+ * Comprobar si un usuario tiene un libro concreto prestado ahora mismo
+ */
+function tender_user_has_borrowed_book($user_id, $book_id) {
+	global $wpdb;
+
+	$result = $wpdb->get_var($wpdb->prepare(
+		"SELECT COUNT(*) FROM " . TENDER_TABLE_LENDINGS . " 
+		 WHERE user_id = %d AND book_id = %d AND returned = 0",
+		$user_id, $book_id
+	));
+
+	return $result > 0;
+}
+
+/**
+ * Obtener la fecha estimada de devolución de un préstamo
+ */
+function tender_get_stimated_return_date_by_book_id($book_id)
+{
+	global $wpdb;
+
+	return $wpdb->get_row($wpdb->prepare(
+			"SELECT stimated_return_date FROM " . TENDER_TABLE_LENDINGS . " WHERE book_id = %d AND returned = 0 ORDER BY lending_date DESC LIMIT 1",
+			$book_id
+		));
+}
+
+/**
  * Obtener los préstamos pasados de un usuario
  */
 function tender_get_past_lendings_by_user($user_id)
