@@ -186,8 +186,8 @@ function tal_profile_template($content)
 								<?php else: ?>
 									<img src="<?php echo plugin_dir_url(__FILE__); ?>../../assets/svg/default-book.svg"" alt=" No cover"> <?php endif; ?>
 								<div class="dates">
-									<span class="loan-date"><?php echo __('Lending') . ': ' . $formatted_lending_date; ?></span>
-									<span class="return-date"><?php echo  __('Return') . ': ' . $formatted_date; ?></span>
+									<span class="loan-date"><?php echo __('Lending', 'tender-a-library') . ': ' . $formatted_lending_date; ?></span>
+									<span class="return-date"><?php echo  __('Return', 'tender-a-library') . ': ' . $formatted_date; ?></span>
 								</div>
 							</div>
 							<div class="book-info">

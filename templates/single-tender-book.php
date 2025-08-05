@@ -8,21 +8,24 @@ if (!defined('ABSPATH')) {
 	exit; // Evitar acceso directo
 }
 
-get_header(); ?>
+get_header();
 
-<main id="tender-book">
-	<div class="container">
-		<article <?php post_class(); ?>>
-			<h1><?php the_title(); ?></h1>
-			<div class="book-meta">
-				<p><strong>Autor:</strong> <?php the_author(); ?></p>
-				<p><strong>Fecha de publicación:</strong> <?php echo get_the_date(); ?></p>
-			</div>
-			<div class="book-content">
-				<?php the_content(); ?>
-			</div>
-		</article>
-	</div>
-</main>
+echo '<main class="wp-block-group wrapper alignwide single-book-content" style="padding: 100px 20px;">';
+	echo '<div class="container">';
+		echo '<h6 class="wp-block-heading alignwide">LIBRO</h6>';
+		echo '<h1 class="wp-block-post-title alignwide has-x-large-font-size">' . get_the_title() . '</h1>';
+		echo '<div class="wp-block-columns alignwide">';
+			echo '<div class="wp-block-column" style="flex-basis:30%; padding: 0 20px;">';
+				echo do_blocks('<!-- wp:tender-a-library/book-cover /-->');
+			echo '</div>';
+			echo '<div class="wp-block-column" style="flex-basis:30%; padding: 0 20px;">';
+				echo do_blocks('<!-- wp:tender-a-library/book-data /-->');
+			echo '</div>';
+			echo '<div class="wp-block-column" style="flex-basis:40%; padding: 0 20px;">';
+				echo do_blocks('<!-- wp:tender-a-library/book-summary /-->');
+			echo '</div>';
+		echo '</div>';
+	echo '</div>';
+echo '</main>';
 
-<?php get_footer(); ?>
+get_footer();

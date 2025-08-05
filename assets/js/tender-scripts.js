@@ -1,5 +1,3 @@
-console.log("¡Pedro es el mejor!");
-
 import "../scss/tender-styles.scss";
 
 jQuery(document).ready(function ($) {

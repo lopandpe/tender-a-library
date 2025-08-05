@@ -8,12 +8,18 @@
     "build:tailwind": "npx tailwindcss -i ./assets/css/tailwind.css -o ./css/tender-public.css --minify && npx tailwindcss -i ./assets/css/tailwind.css -o ./css/tender-admin.css --minify",
     "watch:tailwind": "npx tailwindcss -i ./assets/css/tailwind.css -o ./css/tender-public.css --minify && npx tailwindcss -i ./assets/css/tailwind.css -o ./css/tender-admin.css --watch",
     "webpack": "webpack --config webpack.config.js",
+    "webpack:watch": "webpack --watch --config webpack.config.js",
     "build:blocks": "wp-scripts build --config webpack.blocks.config.js",
     "start:blocks": "wp-scripts start --config webpack.blocks.config.js"
   },
   "devDependencies": {
+    "@babel/core": "^7.28.0",
+    "@babel/preset-env": "^7.28.0",
+    "@wordpress/babel-preset-default": "^8.27.0",
+    "@wordpress/element": "^6.27.0",
     "@wordpress/scripts": "^30.18.0",
     "autoprefixer": "^10.4.20",
+    "babel-loader": "^10.0.0",
     "css-loader": "^7.1.2",
     "eslint": "^8.18.0",
     "eslint-plugin-react": "^7.30.1",
@@ -33,7 +39,8 @@
   "description": "=== Plugin Biblioteca (A)",
   "dependencies": {
     "@tailwindcss/cli": "^4.0.9",
-    "@tailwindcss/postcss": "^4.0.9"
+    "@tailwindcss/postcss": "^4.0.9",
+    "@wordpress/i18n": "^6.0.0"
   },
   "repository": {
     "type": "git",

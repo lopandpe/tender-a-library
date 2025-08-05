@@ -1,5 +1,6 @@
 .profile {
 	font-size: 16px;
+	margin-bottom: 50px;
 	.user-info {
 		ul {
 			display: flex;
@@ -10,6 +11,9 @@
 			li {
 				display: flex;
 				gap: 10px;
+				.label{
+					color: $black-color;
+				}
 				.data {
 					color: $primary-color;
 				}
@@ -42,12 +46,13 @@
 	}
 }
 .profile-lendings {
+	margin-bottom: 50px;
 	.active-lendings {
 		list-style: none;
 		display: grid;
 		gap: 20px;
 		padding: 0px;
-		grid-template-columns: 1fr 1fr;
+		// grid-template-columns: 1fr 1fr;
 	}
 	.past-lendings {
 		list-style: none;
@@ -148,6 +153,100 @@
 		}
 	}
 }
+
+.user-info {
+    form {
+      ul {
+        padding: 0;
+        margin: 0;
+        list-style: none;
+
+        .form-row {
+          display: flex;
+          align-items: center;
+          margin-bottom: 18px;
+
+          .label {
+            flex: 0 0 140px;
+            font-weight: 500;
+            color: #333;
+            font-size: 15px;
+          }
+          .data {
+            flex: 1;
+
+            input[type="text"],
+            input[type="email"] {
+              width: 100%;
+              padding: 8px 10px;
+              border: 1px solid #ccc;
+              border-radius: 4px;
+              font-size: 15px;
+              transition: border 0.2s;
+              color: #222;
+
+              &:focus {
+                outline: none;
+                border-color: $primary-color;
+              }
+            }
+
+            input[type="checkbox"] {
+              accent-color: $primary-color;
+              width: 18px;
+              height: 18px;
+              margin-right: 6px;
+              vertical-align: middle;
+            }
+          }
+        }
+
+        .form-row:last-child {
+          margin-bottom: 0;
+          .tal-button {
+            padding: 10px 26px;
+            border: none;
+            border-radius: 4px;
+            background: $primary-color;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s;
+
+            &:hover, &:focus {
+				opacity: 0.8;
+            }
+          }
+        }
+      }
+    }
+
+    .message.success {
+      margin: 14px 0;
+      border-radius: 4px;
+      background: #e5ffd8;
+      color: #FFF;
+      font-size: 15px;
+    }
+
+    p {
+      margin-top: 18px;
+
+      .go-back {
+        color: $primary-color;
+        font-weight: 500;
+        text-decoration: none;
+        transition: color 0.15s;
+        &:hover,
+        &:focus {
+          opacity: 0.8;
+        }
+      }
+    }
+  }
+
+
 @media screen and (max-width: 768px) {
 	.profile-lendings {
 		.active-lendings {

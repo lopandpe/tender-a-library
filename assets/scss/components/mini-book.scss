@@ -1,0 +1,100 @@
+.tender-book-preview {
+	font-size: 16px;
+	width: 160px;
+	text-decoration: none;
+	color: #000;
+    position: relative;
+	.cover {
+        display: block;
+        line-height: 0;;
+		position: relative;
+		height: 220px;
+		background-color: #FFF;
+		img {
+			width: 100%;
+			height: 220px;
+			object-fit: contain;
+			object-position: center;
+		}
+		.dates {
+			font-size: 12px;
+			background-color: #fff;
+			position: absolute;
+			bottom: 20px;
+			right: 10px;
+			left: 10px;
+			display: flex;
+			flex-direction: column;
+			flex-wrap: wrap;
+			justify-content: center;
+			align-items: center;
+			text-align: center;
+            line-height: 1.5em;
+			.return-date {
+				color: $primary-color;
+			}
+		}
+	}
+	.book-info {
+        line-height: 1.25em;
+		.title {
+			color: $primary-color;
+			text-decoration: none;
+            padding: 10px 0px;
+            display: block;
+		}
+		.author {
+			color: $gray-color;
+		}
+	}
+    .book-availability {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 10px;
+        font-size: 10px;
+        position: absolute;
+        padding: 2px 4px 2px 18px;
+        background-color: #ffffff;
+        top: 0px;
+        right: 10px;
+        text-transform: uppercase;
+        font-weight: bold;
+        span{
+            display: block;
+            position: relative;
+            &:after{
+                content: '';
+                position: absolute;
+                top: 50%;
+                left: -13px;
+                transform: translateY(-50%);
+                width: 7px;
+                height: 8px;
+                border-radius: 50%;
+                background-color: transparent;
+
+            }
+
+            &.available {
+                color: $success-color;
+                &:after {
+                    background-color: $success-color;
+                }
+            }
+
+            &.unavailable {
+                color: $danger-color;
+                &:after {
+                    background-color: $danger-color;
+                }
+            }
+        }
+
+    }
+    a{
+        &:hover{
+            opacity: 0.7;
+        }
+    }
+}

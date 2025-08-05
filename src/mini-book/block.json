@@ -1,0 +1,17 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "tender-a-library/mini-book",
+  "version": "0.1.0",
+  "title": "Mini Book",
+  "category": "tender-blocks",
+  "icon": "book",
+  "parent": ["tender-a-library/book-list"],
+  "supports": {
+    "html": true
+  },
+  "textdomain": "tender-a-library",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
+}

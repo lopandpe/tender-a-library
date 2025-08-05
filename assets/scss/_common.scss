@@ -1,3 +1,6 @@
+*,*:after,*:before{
+	box-sizing: border-box;
+}
 .no-results {
 	color: $primary-color;
 }
@@ -27,44 +30,4 @@
 	// 	text-decoration: underline;
 	// }
 }
-.tender-book-preview {
-	font-size: 16px;
-	width: 160px;
-	text-decoration: none;
-	color: #000;
-	.cover {
-		position: relative;
-		min-height: 160px;
-		img {
-			width: 100%;
-			height: auto;
-		}
-		.dates {
-			font-size: 12px;
-			background-color: #fff;
-			position: absolute;
-			bottom: 20px;
-			right: 10px;
-			left: 10px;
-			display: flex;
-			flex-direction: column;
-			flex-wrap: wrap;
-			justify-content: center;
-			align-items: center;
-			text-align: center;
 
-			.return-date {
-				color: $primary-color;
-			}
-		}
-	}
-	.book-info {
-		.title {
-			color: $primary-color;
-			text-decoration: none;
-		}
-		.author {
-			color: $gray-color;
-		}
-	}
-}

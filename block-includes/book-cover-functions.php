@@ -2,8 +2,10 @@
 
 function tender_book_cover_render_callback($block_attributes, $block_content)
 {
-
-	$block_classes = 'wp-block-tender-a-library-book-cover';
+	$block_classes = tender_get_block_classes(
+		$block_attributes,
+		'wp-block-tender-a-library-book-cover'
+	);
 	$current_post_id = get_the_ID();
 	$image_id = carbon_get_post_meta($current_post_id, 'tender_book_cover');
 	$image = null;

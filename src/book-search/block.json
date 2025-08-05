@@ -1,0 +1,19 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "tender-a-library/book-search",
+  "version": "0.1.0",
+  "title": "Book Search",
+  "category": "tender-blocks",
+  "icon": "book-alt",
+  "supports": {
+    "html": true,
+    "align": true,
+    "anchor": true,
+    "alignWide": true
+  },
+  "textdomain": "tender-a-library",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
+}

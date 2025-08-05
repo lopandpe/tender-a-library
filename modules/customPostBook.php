@@ -9,8 +9,6 @@ if (!defined('ABSPATH')) {
 function tender_book()
 {
 	$book_slug = get_option('tender_book_slug', 'libro'); // Valor por defecto
-	$section_slug = get_option('tender_section_slug', 'seccion-biblioteca'); // Valor por defecto
-	$language_slug = get_option('tender_language_slug', 'idioma-biblioteca'); // Valor por defecto
 
 	$labels = array(
 		'name'                  => _x('Books', 'Post Type General Name', 'tender-a-library'),
@@ -44,10 +42,10 @@ function tender_book()
 		'label'                 => __('Book', 'tender-a-library'),
 		'description'           => __('Library book', 'tender-a-library'),
 		'labels'                => $labels,
-		'supports'              => array('title', 'thumbnail'),
+		'supports'              => array('title', 'thumbnail', 'custom-fields'),
 		'taxonomies'            => array('tender_section'),
 		'public'                => true,
-		'has_archive'           => true,
+		'has_archive'           => false,
 		'rewrite'               => array('slug' => $book_slug),
 		'menu_icon'             => 'dashicons-book-alt',
 		'capability_type'       => array('tender_book', 'tender_books'),
@@ -70,13 +68,9 @@ function tender_book()
 	$tender_section_args = array(
 		'labels'                     => $tender_section_labels,
 		'hierarchical'               => true,
-		'public'                     => true,
-		'show_ui'                    => true,
-		'show_admin_column'          => true,
-		'show_in_nav_menus'          => true,
-		'show_tagcloud'              => true,
-		'meta_box_cb'                => false,
-		'rewrite'               => array('slug' => $section_slug),
+		'show_in_rest'              => true,
+		'rewrite'                   => false, 
+		'publicly_queryable' 		=> false, 
 	);
 	register_taxonomy('tender_section', array('tender_book'), $tender_section_args);
 
@@ -91,13 +85,20 @@ function tender_book()
 	$tender_language_args = array(
 		'labels'                     => $tender_language_labels,
 		'hierarchical'               => false,
-		'public'                     => true,
-		'show_ui'                    => true,
-		'show_admin_column'          => true,
-		'show_in_nav_menus'          => true,
-		'show_tagcloud'              => true,
-		'rewrite'               => array('slug' => $language_slug),
+		'show_in_rest'              => true,
+		'rewrite'                   => false, 
+		'publicly_queryable' 		=> false, 
 	);
 	register_taxonomy('tender_language', array('tender_book'), $tender_language_args);
 }
 add_action('init', 'tender_book', 0);
+
+
+add_action('admin_init', function() {
+    remove_meta_box('tagsdiv-tender_section', 'tender_book', 'side');
+    remove_meta_box('tagsdiv-tender_language', 'tender_book', 'side');
+    
+    // Si son taxonomías jerárquicas (como categorías)
+    remove_meta_box('tender_sectiondiv', 'tender_book', 'side');
+    remove_meta_box('tender_languagediv', 'tender_book', 'side');
+});

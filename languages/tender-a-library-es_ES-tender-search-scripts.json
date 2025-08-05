@@ -1,0 +1,417 @@
+{
+   "domain": "tender-a-library",
+   "locale_data": {
+      "tender-a-library": {
+         "": {
+            "domain": "tender-a-library",
+            "plural_forms": "nplurals=2; plural=(n != 1);",
+            "lang": "es_ES"
+         },
+         "https://localanarquistamagdalena.org": [
+            "https://localanarquistamagdalena.org"
+         ],
+         "Local Anarquista Magdalena": [
+            "Local Anarquista Magdalena"
+         ],
+         "Books": [
+            "Libros"
+         ],
+         "All books": [
+            "Todos los libros"
+         ],
+         "Add new book": [
+            "Añadir nuevo libro"
+         ],
+         "Edit book": [
+            "Editar libro"
+         ],
+         "View book": [
+            "Ver libro"
+         ],
+         "Book": [
+            "Libro"
+         ],
+         "Library book": [
+            "Libro de la biblioteca"
+         ],
+         "Library sections": [
+            "Secciones de la biblioteca"
+         ],
+         "All sections": [
+            "Todas las secciones"
+         ],
+         "Parent section": [
+            "Sección madre"
+         ],
+         "Parent Item:": [
+            "Elemento superior:"
+         ],
+         "New section": [
+            "Nueva sección"
+         ],
+         "Add new section": [
+            "Añadir nueva sección"
+         ],
+         "Languages": [
+            "Idiomas"
+         ],
+         "All languages": [
+            "Todos los idiomas"
+         ],
+         "New language": [
+            "Nuevo idioma"
+         ],
+         "Add new language": [
+            "Añadir idioma nuevo"
+         ],
+         "You do not have permission to access this page.": [
+            "No tienes permisos para acceder a esta página."
+         ],
+         "Library settings": [
+            "Configuración de la biblioteca"
+         ],
+         "Set up slugs for books and their taxonomies.": [
+            "Configurar slugs para los libros y sus taxonomías."
+         ],
+         "Slug for books": [
+            "Slug para los libros"
+         ],
+         "Edit profile": [
+            "Editar perfil"
+         ],
+         "Logout": [
+            "Cerrar sesión"
+         ],
+         "Active lendings": [
+            "Préstamos activos"
+         ],
+         "Lending date": [
+            "Fecha del préstamo"
+         ],
+         "Estimated return date": [
+            "Fecha estimada de devolución"
+         ],
+         "Cover": [
+            "Portada"
+         ],
+         "Authors": [
+            "Autoría"
+         ],
+         "Surname, First name": [
+            "Apellido, Nombre"
+         ],
+         "This value determines the call sign. It must begin with at least three letters.": [
+            "Este valor determina la signatura. Debe comenzar con al menos tres letras."
+         ],
+         "Otras autoras": [
+            "Otras autoras"
+         ],
+         "Publisher": [
+            "Editorial"
+         ],
+         "Copies": [
+            "Copias"
+         ],
+         "Language": [
+            "Idioma"
+         ],
+         "Year of publication": [
+            "Año de publicación"
+         ],
+         "Edition number": [
+            "Número de edición"
+         ],
+         "Summary": [
+            "Resumen"
+         ],
+         "Review": [
+            "Reseña"
+         ],
+         "Library section": [
+            "Sección de la biblioteca"
+         ],
+         "Author": [
+            "Autor(a)"
+         ],
+         "First three letters of the author's first surname.": [
+            "Tres primeras letras del primer apellido de la autora."
+         ],
+         "Title": [
+            "Título"
+         ],
+         "Three first letters of the first word of more than three characters in the title, avoiding articles.": [
+            "Las tres primeras letras de la primera palabra de más de tres caracteres en el título, evitando artículos."
+         ],
+         "Section data": [
+            "Datos de la sección"
+         ],
+         "Section number": [
+            "Número de sección"
+         ],
+         "The format is a sequence of parent section numbers, in order, separated by dots, including the current section number at the end. Ex: ‘2.5.1’.": [
+            "El formato es una secuencia de números de la sección padre, en orden, separados por puntos, incluyendo el número de sección actual al final. Ej: '2.5.1'."
+         ],
+         "Number": [
+            "Número"
+         ],
+         "Opener": [
+            "Abridor(a)"
+         ],
+         "Reader": [
+            "Lector(a)"
+         ],
+         "Plugin Biblioteca (A)": [
+            "Plugin Biblioteca (A)"
+         ],
+         "Book data": [
+            "Datos del libro"
+         ],
+         "Publication year": [
+            "Año de publicación"
+         ],
+         "Signature": [
+            "Signatura"
+         ],
+         "Available for loan.": [
+            "Disponible para préstamo."
+         ],
+         "Not available.": [
+            "No disponible."
+         ],
+         "Lend this book": [
+            "Prestar libro"
+         ],
+         "Reserve this book": [
+            "Reservar este libro"
+         ],
+         "Current active lendings": [
+            "Préstamos activos"
+         ],
+         "Current active lending": [
+            "Préstamo activo"
+         ],
+         "Lending #%d": [
+            "Préstamo #%d"
+         ],
+         "There is no summary": [
+            "No hay resumen"
+         ],
+         "Tender Blocks": [
+            "Bloques Tender (A)"
+         ],
+         "More info": [
+            "Más info"
+         ],
+         "Receive newsletter by e-mail": [
+            "Recibir novedades por e-mail"
+         ],
+         "Phone number": [
+            "Número de teléfono"
+         ],
+         "Invalid email address.": [
+            "E-mail incorrecto."
+         ],
+         "This email is already in use.": [
+            "Este correo ya está en uso."
+         ],
+         "Profile updated successfully.": [
+            "El perfil se ha actualizado correctamente."
+         ],
+         "Name": [
+            "Nombre"
+         ],
+         "Last Name": [
+            "Apellidos"
+         ],
+         "E-mail": [
+            "E-mail"
+         ],
+         "Phone": [
+            "Teléfono"
+         ],
+         "Consents to receive news by e-mail:": [
+            "Acepta el envío de novedades por e-mail:"
+         ],
+         "Save Changes": [
+            "Guardar cambios"
+         ],
+         "Back to Profile": [
+            "Volver al perfil"
+         ],
+         "There is no user with this information": [
+            "No hay ningún usuario con esta información"
+         ],
+         "Yes": [
+            "Sí"
+         ],
+         "No": [
+            "No"
+         ],
+         "This loan cannot be extended": [
+            "Este préstamo no puede prorrogarse"
+         ],
+         "Loan renewal": [
+            "Renovar préstamo"
+         ],
+         "Return": [
+            "Devolver"
+         ],
+         "There are no active lendings right now": [
+            "No hay préstamos activos en este momento"
+         ],
+         "Past lendings": [
+            "Préstamos pasados"
+         ],
+         "Añade la funcionalidad de biblioteca al core de wordpress, incluyendo libros, lectores, préstamos, etc": [
+            ""
+         ],
+         "Renew this lending": [
+            "Renovar préstamo"
+         ],
+         "Unknown user": [
+            "Usuario desconocido"
+         ],
+         "User:": [
+            "Usuario:"
+         ],
+         "Estimated return:": [
+            "Fecha estimada de devolución:"
+         ],
+         "Select the user who will borrow this book": [
+            "Selecciona el usuario al que se presetará el libro"
+         ],
+         "Search user": [
+            "Buscar usuario"
+         ],
+         "Name, email, or phone": [
+            "Nombre, email o teléfono"
+         ],
+         "Start typing to search for users": [
+            "Empieza a escribir para buscar usuarios"
+         ],
+         "Cancel": [
+            "Cancelar"
+         ],
+         "Create Lending": [
+            "Crear préstamo"
+         ],
+         "No users found": [
+            "No se encontraron usuarios"
+         ],
+         "Please select a user": [
+            "Por favor, selecciona un usuario"
+         ],
+         "An error occurred. Please try again.": [
+            "Ha ocurrido un error, por favor vuelva a intentarlo."
+         ],
+         "Available": [
+            "Disponible"
+         ],
+         "Not Available": [
+            "No disponible"
+         ],
+         "Single book": [
+            "Libro individual"
+         ],
+         "Single book custom template (CPT).": [
+            "Plantilla personalizada para libro individual."
+         ],
+         "Tender books archive": [
+            "Archivo de Libros"
+         ],
+         "Tender books archive template (CPT).": [
+            ""
+         ],
+         "Taxonomy: Tender Section": [
+            "Taxonomía: Seccíon de la biblioteca"
+         ],
+         "Custom template for Tender Section taxonomy.": [
+            ""
+         ],
+         "Taxonomy: Tender Language": [
+            ""
+         ],
+         "Custom template for Tender Language taxonomy.": [
+            ""
+         ],
+         "Show filters": [
+            "Mostrar filtros"
+         ],
+         "Close filters": [
+            "Cerrar filtros"
+         ],
+         "Hide filters": [
+            "Ocultar filtros"
+         ],
+         "Filters": [
+            "Filtros"
+         ],
+         "Reset all filters": [
+            "Resetear filtros"
+         ],
+         "Reset Filters": [
+            "Resetear filtros"
+         ],
+         "Search": [
+            "Buscar"
+         ],
+         "Search by title, author, etc": [
+            "Buscar por título, autor(a), etc"
+         ],
+         "Sections": [
+            "Secciones"
+         ],
+         "Books per page": [
+            "Libros por página"
+         ],
+         "Previous": [
+            "Anterior"
+         ],
+         "Page %1$d of %2$d": [
+            "Página %1$d de %2$d"
+         ],
+         "Next": [
+            "Siguiente"
+         ],
+         "Loading...": [
+            "Cargando..."
+         ],
+         "No results found.": [
+            "Sin resultados."
+         ],
+         "Post Type General Name\u0004Books": [
+            "Libros"
+         ],
+         "Post Type Singular Name\u0004Book": [
+            "Libro"
+         ],
+         "Taxonomy General Name\u0004Library sections": [
+            "Secciones de la biblioteca"
+         ],
+         "Taxonomy General Name\u0004Languages": [
+            "Idiomas"
+         ],
+         "Taxonomy Singular Name\u0004Library section": [
+            "Sección de la biblioteca"
+         ],
+         "Taxonomy Singular Name\u0004Language": [
+            "Idioma"
+         ],
+         "block title\u0004Book Cover": [
+            "Portada"
+         ],
+         "block title\u0004Book Data": [
+            "Datos del libro"
+         ],
+         "block title\u0004Book Summary": [
+            "Resumen del libro"
+         ],
+         "block title\u0004Book Search": [
+            "Buscar libros"
+         ],
+         "block title\u0004Mini Book": [
+            "Miniatura de libro"
+         ]
+      }
+   }
+}

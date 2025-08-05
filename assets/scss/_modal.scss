@@ -1,0 +1,78 @@
+/* Modal */
+
+.tender-modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 10000;
+  align-items: center;
+  justify-content: center;
+}
+
+.tender-modal-active {
+  display: flex;
+}
+
+.tender-modal-open {
+  overflow: hidden;
+}
+
+.tender-modal-content {
+  background: white;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  position: relative;
+  animation: tenderModalOpen 0.3s ease;
+}
+
+@keyframes tenderModalOpen {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.tender-top-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #5f6368;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #f8f9fa;
+  }
+}
+
+.tender-modal-title {
+  margin: 20px 20px 10px;
+  font-size: 22px;
+  color: #202124;
+}
+
+.tender-modal-subtitle {
+  margin: 0 20px 20px;
+  color: #5f6368;
+  font-size: 15px;
+}

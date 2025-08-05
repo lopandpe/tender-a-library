@@ -2,8 +2,10 @@
 
 function tender_book_summary_render_callback($block_attributes, $block_content)
 {
-
-	$block_classes = 'wp-block-tender-a-library-book-summary';
+	$block_classes = tender_get_block_classes(
+		$block_attributes,
+		'wp-block-tender-a-library-book-summary'
+	);
 	$current_post_id = get_the_ID();
 	$summary = carbon_get_post_meta($current_post_id, 'tender_book_excerpt');
 

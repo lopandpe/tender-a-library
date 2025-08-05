@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-06-13T09:49:41+00:00\n"
+"POT-Creation-Date: 2025-08-05T09:32:42+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: tender-a-library\n"
@@ -34,191 +34,248 @@ msgstr ""
 msgid "https://localanarquistamagdalena.org"
 msgstr ""
 
-#: blocks/includes/book-data-functions.php:19
-#: blocks/build/book-data/index.js:1
-#: blocks/src/book-data/edit.js:9
+#: block-includes/book-data-functions.php:21
+#: build/book-data/index.js:1
+#: src/book-data/edit.js:9
 msgid "Book data"
 msgstr ""
 
-#: blocks/includes/book-data-functions.php:21
+#: block-includes/book-data-functions.php:23
 #: modules/tender-book/tenderBookFields.php:90
-#: blocks/build/book-data/index.js:1
-#: blocks/src/book-data/edit.js:11
+#: build/book-data/index.js:1
+#: src/book-data/edit.js:11
 msgid "Author"
 msgstr ""
 
-#: blocks/includes/book-data-functions.php:23
+#: block-includes/book-data-functions.php:25
 #: modules/tender-book/tenderBookFields.php:24
-#: blocks/build/book-data/index.js:1
-#: blocks/src/book-data/edit.js:13
+#: build/book-data/index.js:1
+#: src/book-data/edit.js:13
 msgid "Publisher"
 msgstr ""
 
-#: blocks/includes/book-data-functions.php:29
+#: block-includes/book-data-functions.php:29
 #: modules/tender-book/tenderBookFields.php:70
-#: blocks/build/book-data/index.js:1
-#: blocks/src/book-data/edit.js:17
+#: build/book-data/index.js:1
+#: src/book-data/edit.js:17
 msgid "Library section"
 msgstr ""
 
-#: blocks/includes/book-data-functions.php:38
-#: blocks/build/book-data/index.js:1
-#: blocks/src/book-data/edit.js:22
+#: block-includes/book-data-functions.php:35
+#: build/book-data/index.js:1
+#: src/book-data/edit.js:22
 msgid "Publication year"
 msgstr ""
 
-#: blocks/includes/book-data-functions.php:45
-#: blocks/build/book-data/index.js:1
-#: blocks/src/book-data/edit.js:24
+#: block-includes/book-data-functions.php:41
+#: build/book-data/index.js:1
+#: src/book-data/edit.js:24
 msgid "Signature"
 msgstr ""
 
-#: blocks/includes/book-data-functions.php:61
-#: blocks/includes/book-data-functions.php:79
+#: block-includes/book-data-functions.php:54
+#: block-includes/book-data-functions.php:72
 msgid "Available for loan."
 msgstr ""
 
-#: blocks/includes/book-data-functions.php:62
-#: blocks/includes/book-data-functions.php:72
-#: blocks/includes/book-data-functions.php:82
+#: block-includes/book-data-functions.php:55
+#: block-includes/book-data-functions.php:65
+#: block-includes/book-data-functions.php:75
 msgid "Not available."
 msgstr ""
 
-#: blocks/includes/book-data-functions.php:70
+#: block-includes/book-data-functions.php:63
+#: block-includes/book-data-functions.php:115
 msgid "Lend this book"
 msgstr ""
 
-#: blocks/includes/book-data-functions.php:73
-#: blocks/includes/book-data-functions.php:80
-#: blocks/includes/book-data-functions.php:83
+#: block-includes/book-data-functions.php:66
+#: block-includes/book-data-functions.php:73
+#: block-includes/book-data-functions.php:76
 msgid "Reserve this book"
 msgstr ""
 
-#: blocks/includes/book-data-functions.php:77
-msgid "Renew this lending from your profile"
+#: block-includes/book-data-functions.php:70
+msgid "Renew this lending"
 msgstr ""
 
-#: blocks/includes/book-data-functions.php:94
+#: block-includes/book-data-functions.php:84
 msgid "Current active lendings"
 msgstr ""
 
-#: blocks/includes/book-data-functions.php:96
+#: block-includes/book-data-functions.php:85
 msgid "Current active lending"
 msgstr ""
 
-#. translators: Number of current lendings
-#: blocks/includes/book-data-functions.php:107
+#: block-includes/book-data-functions.php:91
+msgid "Unknown user"
+msgstr ""
+
+#: block-includes/book-data-functions.php:96
 #, php-format
 msgid "Lending #%d"
 msgstr ""
 
-#: blocks/includes/book-data-functions.php:109
-msgid "Estimated return"
+#: block-includes/book-data-functions.php:99
+msgid "User:"
 msgstr ""
 
-#: blocks/includes/book-summary-functions.php:17
+#: block-includes/book-data-functions.php:100
+msgid "Estimated return:"
+msgstr ""
+
+#: block-includes/book-data-functions.php:116
+msgid "Select the user who will borrow this book"
+msgstr ""
+
+#: block-includes/book-data-functions.php:123
+msgid "Search user"
+msgstr ""
+
+#: block-includes/book-data-functions.php:126
+msgid "Name, email, or phone"
+msgstr ""
+
+#: block-includes/book-data-functions.php:132
+msgid "Start typing to search for users"
+msgstr ""
+
+#: block-includes/book-data-functions.php:138
+msgid "Cancel"
+msgstr ""
+
+#: block-includes/book-data-functions.php:140
+msgid "Create Lending"
+msgstr ""
+
+#: block-includes/book-data-functions.php:204
+msgid "No users found"
+msgstr ""
+
+#: block-includes/book-data-functions.php:217
+msgid "Please select a user"
+msgstr ""
+
+#: block-includes/book-data-functions.php:265
+msgid "An error occurred. Please try again."
+msgstr ""
+
+#: block-includes/book-summary-functions.php:19
 msgid "There is no summary"
 msgstr ""
 
-#: blocks/tender-blocks.php:18
-msgid "Tender Blocks"
+#: block-includes/mini-book-functions.php:62
+#: assets/js/book-search/view/Results.jsx:42
+#: dist/js/book-search.js:74
+#: dist/js/tender-search-scripts.js:74
+msgid "Available"
 msgstr ""
 
-#: modules/customPostBook.php:16
+#: block-includes/mini-book-functions.php:64
+#: assets/js/book-search/view/Results.jsx:44
+#: dist/js/book-search.js:74
+#: dist/js/tender-search-scripts.js:74
+msgid "Not Available"
+msgstr ""
+
+#: modules/customPostBook.php:14
 msgctxt "Post Type General Name"
 msgid "Books"
 msgstr ""
 
-#: modules/customPostBook.php:17
+#: modules/customPostBook.php:15
 msgctxt "Post Type Singular Name"
 msgid "Book"
 msgstr ""
 
-#: modules/customPostBook.php:18
+#: modules/customPostBook.php:16
 msgid "Books"
 msgstr ""
 
-#: modules/customPostBook.php:19
+#: modules/customPostBook.php:17
 msgid "All books"
 msgstr ""
 
-#: modules/customPostBook.php:20
+#: modules/customPostBook.php:18
 msgid "Add new book"
 msgstr ""
 
-#: modules/customPostBook.php:21
+#: modules/customPostBook.php:19
 msgid "Edit book"
 msgstr ""
 
-#: modules/customPostBook.php:22
+#: modules/customPostBook.php:20
 msgid "View book"
 msgstr ""
 
-#: modules/customPostBook.php:44
+#: modules/customPostBook.php:42
 msgid "Book"
 msgstr ""
 
-#: modules/customPostBook.php:45
+#: modules/customPostBook.php:43
 msgid "Library book"
 msgstr ""
 
-#: modules/customPostBook.php:61
+#: modules/customPostBook.php:59
 msgctxt "Taxonomy General Name"
 msgid "Library sections"
 msgstr ""
 
-#: modules/customPostBook.php:62
+#: modules/customPostBook.php:60
 msgctxt "Taxonomy Singular Name"
 msgid "Library section"
 msgstr ""
 
-#: modules/customPostBook.php:63
+#: modules/customPostBook.php:61
 msgid "Library sections"
 msgstr ""
 
-#: modules/customPostBook.php:64
+#: modules/customPostBook.php:62
 msgid "All sections"
 msgstr ""
 
-#: modules/customPostBook.php:65
+#: modules/customPostBook.php:63
 msgid "Parent section"
 msgstr ""
 
-#: modules/customPostBook.php:66
+#: modules/customPostBook.php:64
 msgid "Parent Item:"
 msgstr ""
 
-#: modules/customPostBook.php:67
+#: modules/customPostBook.php:65
 msgid "New section"
 msgstr ""
 
-#: modules/customPostBook.php:68
+#: modules/customPostBook.php:66
 msgid "Add new section"
 msgstr ""
 
-#: modules/customPostBook.php:84
+#: modules/customPostBook.php:78
 msgctxt "Taxonomy General Name"
 msgid "Languages"
 msgstr ""
 
-#: modules/customPostBook.php:85
+#: modules/customPostBook.php:79
 msgctxt "Taxonomy Singular Name"
 msgid "Language"
 msgstr ""
 
-#: modules/customPostBook.php:86
+#: modules/customPostBook.php:80
+#: assets/js/book-search/view/Filters.jsx:82
+#: dist/js/book-search.js:52
+#: dist/js/tender-search-scripts.js:52
 msgid "Languages"
 msgstr ""
 
-#: modules/customPostBook.php:87
+#: modules/customPostBook.php:81
 msgid "All languages"
 msgstr ""
 
-#: modules/customPostBook.php:88
+#: modules/customPostBook.php:82
 msgid "New language"
 msgstr ""
 
-#: modules/customPostBook.php:89
+#: modules/customPostBook.php:83
 msgid "Add new language"
 msgstr ""
 
@@ -251,11 +308,37 @@ msgid "Slug for books"
 msgstr ""
 
 #: modules/permalinks.php:31
-msgid "Slug for library sections"
+msgid "Book search page"
 msgstr ""
 
-#: modules/permalinks.php:42
-msgid "Slug for languages"
+#: modules/permalinks.php:40
+msgid "Profile settings"
+msgstr ""
+
+#: modules/permalinks.php:47
+msgid "Profile page"
+msgstr ""
+
+#: modules/permalinks.php:55
+msgid "Profile edit page"
+msgstr ""
+
+#: modules/permalinks.php:72
+msgid "Página del buscador"
+msgstr ""
+
+#: modules/permalinks.php:73
+msgid "Página de perfil"
+msgstr ""
+
+#: modules/permalinks.php:74
+msgid "Página de edición de perfil"
+msgstr ""
+
+#: modules/permalinks.php:120
+#: modules/permalinks.php:129
+#: modules/permalinks.php:139
+msgid "Select page"
 msgstr ""
 
 #: modules/profile/editProfilePage.php:28
@@ -343,6 +426,7 @@ msgid "Loan renewal"
 msgstr ""
 
 #: modules/profile/profilePage.php:141
+#: modules/profile/profilePage.php:190
 msgid "Return"
 msgstr ""
 
@@ -352,6 +436,14 @@ msgstr ""
 
 #: modules/profile/profilePage.php:166
 msgid "Past lendings"
+msgstr ""
+
+#: modules/profile/profilePage.php:189
+msgid "Lending"
+msgstr ""
+
+#: modules/tender-blocks.php:20
+msgid "Tender Blocks"
 msgstr ""
 
 #: modules/tender-book/tenderBookFields.php:15
@@ -426,12 +518,36 @@ msgstr ""
 msgid "Number"
 msgstr ""
 
-#: modules/tender-book/tenderBookTemplate.php:45
-msgid "Libro individual"
+#: modules/tender-book/tenderBookTemplate.php:42
+msgid "Single book"
 msgstr ""
 
-#: modules/tender-book/tenderBookTemplate.php:46
-msgid "Plantilla personalizada para libros (CPT)."
+#: modules/tender-book/tenderBookTemplate.php:43
+msgid "Single book custom template (CPT)."
+msgstr ""
+
+#: modules/tender-book/tenderBookTemplate.php:51
+msgid "Tender books archive"
+msgstr ""
+
+#: modules/tender-book/tenderBookTemplate.php:52
+msgid "Tender books archive template (CPT)."
+msgstr ""
+
+#: modules/tender-book/tenderBookTemplate.php:60
+msgid "Taxonomy: Tender Section"
+msgstr ""
+
+#: modules/tender-book/tenderBookTemplate.php:61
+msgid "Custom template for Tender Section taxonomy."
+msgstr ""
+
+#: modules/tender-book/tenderBookTemplate.php:69
+msgid "Taxonomy: Tender Language"
+msgstr ""
+
+#: modules/tender-book/tenderBookTemplate.php:70
+msgid "Custom template for Tender Language taxonomy."
 msgstr ""
 
 #: modules/tenderRoles.php:13
@@ -442,25 +558,174 @@ msgstr ""
 msgid "Reader"
 msgstr ""
 
-#: blocks/build/book-summary/index.js:1
-#: blocks/src/book-summary/edit.js:9
+#: tender-a-library.php:76
+msgid "Perfil"
+msgstr ""
+
+#: tender-a-library.php:76
+msgid "Profile"
+msgstr ""
+
+#: tender-a-library.php:82
+msgid "Editar perfil"
+msgstr ""
+
+#: tender-a-library.php:82
+msgid "Edit Profile"
+msgstr ""
+
+#: tender-a-library.php:88
+msgid "Biblioteca"
+msgstr ""
+
+#: tender-a-library.php:88
+msgid "Library"
+msgstr ""
+
+#: assets/js/book-search/view/Filters.jsx:44
+#: assets/js/book-search/view/Filters.jsx:46
+#: dist/js/book-search.js:52
+#: dist/js/tender-search-scripts.js:52
+msgid "Show filters"
+msgstr ""
+
+#: assets/js/book-search/view/Filters.jsx:52
+#: dist/js/book-search.js:52
+#: dist/js/tender-search-scripts.js:52
+msgid "Close filters"
+msgstr ""
+
+#: assets/js/book-search/view/Filters.jsx:54
+#: dist/js/book-search.js:52
+#: dist/js/tender-search-scripts.js:52
+msgid "Hide filters"
+msgstr ""
+
+#: assets/js/book-search/view/Filters.jsx:56
+#: dist/js/book-search.js:52
+#: dist/js/tender-search-scripts.js:52
+msgid "Filters"
+msgstr ""
+
+#: assets/js/book-search/view/Filters.jsx:60
+#: dist/js/book-search.js:52
+#: dist/js/tender-search-scripts.js:52
+msgid "Reset all filters"
+msgstr ""
+
+#: assets/js/book-search/view/Filters.jsx:62
+#: dist/js/book-search.js:52
+#: dist/js/tender-search-scripts.js:52
+msgid "Reset Filters"
+msgstr ""
+
+#: assets/js/book-search/view/Filters.jsx:65
+#: dist/js/book-search.js:52
+#: dist/js/tender-search-scripts.js:52
+msgid "Search"
+msgstr ""
+
+#: assets/js/book-search/view/Filters.jsx:68
+#: dist/js/book-search.js:52
+#: dist/js/tender-search-scripts.js:52
+msgid "Search by title, author, etc"
+msgstr ""
+
+#: assets/js/book-search/view/Filters.jsx:74
+#: dist/js/book-search.js:52
+#: dist/js/tender-search-scripts.js:52
+msgid "Sections"
+msgstr ""
+
+#: assets/js/book-search/view/Filters.jsx:95
+#: dist/js/book-search.js:52
+#: dist/js/tender-search-scripts.js:52
+msgid "Books per page"
+msgstr ""
+
+#: assets/js/book-search/view/Pagination.jsx:13
+#: dist/js/book-search.js:63
+#: dist/js/tender-search-scripts.js:63
+msgid "Previous"
+msgstr ""
+
+#. translators: 1: current page, 2: total pages
+#: assets/js/book-search/view/Pagination.jsx:18
+#: dist/js/book-search.js:63
+#: dist/js/tender-search-scripts.js:63
+#, js-format
+msgid "Page %1$d of %2$d"
+msgstr ""
+
+#: assets/js/book-search/view/Pagination.jsx:27
+#: dist/js/book-search.js:63
+#: dist/js/tender-search-scripts.js:63
+msgid "Next"
+msgstr ""
+
+#: assets/js/book-search/view/Results.jsx:3
+#: dist/js/book-search.js:74
+#: dist/js/tender-search-scripts.js:74
+msgid "Loading..."
+msgstr ""
+
+#: assets/js/book-search/view/Results.jsx:6
+#: dist/js/book-search.js:74
+#: dist/js/tender-search-scripts.js:74
+msgid "No results found."
+msgstr ""
+
+#: build/book-search/index.js:1
+#: src/book-search/edit.js:9
+msgid "Book search"
+msgstr ""
+
+#: build/book-search/index.js:1
+#: src/book-search/edit.js:10
+msgid "This block can only be seen on the frontend."
+msgstr ""
+
+#: build/book-summary/index.js:1
+#: src/book-summary/edit.js:9
 msgid "Book summary"
 msgstr ""
 
-#: blocks/build/book-cover/block.json
-#: blocks/src/book-cover/block.json
+#: build/mini-book/index.js:1
+#: src/mini-book/edit.js:30
+msgid "Book title"
+msgstr ""
+
+#: build/mini-book/index.js:1
+#: src/mini-book/edit.js:31
+msgid "Book Author"
+msgstr ""
+
+#: build/book-cover/block.json
+#: src/book-cover/block.json
 msgctxt "block title"
 msgid "Book Cover"
 msgstr ""
 
-#: blocks/build/book-data/block.json
-#: blocks/src/book-data/block.json
+#: build/book-data/block.json
+#: src/book-data/block.json
 msgctxt "block title"
 msgid "Book Data"
 msgstr ""
 
-#: blocks/build/book-summary/block.json
-#: blocks/src/book-summary/block.json
+#: build/book-search/block.json
+#: src/book-search/block.json
+msgctxt "block title"
+msgid "Book Search"
+msgstr ""
+
+#: build/book-summary/block.json
+#: src/book-summary/block.json
 msgctxt "block title"
 msgid "Book Summary"
+msgstr ""
+
+#: build/mini-book/block.json
+#: src/mini-book/block.json
+msgctxt "block title"
+msgid "Mini Book"
 msgstr ""

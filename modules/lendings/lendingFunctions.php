@@ -265,16 +265,32 @@ function tender_search_users()
 
 	$query = sanitize_text_field($_POST['query']);
 
-	// Buscar usuarios por nombre, apellidos o email
-	$users = get_users([
-		'search' => "*{$query}*",
-		'search_columns' => ['user_login', 'user_email', 'display_name'],
-		'number' => 10,
-	]);
+    // 1. Buscar usuarios por nombre, email, etc. (como ya hacías)
+    $users_by_name = get_users([
+        'search'         => "*{$query}*",
+        'search_columns' => ['user_login', 'user_email', 'display_name'],
+        'number'        => 10,
+    ]);
 
-	if (empty($users)) {
-		wp_send_json_error(['message' => 'No se encontraron usuarios']);
-	}
+    // 2. Buscar usuarios por teléfono (meta_key 'phone_number')
+    $users_by_phone = get_users([
+        'meta_query' => [
+            [
+                'key'     => 'phone_number', // Asegúrate de que este es el meta_key correcto
+                'value'   => $query,
+                'compare' => 'LIKE',
+            ],
+        ],
+        'number' => 10,
+    ]);
+
+    // Combinar resultados y eliminar duplicados
+    $users = array_merge($users_by_name, $users_by_phone);
+    $users = array_unique($users, SORT_REGULAR);
+
+    if (empty($users)) {
+        wp_send_json_error(['message' => 'No se encontraron usuarios']);
+    }
 
 	$options = '';
 	foreach ($users as $user) {
