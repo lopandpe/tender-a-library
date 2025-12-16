@@ -1,0 +1,67 @@
+.tal_admin_lendings_table{
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    margin: 20px 0px;
+    width: 100%;
+    th, td{
+        padding: 5px 10px;
+        text-align: left;
+        border: 1px solid #c5c5c5;
+    }
+}
+.tal_admin_pagination-links{
+    display: flex;
+    gap: 5px;
+    a{
+        display: block;
+        padding: 5px;
+        background-color: #589df7;
+        border-radius: 3px;
+        color: #FFF;
+        font-weight: bold;
+        text-decoration: none;
+        &.active{
+            background-color: #144f9b;
+            color: #FFF;
+        }
+    }
+}
+#tal-confirmation-modal{
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0,0,0,0.5);
+    .tal-modal-content{
+        background-color: #FFF;
+        padding: 20px;
+        h3{
+            margin-bottom: 15px;
+            font-size: 16px;
+            font-weight: 500;
+        }
+        button{
+            padding: 5px 10px;
+            margin-right: 10px;
+            background-color: rgb(47, 95, 47);
+            border-radius: 3px;
+            color: #FFF;
+            text-transform: uppercase;
+            font-weight: bold;
+            font-size: 12px;
+            cursor: pointer;
+            &.error{
+                border: none;
+                box-shadow: none;
+                background: transparent;
+                color: rgb(131, 42, 42);
+                &:hover{
+                    opacity: 0.8;
+                }
+            }
+        }
+    }
+}

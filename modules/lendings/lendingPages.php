@@ -26,15 +26,17 @@ function tender_render_lending_page($args)
 ?>
 	<div class="wrap">
 		<h1><?php echo esc_html($title); ?></h1>
+		<?php do_action('tal_admin_pre_active_lendings'); ?>
 		<input type="text" id="search-lendings" placeholder="Buscar por usuario o libro..." style="width: 300px;">
 		<div id="lendings-list"></div>
 		<?php if ($show_actions) : ?>
 			<!-- Modal de confirmación -->
-			<div id="confirmation-modal" style="display: none;" class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-				<div class="w-full max-w-sm p-6 bg-white rounded-lg">
-					<h3 id="modal-message" class="mb-4 text-lg font-semibold"></h3>
-					<button id="confirm-action" class="px-4 py-2 mr-2 text-white bg-green-500 rounded">Confirmar</button>
-					<button id="cancel-action" class="px-4 py-2 text-white bg-gray-500 rounded">Cancelar</button>
+			<div id="tal-confirmation-modal" style="display: none;">
+				<div class="tal-modal-content">
+					<h3 id="modal-message" class=""></h3>
+					<button id="confirm-action"><?php _e('Confirm', 'tender-a-library') ?></button>
+					<button id="cancel-action" class="error"><?php _e('Cancel', 'tender-a-library') ?></button>
+					<button id="accept-action" style="display: none"><?php _e('Accept', 'tender-a-library') ?></button>
 				</div>
 			</div>
 		<?php endif; ?>
@@ -108,7 +110,7 @@ function tender_render_lending_page($args)
 			});
 
 			// Delegación para la paginación
-			$(document).on('click', '#pagination-links a', function(e) {
+			$(document).on('click', '.tal_admin_pagination-links a', function(e) {
 				e.preventDefault();
 				let page = $(this).data('page');
 				let query = $('#search-lendings').val();
@@ -120,30 +122,59 @@ function tender_render_lending_page($args)
 				$(document).on('click', '.lending-return, .lending-renew', function() {
 					let lendingId = $(this).closest('tr').attr('id');
 					let action = $(this).data('action');
-					let message = (action === 'return') ? '¿Estás seguro de que quieres devolver este libro?' : '¿Estás seguro de que quieres renovar este préstamo?';
-					$('#confirmation-modal').show();
+					let message = (action === 'return') ? '<?php _e('Are you sure you want to FINISH this loan?', 'tender-a-library') ?>' : '<?php _e('Are you sure you want to RENEW this loan?', 'tender-a-library') ?>';
+					
+					$("#confirm-action")
+						.data("lending-id", lendingId)
+						.data("action", action);
+					console.log($("#confirm-action").data("lending-id"));
+					$('#tal-confirmation-modal  button').show();
+					$('#tal-confirmation-modal #accept-action').hide();
+					$('#tal-confirmation-modal').show();
 					$('#modal-message').text(message);
-					$('#confirm-action').data('lending-id', lendingId).data('action', action);
 				});
 
 				// Confirmar acción en el modal
 				$(document).on('click', '#confirm-action', function() {
 					let lendingId = $(this).data('lending-id');
 					let action = $(this).data('action');
-
+					console.log(lendingId);
 					$.post(ajaxurl, {
-						action: 'tender_handle_lending_action',
-						lending_id: lendingId,
-						action_type: action
-					}, function(response) {
-						$('#confirmation-modal').hide();
-						loadLendings($('#search-lendings').val(), 1);
-					});
+							action: 'tender_handle_lending_action',
+							lending_id: lendingId,
+							action_type: action
+						})
+						.done(function(response) {
+							// WordPress siempre devuelve success/data
+							if (response && response.data && response.data.message) {
+								$("#modal-message").text(response.data.message);
+							} else {
+								$("#modal-message").text("No se recibió respuesta del servidor.");
+							}
+						})
+						.fail(function(jqXHR, textStatus, errorThrown) {
+							console.error(jqXHR, textStatus, errorThrown);
+							$("#modal-message").text(
+								"Ocurrió un error. No se recibió respuesta del servidor."
+							);
+						})
+						.always(function() {
+							$("#confirm-action, #cancel-action").hide();
+							$("#accept-action").show();
+						});
 				});
+
+
 
 				// Cancelar acción en el modal
 				$(document).on('click', '#cancel-action', function() {
-					$('#confirmation-modal').hide();
+					$('#tal-confirmation-modal').hide();
+				});
+
+				// Cancelar acción en el modal
+				$(document).on('click', '#accept-action', function() {
+					$('#tal-confirmation-modal').hide();					
+					window.location.href = window.location.href;
 				});
 			<?php endif; ?>
 		});
@@ -281,22 +312,22 @@ function render_pagination($current_page, $total_pages)
 		$start_page = max(1, $total_pages - $max_pages_to_show + 1);
 	}
 ?>
-	<div class="flex justify-center mt-4 space-x-2 pagination" id="pagination-links">
+	<div class="tal_admin_pagination-links">
 		<?php if ($current_page > 1) : ?>
-			<a href="#" data-page="<?php echo $current_page - 1; ?>" class="flex items-center px-4 py-2 bg-gray-200 rounded hover:bg-gray-300">
+			<a href="#" data-page="<?php echo $current_page - 1; ?>">
 				« <?php _e('Previous', 'tender-plugin'); ?>
 			</a>
 		<?php endif; ?>
 
 		<?php if ($start_page > 1) : ?>
-			<a href="#" data-page="1" class="flex items-center px-3 py-1 bg-gray-200 rounded hover:bg-gray-300">1</a>
+			<a href="#" data-page="1">1</a>
 			<?php if ($start_page > 2) : ?>
-				<span class="px-3 py-1">...</span>
+				<span>...</span>
 			<?php endif; ?>
 		<?php endif; ?>
 
 		<?php for ($i = $start_page; $i <= $end_page; $i++) : ?>
-			<a href="#" data-page="<?php echo $i; ?>" class="flex items-center px-3 py-1 rounded <?php echo ($i == $current_page) ? 'bg-blue-500 !text-white' : 'bg-gray-200 hover:bg-gray-300'; ?>">
+			<a href="#" data-page="<?php echo $i; ?>" class="<?php echo ($i == $current_page) ? 'active' : ''; ?>">
 				<?php echo $i; ?>
 			</a>
 		<?php endfor; ?>
@@ -305,11 +336,11 @@ function render_pagination($current_page, $total_pages)
 			<?php if ($end_page < $total_pages - 1) : ?>
 				<span class="px-3 py-1">...</span>
 			<?php endif; ?>
-			<a href="#" data-page="<?php echo $total_pages; ?>" class="flex items-center px-3 py-1 bg-gray-200 rounded hover:bg-gray-300"><?php echo $total_pages; ?></a>
+			<a href="#" data-page="<?php echo $total_pages; ?>"><?php echo $total_pages; ?></a>
 		<?php endif; ?>
 
 		<?php if ($current_page < $total_pages) : ?>
-			<a href="#" data-page="<?php echo $current_page + 1; ?>" class="flex items-center px-4 py-2 bg-gray-200 rounded hover:bg-gray-300">
+			<a href="#" data-page="<?php echo $current_page + 1; ?>">
 				<?php _e('Next', 'tender-plugin'); ?> »
 			</a>
 		<?php endif; ?>
@@ -325,23 +356,24 @@ function render_lendings_table($results)
 {
 	ob_start();
 ?>
-	<table class="w-full mt-4 text-left bg-white table-auto min-w-max">
+
+	<table class="tal_admin_lendings_table">
 		<thead>
-			<tr class="border-y border-slate-200 bg-slate-50">
+			<tr>
 				<th>
-					<p class="px-2 text-sm text-slate-500">Libro</p>
+					<?php _e('Book title', 'tender-a-library'); ?>
 				</th>
 				<th>
-					<p class="px-2 text-sm text-slate-500">Usuario</p>
+					<?php _e('User', 'tender-a-library'); ?>
 				</th>
 				<th>
-					<p class="px-2 text-sm text-slate-500">Fecha Préstamo</p>
+					<?php _e('Loan date', 'tender-a-library'); ?>
 				</th>
 				<th>
-					<p class="px-2 text-sm text-slate-500">Fecha Límite</p>
+					<?php _e('Estimated return date', 'tender-a-library'); ?>
 				</th>
 				<th>
-					<p class="px-2 text-sm text-slate-500">Acciones</p>
+					<?php _e('Actions', 'tender-a-library'); ?>
 				</th>
 			</tr>
 		</thead>
@@ -355,19 +387,20 @@ function render_lendings_table($results)
 				}
 				$user_profile = get_user_profile_url_by_id($row->user_id);
 			?>
-				<tr id="<?php echo esc_attr($row->id); ?>"></tr>
-				<td class="p-2 border-b border-slate-200"><?php echo esc_html($row->post_title); ?></td>
-				<td class="p-2 border-b border-slate-200"><a href="<?php echo esc_url(is_array($user_profile) ? $user_profile['profile'] : ''); ?>"><?php echo esc_html($row->display_name); ?></a></td>
-				<td class="p-2 border-b border-slate-200"><?php echo esc_html($row->lending_date); ?></td>
-				<td class="p-2 border-b border-slate-200"><?php echo esc_html($formatted_date); ?></td>
-				<td class="p-2 border-b border-slate-200">
-					<button class="bg-red-500 lending-action lending-return tender-button" data-action="return" data-id="<?php echo esc_attr($row->id); ?>">
-						Devolver
-					</button>
-					<button class="bg-orange-500 lending-action lending-renew tender-button" data-action="renew" data-id="<?php echo esc_attr($row->id); ?>">
-						Renovar
-					</button>
-				</td>
+				<tr id="<?php echo esc_attr($row->id); ?>">
+					<td><?php echo esc_html($row->post_title); ?></td>
+					<td><a href="<?php echo esc_url(is_array($user_profile) ? $user_profile['profile'] : ''); ?>"><?php echo esc_html($row->display_name); ?></a></td>
+					<td><?php echo esc_html($row->lending_date); ?></td>
+					<td><?php echo esc_html($formatted_date); ?></td>
+					<td>
+						<button class="lending-return" data-action="return" data-id="<?php echo esc_attr($row->id); ?>">
+							<?php _e('Return', 'tender-a-library'); ?>
+						</button>
+						<button class="lending-renew" data-action="renew" data-id="<?php echo esc_attr($row->id); ?>">
+							<?php _e('Loan renewal', 'tender-a-library'); ?>
+						</button>
+
+					</td>
 				</tr>
 			<?php endforeach; ?>
 		</tbody>
@@ -383,23 +416,23 @@ function render_old_lendings_table($results)
 {
 	ob_start();
 ?>
-	<table class="w-full mt-4 text-left bg-white table-auto min-w-max">
+	<table class="tal_admin_lendings_table">
 		<thead>
-			<tr class="border-y border-slate-200 bg-slate-50">
+			<tr>
 				<th>
-					<p class="px-2 text-sm text-slate-500">Libro</p>
+					<?php _e('Book title', 'tender-a-library'); ?>
 				</th>
 				<th>
-					<p class="px-2 text-sm text-slate-500">Usuario</p>
+					<?php _e('User', 'tender-a-library'); ?>
 				</th>
 				<th>
-					<p class="px-2 text-sm text-slate-500">Fecha Préstamo</p>
+					<?php _e('Loan date', 'tender-a-library'); ?>
 				</th>
 				<th>
-					<p class="px-2 text-sm text-slate-500">Fecha de devolución</p>
+					<?php _e('Return date', 'tender-a-library'); ?>
 				</th>
 				<th>
-					<p class="px-2 text-sm text-slate-500">Número de renovaciones</p>
+					<?php _e('Renewals count', 'tender-a-library'); ?>
 				</th>
 			</tr>
 		</thead>
@@ -414,11 +447,11 @@ function render_old_lendings_table($results)
 				$user_profile = get_user_profile_url_by_id($row->user_id);
 			?>
 				<tr id="<?php echo esc_attr($row->id); ?>">
-					<td class="p-2 border-b border-slate-200"><?php echo esc_html($row->post_title); ?></td>
-					<td class="p-2 border-b border-slate-200"><a href="<?php echo esc_url(is_array($user_profile) ? $user_profile['profile'] : ''); ?>"><?php echo esc_html($row->display_name); ?></a></td>
-					<td class="p-2 border-b border-slate-200"><?php echo esc_html($row->lending_date); ?></td>
-					<td class="p-2 border-b border-slate-200"><?php echo esc_html($formatted_date); ?></td>
-					<td class="p-2 border-b border-slate-200"><?php echo esc_html($row->renewals); ?></td>
+					<td><?php echo esc_html($row->post_title); ?></td>
+					<td><a href="<?php echo esc_url(is_array($user_profile) ? $user_profile['profile'] : ''); ?>"><?php echo esc_html($row->display_name); ?></a></td>
+					<td><?php echo esc_html($row->lending_date); ?></td>
+					<td><?php echo esc_html($formatted_date); ?></td>
+					<td><?php echo esc_html($row->renewals); ?></td>
 				</tr>
 			<?php endforeach; ?>
 		</tbody>

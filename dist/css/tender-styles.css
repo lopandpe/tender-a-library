@@ -218,6 +218,100 @@
   opacity: 1;
 }
 
+#loginform input[type=text],
+#loginform input[type=password] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  font-size: 14px;
+  color: #333;
+  margin-bottom: 10px;
+}
+#loginform input[type=text]:focus,
+#loginform input[type=password]:focus {
+  border-color: var(--primary-color);
+  outline: none;
+  box-shadow: 0 0 5px rgba(var(--primary-color), 0.5);
+}
+#loginform input[type=text]::placeholder,
+#loginform input[type=password]::placeholder {
+  color: #999;
+}
+#loginform label {
+  display: flex;
+  align-items: flex-start;
+  cursor: pointer;
+  gap: 5px;
+  margin-bottom: 5px;
+  color: #333;
+  font-size: 14px;
+}
+#loginform label span {
+  width: calc(100% - 20px);
+}
+#loginform label {
+  display: flex;
+  align-items: flex-start;
+  cursor: pointer;
+  gap: 5px;
+  margin-bottom: 5px;
+  color: #333;
+  font-size: 14px;
+}
+#loginform label span {
+  width: calc(100% - 20px);
+}
+#loginform input[type=checkbox] {
+  appearance: none;
+  position: relative;
+  border: 1px solid;
+  border-color: var(--primary-color);
+  border-radius: 3px;
+  width: 15px;
+  height: 15px;
+  opacity: 0.8;
+}
+#loginform input[type=checkbox]:hover {
+  border-width: 2px;
+}
+#loginform input[type=checkbox]:checked {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  color: #fff;
+}
+#loginform input[type=checkbox]:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+  opacity: 1;
+}
+#loginform input[type=submit] {
+  background-color: var(--primary-color);
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 3px;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+#loginform input[type=submit]:hover {
+  opacity: 0.8;
+}
+#loginform input[type=submit]:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+.download_csv_form {
+  margin: 20px 0px 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: flex-start;
+}
+
 .tal-button {
   background-color: var(--primary-color);
   padding: 5px 10px;
@@ -389,8 +483,54 @@
 .profile-lendings .lending .delayed img {
   width: 100%;
 }
+.profile-lendings .lending .delayed:after, .profile-lendings .lending .delayed:after {
+  position: absolute;
+  z-index: 1;
+  top: -2.2em;
+  right: -50%;
+  display: block;
+  overflow: hidden;
+  height: 2em;
+  border-radius: 0.2em;
+  padding: 0 0.7em;
+  content: attr(aria-label);
+  color: #fff;
+  background: var(--danger-color);
+  font-size: 1em;
+  line-height: 2em;
+  text-align: left;
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+.profile-lendings .lending .delayed:focus:after, .profile-lendings .lending .delayed:hover:after {
+  opacity: 1;
+}
 .profile-lendings .lending.delayed {
   box-shadow: 0px 0px 5px rgba(255, 0, 0, 0.5);
+}
+
+.active-reservations {
+  list-style: none;
+  padding: 0px;
+}
+.active-reservations .reservation {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  padding: 20px;
+  max-width: 500px;
+}
+.active-reservations .reservation .reservation-info {
+  font-size: 1rem;
+  color: #000;
+}
+.active-reservations .reservation .tender-cancel-reservation {
+  background-color: var(--danger-color);
+  color: #fff;
+  margin-top: 10px;
 }
 
 .tal-confirmation-modal {
@@ -411,6 +551,11 @@
 }
 .tal-confirmation-modal .wrapper h3 {
   font-size: 20px;
+}
+.tal-confirmation-modal .wrapper .actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
 }
 .tal-confirmation-modal .wrapper #confirm-action {
   background-color: var(--success-color);
@@ -680,37 +825,13 @@
   text-transform: uppercase;
   cursor: pointer;
   color: #333;
-  padding: 40px 5px 5px;
+  padding: 5px 10px;
   background: #f0f0f0;
   border: 1px solid #ddd;
   font-weight: bold;
 }
-#filters-wrapper .tender-filters-close:before, #filters-wrapper .tender-filters-close:after {
-  content: "";
-  position: absolute;
-  display: block;
-  width: 25px;
-  height: 2px;
-  background: #333;
-  top: 20px;
-  left: 50%;
-  transform: translateX(-50%) rotate(45deg);
-  transition: all 0.6s ease;
-}
-#filters-wrapper .tender-filters-close:before {
-  transform: translateX(-50%) rotate(-45deg);
-}
 #filters-wrapper .tender-filters-close:hover {
   color: #f00;
-}
-#filters-wrapper .tender-filters-close:hover:before, #filters-wrapper .tender-filters-close:hover:after {
-  background-color: #f00;
-}
-#filters-wrapper .tender-filters-close:hover:before {
-  transform: translateX(-50%) rotate(225deg);
-}
-#filters-wrapper .tender-filters-close:hover:after {
-  transform: translateX(-50%) rotate(135deg);
 }
 #filters-wrapper .tender-filters-reset {
   margin-bottom: 20px;
@@ -798,4 +919,74 @@
   background-color: #f8f8f8;
   border-left: 3px solid var(--primary-color);
   padding-left: 7px;
+}
+
+.tal_admin_lendings_table {
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  margin: 20px 0px;
+  width: 100%;
+}
+.tal_admin_lendings_table th, .tal_admin_lendings_table td {
+  padding: 5px 10px;
+  text-align: left;
+  border: 1px solid #c5c5c5;
+}
+
+.tal_admin_pagination-links {
+  display: flex;
+  gap: 5px;
+}
+.tal_admin_pagination-links a {
+  display: block;
+  padding: 5px;
+  background-color: #589df7;
+  border-radius: 3px;
+  color: #FFF;
+  font-weight: bold;
+  text-decoration: none;
+}
+.tal_admin_pagination-links a.active {
+  background-color: #144f9b;
+  color: #FFF;
+}
+
+#tal-confirmation-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+#tal-confirmation-modal .tal-modal-content {
+  background-color: #FFF;
+  padding: 20px;
+}
+#tal-confirmation-modal .tal-modal-content h3 {
+  margin-bottom: 15px;
+  font-size: 16px;
+  font-weight: 500;
+}
+#tal-confirmation-modal .tal-modal-content button {
+  padding: 5px 10px;
+  margin-right: 10px;
+  background-color: rgb(47, 95, 47);
+  border-radius: 3px;
+  color: #FFF;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 12px;
+  cursor: pointer;
+}
+#tal-confirmation-modal .tal-modal-content button.error {
+  border: none;
+  box-shadow: none;
+  background: transparent;
+  color: rgb(131, 42, 42);
+}
+#tal-confirmation-modal .tal-modal-content button.error:hover {
+  opacity: 0.8;
 }

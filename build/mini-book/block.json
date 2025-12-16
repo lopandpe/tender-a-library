@@ -6,9 +6,6 @@
   "title": "Mini Book",
   "category": "tender-blocks",
   "icon": "book",
-  "parent": [
-    "tender-a-library/book-list"
-  ],
   "supports": {
     "html": true
   },

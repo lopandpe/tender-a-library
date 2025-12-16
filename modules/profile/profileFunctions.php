@@ -15,7 +15,7 @@ function tal_hide_author_page()
 		$author_user = get_userdata($author_id);
 
 		// Verificar si el usuario tiene el rol "reader" o "opener"
-		if (in_array('reader', $author_user->roles) || in_array('opener', $author_user->roles)) {
+		if (in_array('reader', $author_user->roles) || in_array('opener', $author_user->roles) || in_array('librarian', $author_user->roles)) {
 			$args = array(
 				'author' => $author_id,
 				'post_type' => 'any', // Buscar cualquier tipo de contenido
@@ -41,7 +41,7 @@ function tal_exclude_author_queries($query)
 		$author_user = get_userdata($author_id);
 
 		// Verificar si el usuario tiene el rol "reader" o "opener"
-		if (in_array('reader', $author_user->roles) || in_array('opener', $author_user->roles)) {
+		if (in_array('reader', $author_user->roles) || in_array('opener', $author_user->roles) || in_array('librarian', $author_user->roles)) {
 			$args = array(
 				'author' => $author_id,
 				'post_type' => 'any',
@@ -102,10 +102,16 @@ function get_user_profile_url_by_id($user_id)
 		if ($profile_page_id) {
 			$profile_page_url = get_permalink($profile_page_id);
 			$profile_url = trailingslashit($profile_page_url) . $user_slug;
+		}else{
+			$profile_url = 'error';
+
 		}
 		if ($edit_profile_page_id) {
 			$edit_profile_page_url = get_permalink($edit_profile_page_id);
 			$edit_profile_url = trailingslashit($edit_profile_page_url) . $user_slug;
+		}else{
+			$edit_profile_url = 'error';
+
 		}
 
 		return array(

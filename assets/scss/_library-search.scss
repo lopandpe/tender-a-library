@@ -1,3 +1,5 @@
+@use "variables" as *;
+
 #library-search-root {
 	position: relative;
 	.tender-book-search {
@@ -88,39 +90,15 @@
 		text-transform: uppercase;
 		cursor: pointer;
 		color: #333;
-		padding: 40px 5px 5px;
+		padding: 5px 10px;
         background: #f0f0f0;
         border: 1px solid #ddd;
         font-weight: bold;
-		&:before,
-		&:after {
-			content: "";
-			position: absolute;
-			display: block;
-			width: 25px;
-			height: 2px;
-			background: #333;
-			top: 20px;
-			left: 50%;
-			transform: translateX(-50%) rotate(45deg);
-			transition: all 0.6s ease;
-		}
-		&:before {
-			transform: translateX(-50%) rotate(-45deg);
-		}
+		
 
 		&:hover {
 			color: #f00;
-			&:before,
-			&:after {
-				background-color: #f00;
-			}
-			&:before {
-				transform: translateX(-50%) rotate(225deg);
-			}
-			&:after {
-				transform: translateX(-50%) rotate(135deg);
-			}
+			
 		}
 	}
     .tender-filters-reset{

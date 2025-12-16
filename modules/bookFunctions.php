@@ -56,6 +56,35 @@ function generate_tender_sig2($title)
 	return strtolower($signature);
 }
 
+function get_tender_signature($book_id) {
+    // Obtiene el post del libro
+    $book = get_post($book_id);
+    if (!$book) return '';
+
+    // Obtiene los términos de la taxonomía 'tender_section'
+    $terms = get_the_terms($book_id, 'tender_section');
+    if (!$terms || is_wp_error($terms)) return '';
+
+    // Tomamos el primer término (puedes adaptarlo si hay varios)
+    $section = $terms[0];
+    $number = function_exists('carbon_get_term_meta') 
+        ? carbon_get_term_meta($section->term_id, 'tender_section_number') 
+        : '';
+
+    // Obtiene los meta campos del libro
+    $sig1 = function_exists('carbon_get_post_meta') 
+        ? carbon_get_post_meta($book_id, 'tender_book_sig1') 
+        : '';
+
+    $sig2 = function_exists('carbon_get_post_meta') 
+        ? carbon_get_post_meta($book_id, 'tender_book_sig2') 
+        : '';
+
+    // Monta la signatura
+    return trim("{$number} {$sig1} - {$sig2}");
+}
+
+
 add_action('carbon_fields_post_meta_container_saved', 'save_tender_taxonomies_to_categories', 10, 2);
 
 function save_tender_taxonomies_to_categories($post_id, $container)
@@ -68,7 +97,7 @@ function save_tender_taxonomies_to_categories($post_id, $container)
 	}
 
 	// Check if current user can edit post
-	if (!current_user_can('edit_post', $post_id)) {
+	if (!current_user_can('edit_tender_books', $post_id)) {
 		return;
 	}
 

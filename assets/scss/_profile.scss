@@ -1,3 +1,5 @@
+@use "variables" as *;
+
 .profile {
 	font-size: 16px;
 	margin-bottom: 50px;
@@ -115,9 +117,56 @@
 			img {
 				width: 100%;
 			}
+			&:after,
+			&:after {
+				position: absolute;
+				z-index: 1;
+				top: -2.2em;
+				right: -50%;
+				display: block;
+				overflow: hidden;
+				height: 2em;
+				border-radius: .2em;
+				padding: 0 .7em;
+				content: attr(aria-label);
+				color: #fff;
+				background: $danger-color;
+				font-size: 1em;
+				line-height: 2em;
+				text-align: left;
+				opacity: 0;
+				transition: opacity 0.3s;
+				pointer-events: none;
+			}
+			&:focus:after,
+			&:hover:after {
+				opacity: 1;
+			}
 		}
 		&.delayed {
 			box-shadow: 0px 0px 5px rgba(255, 0, 0, 0.5);
+		}
+	}
+}
+.active-reservations{
+	list-style: none;
+	padding: 0px;;
+	.reservation{
+		display: flex;
+		gap: 20px;
+		flex-wrap: wrap;
+		box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+		border-radius: 5px;
+		padding: 20px;
+		max-width: 500px;
+		.reservation-info{
+			font-size: 1rem;
+			color: #000;
+		}
+		.tender-cancel-reservation{
+				background-color: $danger-color;
+				color: #fff;
+				margin-top: 10px;
 		}
 	}
 }
@@ -137,6 +186,11 @@
 		max-width: 100%;
 		h3 {
 			font-size: 20px;
+		}
+		.actions{
+			display: flex;
+			flex-wrap:wrap;
+			gap: 20px;
 		}
 		#confirm-action {
 			background-color: $success-color;

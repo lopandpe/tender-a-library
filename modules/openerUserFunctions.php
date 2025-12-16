@@ -10,7 +10,7 @@ if (!defined('ABSPATH')) {
 function limit_opener_roles($roles)
 {
 	// Si el usuario actual es "Opener" y NO es administrador:
-	if (current_user_can('opener') && !current_user_can('administrator')) {
+	if (current_user_can('opener') && !current_user_can('create_tender_books')) {
 		// Deja únicamente "reader" en la lista de roles
 		return array(
 			'reader' => $roles['reader'],
@@ -23,7 +23,7 @@ add_filter('editable_roles', 'limit_opener_roles');
 function force_reader_role_for_opener($user_id)
 {
 	// Si el usuario que está creando es "Opener"
-	if (current_user_can('opener') && !current_user_can('administrator')) {
+	if (current_user_can('opener') && !current_user_can('create_tender_books')) {
 		// Fuerza el rol del nuevo usuario a "reader"
 		$user = new WP_User($user_id);
 		$user->set_role('reader');
@@ -43,7 +43,6 @@ function filter_opener_user_list($query)
 	if (
 		'users.php' === $pagenow
 		&& current_user_can('opener')
-		&& ! current_user_can('administrator')
 	) {
 		// Forzamos la búsqueda de usuarios con rol "reader" únicamente
 		$query->set('role', 'reader');
@@ -67,7 +66,7 @@ function restrict_opener_edit_non_reader($allcaps, $caps, $args, $user)
 		! empty($args[0])
 		&& in_array($args[0], array('edit_user', 'edit_users'), true)
 		&& current_user_can('opener')
-		&& ! current_user_can('administrator')
+		&& ! current_user_can('create_tender_books')
 	) {
 		// $args[2] es el ID del usuario al que se intenta editar
 		if (isset($args[2]) && (int) $args[2] > 0) {
@@ -95,7 +94,7 @@ add_filter('user_has_cap', 'restrict_opener_edit_non_reader', 10, 4);
 function tal_current_user_opener_or_admin()
 {
 	// Si el usuario actual es "Opener" o "Administrador"
-	if (current_user_can('opener') || current_user_can('administrator')) {
+	if (current_user_can('create_lendings') ) {
 		return true;
 	}
 	return false;
@@ -116,3 +115,4 @@ function tal_attach_user_fields()
 		));
 }
 add_action('after_setup_theme', 'crb_load');
+

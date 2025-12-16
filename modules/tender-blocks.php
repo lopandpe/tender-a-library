@@ -9,6 +9,7 @@ include_once __DIR__ . '/../block-includes/book-cover-functions.php';
 include_once __DIR__ . '/../block-includes/book-data-functions.php';
 include_once __DIR__ . '/../block-includes/mini-book-functions.php';
 include_once __DIR__ . '/../block-includes/book-search-functions.php';
+include_once __DIR__ . '/../block-includes/upcoming-events-functions.php';
 
 function tender_plugin_block_categories($categories)
 {
@@ -41,6 +42,9 @@ function tender_tender_block_init()
 	));
 	register_block_type(__DIR__ . '/../build/book-search', array(
 		'render_callback' => 'tender_book_search_render_callback',
+	));
+	register_block_type(__DIR__ . '/../build/upcoming-events', array(
+		'render_callback' => 'tender_upcoming_events_render_callback',
 	));
 }
 add_action('init', 'tender_tender_block_init');

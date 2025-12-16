@@ -8,31 +8,36 @@
 		list-style: none;
 		margin: 0;
 		padding: 0;
-		font-size: 0.8em;
+		// font-size: 0.8em;
 		li {
 			margin-bottom: 5px;
 		}
 	}
-	#lending-info{
+	#lending-info { 
 		margin: 50px auto;
-		p{
-			font-size: 0.8em;
+		font-size: 16px;
+		p {
+			// font-size: 0.8em;
 			text-transform: uppercase;
 			font-weight: 600;
 		}
-		p.error{
-			color: #B10000;
+		p.tender-note{
+			font-weight: normal;
+			text-transform: none;  
 		}
-		p.success{
-			color: #09B100;
+		p.error {
+			color: #b10000;
+		}
+		p.success {
+			color: #09b100;
 		}
 	}
-	.lending-dates{
-		h6{
+	.lending-dates {
+		h6 {
 			font-weight: bold;
 			margin-bottom: 10px;
 		}
-		li{
+		li {
 			font-style: italic;
 		}
 	}
@@ -41,293 +46,304 @@
 /* Estilos generales */
 
 .tender-book-meta {
-  list-style: none;
-  padding: 0;
-  margin: 20px 0;
-  border-top: 1px solid #eee;
+	list-style: none;
+	padding: 0;
+	margin: 20px 0;
+	border-top: 1px solid #eee;
 
-  li {
-    padding: 10px 0;
-    border-bottom: 1px solid #eee;
-  }
+	li {
+		padding: 10px 0;
+		border-bottom: 1px solid #eee;
+    font-size: 0.8em;
+	}
 }
 
 /* Estados de disponibilidad */
 
 .tender-status {
-  padding: 10px 15px;
-  border-radius: 4px;
-  font-weight: bold;
-  margin: 15px 0;
+	padding: 10px 15px;
+	border-radius: 4px;
+	font-weight: bold;
+	margin: 15px 0;
 }
 
 .tender-available {
-  background-color: #e6f4ea;
-  color: #137333;
-  border-left: 4px solid #34a853;
+	background-color: #e6f4ea;
+	color: #137333;
+	border-left: 4px solid #34a853;
 }
 
 .tender-unavailable {
-  background-color: #fce8e6;
-  color: #a50e0e;
-  border-left: 4px solid #ea4335;
+	background-color: #fce8e6;
+	color: #a50e0e;
+	border-left: 4px solid #ea4335;
 }
 
 /* Botones */
 
 .tender-button {
-  display: inline-block;
-  padding: 12px 24px;
-  border-radius: 4px;
-  font-weight: 500;
-  text-align: center;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  border: none;
-  margin: 10px 0;
+	display: inline-block;
+	padding: 12px 24px;
+	border-radius: 4px;
+	font-weight: 500;
+	text-align: center;
+	cursor: pointer;
+	transition: all 0.3s ease;
+	border: none;
+	margin: 10px 0;
 }
 
 .tender-lend-button {
-  background-color: #1a73e8;
-  color: white;
+	background-color: #1a73e8;
+	color: white;
 
-  &:hover {
-    background-color: #0d62c9;
-  }
+	&:hover {
+		background-color: #0d62c9;
+	}
 }
 
 .tender-reserve-button {
-  background-color: #f8f9fa;
-  color: #1a73e8;
-  border: 1px solid #dadce0;
+	background-color: #f8f9fa;
+	color: #1a73e8;
+	border: 1px solid #dadce0;
 
-  &:hover {
-    background-color: #f1f3f4;
-  }
+	&:hover {
+		background-color: #f1f3f4;
+	}
 }
 
 .tender-renew-button {
-  background-color: #e8f0fe;
-  color: #1a73e8;
+	background-color: #e8f0fe;
+	color: #1a73e8;
 }
 
 /* Lista de préstamos activos */
 
 .tender-active-lendings {
-  margin-top: 25px;
-  padding-top: 15px;
-  border-top: 1px solid #eee;
+	margin-top: 25px;
+	padding-top: 15px;
+	border-top: 1px solid #eee;
 }
 
 .tender-lendings-list {
-  list-style: none;
-  padding: 0;
+	list-style: none;
+	padding: 0;
 }
 
 .tender-lending-item {
-  padding: 15px;
-  background: #f8f9fa;
-  margin-bottom: 10px;
-  border-left: 3px solid #1a73e8;
+	padding: 15px;
+	background: #f8f9fa;
+	margin-bottom: 10px;
+	border-left: 3px solid #1a73e8;
 }
 
 .tender-lending-number {
-  font-weight: bold;
-  margin-bottom: 5px;
+	font-weight: bold;
+	margin-bottom: 5px;
 }
 
 .tender-lending-details > div {
-  margin-bottom: 3px;
+	margin-bottom: 3px;
 }
-
 
 /* Formulario */
 
 .tender-form {
-  padding: 0 20px 20px;
+	padding: 0 20px 20px;
 }
 
 .tender-form-group {
-  margin-bottom: 20px;
+	margin-bottom: 20px;
 }
 
 .tender-form-label {
-  display: block;
-  margin-bottom: 8px;
-  font-weight: 500;
-  color: #202124;
+	display: block;
+	margin-bottom: 8px;
+	font-weight: 500;
+	color: #202124;
 }
 
 .tender-form-input {
-  width: 100%;
-  padding: 12px 14px;
-  border: 1px solid #dadce0;
-  border-radius: 8px;
-  font-size: 15px;
-  transition: border-color 0.3s;
+	width: 100%;
+	padding: 12px 14px;
+	border: 1px solid #dadce0;
+	border-radius: 8px;
+	font-size: 15px;
+	transition: border-color 0.3s;
 
-  &:focus {
-    border-color: #1a73e8;
-    outline: none;
-    box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.2);
-  }
+	&:focus {
+		border-color: #1a73e8;
+		outline: none;
+		box-shadow: 0 0 0 2px rgba(26, 115, 232, 0.2);
+	}
 }
 
 .tender-form-select {
-  width: 100%;
-  padding: 12px 14px;
-  border: 1px solid #dadce0;
-  border-radius: 8px;
-  background: white;
-  font-size: 15px;
+	width: 100%;
+	padding: 12px 14px;
+	border: 1px solid #dadce0;
+	border-radius: 8px;
+	background: white;
+	font-size: 15px;
 }
 
 .tender-form-hint {
-  margin: 8px 0 0;
-  font-size: 13px;
-  color: #5f6368;
+	margin: 8px 0 0;
+	font-size: 13px;
+	color: #5f6368;
 }
 
 .tender-form-actions {
-  display: flex;
-  justify-content: flex-end;
-  gap: 10px;
-  margin-top: 20px;
-  &.active{
-	.tender-form-input{
-  		border: none;
-  		border-bottom: 1px solid #dadce0;
+	display: flex;
+	justify-content: flex-end;
+	gap: 10px;
+	margin-top: 20px;
+	&.active {
+		.tender-form-input {
+			border: none;
+			border-bottom: 1px solid #dadce0;
+		}
 	}
-  }
 }
 
 .tender-button-primary {
-  background-color: #1a73e8;
-  color: white;
-  padding: 10px 24px;
-  min-width: 120px;
+	background-color: #1a73e8;
+	color: white;
+	padding: 10px 24px;
+	min-width: 120px;
 
-  &:hover {
-    background-color: #0d62c9;
-  }
+	&:hover {
+		background-color: #0d62c9;
+	}
+
+	&:disabled {
+		background-color: #ccc;
+		cursor: not-allowed;
+	}
 }
 
 .tender-button-secondary {
-  background: transparent;
-  color: #5f6368;
+	background: transparent;
+	color: #5f6368;
 
-  &:hover {
-    background-color: #f1f3f4;
-  }
+	&:hover {
+		background-color: #f1f3f4;
+	}
 }
 
 .tender-button-spinner {
-  display: inline-block;
-  width: 16px;
-  height: 16px;
-  border: 3px solid rgba(255, 255, 255, 0.3);
-  border-radius: 50%;
-  border-top-color: white;
-  animation: tenderSpin 1s ease-in-out infinite;
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	border: 3px solid rgba(255, 255, 255, 0.3);
+	border-radius: 50%;
+	border-top-color: white;
+	animation: tenderSpin 1s ease-in-out infinite;
 }
 
 @keyframes tenderSpin {
-  to {
-    transform: rotate(360deg);
-  }
+	to {
+		transform: rotate(360deg);
+	}
 }
 
 /* Alertas y mensajes */
-
+.tender-modal{
+	.tender-response-message{
+		font-size: 0.8em;
+	}
+}
 .tender-alert {
-  padding: 12px 16px;
-  border-radius: 8px;
-  margin: 15px 0;
-  font-size: 14px;
+	padding: 12px 16px;
+	border-radius: 8px;
+	margin: 15px 0;
 }
 
 .tender-alert-success {
-  background-color: #e6f4ea;
-  color: #137333;
-  border-left: 4px solid #34a853;
+	background-color: #e6f4ea;
+	color: #137333;
+	border-left: 4px solid #34a853;
 }
 
 .tender-alert-error {
-  background-color: #fce8e6;
-  color: #a50e0e;
-  border-left: px solid #ea4335;
+	background-color: #fce8e6;
+	color: #a50e0e;
+	border-left: 4px solid #ea4335;
 }
 
 .tender-success-message {
-  display: flex;
-  align-items: center;
-  padding: 15px;
-  background-color: #e6f4ea;
-  color: #137333;
-  border-radius: 8px;
-  margin-bottom: 20px;
-  animation: tenderFadeIn 0.5s ease;
-}
-
-.tender-success-icon {
-  background: #34a853;
-  color: white;
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-right: 12px;
-  font-weight: bold;
+	display: flex;
+	align-items: center;
+	padding: 15px;
+	background-color: #e6f4ea;
+	color: #137333;
+	border-radius: 8px;
+	margin-bottom: 20px;
+	animation: tenderFadeIn 0.5s ease;
+	> div {
+		width: calc(100% - 28px);
+	}
+	> .tender-success-icon {
+		background: #34a853;
+		color: white;
+		width: 28px;
+		height: 28px;
+		border-radius: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin-right: 12px;
+		font-weight: bold;
+	}
 }
 
 @keyframes tenderFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
+	from {
+		opacity: 0;
+		transform: translateY(-10px);
+	}
 
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
 }
 
 /* Spinner de búsqueda */
 
 .tender-search-container {
-  position: relative;
+	position: relative;
+	margin-bottom: 20px;
 }
 
 .tender-search-loading {
-  position: absolute;
-  top: 50%;
-  right: 12px;
-  transform: translateY(-50%);
+	position: absolute;
+	top: 50%;
+	right: 12px;
+	transform: translateY(-50%);
 }
 
 .tender-spinner {
-  width: 20px;
-  height: 20px;
-  border: 3px solid rgba(26, 115, 232, 0.2);
-  border-radius: 50%;
-  border-top-color: #1a73e8;
-  animation: tenderSpin 1s ease-in-out infinite;
+	width: 20px;
+	height: 20px;
+	border: 3px solid rgba(26, 115, 232, 0.2);
+	border-radius: 50%;
+	border-top-color: #1a73e8;
+	animation: tenderSpin 1s ease-in-out infinite;
 }
 
 /* Responsive */
 @media (max-width: 600px) {
-  .tender-modal-content {
-    width: 95%;
-  }
+	.tender-modal-content {
+		width: 95%;
+	}
 
-  .tender-form-actions {
-    flex-direction: column;
-  }
+	.tender-form-actions {
+		flex-direction: column;
+	}
 
-  .tender-button {
-    width: 100%;
-    margin: 5px 0;
-  }
+	.tender-button {
+		width: 100%;
+		margin: 5px 0;
+	}
 }

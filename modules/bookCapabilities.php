@@ -8,7 +8,7 @@ add_action('init', 'add_tender_book_caps_to_existing_roles', 0);
 function add_tender_book_caps_to_existing_roles()
 {
 	// Lista de roles a los que darás permisos completos sobre tu CPT
-	$roles = array('administrator', 'editor', 'author', 'contributor');
+	$roles = array('administrator', 'editor', 'author', 'contributor','librarian', 'opener');
 
 	// Las mismas capacidades que definiste arriba en $capabilities
 	$caps = array(

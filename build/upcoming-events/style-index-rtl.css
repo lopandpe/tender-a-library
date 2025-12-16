@@ -1,0 +1,56 @@
+/*!***************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/@wordpress/scripts/node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[4].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[4].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[4].use[3]!./src/upcoming-events/style.scss ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************************/
+@charset "UTF-8";
+.wp-block-tender-events--calendar .tender-calendar__weekdays,
+.wp-block-tender-events--calendar .tender-calendar__grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 2px;
+}
+
+.tender-calendar__day {
+  border: 1px solid #e0e0e0;
+  min-height: 80px;
+  padding: 0.3rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  font-size: 0.8rem;
+}
+.tender-calendar__day .tender-calendar__events {
+  list-style: none;
+  padding: 0px;
+}
+.tender-calendar__day .tender-calendar__events .tender-calendar__event-badge {
+  display: none;
+}
+
+.tender-calendar__weekdays {
+  font-size: 0.6em;
+  text-transform: uppercase;
+}
+
+.tender-calendar__navs {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+  font-size: 0.7em;
+  margin-bottom: 1rem;
+}
+
+/* móvil: vista tipo lista */
+@media (max-width: 768px) {
+  .wp-block-tender-events--calendar .tender-calendar__weekdays {
+    display: none;
+  }
+  .wp-block-tender-events--calendar .tender-calendar__day {
+    display: none;
+  }
+  .wp-block-tender-events--calendar .tender-calendar__day.tender-calendar__day--has-events {
+    display: block;
+  }
+  .wp-block-tender-events--calendar .tender-calendar__grid {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+}

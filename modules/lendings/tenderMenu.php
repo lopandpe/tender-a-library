@@ -43,7 +43,7 @@ add_action('admin_menu', 'tender_library_menu');
 function tender_user_can_access_library()
 {
 	$user = wp_get_current_user();
-	$roles = ['administrator', 'editor', 'opener'];
+	$roles = ['administrator', 'editor', 'opener', 'librarian'];
 
 	return array_intersect($roles, $user->roles);
 }

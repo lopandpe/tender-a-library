@@ -10,9 +10,24 @@ function tal_edit_profile_template($content)
 	$edit_page_id = get_option('tal_edit_profile_page');
 
 	if ($edit_page_id && is_page($edit_page_id) && is_user_logged_in()) {
+
+		$mensaje = "";
 		$username = get_query_var('tal_profile_user');
 		$current_user = $username ? get_user_by('slug', $username) : wp_get_current_user();
-		$mensaje = '';
+		// Comprobación para ver perfil:
+		
+		if ( tal_can_edit_profile($current_user->ID) === false ) {
+			ob_start(); 
+			?>
+			<div class="no-results">
+				<div class="">
+					<div class="">
+						<p class=""><?php echo __('You do not have permission to view this page.', 'tender-a-library'); ?></p>
+					</div>
+				</div>
+			</div>
+			<?php return ob_get_clean();
+		}
 
 		if (isset($_POST['tal_edit_profile'])) {
 			check_admin_referer('tal_edit_profile_action', 'tal_edit_profile_nonce');

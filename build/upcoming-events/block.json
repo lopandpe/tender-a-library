@@ -1,0 +1,38 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "tender-a-library/upcoming-events",
+  "version": "0.1.0",
+  "title": "Upcoming Events",
+  "category": "tender-blocks",
+  "icon": "calendar-alt",
+  "attributes": {
+    "mode": {
+      "type": "string",
+      "enum": [
+        "calendar",
+        "list"
+      ],
+      "default": "calendar"
+    },
+    "limit": {
+      "type": "number",
+      "default": 5
+    }
+  },
+  "supports": {
+    "align": [
+      "wide",
+      "full"
+    ],
+    "spacing": {
+      "margin": true,
+      "padding": true
+    },
+    "html": true
+  },
+  "textdomain": "tender-a-library",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
+}

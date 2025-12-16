@@ -8,7 +8,7 @@ function tender_mini_book_render_callback($block_attributes, $block_content)
 		'wp-block-tender-a-library-mini-book tender-book-preview'
 	);
 
-    $book_id = $block_attributes['bookId'];
+    $book_id = get_the_ID();
     
     if (!$book_id) {
         return '<p class="miniatura-placeholder">No hay libros seleccionados</p>';
@@ -26,7 +26,7 @@ function tender_mini_book_render_callback($block_attributes, $block_content)
     ob_start(); ?>
     
     <div class="<?php echo $block_classes; ?>">
-		<div class="cover">
+		<a href="<?php echo get_permalink(); ?>" class="cover">
 			<?php if($image): ?>
 					<?php echo $image; ?>
 				<?php else: ?>
@@ -49,7 +49,7 @@ function tender_mini_book_render_callback($block_attributes, $block_content)
 						/>
 					</svg>
 				<?php endif; ?>
-		</div>
+				</a>
 		<div class="book-info">
 			<a class="title" href="<?php echo get_permalink(); ?>"><?php echo get_the_title(); ?></a>
 			

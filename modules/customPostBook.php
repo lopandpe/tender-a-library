@@ -71,6 +71,12 @@ function tender_book()
 		'show_in_rest'              => true,
 		'rewrite'                   => false, 
 		'publicly_queryable' 		=> false, 
+		'capabilities' => [
+			'manage_terms' => 'manage_tender_sections',
+			'edit_terms'   => 'edit_tender_sections',
+			'delete_terms' => 'delete_tender_sections',
+			'assign_terms' => 'assign_tender_sections',
+		],
 	);
 	register_taxonomy('tender_section', array('tender_book'), $tender_section_args);
 
@@ -88,6 +94,12 @@ function tender_book()
 		'show_in_rest'              => true,
 		'rewrite'                   => false, 
 		'publicly_queryable' 		=> false, 
+		'capabilities' => [
+			'manage_terms' => 'manage_tender_languages',
+			'edit_terms'   => 'edit_tender_languages',
+			'delete_terms' => 'delete_tender_languages',
+			'assign_terms' => 'assign_tender_languages',
+		],
 	);
 	register_taxonomy('tender_language', array('tender_book'), $tender_language_args);
 }
