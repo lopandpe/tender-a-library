@@ -72,7 +72,10 @@
     }
 }
 
-
+.login-form-container{
+    width: 300px !important;
+    max-width: 100% !important;
+}
 #loginform{
     input[type="text"],
     input[type="password"] {

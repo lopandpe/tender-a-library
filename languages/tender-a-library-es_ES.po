@@ -98,32 +98,33 @@ msgstr "Nueva sección"
 msgid "Add new section"
 msgstr "Añadir nueva sección"
 
-#: modules/customPostBook.php:78
+#: modules/customPostBook.php:84
 msgctxt "Taxonomy General Name"
 msgid "Languages"
 msgstr "Idiomas"
 
-#: modules/customPostBook.php:79
+#: modules/customPostBook.php:85
 msgctxt "Taxonomy Singular Name"
 msgid "Language"
 msgstr "Idioma"
 
-#: modules/customPostBook.php:80
-#: assets/js/book-search/view/Filters.jsx:82
+#: modules/customPostBook.php:86
+#: assets/js/book-search/view/Filters.jsx:49
+#: assets/js/book-search/view/Filters.jsx:180
 #: dist/js/book-search.js:52
 #: dist/js/tender-search-scripts.js:52
 msgid "Languages"
 msgstr "Idiomas"
 
-#: modules/customPostBook.php:81
+#: modules/customPostBook.php:87
 msgid "All languages"
 msgstr "Todos los idiomas"
 
-#: modules/customPostBook.php:82
+#: modules/customPostBook.php:88
 msgid "New language"
 msgstr "Nuevo idioma"
 
-#: modules/customPostBook.php:83
+#: modules/customPostBook.php:89
 msgid "Add new language"
 msgstr "Añadir idioma nuevo"
 
@@ -143,23 +144,25 @@ msgstr "Configurar slugs para los libros y sus taxonomías."
 msgid "Slug for books"
 msgstr "Slug para los libros"
 
-#: modules/profile/profilePage.php:73
+#: modules/profile/profilePage.php:75
 msgid "Edit profile"
 msgstr "Editar perfil"
 
-#: modules/profile/profilePage.php:81
+#: modules/profile/profilePage.php:86
 msgid "Logout"
 msgstr "Cerrar sesión"
 
-#: modules/profile/profilePage.php:87
+#: modules/profile/profilePage.php:93
 msgid "Active lendings"
 msgstr "Préstamos activos"
 
-#: modules/profile/profilePage.php:124
+#: modules/profile/profilePage.php:130
 msgid "Lending date"
 msgstr "Fecha del préstamo"
 
-#: modules/profile/profilePage.php:127
+#: modules/lendings/downloadCsvLendings.php:56
+#: modules/lendings/lendingPages.php:373
+#: modules/profile/profilePage.php:133
 msgid "Estimated return date"
 msgstr "Fecha estimada de devolución"
 
@@ -185,8 +188,9 @@ msgstr "Otras autoras"
 
 #: block-includes/book-data-functions.php:25
 #: modules/tender-book/tenderBookFields.php:24
-#: build/book-data/index.js:1
+#: build/book-data/index.js:37
 #: src/book-data/edit.js:13
+#: build/book-data/index.js:13
 msgid "Publisher"
 msgstr "Editorial"
 
@@ -214,17 +218,20 @@ msgstr "Resumen"
 msgid "Review"
 msgstr "Reseña"
 
-#: block-includes/book-data-functions.php:29
+#: block-includes/book-data-functions.php:36
 #: modules/tender-book/tenderBookFields.php:70
-#: build/book-data/index.js:1
+#: modules/tender-event/tenderEventFields.php:76
+#: build/book-data/index.js:39
 #: src/book-data/edit.js:17
+#: build/book-data/index.js:17
 msgid "Library section"
 msgstr "Sección de la biblioteca"
 
 #: block-includes/book-data-functions.php:23
 #: modules/tender-book/tenderBookFields.php:90
-#: build/book-data/index.js:1
+#: build/book-data/index.js:35
 #: src/book-data/edit.js:11
+#: build/book-data/index.js:11
 msgid "Author"
 msgstr "Autor(a)"
 
@@ -260,7 +267,7 @@ msgstr "Número"
 msgid "Opener"
 msgstr "Abridor(a)"
 
-#: modules/tenderRoles.php:49
+#: modules/tenderRoles.php:95
 msgid "Reader"
 msgstr "Lector(a)"
 
@@ -270,54 +277,59 @@ msgid "Plugin Biblioteca (A)"
 msgstr "Plugin Biblioteca (A)"
 
 #: block-includes/book-data-functions.php:21
-#: build/book-data/index.js:1
+#: build/book-data/index.js:32
 #: src/book-data/edit.js:9
+#: build/book-data/index.js:9
 msgid "Book data"
 msgstr "Datos del libro"
 
-#: block-includes/book-data-functions.php:35
-#: build/book-data/index.js:1
+#: block-includes/book-data-functions.php:40
+#: build/book-data/index.js:45
 #: src/book-data/edit.js:22
+#: build/book-data/index.js:22
 msgid "Publication year"
 msgstr "Año de publicación"
 
-#: block-includes/book-data-functions.php:41
-#: build/book-data/index.js:1
+#: block-includes/book-data-functions.php:46
+#: modules/lendings/downloadCsvLendings.php:54
+#: build/book-data/index.js:47
 #: src/book-data/edit.js:24
+#: build/book-data/index.js:24
 msgid "Signature"
 msgstr "Signatura"
 
-#: block-includes/book-data-functions.php:54
-#: block-includes/book-data-functions.php:72
+#: block-includes/book-data-functions.php:63
+#: block-includes/book-data-functions.php:77
+#: block-includes/book-data-functions.php:105
 msgid "Available for loan."
 msgstr "Disponible para préstamo."
 
-#: block-includes/book-data-functions.php:55
-#: block-includes/book-data-functions.php:65
-#: block-includes/book-data-functions.php:75
+#: block-includes/book-data-functions.php:64
+#: block-includes/book-data-functions.php:81
+#: block-includes/book-data-functions.php:117
 msgid "Not available."
 msgstr "No disponible."
 
-#: block-includes/book-data-functions.php:63
-#: block-includes/book-data-functions.php:115
+#: block-includes/book-data-functions.php:78
+#: block-includes/book-data-functions.php:158
 msgid "Lend this book"
 msgstr "Prestar libro"
 
-#: block-includes/book-data-functions.php:66
-#: block-includes/book-data-functions.php:73
-#: block-includes/book-data-functions.php:76
+#: block-includes/book-data-functions.php:92
+#: block-includes/book-data-functions.php:118
+#: block-includes/book-data-functions.php:194
 msgid "Reserve this book"
 msgstr "Reservar este libro"
 
-#: block-includes/book-data-functions.php:84
+#: block-includes/book-data-functions.php:127
 msgid "Current active lendings"
 msgstr "Préstamos activos"
 
-#: block-includes/book-data-functions.php:85
+#: block-includes/book-data-functions.php:128
 msgid "Current active lending"
 msgstr "Préstamo activo"
 
-#: block-includes/book-data-functions.php:96
+#: block-includes/book-data-functions.php:139
 #, php-format
 msgid "Lending #%d"
 msgstr "Préstamo #%d"
@@ -326,96 +338,103 @@ msgstr "Préstamo #%d"
 msgid "There is no summary"
 msgstr "No hay resumen"
 
-#: modules/tender-blocks.php:20
+#: modules/tender-blocks.php:22
 msgid "Tender Blocks"
 msgstr "Bloques Tender (A)"
 
-#: modules/openerUserFunctions.php:109
+#: modules/openerUserFunctions.php:108
 msgid "More info"
 msgstr "Más info"
 
-#: modules/openerUserFunctions.php:111
+#: modules/openerUserFunctions.php:110
 msgid "Receive newsletter by e-mail"
 msgstr "Recibir novedades por e-mail"
 
-#: modules/openerUserFunctions.php:113
+#: modules/lendings/downloadCsvLendings.php:51
+#: modules/openerUserFunctions.php:112
 msgid "Phone number"
 msgstr "Número de teléfono"
 
-#: modules/profile/editProfilePage.php:28
+#: modules/profile/editProfilePage.php:43
+#: modules/profile/newUserForm.php:29
 msgid "Invalid email address."
 msgstr "E-mail incorrecto."
 
-#: modules/profile/editProfilePage.php:30
+#: modules/profile/editProfilePage.php:45
+#: modules/profile/newUserForm.php:31
 msgid "This email is already in use."
 msgstr "Este correo ya está en uso."
 
-#: modules/profile/editProfilePage.php:41
+#: modules/profile/editProfilePage.php:56
 msgid "Profile updated successfully."
 msgstr "El perfil se ha actualizado correctamente."
 
-#: modules/profile/editProfilePage.php:55
-#: modules/profile/profilePage.php:53
+#: modules/profile/editProfilePage.php:70
+#: modules/profile/newUserForm.php:85
+#: modules/profile/profilePage.php:55
 msgid "Name"
 msgstr "Nombre"
 
-#: modules/profile/editProfilePage.php:59
+#: modules/profile/editProfilePage.php:74
+#: modules/profile/newUserForm.php:89
 msgid "Last Name"
 msgstr "Apellidos"
 
-#: modules/profile/editProfilePage.php:63
-#: modules/profile/profilePage.php:57
+#: modules/lendings/downloadCsvLendings.php:50
+#: modules/profile/editProfilePage.php:78
+#: modules/profile/newUserForm.php:93
+#: modules/profile/profilePage.php:59
 msgid "E-mail"
 msgstr "E-mail"
 
-#: modules/profile/editProfilePage.php:67
-#: modules/profile/profilePage.php:61
+#: modules/profile/editProfilePage.php:82
+#: modules/profile/newUserForm.php:97
+#: modules/profile/profilePage.php:63
 msgid "Phone"
 msgstr "Teléfono"
 
-#: modules/profile/editProfilePage.php:71
-#: modules/profile/profilePage.php:65
+#: modules/profile/editProfilePage.php:86
+#: modules/profile/newUserForm.php:101
+#: modules/profile/profilePage.php:67
 msgid "Consents to receive news by e-mail:"
 msgstr "Acepta el envío de novedades por e-mail:"
 
-#: modules/profile/editProfilePage.php:75
+#: modules/profile/editProfilePage.php:90
 msgid "Save Changes"
 msgstr "Guardar cambios"
 
-#: modules/profile/editProfilePage.php:81
+#: modules/profile/editProfilePage.php:96
 msgid "Back to Profile"
 msgstr "Volver al perfil"
 
-#: modules/profile/profilePage.php:39
-msgid "There is no user with this information"
-msgstr "No hay ningún usuario con esta información"
-
-#: modules/profile/profilePage.php:66
+#: modules/profile/profilePage.php:68
 msgid "Yes"
 msgstr "Sí"
 
-#: modules/profile/profilePage.php:66
+#: modules/profile/profilePage.php:68
 msgid "No"
 msgstr "No"
 
-#: modules/profile/profilePage.php:131
+#: modules/profile/profilePage.php:137
 msgid "This loan cannot be extended"
 msgstr "Este préstamo no puede prorrogarse"
 
-#: modules/profile/profilePage.php:134
+#: modules/lendings/lendingPages.php:400
+#: modules/profile/profilePage.php:140
 msgid "Loan renewal"
 msgstr "Renovar préstamo"
 
-#: modules/profile/profilePage.php:141
-#: modules/profile/profilePage.php:190
+#: modules/lendings/lendingPages.php:397
+#: modules/profile/profilePage.php:147
+#: modules/profile/profilePage.php:199
 msgid "Return"
 msgstr "Devolución"
 
-#: modules/profile/profilePage.php:157
+#: modules/profile/profilePage.php:163
 msgid "There are no active lendings right now"
 msgstr "No hay préstamos activos en este momento"
 
-#: modules/profile/profilePage.php:166
+#: modules/profile/profilePage.php:175
 msgid "Past lendings"
 msgstr "Préstamos pasados"
 
@@ -437,60 +456,64 @@ msgctxt "block title"
 msgid "Book Summary"
 msgstr "Resumen del libro"
 
-#. Description of the plugin
-#: tender-a-library.php
-msgid "Añade la funcionalidad de biblioteca al core de wordpress, incluyendo libros, lectores, préstamos, etc"
-msgstr ""
-
-#: block-includes/book-data-functions.php:70
+#: block-includes/book-data-functions.php:101
 msgid "Renew this lending"
 msgstr "Renovar préstamo"
 
-#: block-includes/book-data-functions.php:91
+#: block-includes/book-data-functions.php:134
 msgid "Unknown user"
 msgstr "Usuario desconocido"
 
-#: block-includes/book-data-functions.php:99
+#: block-includes/book-data-functions.php:142
 msgid "User:"
 msgstr "Usuario:"
 
-#: block-includes/book-data-functions.php:100
+#: block-includes/book-data-functions.php:143
 msgid "Estimated return:"
 msgstr "Fecha estimada de devolución:"
 
-#: block-includes/book-data-functions.php:116
+#: block-includes/book-data-functions.php:159
 msgid "Select the user who will borrow this book"
 msgstr "Selecciona el usuario al que se presetará el libro"
 
-#: block-includes/book-data-functions.php:123
+#: block-includes/book-data-functions.php:166
+#: modules/profile/usersListPage.php:48
 msgid "Search user"
 msgstr "Buscar usuario"
 
-#: block-includes/book-data-functions.php:126
+#: block-includes/book-data-functions.php:169
+#: modules/profile/usersListPage.php:51
 msgid "Name, email, or phone"
 msgstr "Nombre, email o teléfono"
 
-#: block-includes/book-data-functions.php:132
+#: block-includes/book-data-functions.php:175
+#: modules/profile/usersListPage.php:57
 msgid "Start typing to search for users"
 msgstr "Empieza a escribir para buscar usuarios"
 
-#: block-includes/book-data-functions.php:138
+#: block-includes/book-data-functions.php:181
+#: block-includes/book-data-functions.php:203
+#: modules/lendings/lendingPages.php:38
+#: modules/profile/profilePage.php:219
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: block-includes/book-data-functions.php:140
+#: block-includes/book-data-functions.php:183
 msgid "Create Lending"
 msgstr "Crear préstamo"
 
-#: block-includes/book-data-functions.php:204
+#: block-includes/book-data-functions.php:285
+#: modules/profile/usersListPage.php:74
+#: modules/profile/usersListPage.php:114
 msgid "No users found"
 msgstr "No se encontraron usuarios"
 
-#: block-includes/book-data-functions.php:217
+#: block-includes/book-data-functions.php:299
 msgid "Please select a user"
 msgstr "Por favor, selecciona un usuario"
 
-#: block-includes/book-data-functions.php:265
+#: block-includes/book-data-functions.php:347
+#: block-includes/book-data-functions.php:401
 msgid "An error occurred. Please try again."
 msgstr "Ha ocurrido un error, por favor vuelva a intentarlo."
 
@@ -522,7 +545,7 @@ msgstr "Archivo de Libros"
 
 #: modules/tender-book/tenderBookTemplate.php:52
 msgid "Tender books archive template (CPT)."
-msgstr ""
+msgstr "Archivo de plantillas de libros."
 
 #: modules/tender-book/tenderBookTemplate.php:60
 msgid "Taxonomy: Tender Section"
@@ -530,72 +553,76 @@ msgstr "Taxonomía: Seccíon de la biblioteca"
 
 #: modules/tender-book/tenderBookTemplate.php:61
 msgid "Custom template for Tender Section taxonomy."
-msgstr ""
+msgstr "Plantilla personalizada para la taxonomía Sección de la biblioteca."
 
 #: modules/tender-book/tenderBookTemplate.php:69
 msgid "Taxonomy: Tender Language"
-msgstr ""
+msgstr "Taxonomía: Idioma"
 
 #: modules/tender-book/tenderBookTemplate.php:70
 msgid "Custom template for Tender Language taxonomy."
-msgstr ""
+msgstr "Plantilla personalizada para la taxonomía Idioma."
 
-#: assets/js/book-search/view/Filters.jsx:44
-#: assets/js/book-search/view/Filters.jsx:46
+#: assets/js/book-search/view/Filters.jsx:88
+#: assets/js/book-search/view/Filters.jsx:90
 #: dist/js/book-search.js:52
 #: dist/js/tender-search-scripts.js:52
 msgid "Show filters"
 msgstr "Mostrar filtros"
 
-#: assets/js/book-search/view/Filters.jsx:52
+#: assets/js/book-search/view/Filters.jsx:138
 #: dist/js/book-search.js:52
 #: dist/js/tender-search-scripts.js:52
 msgid "Close filters"
 msgstr "Cerrar filtros"
 
-#: assets/js/book-search/view/Filters.jsx:54
+#: assets/js/book-search/view/Filters.jsx:140
 #: dist/js/book-search.js:52
 #: dist/js/tender-search-scripts.js:52
 msgid "Hide filters"
 msgstr "Ocultar filtros"
 
-#: assets/js/book-search/view/Filters.jsx:56
+#: assets/js/book-search/view/Filters.jsx:142
 #: dist/js/book-search.js:52
 #: dist/js/tender-search-scripts.js:52
 msgid "Filters"
 msgstr "Filtros"
 
-#: assets/js/book-search/view/Filters.jsx:60
+#: assets/js/book-search/view/Filters.jsx:124
+#: assets/js/book-search/view/Filters.jsx:148
 #: dist/js/book-search.js:52
 #: dist/js/tender-search-scripts.js:52
 msgid "Reset all filters"
 msgstr "Resetear filtros"
 
-#: assets/js/book-search/view/Filters.jsx:62
+#: assets/js/book-search/view/Filters.jsx:129
+#: assets/js/book-search/view/Filters.jsx:153
 #: dist/js/book-search.js:52
 #: dist/js/tender-search-scripts.js:52
 msgid "Reset Filters"
 msgstr "Resetear filtros"
 
-#: assets/js/book-search/view/Filters.jsx:65
+#: assets/js/book-search/view/Filters.jsx:47
+#: assets/js/book-search/view/Filters.jsx:157
 #: dist/js/book-search.js:52
 #: dist/js/tender-search-scripts.js:52
 msgid "Search"
 msgstr "Buscar"
 
-#: assets/js/book-search/view/Filters.jsx:68
+#: assets/js/book-search/view/Filters.jsx:160
 #: dist/js/book-search.js:52
 #: dist/js/tender-search-scripts.js:52
 msgid "Search by title, author, etc"
 msgstr "Buscar por título, autor(a), etc"
 
-#: assets/js/book-search/view/Filters.jsx:74
+#: assets/js/book-search/view/Filters.jsx:48
+#: assets/js/book-search/view/Filters.jsx:170
 #: dist/js/book-search.js:52
 #: dist/js/tender-search-scripts.js:52
 msgid "Sections"
 msgstr "Secciones"
 
-#: assets/js/book-search/view/Filters.jsx:95
+#: assets/js/book-search/view/Filters.jsx:201
 #: dist/js/book-search.js:52
 #: dist/js/tender-search-scripts.js:52
 msgid "Books per page"
@@ -647,87 +674,580 @@ msgstr "Miniatura de libro"
 
 #: modules/permalinks.php:31
 msgid "Book search page"
-msgstr ""
+msgstr "Página de búsqueda de libros"
 
-#: modules/permalinks.php:40
+#: modules/permalinks.php:39
 msgid "Profile settings"
-msgstr ""
+msgstr "Ajustes de perfil"
 
-#: modules/permalinks.php:47
-msgid "Profile page"
-msgstr ""
-
-#: modules/permalinks.php:55
+#: modules/permalinks.php:62
+#: modules/permalinks.php:82
 msgid "Profile edit page"
-msgstr ""
+msgstr "Página de edición de perfil"
 
-#: modules/permalinks.php:72
-msgid "Página del buscador"
-msgstr ""
-
-#: modules/permalinks.php:73
-msgid "Página de perfil"
-msgstr ""
-
-#: modules/permalinks.php:74
-msgid "Página de edición de perfil"
-msgstr ""
-
-#: modules/permalinks.php:120
 #: modules/permalinks.php:129
-#: modules/permalinks.php:139
+#: modules/permalinks.php:138
+#: modules/permalinks.php:148
+#: modules/permalinks.php:157
 msgid "Select page"
-msgstr ""
+msgstr "Seleccionar página"
 
-#: modules/profile/profilePage.php:189
+#: modules/profile/profilePage.php:198
 msgid "Lending"
 msgstr "Préstamo"
 
-#: tender-a-library.php:76
+#: modules/createPagesOnActivation.php:16
 msgid "Perfil"
 msgstr ""
 
-#: tender-a-library.php:76
+#: modules/createPagesOnActivation.php:16
 msgid "Profile"
 msgstr "Perfil"
 
-#: tender-a-library.php:82
-msgid "Editar perfil"
-msgstr ""
-
-#: tender-a-library.php:82
+#: modules/createPagesOnActivation.php:22
 msgid "Edit Profile"
 msgstr "Editar Perfil"
 
-#: tender-a-library.php:88
-msgid "Biblioteca"
-msgstr ""
-
-#: tender-a-library.php:88
+#: modules/createPagesOnActivation.php:34
 msgid "Library"
 msgstr "Biblioteca"
 
-#: build/book-search/index.js:1
+#: build/book-search/index.js:32
 #: src/book-search/edit.js:9
+#: build/book-search/index.js:9
 msgid "Book search"
-msgstr ""
+msgstr "Buscar libros"
 
-#: build/book-search/index.js:1
+#: build/book-search/index.js:34
 #: src/book-search/edit.js:10
+#: build/book-search/index.js:10
 msgid "This block can only be seen on the frontend."
 msgstr "Este bloque solo se verá en la parte pública de la web"
 
-#: build/book-summary/index.js:1
+#: build/book-summary/index.js:33
 #: src/book-summary/edit.js:9
+#: build/book-summary/index.js:9
 msgid "Book summary"
 msgstr "Resumen del libro"
 
-#: build/mini-book/index.js:1
+#: modules/lendings/lendingPages.php:364
+#: modules/lendings/lendingPages.php:423
+#: build/mini-book/index.js:53
 #: src/mini-book/edit.js:30
+#: build/mini-book/index.js:30
 msgid "Book title"
 msgstr "Título del libro"
 
-#: build/mini-book/index.js:1
+#: build/mini-book/index.js:56
 #: src/mini-book/edit.js:31
+#: build/mini-book/index.js:31
 msgid "Book Author"
 msgstr "Autor(a) del libro"
+
+#. Description of the plugin
+#: tender-a-library.php
+msgid "Adds library functionality to the core of WordPress, including books, readers, loans, etc."
+msgstr "Añade funcionalidad de biblioteca al núcleo de WordPress, incluyendo libros, lectores, préstamos, etc."
+
+#: block-includes/book-data-functions.php:85
+#: block-includes/book-data-functions.php:111
+msgid "You already have an active reservation for this book."
+msgstr "Ya tienes una reserva activa para este libro."
+
+#: block-includes/book-data-functions.php:87
+msgid "This book already has an active reservation."
+msgstr "Este libro ya tiene una reserva activa."
+
+#: block-includes/book-data-functions.php:113
+msgid "This book already has an active reservation by another user."
+msgstr "Este libro ya tiene una reserva activa por otro usuario."
+
+#: block-includes/book-data-functions.php:195
+msgid "A reservation will be created for user: "
+msgstr "Se va a crear una reserva para el usuario: "
+
+#: block-includes/book-data-functions.php:205
+msgid "Create Reservation"
+msgstr "Crear reserva"
+
+#: modules/createPagesOnActivation.php:28
+msgid "Users list"
+msgstr "Listado de usuarios"
+
+#: modules/emails/lendingHasReservation.php:15
+msgid "Someone else wants to read the book you have borrowed"
+msgstr "Alguien más quiere leer el libro que has prestado"
+
+#: modules/emails/lendingHasReservation.php:43
+#: modules/emails/notReturnedEmails.php:126
+#: modules/emails/reservationIsAvailableNow.php:34
+#, php-format
+msgid "Hello <strong>%s</strong>,"
+msgstr "Hola <strong>%s</strong>,"
+
+#: modules/emails/lendingHasReservation.php:44
+msgid "We are contacting you because someone has made a reservation on the book you have borrowed."
+msgstr "Nos ponemos en contacto contigo porque alguien ha hecho una reserva del libro que tienes prestado."
+
+#: modules/emails/lendingHasReservation.php:45
+msgid "From now, the book loan can not be renewed, and we ask you to please return it as soon as you finish reading it."
+msgstr "A partir de ahora, el préstamo del libro no puede ser renovado, y te pedimos que lo devuelvas lo antes posible una vez que hayas terminado de leerlo."
+
+#: modules/emails/lendingHasReservation.php:48
+#: modules/emails/notReturnedEmails.php:132
+#: modules/emails/reservationIsAvailableNow.php:39
+msgid "Title:"
+msgstr "Título"
+
+#: modules/emails/lendingHasReservation.php:49
+#: modules/emails/notReturnedEmails.php:133
+#: modules/emails/reservationIsAvailableNow.php:40
+msgid "Author:"
+msgstr "Autor(a):"
+
+#: modules/emails/lendingHasReservation.php:53
+#: modules/emails/notReturnedEmails.php:139
+msgid "Remember that our library is a self-managed, non-profit space that relies on the individual and collective responsibility of all its members. Returning books on time ensures that more people can enjoy them, and helps keep the project alive for everyone."
+msgstr "Recuerda que nuestra biblioteca es un espacio autogestionado y sin ánimo de lucro que depende de la responsabilidad individual y colectiva de todos sus miembros. Devolver los libros a tiempo asegura que más personas puedan disfrutarlos, y ayuda a mantener el proyecto vivo para todas."
+
+#: modules/emails/lendingHasReservation.php:59
+#: modules/emails/notReturnedEmails.php:145
+msgid "If you have lost the books, or if you think there has been a mistake, please contact us."
+msgstr "Si has perdido los libros, o si crees que ha habido un error, por favor contáctanos."
+
+#: modules/emails/notReturnedEmails.php:70
+msgid "[Deleted book]"
+msgstr "[Libro borrado]"
+
+#: modules/emails/notReturnedEmails.php:74
+msgid "Unknown"
+msgstr "Desconocido/a"
+
+#: modules/emails/notReturnedEmails.php:92
+msgid "Reminder: Books pending return"
+msgstr "Recordatorio: Libros pendientes de devolución"
+
+#: modules/emails/notReturnedEmails.php:127
+msgid "We are contacting you because our system shows that you have the following books pending to return."
+msgstr "Nos ponemos en contacto contigo porque nuestro sistema muestra que tienes los siguientes libros pendientes de devolución."
+
+#: modules/emails/notReturnedEmails.php:128
+msgid "Please come by the library to return them as soon as possible."
+msgstr "Por favor, acércate a la biblioteca para devolverlos lo antes posible."
+
+#: modules/emails/notReturnedEmails.php:134
+msgid "Estimated return date:"
+msgstr "Fecha estimada de devolución:"
+
+#: modules/emails/reservationIsAvailableNow.php:8
+msgid "The book you want is already available for ten days"
+msgstr "El libroi que querías ya está disponible durante diez días"
+
+#: modules/emails/reservationIsAvailableNow.php:35
+msgid "We are contacting you because the book you reserved is available now."
+msgstr "Nos ponemos en contacto contigo porque el libro que reservaste ya está disponible."
+
+#: modules/emails/reservationIsAvailableNow.php:36
+msgid "If you do not borrow it on ten days, the book will be available for everyone."
+msgstr "Si no lo retiras en diez días, el libro se liberará para que cualquiera se lo pueda llevar prestado."
+
+#: modules/emails/reservationIsAvailableNow.php:44
+msgid "Thank you."
+msgstr "Gracias."
+
+#: modules/lendings/downloadCsvLendings.php:13
+msgid "Export active lendings to CSV"
+msgstr "Exportar préstamos activos a CSV"
+
+#: modules/lendings/downloadCsvLendings.php:16
+msgid "CSV Download"
+msgstr "Descargar CSV"
+
+#: modules/lendings/downloadCsvLendings.php:49
+#: modules/lendings/lendingPages.php:367
+#: modules/lendings/lendingPages.php:426
+msgid "User"
+msgstr "Usuario"
+
+#: modules/lendings/downloadCsvLendings.php:52
+msgid "Book Title"
+msgstr "Título del libro"
+
+#: modules/lendings/downloadCsvLendings.php:53
+msgid "Author(s)"
+msgstr "Autoría"
+
+#: modules/lendings/downloadCsvLendings.php:55
+#: modules/lendings/lendingPages.php:370
+#: modules/lendings/lendingPages.php:429
+msgid "Loan date"
+msgstr "Fecha de préstamo"
+
+#: modules/lendings/lendingFunctions.php:16
+msgid "Error updating reservation"
+msgstr "Error al actualizar la reserva"
+
+#: modules/lendings/lendingFunctions.php:92
+msgid "Error updating reservation status"
+msgstr "Error al actualizar el estado de la reserva"
+
+#: modules/lendings/lendingFunctions.php:361
+#: modules/reservations/reservationFunctions.php:208
+msgid "This book has an active reservation by some other user."
+msgstr "Este libro tiene una reserva activa por parte de otro usuario."
+
+#: modules/lendings/lendingFunctions.php:398
+msgid "Loan successfully returned."
+msgstr "Préstamo devuelto correctamente."
+
+#: modules/lendings/lendingFunctions.php:401
+msgid "Could not return the loan."
+msgstr "No se ha podido realizar la devolución del préstamo."
+
+#: modules/lendings/lendingFunctions.php:411
+#, php-format
+msgid "Loan renewed successfully. New return date: %s"
+msgstr "Préstamo renovado correctamente. Nueva fecha de devolución: %s"
+
+#: modules/lendings/lendingFunctions.php:416
+msgid "Could not renew the loan."
+msgstr "No se ha podido renovar el préstamo."
+
+#: modules/lendings/lendingFunctions.php:425
+msgid "Action could not be performed."
+msgstr "La acción no se ha podido realizar."
+
+#: modules/lendings/lendingPages.php:37
+#: modules/profile/profilePage.php:218
+msgid "Confirm"
+msgstr "Confirmar"
+
+#: modules/lendings/lendingPages.php:39
+#: modules/profile/newUserForm.php:114
+#: modules/profile/profilePage.php:220
+msgid "Accept"
+msgstr "Aceptar"
+
+#: modules/lendings/lendingPages.php:125
+msgid "Are you sure you want to FINISH this loan?"
+msgstr "¿Estás segura de que quieres FINALIZAR este préstamo?"
+
+#: modules/lendings/lendingPages.php:125
+msgid "Are you sure you want to RENEW this loan?"
+msgstr "Estás segura de que quieres RENOVAR este préstamo?"
+
+#: modules/lendings/lendingPages.php:376
+msgid "Actions"
+msgstr "Acciones"
+
+#: modules/lendings/lendingPages.php:432
+msgid "Return date"
+msgstr "Fecha de devolución"
+
+#: modules/lendings/lendingPages.php:435
+msgid "Renewals count"
+msgstr "Número de renovaciones"
+
+#: modules/permalinks.php:46
+#: modules/permalinks.php:83
+msgid "Users management page"
+msgstr "Página de gestión de usuarios"
+
+#: modules/permalinks.php:80
+msgid "Searching page"
+msgstr "Página de búsqueda"
+
+#: modules/profile/editProfilePage.php:25
+#: modules/profile/profilePage.php:41
+#: modules/profile/usersListPage.php:26
+msgid "You do not have permission to view this page."
+msgstr "No tienes permisos para ver esta página."
+
+#: modules/profile/newUserForm.php:27
+msgid "Name and surname are required."
+msgstr "El nombre y apellidos son obligatorios."
+
+#: modules/profile/newUserForm.php:52
+msgid "Could not create user. Please try again."
+msgstr "No se ha podido crear el usuario. Por favor, inténtalo de nuevo."
+
+#: modules/profile/newUserForm.php:65
+msgid "User created successfully."
+msgstr "Usuario creado correctamente."
+
+#: modules/profile/newUserForm.php:105
+msgid "Create user"
+msgstr "Crear usuario"
+
+#: modules/profile/profilePage.php:155
+#: modules/profile/profilePage.php:156
+msgid "Delayed"
+msgstr "Retrasado"
+
+#: modules/profile/usersListPage.php:62
+msgid "Latest users created"
+msgstr "Últimos usuarios creados"
+
+#: modules/profile/usersListPage.php:80
+msgid "Create new user (reader)"
+msgstr "Crear nuevo usuario (lector)"
+
+#: modules/reservations/reservationFunctions.php:134
+#: modules/reservations/reservationFunctions.php:199
+msgid "Invalid book or user"
+msgstr "Usuario o libro inválido"
+
+#: modules/reservations/reservationFunctions.php:137
+#: modules/reservations/reservationFunctions.php:202
+msgid "This book is not currently on loan"
+msgstr "Este libro no está actualmente prestado"
+
+#: modules/reservations/reservationFunctions.php:140
+msgid "This book has already a reservation"
+msgstr "Este libro ya tiene una reserva"
+
+#: modules/reservations/reservationFunctions.php:166
+msgid "Another reservation has been made right now"
+msgstr "Otra reserva acaba de ser realizada para el mismo libro"
+
+#: modules/reservations/reservationFunctions.php:178
+#: modules/reservations/reservationFunctions.php:218
+msgid "Error creating reservation"
+msgstr "Error al crear la reserva"
+
+#: modules/reservations/reservationFunctions.php:205
+msgid "You have have an active lending for this book"
+msgstr "Ya tienes un préstamo activo para este libro"
+
+#: modules/reservations/reservationFunctions.php:214
+msgid "Reservation created successfully."
+msgstr "Reserva creada correctamente."
+
+#: modules/reservations/reservationFunctions.php:227
+msgid "You must be logged in to view your reservations."
+msgstr "Debes estar logueado para ver tus reservas."
+
+#: modules/reservations/reservationFunctions.php:241
+msgid "Do you really want to cancel this reservation?"
+msgstr "¿De verdad quieres cancelar esta reserva?"
+
+#: modules/reservations/reservationFunctions.php:242
+msgid "Unexpected error. Please try again."
+msgstr "Error inesperado. Por favor, inténtalo de nuevo."
+
+#: modules/reservations/reservationFunctions.php:250
+msgid "My active reservations"
+msgstr "Mis reservas activas"
+
+#: modules/reservations/reservationFunctions.php:253
+msgid "You do not have active reservations."
+msgstr "No tienes reservas activas."
+
+#: modules/reservations/reservationFunctions.php:282
+msgid "Reservation date"
+msgstr "Fecha de la reserva"
+
+#. translators: %s: formatted date
+#: modules/reservations/reservationFunctions.php:287
+#, php-format
+msgid "Status: Available for pickup until %s"
+msgstr "Estado: Disponible para recoger hasta %s"
+
+#. translators: Status label
+#: modules/reservations/reservationFunctions.php:295
+#, php-format
+msgid "Status: %s"
+msgstr "Estado: %s"
+
+#: modules/reservations/reservationFunctions.php:296
+msgid "Reserved"
+msgstr "Reservado"
+
+#: modules/reservations/reservationFunctions.php:305
+msgid "Cancel reservation"
+msgstr "Cancelar reserva"
+
+#: modules/reservations/reservationFunctions.php:324
+msgid "Not authorized"
+msgstr "No autorizado"
+
+#: modules/reservations/reservationFunctions.php:329
+msgid "Invalid request"
+msgstr "Petición inválida"
+
+#: modules/reservations/reservationFunctions.php:340
+msgid "Reservation not found"
+msgstr "Reserva no encontrada"
+
+#: modules/reservations/reservationFunctions.php:352
+msgid "You cannot cancel this reservation"
+msgstr "No puedes cancelar esta reserva"
+
+#: modules/reservations/reservationFunctions.php:360
+msgid "Reservation is not active"
+msgstr "La reserva no está activa"
+
+#: modules/reservations/reservationFunctions.php:372
+msgid "Database error"
+msgstr "Error de base de datos"
+
+#: modules/reservations/reservationFunctions.php:376
+msgid "Reservation cancelled successfully"
+msgstr "Reserva cancelada correctamente"
+
+#: modules/tender-event/customPostEvent.php:28
+#: modules/tender-event/tenderEventFields.php:22
+msgid "Event"
+msgstr "Evento"
+
+#: modules/tender-event/tenderEventFields.php:28
+msgid "Date of the event"
+msgstr "Fecha del evento"
+
+#: modules/tender-event/tenderEventFields.php:39
+msgid "Start datetime of the event"
+msgstr "Fecha y hora de inicio del evento"
+
+#: modules/tender-event/tenderEventFields.php:41
+msgid "It repeats every week"
+msgstr "Se repite cada semana"
+
+#: modules/tender-event/tenderEventFields.php:43
+msgid "Check this box if the event is recurring. Remember to add end date to the event."
+msgstr "Marca esta casilla si el evento es recurrente. Recuerda añadir una fecha de fin al evento."
+
+#: modules/tender-event/tenderEventFields.php:47
+msgid "End date of the event"
+msgstr "Fecha de fin del evento"
+
+#: modules/tender-event/tenderEventFields.php:56
+msgid "End date of the repeating event"
+msgstr "Fecha de fin del evento recurrente"
+
+#: modules/tender-event/tenderEventFields.php:76
+msgid " (optional)"
+msgstr " (opcional)"
+
+#: modules/tenderRoles.php:48
+msgid "Librarian"
+msgstr "Bibliotecaria"
+
+#: assets/js/book-search/view/Filters.jsx:50
+#: dist/js/tender-search-scripts.js:52
+msgid "Page"
+msgstr "Página"
+
+#: assets/js/book-search/view/Filters.jsx:51
+#: dist/js/tender-search-scripts.js:52
+msgid "Per Page"
+msgstr "Por página"
+
+#: assets/js/book-search/view/Filters.jsx:52
+#: dist/js/tender-search-scripts.js:52
+msgid "Order By"
+msgstr "Ordenar por"
+
+#: assets/js/book-search/view/Filters.jsx:53
+#: dist/js/tender-search-scripts.js:52
+msgid "Order"
+msgstr "Orden"
+
+#: build/profile-links/block.json
+#: src/profile-links/block.json
+msgctxt "block title"
+msgid "Profile Links"
+msgstr "Enlaces de perfil"
+
+#: build/profile-links/block.json
+#: src/profile-links/block.json
+msgctxt "block description"
+msgid "Block to display tender profile links."
+msgstr "Bloque para mostrar los enlaces de perfil."
+
+#: build/upcoming-events/block.json
+#: src/upcoming-events/block.json
+msgctxt "block title"
+msgid "Upcoming Events"
+msgstr "Próximos eventos"
+
+#: modules/permalinks.php:54
+#: modules/permalinks.php:81
+msgid "Profile page"
+msgstr "Página de perfil"
+
+#: modules/tender-event/customPostEvent.php:17
+msgctxt "Post Type General Name"
+msgid "Events"
+msgstr "Eventos"
+
+#: modules/tender-event/customPostEvent.php:18
+msgctxt "Post Type Singular Name"
+msgid "Event"
+msgstr "Evento"
+
+#: modules/tender-event/customPostEvent.php:19
+msgid "Events"
+msgstr "Eventos"
+
+#: modules/tender-event/customPostEvent.php:20
+msgid "All events"
+msgstr "Todos los eventos"
+
+#: modules/tender-event/customPostEvent.php:21
+msgid "Add new event"
+msgstr "Añadir nuevo evento"
+
+#: modules/tender-event/customPostEvent.php:22
+msgid "Edit event"
+msgstr "Editar evento"
+
+#: modules/tender-event/customPostEvent.php:23
+msgid "View event"
+msgstr "Ver evento"
+
+#: modules/tender-event/customPostEvent.php:29
+msgid "Event in the library"
+msgstr "Evento en la biblioteca"
+
+#: build/upcoming-events/index.js:42
+#: src/upcoming-events/edit.js:14
+#: build/upcoming-events/index.js:14
+msgid "Events adjustments"
+msgstr "Ajustes de eventos"
+
+#: build/upcoming-events/index.js:44
+#: src/upcoming-events/edit.js:16
+#: build/upcoming-events/index.js:16
+msgid "Visualization mode"
+msgstr "Modo de visualización"
+
+#: build/upcoming-events/index.js:47
+#: src/upcoming-events/edit.js:19
+#: build/upcoming-events/index.js:19
+msgid "Monthly calendar"
+msgstr "Calendario mensual"
+
+#: build/upcoming-events/index.js:50
+#: src/upcoming-events/edit.js:20
+#: build/upcoming-events/index.js:20
+msgid "List of upcoming events"
+msgstr "Listado de próximos eventos"
+
+#: build/upcoming-events/index.js:57
+#: src/upcoming-events/edit.js:27
+#: build/upcoming-events/index.js:27
+msgid "Events to show"
+msgstr "Eventos a mostrar"
+
+#: build/upcoming-events/index.js:69
+#: src/upcoming-events/edit.js:39
+#: build/upcoming-events/index.js:39
+msgid "Preview: a monthly calendar of events will be displayed."
+msgstr "Previsualización: se mostrará un calendario mensual de eventos."
+
+#: build/upcoming-events/index.js:71
+#: src/upcoming-events/edit.js:42
+#: build/upcoming-events/index.js:42
+#, js-format
+msgid "Preview: a list of the next %s events will be displayed."
+msgstr "Previsualización: se mostrará un listado de los próximos %s eventos."

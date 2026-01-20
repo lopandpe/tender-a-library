@@ -4,3 +4,4 @@ import "./book-data/";
 import "./mini-book/";
 import "./book-search/";
 import "./upcoming-events";
+import "./profile-links";

@@ -24,7 +24,7 @@ function tender_library_menu()
 	$submenus = [
 		['Préstamos Activos', 'Préstamos', 'tender-lendings', 'tender_lendings_page'],
 		['Préstamos Pasados', 'Préstamos terminados', 'tender-old-lendings', 'tender_old_lendings_page'],
-		['Nuevo Préstamo', 'Nuevo Préstamo', 'tender-new-lending', 'tender_new_lending_page'],
+		// ['Nuevo Préstamo', 'Nuevo Préstamo', 'tender-new-lending', 'tender_new_lending_page'],
 	];
 
 	foreach ($submenus as $submenu) {

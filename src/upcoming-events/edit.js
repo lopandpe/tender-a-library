@@ -11,20 +11,20 @@ export default function Edit( props ) {
 	return (
 		<>
 			<InspectorControls>
-				<PanelBody title={ __( 'Ajustes de eventos', 'tender-a-library' ) }>
+				<PanelBody title={ __( 'Events adjustments', 'tender-a-library' ) }>
 					<RadioControl
-						label={ __( 'Modo de visualización', 'tender-a-library' ) }
+						label={ __( 'Visualization mode', 'tender-a-library' ) }
 						selected={ mode }
 						options={ [
-							{ label: __( 'Calendario mensual', 'tender-a-library' ), value: 'calendar' },
-							{ label: __( 'Lista de próximos eventos', 'tender-a-library' ), value: 'list' },
+							{ label: __( 'Monthly calendar', 'tender-a-library' ), value: 'calendar' },
+							{ label: __( 'List of upcoming events', 'tender-a-library' ), value: 'list' },
 						] }
 						onChange={ ( value ) => setAttributes( { mode: value } ) }
 					/>
 
 					{ mode === 'list' && (
 						<RangeControl
-							label={ __( 'Número de eventos', 'tender-a-library' ) }
+							label={ __( 'Events to show', 'tender-a-library' ) }
 							value={ limit }
 							onChange={ ( value ) => setAttributes( { limit: value } ) }
 							min={ 1 }
@@ -36,10 +36,10 @@ export default function Edit( props ) {
 
 			<div { ...blockProps }>
 				{ mode === 'calendar' ? (
-					<p>{ __( 'Vista previa: se mostrará un calendario mensual de eventos.', 'tender-a-library' ) }</p>
+					<p>{ __( 'Preview: a monthly calendar of events will be displayed.', 'tender-a-library' ) }</p>
 				) : (
 					<p>
-						{ __( 'Vista previa: se mostrará un listado de los próximos', 'tender-a-library' ) } { limit } { __( 'eventos.', 'tender-a-library' ) }
+						{ printf(__( 'Preview: a list of the next %s events will be displayed.', 'tender-a-library' ), limit) }
 					</p>
 				) }
 			</div>

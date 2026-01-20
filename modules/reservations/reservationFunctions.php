@@ -247,7 +247,7 @@ function tender_user_reservations_shortcode() {
     ?>
     <div class="profile-reservations">
 
-        <h2 class=""><?php echo __('My active reservations', 'tender-a-library'); ?></h2>
+        <h2 class=""><?php _e('My active reservations', 'tender-a-library'); ?></h2>
 
         <?php if ( empty( $rows ) ) : ?>
             <p><?php esc_html_e('You do not have active reservations.', 'tender-a-library'); ?></p>

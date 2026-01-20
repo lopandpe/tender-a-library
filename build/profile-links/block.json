@@ -1,0 +1,17 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 2,
+  "name": "tender-a-library/profile-links",
+  "version": "0.1.0",
+  "title": "Profile Links",
+  "category": "tender-blocks",
+  "icon": "admin-users",
+  "description": "Block to display tender profile links.",
+  "parent": [
+    "core/navigation"
+  ],
+  "textdomain": "tender-a-library",
+  "editorScript": "file:./index.js",
+  "editorStyle": "file:./index.css",
+  "style": "file:./style-index.css"
+}

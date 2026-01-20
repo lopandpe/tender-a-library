@@ -1,0 +1,11 @@
+
+.tender-auth-link-block{
+    &> * {
+        display: flex !important;
+        gap: 5px;
+        align-items: center;
+        svg{
+            width: 20px;
+        }
+    }
+}

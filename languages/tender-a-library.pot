@@ -1,4 +1,4 @@
-# Copyright (C) 2025 Local Anarquista Magdalena
+# Copyright (C) 2026 Local Anarquista Magdalena
 # This file is distributed under the same license as the Plugin Biblioteca (A) plugin.
 msgid ""
 msgstr ""
@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-11-11T19:29:34+00:00\n"
+"POT-Creation-Date: 2026-01-20T18:53:03+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: tender-a-library\n"
@@ -59,6 +59,7 @@ msgstr ""
 
 #: block-includes/book-data-functions.php:36
 #: modules/tender-book/tenderBookFields.php:70
+#: modules/tender-event/tenderEventFields.php:76
 #: build/book-data/index.js:39
 #: src/book-data/edit.js:17
 #: build/book-data/index.js:17
@@ -830,7 +831,7 @@ msgstr ""
 msgid "Reservation cancelled successfully"
 msgstr ""
 
-#: modules/tender-blocks.php:20
+#: modules/tender-blocks.php:22
 msgid "Tender Blocks"
 msgstr ""
 
@@ -936,6 +937,73 @@ msgstr ""
 
 #: modules/tender-book/tenderBookTemplate.php:70
 msgid "Custom template for Tender Language taxonomy."
+msgstr ""
+
+#: modules/tender-event/customPostEvent.php:17
+msgctxt "Post Type General Name"
+msgid "Events"
+msgstr ""
+
+#: modules/tender-event/customPostEvent.php:18
+msgctxt "Post Type Singular Name"
+msgid "Event"
+msgstr ""
+
+#: modules/tender-event/customPostEvent.php:19
+msgid "Events"
+msgstr ""
+
+#: modules/tender-event/customPostEvent.php:20
+msgid "All events"
+msgstr ""
+
+#: modules/tender-event/customPostEvent.php:21
+msgid "Add new event"
+msgstr ""
+
+#: modules/tender-event/customPostEvent.php:22
+msgid "Edit event"
+msgstr ""
+
+#: modules/tender-event/customPostEvent.php:23
+msgid "View event"
+msgstr ""
+
+#: modules/tender-event/customPostEvent.php:28
+#: modules/tender-event/tenderEventFields.php:22
+msgid "Event"
+msgstr ""
+
+#: modules/tender-event/customPostEvent.php:29
+msgid "Event in the library"
+msgstr ""
+
+#: modules/tender-event/tenderEventFields.php:28
+msgid "Date of the event"
+msgstr ""
+
+#: modules/tender-event/tenderEventFields.php:39
+msgid "Start datetime of the event"
+msgstr ""
+
+#: modules/tender-event/tenderEventFields.php:41
+msgid "It repeats every week"
+msgstr ""
+
+#: modules/tender-event/tenderEventFields.php:43
+msgid "Check this box if the event is recurring. Remember to add end date to the event."
+msgstr ""
+
+#: modules/tender-event/tenderEventFields.php:47
+msgid "End date of the event"
+msgstr ""
+
+#: modules/tender-event/tenderEventFields.php:56
+msgid "End date of the repeating event"
+msgstr ""
+
+#: modules/tender-event/tenderEventFields.php:76
+msgid " (optional)"
 msgstr ""
 
 #: modules/tenderRoles.php:13
@@ -1091,6 +1159,49 @@ msgstr ""
 msgid "Book Author"
 msgstr ""
 
+#: build/upcoming-events/index.js:42
+#: src/upcoming-events/edit.js:14
+#: build/upcoming-events/index.js:14
+msgid "Events adjustments"
+msgstr ""
+
+#: build/upcoming-events/index.js:44
+#: src/upcoming-events/edit.js:16
+#: build/upcoming-events/index.js:16
+msgid "Visualization mode"
+msgstr ""
+
+#: build/upcoming-events/index.js:47
+#: src/upcoming-events/edit.js:19
+#: build/upcoming-events/index.js:19
+msgid "Monthly calendar"
+msgstr ""
+
+#: build/upcoming-events/index.js:50
+#: src/upcoming-events/edit.js:20
+#: build/upcoming-events/index.js:20
+msgid "List of upcoming events"
+msgstr ""
+
+#: build/upcoming-events/index.js:57
+#: src/upcoming-events/edit.js:27
+#: build/upcoming-events/index.js:27
+msgid "Events to show"
+msgstr ""
+
+#: build/upcoming-events/index.js:69
+#: src/upcoming-events/edit.js:39
+#: build/upcoming-events/index.js:39
+msgid "Preview: a monthly calendar of events will be displayed."
+msgstr ""
+
+#: build/upcoming-events/index.js:71
+#: src/upcoming-events/edit.js:42
+#: build/upcoming-events/index.js:42
+#, js-format
+msgid "Preview: a list of the next %s events will be displayed."
+msgstr ""
+
 #: build/book-cover/block.json
 #: src/book-cover/block.json
 msgctxt "block title"
@@ -1119,4 +1230,22 @@ msgstr ""
 #: src/mini-book/block.json
 msgctxt "block title"
 msgid "Mini Book"
+msgstr ""
+
+#: build/profile-links/block.json
+#: src/profile-links/block.json
+msgctxt "block title"
+msgid "Profile Links"
+msgstr ""
+
+#: build/profile-links/block.json
+#: src/profile-links/block.json
+msgctxt "block description"
+msgid "Block to display tender profile links."
+msgstr ""
+
+#: build/upcoming-events/block.json
+#: src/upcoming-events/block.json
+msgctxt "block title"
+msgid "Upcoming Events"
 msgstr ""

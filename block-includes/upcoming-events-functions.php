@@ -36,21 +36,44 @@ function tender_render_events_list( $limit = 5 ) {
             $event_post = $occ['post'];
             $ts         = $occ['ts'];
             $post_id    = $event_post->ID;
+            $thumb_html = get_the_post_thumbnail(
+                $post_id,
+                'thumbnail',
+                array(
+                    'class'   => 'tender-events-list__thumb-img',
+                    'loading' => 'lazy',
+                    'alt'     => the_title_attribute( array( 'echo' => false, 'post' => $post_id ) ),
+                )
+            );
 
             $is_recurrent = (bool) carbon_get_post_meta( $post_id, 'tender_event_recurrent' );
 
             echo '<li class="tender-events-list__item">';
-                echo '<a href="' . esc_url( get_permalink( $post_id ) ) . '" class="tender-events-list__link">';
-                    echo esc_html( get_the_title( $post_id ) );
-                echo '</a>';
+                echo '<div class="tender-events-list__thumb">';
+                    if ( $thumb_html ) {
+                        echo '<a href="' . esc_url( get_permalink( $post_id ) ) . '" class="tender-events-list__link">';
+                            echo $thumb_html; // get_the_post_thumbnail ya devuelve HTML seguro
+                        echo '</a>';
+                    } else {
+                        echo '<span class="tender-events-list__thumb-placeholder" aria-hidden="true"></span>';
+                    }
+                echo '</div>';
+                echo '<div class="tender-events-list__content">';
+                    echo '<a href="' . esc_url( get_permalink( $post_id ) ) . '" class="tender-events-list__link">';
+                        echo esc_html( get_the_title( $post_id ) );
+                    echo '</a>';
 
-                echo '<span class="tender-events-list__date">';
-                    echo esc_html( date_i18n( 'd/m/Y H:i', $ts ) );
-                echo '</span>';
+                    echo '<span class="tender-events-list__date">';
+                        echo esc_html( date_i18n( 'd/m/Y', $ts ) );
+                    echo '</span>';
+                    echo '<span class="tender-events-list__time">';
+                        echo esc_html( date_i18n( 'H:i', $ts ) );
+                    echo '</span>';
 
-                if ( $is_recurrent ) {
-                    echo '<span class="tender-events-list__badge">' . esc_html__( 'R', 'tender-library' ) . '</span>';
-                }
+                    if ( $is_recurrent ) {
+                        echo '<span class="tender-events-list__badge">' . esc_html__( 'Recurring event', 'tender-library' ) . '</span>';
+                    }
+                echo '</div>';
 
             echo '</li>';
         }

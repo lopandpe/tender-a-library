@@ -218,6 +218,11 @@
   opacity: 1;
 }
 
+.login-form-container {
+  width: 300px !important;
+  max-width: 100% !important;
+}
+
 #loginform input[type=text],
 #loginform input[type=password] {
   width: 100%;

@@ -14,19 +14,19 @@ function tender_event()
 	$event_slug = get_option('tender_event_slug', 'evento'); // Valor por defecto
 
 	$labels = array(
-		'name'                  => _x('Eventos', 'Post Type General Name', 'tender-a-library'),
-		'singular_name'         => _x('Evento', 'Post Type Singular Name', 'tender-a-library'),
-		'menu_name'             => __('Eventos', 'tender-a-library'),
-		'all_items'             => __('Todos los eventos', 'tender-a-library'),
-		'add_new_item'          => __('Agregar nuevo evento', 'tender-a-library'),
-		'edit_item'             => __('Editar evento', 'tender-a-library'),
-		'view_item'             => __('Ver evento', 'tender-a-library'),
+		'name'                  => _x('Events', 'Post Type General Name', 'tender-a-library'),
+		'singular_name'         => _x('Event', 'Post Type Singular Name', 'tender-a-library'),
+		'menu_name'             => __('Events', 'tender-a-library'),
+		'all_items'             => __('All events', 'tender-a-library'),
+		'add_new_item'          => __('Add new event', 'tender-a-library'),
+		'edit_item'             => __('Edit event', 'tender-a-library'),
+		'view_item'             => __('View event', 'tender-a-library'),
 	);
 
 
 	$args = array(
-		'label'                 => __('Evento', 'tender-a-library'),
-		'description'           => __('Evento en la biblioteca', 'tender-a-library'),
+		'label'                 => __('Event', 'tender-a-library'),
+		'description'           => __('Event in the library', 'tender-a-library'),
 		'labels'                => $labels,
 		'supports'              => array('title', 'thumbnail', 'editor', 'excerpt', 'revisions', 'custom-fields'),
 		'taxonomies'            => array('tender_section'),
