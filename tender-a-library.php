@@ -65,6 +65,7 @@ function tender_bootstrap()
 			"modules/emails/reservationIsAvailableNow",
 			"modules/tender-event/customPostEvent",
 			"modules/tender-event/tenderEventFields",
+			"modules/tender-event/tenderEventTemplate",
 		];
 
 		$bootstrapApp = new TenderBootstrap($modules);

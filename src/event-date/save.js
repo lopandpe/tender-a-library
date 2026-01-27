@@ -3,10 +3,7 @@ import { useBlockProps } from "@wordpress/block-editor";
 
 export default function Save() {
 	return (
-		<section
-			className="wp-block-"
-			{...useBlockProps.save()}
-		>
+		<section {...useBlockProps.save()}>
 			<div className="block-container">
 				<h2>{__("Hola Mundo!")}</h2>
 			</div>

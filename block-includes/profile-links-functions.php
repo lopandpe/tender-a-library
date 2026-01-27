@@ -22,7 +22,7 @@ function tender_profile_links_render_callback( $attributes, $content = '', $bloc
         $label       = get_the_title( $profile_page_option );
         $extra_class = 'menu-item-auth--profile';
     } else {
-        $label       = esc_html__( 'Login', 'tender-library' );
+        $label       = esc_html__( 'Login', 'tender-a-library' );
         $extra_class = 'menu-item-auth--login';
     }
 

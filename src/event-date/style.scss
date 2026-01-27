@@ -1,0 +1,11 @@
+.wp-block-tender-a-library-event-date{
+	.tender-event-date{
+		&__recurrent {
+			font-size: var(--wp--preset--font-size--small);
+			color: var(--wp--preset--color--accent-1);
+		}
+		&__start {
+			font-size: var(--wp--preset--font-size--small);
+		}
+	}
+}

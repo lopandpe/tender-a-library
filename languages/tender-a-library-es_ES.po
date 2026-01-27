@@ -23,6 +23,8 @@ msgstr "https://localanarquistamagdalena.org"
 
 #. Author of the plugin
 #: tender-a-library.php
+#: modules/lendings/tenderMenuCover.php:465
+#: modules/lendings/tenderMenuCover.php:1047
 msgid "Local Anarquista Magdalena"
 msgstr "Local Anarquista Magdalena"
 
@@ -57,6 +59,8 @@ msgid "View book"
 msgstr "Ver libro"
 
 #: modules/customPostBook.php:42
+#: templates/single-tender-book.php:15
+#: templates/single-tender-event.php:15
 msgid "Book"
 msgstr "Libro"
 
@@ -128,7 +132,7 @@ msgstr "Nuevo idioma"
 msgid "Add new language"
 msgstr "Añadir idioma nuevo"
 
-#: modules/lendings/tenderMenuCover.php:10
+#: modules/lendings/tenderMenuCover.php:20
 msgid "You do not have permission to access this page."
 msgstr "No tienes permisos para acceder a esta página."
 
@@ -188,9 +192,8 @@ msgstr "Otras autoras"
 
 #: block-includes/book-data-functions.php:25
 #: modules/tender-book/tenderBookFields.php:24
-#: build/book-data/index.js:37
+#: build/book-data/index.js:1
 #: src/book-data/edit.js:13
-#: build/book-data/index.js:13
 msgid "Publisher"
 msgstr "Editorial"
 
@@ -221,17 +224,16 @@ msgstr "Reseña"
 #: block-includes/book-data-functions.php:36
 #: modules/tender-book/tenderBookFields.php:70
 #: modules/tender-event/tenderEventFields.php:76
-#: build/book-data/index.js:39
+#: build/book-data/index.js:1
 #: src/book-data/edit.js:17
-#: build/book-data/index.js:17
 msgid "Library section"
 msgstr "Sección de la biblioteca"
 
 #: block-includes/book-data-functions.php:23
+#: modules/lendings/tenderMenuCover.php:464
 #: modules/tender-book/tenderBookFields.php:90
-#: build/book-data/index.js:35
+#: build/book-data/index.js:1
 #: src/book-data/edit.js:11
-#: build/book-data/index.js:11
 msgid "Author"
 msgstr "Autor(a)"
 
@@ -273,28 +275,27 @@ msgstr "Lector(a)"
 
 #. Plugin Name of the plugin
 #: tender-a-library.php
+#: modules/lendings/tenderMenuCover.php:454
+#: modules/lendings/tenderMenuCover.php:1043
 msgid "Plugin Biblioteca (A)"
 msgstr "Plugin Biblioteca (A)"
 
 #: block-includes/book-data-functions.php:21
-#: build/book-data/index.js:32
+#: build/book-data/index.js:1
 #: src/book-data/edit.js:9
-#: build/book-data/index.js:9
 msgid "Book data"
 msgstr "Datos del libro"
 
 #: block-includes/book-data-functions.php:40
-#: build/book-data/index.js:45
+#: build/book-data/index.js:1
 #: src/book-data/edit.js:22
-#: build/book-data/index.js:22
 msgid "Publication year"
 msgstr "Año de publicación"
 
 #: block-includes/book-data-functions.php:46
 #: modules/lendings/downloadCsvLendings.php:54
-#: build/book-data/index.js:47
+#: build/book-data/index.js:1
 #: src/book-data/edit.js:24
-#: build/book-data/index.js:24
 msgid "Signature"
 msgstr "Signatura"
 
@@ -338,7 +339,7 @@ msgstr "Préstamo #%d"
 msgid "There is no summary"
 msgstr "No hay resumen"
 
-#: modules/tender-blocks.php:22
+#: modules/tender-blocks.php:23
 msgid "Tender Blocks"
 msgstr "Bloques Tender (A)"
 
@@ -712,35 +713,30 @@ msgstr "Editar Perfil"
 msgid "Library"
 msgstr "Biblioteca"
 
-#: build/book-search/index.js:32
+#: build/book-search/index.js:1
 #: src/book-search/edit.js:9
-#: build/book-search/index.js:9
 msgid "Book search"
 msgstr "Buscar libros"
 
-#: build/book-search/index.js:34
+#: build/book-search/index.js:1
 #: src/book-search/edit.js:10
-#: build/book-search/index.js:10
 msgid "This block can only be seen on the frontend."
 msgstr "Este bloque solo se verá en la parte pública de la web"
 
-#: build/book-summary/index.js:33
+#: build/book-summary/index.js:1
 #: src/book-summary/edit.js:9
-#: build/book-summary/index.js:9
 msgid "Book summary"
 msgstr "Resumen del libro"
 
 #: modules/lendings/lendingPages.php:364
 #: modules/lendings/lendingPages.php:423
-#: build/mini-book/index.js:53
+#: build/mini-book/index.js:1
 #: src/mini-book/edit.js:30
-#: build/mini-book/index.js:30
 msgid "Book title"
 msgstr "Título del libro"
 
-#: build/mini-book/index.js:56
+#: build/mini-book/index.js:1
 #: src/mini-book/edit.js:31
-#: build/mini-book/index.js:31
 msgid "Book Author"
 msgstr "Autor(a) del libro"
 
@@ -1209,45 +1205,1028 @@ msgstr "Ver evento"
 msgid "Event in the library"
 msgstr "Evento en la biblioteca"
 
-#: build/upcoming-events/index.js:42
+#: build/upcoming-events/index.js:1
 #: src/upcoming-events/edit.js:14
-#: build/upcoming-events/index.js:14
 msgid "Events adjustments"
 msgstr "Ajustes de eventos"
 
-#: build/upcoming-events/index.js:44
+#: build/upcoming-events/index.js:1
 #: src/upcoming-events/edit.js:16
-#: build/upcoming-events/index.js:16
 msgid "Visualization mode"
 msgstr "Modo de visualización"
 
-#: build/upcoming-events/index.js:47
+#: build/upcoming-events/index.js:1
 #: src/upcoming-events/edit.js:19
-#: build/upcoming-events/index.js:19
 msgid "Monthly calendar"
 msgstr "Calendario mensual"
 
-#: build/upcoming-events/index.js:50
+#: build/upcoming-events/index.js:1
 #: src/upcoming-events/edit.js:20
-#: build/upcoming-events/index.js:20
 msgid "List of upcoming events"
 msgstr "Listado de próximos eventos"
 
-#: build/upcoming-events/index.js:57
+#: build/upcoming-events/index.js:1
 #: src/upcoming-events/edit.js:27
-#: build/upcoming-events/index.js:27
 msgid "Events to show"
 msgstr "Eventos a mostrar"
 
-#: build/upcoming-events/index.js:69
+#: build/upcoming-events/index.js:1
 #: src/upcoming-events/edit.js:39
-#: build/upcoming-events/index.js:39
 msgid "Preview: a monthly calendar of events will be displayed."
 msgstr "Previsualización: se mostrará un calendario mensual de eventos."
 
-#: build/upcoming-events/index.js:71
+#: build/upcoming-events/index.js:1
 #: src/upcoming-events/edit.js:42
-#: build/upcoming-events/index.js:42
 #, js-format
 msgid "Preview: a list of the next %s events will be displayed."
 msgstr "Previsualización: se mostrará un listado de los próximos %s eventos."
+
+#: block-includes/profile-links-functions.php:25
+msgid "Login"
+msgstr "Login"
+
+#: block-includes/upcoming-events-functions.php:31
+msgid "There are no upcoming events."
+msgstr "No hay eventos próximamente"
+
+#: block-includes/upcoming-events-functions.php:74
+msgid "Recurring event"
+msgstr "Evento recurrente"
+
+#: block-includes/upcoming-events-functions.php:140
+msgid "Previous month"
+msgstr "Mes anterior"
+
+#: block-includes/upcoming-events-functions.php:144
+msgid "Next month"
+msgstr "Mes siguiente"
+
+#: block-includes/upcoming-events-functions.php:150
+msgid "Mon"
+msgstr "Lun"
+
+#: block-includes/upcoming-events-functions.php:151
+msgid "Tue"
+msgstr "Mar"
+
+#: block-includes/upcoming-events-functions.php:152
+msgid "Wed"
+msgstr "Mie"
+
+#: block-includes/upcoming-events-functions.php:153
+msgid "Thu"
+msgstr "Jue"
+
+#: block-includes/upcoming-events-functions.php:154
+msgid "Fri"
+msgstr "Vie"
+
+#: block-includes/upcoming-events-functions.php:155
+msgid "Sat"
+msgstr "Sáb"
+
+#: block-includes/upcoming-events-functions.php:156
+msgid "Sun"
+msgstr "Dom"
+
+#: block-includes/upcoming-events-functions.php:190
+msgid "R"
+msgstr "R"
+
+#: modules/lendings/tenderMenuCover.php:32
+msgid "Plugin Biblioteca (A) - Dashboard"
+msgstr "Plugin Biblioteca (A) - Escritorio"
+
+#: modules/lendings/tenderMenuCover.php:456
+msgid "Adds library functionality to the core of WordPress, including books, readers, loans, and more."
+msgstr "Añade la funcionalidad de una biblioteca a wordpress, incluyendo libros, lectores, préstamos y más."
+
+#: modules/lendings/tenderMenuCover.php:460
+msgid "Version"
+msgstr "Versión"
+
+#: modules/lendings/tenderMenuCover.php:468
+msgid "WordPress"
+msgstr ""
+
+#: modules/lendings/tenderMenuCover.php:472
+msgid "PHP"
+msgstr ""
+
+#: modules/lendings/tenderMenuCover.php:480
+msgid "Quick Navigation"
+msgstr "Navegación rápida"
+
+#: modules/lendings/tenderMenuCover.php:482
+msgid "View Active Loans"
+msgstr "Ver préstamos activos"
+
+#: modules/lendings/tenderMenuCover.php:483
+msgid "View Completed Loans"
+msgstr "Ver préstamos finalizados"
+
+#: modules/lendings/tenderMenuCover.php:484
+msgid "Manage Books"
+msgstr "Gestionar libros"
+
+#: modules/lendings/tenderMenuCover.php:490
+msgid "Main Features"
+msgstr "Utilidades"
+
+#: modules/lendings/tenderMenuCover.php:492
+msgid "Complete book management system with custom fields and taxonomies"
+msgstr "Sistema completo de gestión de libros con campos personalizados y taxonomías"
+
+#: modules/lendings/tenderMenuCover.php:493
+msgid "Advanced lending system with tracking and history"
+msgstr "Sistema avanzado de préstamos con seguimiento e histórico."
+
+#: modules/lendings/tenderMenuCover.php:494
+msgid "Reservation system for unavailable books"
+msgstr "Sistema de reservas para libros no disponibles"
+
+#: modules/lendings/tenderMenuCover.php:495
+msgid "User profile management with custom permissions"
+msgstr "Gestión del perfil de usuarios con permisos personalizados"
+
+#: modules/lendings/tenderMenuCover.php:496
+msgid "Advanced search functionality with filters and API"
+msgstr "Búsqueda avanzada con filtros y API"
+
+#: modules/lendings/tenderMenuCover.php:497
+msgid "Customizable Gutenberg blocks for content display"
+msgstr "Bloques personalizables de Gutenberg"
+
+#: modules/lendings/tenderMenuCover.php:498
+msgid "Email notifications for loan reminders and reservations"
+msgstr "Notificaciones e-mail de recordatorio para préstamos y reservas"
+
+#: modules/lendings/tenderMenuCover.php:499
+msgid "CSV export functionality for lending reports"
+msgstr "Exportación a CSV de préstamos activos"
+
+#: modules/lendings/tenderMenuCover.php:500
+msgid "Role-based access control with multiple user roles"
+msgstr "Acceso controlado por roles"
+
+#: modules/lendings/tenderMenuCover.php:501
+msgid "Internationalization support (Spanish included)"
+msgstr "Preparado para múltiples traducciones (incluídos castellano e inglés)"
+
+#: modules/lendings/tenderMenuCover.php:507
+msgid "Gutenberg Blocks"
+msgstr "Bloques Gutenberg"
+
+#: modules/lendings/tenderMenuCover.php:508
+msgid "The plugin includes 7 custom Gutenberg blocks for displaying library content:"
+msgstr "Se incluyen 7 bloques de Gutenberg para mostrar contenido de la biblioteca:"
+
+#: modules/lendings/tenderMenuCover.php:512
+msgid "Book Summary Block"
+msgstr "Bloque de resumen de un libro"
+
+#: modules/lendings/tenderMenuCover.php:513
+msgid "Displays a summary view of a book with title, author, and key information."
+msgstr "Muestra la reseña del libro con título, autoría e información clave."
+
+#: modules/lendings/tenderMenuCover.php:517
+msgid "Book Cover Block"
+msgstr "Bloque de portada"
+
+#: modules/lendings/tenderMenuCover.php:518
+msgid "Shows the book cover image with customizable sizing and styling options."
+msgstr "Muestra la cubierta de un libro"
+
+#: modules/lendings/tenderMenuCover.php:522
+msgid "Book Data Block"
+msgstr "Información del libro seleccionado"
+
+#: modules/lendings/tenderMenuCover.php:523
+msgid "Displays detailed book information including ISBN, publisher, publication date, and more."
+msgstr "Muestra información detallada del ISBN, editorial, fecha de publicación, etc."
+
+#: modules/lendings/tenderMenuCover.php:527
+msgid "Mini Book Block"
+msgstr "Miniatura de libro"
+
+#: modules/lendings/tenderMenuCover.php:528
+msgid "A compact book preview card ideal for listings and collections."
+msgstr "Una previsualización compacta de un libro, ideal para listas"
+
+#: modules/lendings/tenderMenuCover.php:532
+msgid "Book Search Block"
+msgstr "Bloque de búsqueda de libros"
+
+#: modules/lendings/tenderMenuCover.php:533
+msgid "Interactive search component to find books with advanced filtering options."
+msgstr "Componente interactivo de búsqueda con filtros avanzados."
+
+#: modules/lendings/tenderMenuCover.php:537
+msgid "Upcoming Events Block"
+msgstr "Próximos eventos"
+
+#: modules/lendings/tenderMenuCover.php:538
+msgid "Shows upcoming library events and activities."
+msgstr "Muestra los próximos eventos, en formato lista o calendario"
+
+#: modules/lendings/tenderMenuCover.php:542
+msgid "Profile Links Block"
+msgstr "Enlace al perfil"
+
+#: modules/lendings/tenderMenuCover.php:543
+msgid "Displays user profile navigation links for quick access."
+msgstr "Muestra los enlaces al perfil para añadir a bloques de navegación"
+
+#: modules/lendings/tenderMenuCover.php:548
+msgid "Block Category:"
+msgstr "Categoría del bloque:"
+
+#: modules/lendings/tenderMenuCover.php:555
+msgid "Admin Menu Structure"
+msgstr "Estructura del menú de administración"
+
+#: modules/lendings/tenderMenuCover.php:556
+msgid "The plugin adds a main \"Biblioteca\" menu to the WordPress admin with the following structure:"
+msgstr "El plugin añade un menú \"Biblioteca\" al panel de administración de wordpress con la siguiente estructura"
+
+#: modules/lendings/tenderMenuCover.php:560
+msgid "Active Loans"
+msgstr "Préstamos activos"
+
+#: modules/lendings/tenderMenuCover.php:561
+msgid "Completed Loans"
+msgstr "Préstamos finalizados"
+
+#: modules/lendings/tenderMenuCover.php:564
+msgid "Access Requirements"
+msgstr "Requisitos de acceso"
+
+#: modules/lendings/tenderMenuCover.php:565
+msgid "The library menu is visible only to users with the following roles:"
+msgstr "El menú de administración es solo visible para los siguientes roles:"
+
+#: modules/lendings/tenderMenuCover.php:576
+msgid "Custom Post Types & Taxonomies"
+msgstr ""
+
+#: modules/lendings/tenderMenuCover.php:581
+msgid "📖 Books (CPT: book)"
+msgstr "📖 Libros (CPT: book)"
+
+#: modules/lendings/tenderMenuCover.php:585
+msgid "Main post type for managing library books with extensive metadata."
+msgstr "Contenido básico para gestionar libros con diversidad de metadatos"
+
+#: modules/lendings/tenderMenuCover.php:586
+msgid "Custom Fields:"
+msgstr "Campos personalizados:"
+
+#: modules/lendings/tenderMenuCover.php:588
+msgid "ISBN - International Standard Book Number"
+msgstr ""
+
+#: modules/lendings/tenderMenuCover.php:589
+msgid "Author(s) - Book authors"
+msgstr "Autoría"
+
+#: modules/lendings/tenderMenuCover.php:590
+msgid "Publisher - Publishing company"
+msgstr "Editorial"
+
+#: modules/lendings/tenderMenuCover.php:591
+msgid "Publication Date - Release date"
+msgstr "Fecha de publicación"
+
+#: modules/lendings/tenderMenuCover.php:592
+msgid "Number of Pages - Book length"
+msgstr "Número de páginas"
+
+#: modules/lendings/tenderMenuCover.php:593
+msgid "Language - Book language"
+msgstr "Idioma del libro"
+
+#: modules/lendings/tenderMenuCover.php:594
+msgid "Edition - Book edition"
+msgstr "Número de edición"
+
+#: modules/lendings/tenderMenuCover.php:595
+msgid "Book Cover - Featured image"
+msgstr "Portada"
+
+#: modules/lendings/tenderMenuCover.php:596
+msgid "Availability Status - Available/Unavailable"
+msgstr "Disponibilidad"
+
+#: modules/lendings/tenderMenuCover.php:597
+msgid "Physical Location - Shelf location"
+msgstr "Ubicación"
+
+#: modules/lendings/tenderMenuCover.php:599
+msgid "Taxonomies:"
+msgstr "Taxonomías:"
+
+#: modules/lendings/tenderMenuCover.php:601
+msgid "Section - Library section/category"
+msgstr "Sección/Apartado"
+
+#: modules/lendings/tenderMenuCover.php:603
+msgid "Subject - Subject matter"
+msgstr "Asunto - Materia"
+
+#: modules/lendings/tenderMenuCover.php:610
+msgid "🔄 Lendings (CPT: lending)"
+msgstr "🔄 Préstamos (CPT: lending)"
+
+#: modules/lendings/tenderMenuCover.php:614
+msgid "Post type for managing book loans and lending history."
+msgstr "Tipo de contenido para gestionar los préstamos de libros y el historial de préstamos."
+
+#: modules/lendings/tenderMenuCover.php:615
+msgid "Tracked Information:"
+msgstr "Información registrada:"
+
+#: modules/lendings/tenderMenuCover.php:617
+msgid "Book ID - Reference to borrowed book"
+msgstr "ID del libro - Referencia al libro prestado"
+
+#: modules/lendings/tenderMenuCover.php:618
+msgid "User/Reader - Person who borrowed the book"
+msgstr "Usuario/Lector - Persona que tomó prestado el libro"
+
+#: modules/lendings/tenderMenuCover.php:619
+msgid "Loan Date - Date of borrowing"
+msgstr "Fecha de préstamo - Fecha de préstamo"
+
+#: modules/lendings/tenderMenuCover.php:620
+msgid "Due Date - Expected return date"
+msgstr "Fecha de vencimiento - Fecha prevista de devolución"
+
+#: modules/lendings/tenderMenuCover.php:621
+msgid "Return Date - Actual return date"
+msgstr "Fecha de devolución - Fecha real de devolución"
+
+#: modules/lendings/tenderMenuCover.php:622
+msgid "Loan Status - Active/Returned/Overdue"
+msgstr "Estado del préstamo - Activo/Devuelto/Vencido"
+
+#: modules/lendings/tenderMenuCover.php:623
+msgid "Notes - Lending notes"
+msgstr "Notas - Notas del préstamo"
+
+#: modules/lendings/tenderMenuCover.php:630
+msgid "📅 Events (CPT: event)"
+msgstr "📅 Eventos (CPT: event)"
+
+#: modules/lendings/tenderMenuCover.php:634
+msgid "Post type for managing library events and activities."
+msgstr "Tipo de contenido para gestionar eventos y actividades de la biblioteca."
+
+#: modules/lendings/tenderMenuCover.php:635
+msgid "Event Information:"
+msgstr "Información del evento:"
+
+#: modules/lendings/tenderMenuCover.php:637
+msgid "Event Title"
+msgstr "Título del evento"
+
+#: modules/lendings/tenderMenuCover.php:638
+msgid "Event Date & Time"
+msgstr "Fecha y hora del evento"
+
+#: modules/lendings/tenderMenuCover.php:639
+msgid "Location"
+msgstr "Ubicación"
+
+#: modules/lendings/tenderMenuCover.php:640
+#: modules/lendings/tenderMenuCover.php:984
+msgid "Description"
+msgstr "Descripción"
+
+#: modules/lendings/tenderMenuCover.php:641
+msgid "Featured Image"
+msgstr "Imagen destacada"
+
+#: modules/lendings/tenderMenuCover.php:650
+msgid "Database Tables"
+msgstr "Tablas de la base de datos"
+
+#: modules/lendings/tenderMenuCover.php:651
+msgid "The plugin creates the following custom database tables:"
+msgstr "El plugin crea las siguientes tablas personalizadas en la base de datos:"
+
+#: modules/lendings/tenderMenuCover.php:656
+msgid "Table Name"
+msgstr "Nombre de la tabla"
+
+#: modules/lendings/tenderMenuCover.php:657
+msgid "Purpose"
+msgstr "Finalidad"
+
+#: modules/lendings/tenderMenuCover.php:663
+msgid "Stores lending/loan records"
+msgstr "Almacena registros de préstamos"
+
+#: modules/lendings/tenderMenuCover.php:667
+msgid "Stores book reservations"
+msgstr "Almacena reservas de libros"
+
+#: modules/lendings/tenderMenuCover.php:675
+msgid "Frontend Pages"
+msgstr "Páginas del front-end"
+
+#: modules/lendings/tenderMenuCover.php:676
+msgid "The plugin creates and manages the following frontend pages:"
+msgstr "El plugin crea y gestiona las siguientes páginas del front-end:"
+
+#: modules/lendings/tenderMenuCover.php:681
+msgid "👤 User Profile Page"
+msgstr "👤 Página de perfil de usuario"
+
+#: modules/lendings/tenderMenuCover.php:685
+msgid "Displays user profile information with viewing and editing capabilities."
+msgstr "Muestra la información del perfil de usuario con opciones de visualización y edición."
+
+#: modules/lendings/tenderMenuCover.php:686
+#: modules/lendings/tenderMenuCover.php:704
+#: modules/lendings/tenderMenuCover.php:721
+#: modules/lendings/tenderMenuCover.php:738
+#: modules/lendings/tenderMenuCover.php:816
+#: modules/lendings/tenderMenuCover.php:853
+msgid "Features:"
+msgstr "Características:"
+
+#: modules/lendings/tenderMenuCover.php:688
+msgid "User profile information display"
+msgstr "Visualización de la información del perfil de usuario"
+
+#: modules/lendings/tenderMenuCover.php:689
+msgid "Login required for access"
+msgstr "Inicio de sesión obligatorio para acceder"
+
+#: modules/lendings/tenderMenuCover.php:690
+msgid "View other users' public profiles"
+msgstr "Ver los perfiles públicos de otros usuarios"
+
+#: modules/lendings/tenderMenuCover.php:691
+msgid "Permission-based profile access"
+msgstr "Acceso al perfil basado en permisos"
+
+#: modules/lendings/tenderMenuCover.php:692
+msgid "Personalized user information"
+msgstr "Información de usuario personalizada"
+
+#: modules/lendings/tenderMenuCover.php:699
+msgid "✏️ Edit Profile Page"
+msgstr "✏️ Página de edición de perfil"
+
+#: modules/lendings/tenderMenuCover.php:703
+msgid "Allows users to edit their profile information."
+msgstr "Permite a los usuarios editar la información de su perfil."
+
+#: modules/lendings/tenderMenuCover.php:706
+msgid "Edit personal information"
+msgstr "Editar información personal"
+
+#: modules/lendings/tenderMenuCover.php:707
+msgid "Upload profile picture"
+msgstr "Subir foto de perfil"
+
+#: modules/lendings/tenderMenuCover.php:708
+msgid "Manage contact information"
+msgstr "Gestionar información de contacto"
+
+#: modules/lendings/tenderMenuCover.php:709
+msgid "Role-based edit permissions"
+msgstr "Permisos de edición basados en roles"
+
+#: modules/lendings/tenderMenuCover.php:716
+msgid "👥 Users List Page"
+msgstr "👥 Página de listado de usuarios"
+
+#: modules/lendings/tenderMenuCover.php:720
+msgid "Displays a list of all library users/readers."
+msgstr "Muestra una lista de todos los usuarios/lectores de la biblioteca."
+
+#: modules/lendings/tenderMenuCover.php:723
+msgid "User directory listing"
+msgstr "Directorio de usuarios"
+
+#: modules/lendings/tenderMenuCover.php:724
+msgid "Searchable user list"
+msgstr "Lista de usuarios con buscador"
+
+#: modules/lendings/tenderMenuCover.php:725
+msgid "Links to user profiles"
+msgstr "Enlaces a perfiles de usuario"
+
+#: modules/lendings/tenderMenuCover.php:726
+msgid "Permission-based visibility"
+msgstr "Visibilidad basada en permisos"
+
+#: modules/lendings/tenderMenuCover.php:733
+msgid "🔍 Search Page"
+msgstr "🔍 Página de búsqueda"
+
+#: modules/lendings/tenderMenuCover.php:737
+msgid "Advanced book search with filtering capabilities."
+msgstr "Búsqueda avanzada de libros con opciones de filtrado."
+
+#: modules/lendings/tenderMenuCover.php:740
+msgid "Full-text book search"
+msgstr "Búsqueda de libros por texto completo"
+
+#: modules/lendings/tenderMenuCover.php:741
+msgid "Filter by genre, section, author"
+msgstr "Filtrar por género, sección y autor"
+
+#: modules/lendings/tenderMenuCover.php:742
+msgid "Sort options (title, author, date)"
+msgstr "Opciones de ordenación (título, autor, fecha)"
+
+#: modules/lendings/tenderMenuCover.php:743
+msgid "RESTful API endpoints for filters"
+msgstr "Endpoints de API REST para filtros"
+
+#: modules/lendings/tenderMenuCover.php:744
+msgid "Pagination support"
+msgstr "Compatibilidad con paginación"
+
+#: modules/lendings/tenderMenuCover.php:753
+msgid "Core Functionalities"
+msgstr "Funcionalidades principales"
+
+#: modules/lendings/tenderMenuCover.php:758
+msgid "📚 Book Management"
+msgstr "📚 Gestión de libros"
+
+#: modules/lendings/tenderMenuCover.php:763
+msgid "Create, edit, and delete books"
+msgstr "Crear, editar y eliminar libros"
+
+#: modules/lendings/tenderMenuCover.php:764
+msgid "Assign books to sections and categories"
+msgstr "Asignar libros a secciones y categorías"
+
+#: modules/lendings/tenderMenuCover.php:765
+msgid "Upload and manage book covers"
+msgstr "Subir y gestionar portadas de libros"
+
+#: modules/lendings/tenderMenuCover.php:766
+msgid "Track ISBN and publication details"
+msgstr "Registrar el ISBN y los detalles de publicación"
+
+#: modules/lendings/tenderMenuCover.php:767
+msgid "Manage book availability status"
+msgstr "Gestionar el estado de disponibilidad de los libros"
+
+#: modules/lendings/tenderMenuCover.php:768
+msgid "Full-text searchable book content"
+msgstr "Contenido del libro con búsqueda por texto completo"
+
+#: modules/lendings/tenderMenuCover.php:775
+msgid "🔄 Lending System"
+msgstr "🔄 Sistema de préstamos"
+
+#: modules/lendings/tenderMenuCover.php:780
+msgid "Create and track book loans"
+msgstr "Crear y hacer seguimiento de préstamos de libros"
+
+#: modules/lendings/tenderMenuCover.php:781
+msgid "Set loan duration and due dates"
+msgstr "Configurar la duración del préstamo y las fechas de vencimiento"
+
+#: modules/lendings/tenderMenuCover.php:782
+msgid "Track loan history per book and user"
+msgstr "Hacer seguimiento del historial de préstamos por libro y por usuario"
+
+#: modules/lendings/tenderMenuCover.php:783
+msgid "Manage overdue loans"
+msgstr "Gestionar préstamos vencidos"
+
+#: modules/lendings/tenderMenuCover.php:784
+msgid "Export lending data to CSV"
+msgstr "Exportar datos de préstamos a CSV"
+
+#: modules/lendings/tenderMenuCover.php:785
+msgid "Record book returns"
+msgstr "Registrar devoluciones de libros"
+
+#: modules/lendings/tenderMenuCover.php:792
+msgid "🏷️ Reservation System"
+msgstr "🏷️ Sistema de reservas"
+
+#: modules/lendings/tenderMenuCover.php:797
+msgid "Reserve unavailable books"
+msgstr "Reservar libros no disponibles"
+
+#: modules/lendings/tenderMenuCover.php:798
+msgid "Track reservation queue"
+msgstr "Hacer seguimiento de la cola de reservas"
+
+#: modules/lendings/tenderMenuCover.php:799
+msgid "Notify users when books become available"
+msgstr "Notificar a los usuarios cuando los libros estén disponibles"
+
+#: modules/lendings/tenderMenuCover.php:800
+msgid "Cancel reservations"
+msgstr "Cancelar reservas"
+
+#: modules/lendings/tenderMenuCover.php:807
+msgid "👥 User Roles & Permissions"
+msgstr "👥 Roles y permisos de usuario"
+
+#: modules/lendings/tenderMenuCover.php:811
+msgid "Custom Roles:"
+msgstr "Roles personalizados:"
+
+#: modules/lendings/tenderMenuCover.php:818
+msgid "Custom role creation for librarians"
+msgstr "Creación de roles personalizados para bibliotecarios"
+
+#: modules/lendings/tenderMenuCover.php:819
+msgid "Custom role for users who open/close library"
+msgstr "Rol personalizado para usuarios que abren/cierran la biblioteca"
+
+#: modules/lendings/tenderMenuCover.php:820
+msgid "Granular capability management"
+msgstr "Gestión granular de capacidades"
+
+#: modules/lendings/tenderMenuCover.php:821
+msgid "Role-based content access restrictions"
+msgstr "Restricciones de acceso al contenido basadas en roles"
+
+#: modules/lendings/tenderMenuCover.php:822
+msgid "Restrict admin dashboard for non-staff"
+msgstr "Restringir el escritorio de administración para quienes no sean del personal"
+
+#: modules/lendings/tenderMenuCover.php:829
+msgid "📧 Email Notifications"
+msgstr "📧 Notificaciones por correo electrónico"
+
+#: modules/lendings/tenderMenuCover.php:834
+msgid "Overdue loan reminders"
+msgstr "Recordatorios de préstamos vencidos"
+
+#: modules/lendings/tenderMenuCover.php:835
+msgid "Reservation availability notifications"
+msgstr "Notificaciones de disponibilidad de reservas"
+
+#: modules/lendings/tenderMenuCover.php:836
+msgid "Loan confirmation emails"
+msgstr "Correos de confirmación de préstamo"
+
+#: modules/lendings/tenderMenuCover.php:837
+msgid "Return reminder emails"
+msgstr "Correos de recordatorio de devolución"
+
+#: modules/lendings/tenderMenuCover.php:844
+msgid "🔍 Search & Filter API"
+msgstr "🔍 API de búsqueda y filtros"
+
+#: modules/lendings/tenderMenuCover.php:848
+msgid "API Endpoints:"
+msgstr "Endpoints de la API:"
+
+#: modules/lendings/tenderMenuCover.php:850
+msgid "Book search endpoint"
+msgstr "Endpoint de búsqueda de libros"
+
+#: modules/lendings/tenderMenuCover.php:851
+msgid "Available filters endpoint"
+msgstr "Endpoint de filtros disponibles"
+
+#: modules/lendings/tenderMenuCover.php:855
+msgid "RESTful API for searching books"
+msgstr "API REST para buscar libros"
+
+#: modules/lendings/tenderMenuCover.php:856
+msgid "Dynamic filter generation"
+msgstr "Generación dinámica de filtros"
+
+#: modules/lendings/tenderMenuCover.php:857
+msgid "Support for complex queries"
+msgstr "Compatibilidad con consultas complejas"
+
+#: modules/lendings/tenderMenuCover.php:858
+msgid "URL parameter support for saved searches"
+msgstr "Compatibilidad con parámetros de URL para búsquedas guardadas"
+
+#: modules/lendings/tenderMenuCover.php:865
+msgid "🎨 Styling & Theming"
+msgstr "🎨 Estilos y tematización"
+
+#: modules/lendings/tenderMenuCover.php:870
+msgid "Custom CSS for plugin pages"
+msgstr "CSS personalizado para las páginas del plugin"
+
+#: modules/lendings/tenderMenuCover.php:871
+msgid "Tailwind CSS integration"
+msgstr "Integración con Tailwind CSS"
+
+#: modules/lendings/tenderMenuCover.php:872
+msgid "Block styling support"
+msgstr "Compatibilidad con estilos de bloques"
+
+#: modules/lendings/tenderMenuCover.php:873
+msgid "Responsive design"
+msgstr "Diseño responsive"
+
+#: modules/lendings/tenderMenuCover.php:880
+msgid "🌍 Localization"
+msgstr "🌍 Localización"
+
+#: modules/lendings/tenderMenuCover.php:885
+msgid "Spanish (es_ES) translation included"
+msgstr "Traducción al español (es_ES) incluida"
+
+#: modules/lendings/tenderMenuCover.php:886
+msgid "Language files in /languages directory"
+msgstr "Archivos de idioma en el directorio /languages"
+
+#: modules/lendings/tenderMenuCover.php:887
+msgid "Mobile Object (MO) files for compiled translations"
+msgstr "Archivos MO (Mobile Object) para traducciones compiladas"
+
+#: modules/lendings/tenderMenuCover.php:888
+msgid "Text domain: tender-a-library"
+msgstr "Dominio de texto: tender-a-library"
+
+#: modules/lendings/tenderMenuCover.php:889
+msgid "WordPress Locale support"
+msgstr "Compatibilidad con Locale de WordPress"
+
+#: modules/lendings/tenderMenuCover.php:896
+msgid "🔗 Permalink & URL Routing"
+msgstr "🔗 Enlaces permanentes y enrutado de URL"
+
+#: modules/lendings/tenderMenuCover.php:901
+msgid "Custom permalink structures"
+msgstr "Estructuras personalizadas de enlaces permanentes"
+
+#: modules/lendings/tenderMenuCover.php:902
+msgid "Query variable registration"
+msgstr "Registro de variables de consulta"
+
+#: modules/lendings/tenderMenuCover.php:903
+msgid "Rewrite rule management"
+msgstr "Gestión de reglas de reescritura"
+
+#: modules/lendings/tenderMenuCover.php:904
+msgid "Clean URL support"
+msgstr "Compatibilidad con URLs limpias"
+
+#: modules/lendings/tenderMenuCover.php:913
+msgid "Technical Stack"
+msgstr "Stack técnico"
+
+#: modules/lendings/tenderMenuCover.php:917
+msgid "Frontend"
+msgstr "Front-end"
+
+#: modules/lendings/tenderMenuCover.php:921
+msgid "Backend"
+msgstr "Back-end"
+
+#: modules/lendings/tenderMenuCover.php:925
+msgid "Database"
+msgstr "Base de datos"
+
+#: modules/lendings/tenderMenuCover.php:929
+msgid "Build Tools"
+msgstr "Herramientas de build"
+
+#: modules/lendings/tenderMenuCover.php:933
+msgid "Testing"
+msgstr "Pruebas"
+
+#: modules/lendings/tenderMenuCover.php:937
+msgid "Version Control"
+msgstr "Control de versiones"
+
+#: modules/lendings/tenderMenuCover.php:942
+msgid "Key Dependencies:"
+msgstr "Dependencias clave:"
+
+#: modules/lendings/tenderMenuCover.php:944
+msgid "Carbon Fields - Advanced WordPress custom fields framework"
+msgstr "Carbon Fields - Framework avanzado de campos personalizados para WordPress"
+
+#: modules/lendings/tenderMenuCover.php:945
+msgid "WordPress REST API - RESTful data access"
+msgstr "WordPress REST API - Acceso a datos REST"
+
+#: modules/lendings/tenderMenuCover.php:946
+msgid "Gutenberg Blocks Editor - Block development framework"
+msgstr "Editor de bloques Gutenberg - Framework de desarrollo de bloques"
+
+#: modules/lendings/tenderMenuCover.php:947
+msgid "Tailwind CSS - Utility-first CSS framework"
+msgstr "Tailwind CSS - Framework CSS de utilidades"
+
+#: modules/lendings/tenderMenuCover.php:953
+msgid "Installation & Activation"
+msgstr "Instalación y activación"
+
+#: modules/lendings/tenderMenuCover.php:955
+msgid "Automatic Setup"
+msgstr "Configuración automática"
+
+#: modules/lendings/tenderMenuCover.php:956
+msgid "When the plugin is activated, the following happens automatically:"
+msgstr "Cuando se activa el plugin, ocurre lo siguiente automáticamente:"
+
+#: modules/lendings/tenderMenuCover.php:958
+msgid "Creates necessary database tables"
+msgstr "Crea las tablas necesarias en la base de datos"
+
+#: modules/lendings/tenderMenuCover.php:959
+msgid "Registers custom post types"
+msgstr "Registra los tipos de contenido personalizados"
+
+#: modules/lendings/tenderMenuCover.php:960
+msgid "Creates default pages for profile, search, and users list"
+msgstr "Crea páginas predeterminadas para el perfil, la búsqueda y el listado de usuarios"
+
+#: modules/lendings/tenderMenuCover.php:961
+msgid "Sets up rewrite rules for clean permalinks"
+msgstr "Configura las reglas de reescritura para enlaces permanentes limpios"
+
+#: modules/lendings/tenderMenuCover.php:962
+msgid "Registers custom roles and capabilities"
+msgstr "Registra roles y capacidades personalizados"
+
+#: modules/lendings/tenderMenuCover.php:963
+msgid "Loads plugin modules and features"
+msgstr "Carga los módulos y funcionalidades del plugin"
+
+#: modules/lendings/tenderMenuCover.php:966
+msgid "Plugin Hooks"
+msgstr "Hooks del plugin"
+
+#: modules/lendings/tenderMenuCover.php:967
+msgid "Activation Hooks:"
+msgstr "Hooks de activación:"
+
+#: modules/lendings/tenderMenuCover.php:969
+msgid "Creates custom database tables"
+msgstr "Crea tablas personalizadas en la base de datos"
+
+#: modules/lendings/tenderMenuCover.php:970
+msgid "Creates frontend pages"
+msgstr "Crea páginas del front-end"
+
+#: modules/lendings/tenderMenuCover.php:976
+msgid "Configuration & Settings"
+msgstr "Configuración y ajustes"
+
+#: modules/lendings/tenderMenuCover.php:978
+msgid "The plugin stores configuration in WordPress options:"
+msgstr "El plugin guarda la configuración en las opciones de WordPress:"
+
+#: modules/lendings/tenderMenuCover.php:983
+msgid "Option Key"
+msgstr "Clave de la opción"
+
+#: modules/lendings/tenderMenuCover.php:990
+msgid "Page ID for user profile page"
+msgstr "ID de la página del perfil de usuario"
+
+#: modules/lendings/tenderMenuCover.php:994
+msgid "Page ID for book search page"
+msgstr "ID de la página de búsqueda de libros"
+
+#: modules/lendings/tenderMenuCover.php:998
+msgid "Page ID for users list page"
+msgstr "ID de la página del listado de usuarios"
+
+#: modules/lendings/tenderMenuCover.php:1002
+msgid "Page ID for edit profile page"
+msgstr "ID de la página de edición de perfil"
+
+#: modules/lendings/tenderMenuCover.php:1010
+msgid "Security & Best Practices"
+msgstr "Seguridad y buenas prácticas"
+
+#: modules/lendings/tenderMenuCover.php:1013
+msgid "WordPress nonce verification for form submissions"
+msgstr "Verificación de nonce de WordPress en los envíos de formularios"
+
+#: modules/lendings/tenderMenuCover.php:1014
+msgid "Role-based access control throughout the plugin"
+msgstr "Control de acceso basado en roles en todo el plugin"
+
+#: modules/lendings/tenderMenuCover.php:1015
+msgid "Sanitization and escaping of user input"
+msgstr "Saneamiento y escape de la entrada de usuario"
+
+#: modules/lendings/tenderMenuCover.php:1016
+msgid "Proper capability checks for admin operations"
+msgstr "Comprobaciones adecuadas de capacidades para operaciones de administración"
+
+#: modules/lendings/tenderMenuCover.php:1017
+msgid "REST API authentication and permission checks"
+msgstr "Autenticación y comprobaciones de permisos de la REST API"
+
+#: modules/lendings/tenderMenuCover.php:1018
+msgid "Database prepared statements via WordPress functions"
+msgstr "Sentencias preparadas de base de datos mediante funciones de WordPress"
+
+#: modules/lendings/tenderMenuCover.php:1019
+msgid "ABSPATH check to prevent direct file access"
+msgstr "Comprobación de ABSPATH para evitar el acceso directo a archivos"
+
+#: modules/lendings/tenderMenuCover.php:1025
+msgid "Potential Future Enhancements"
+msgstr "Posibles mejoras futuras"
+
+#: modules/lendings/tenderMenuCover.php:1028
+msgid "Mobile app integration"
+msgstr "Integración con app móvil"
+
+#: modules/lendings/tenderMenuCover.php:1029
+msgid "Barcode scanning for books and users"
+msgstr "Escaneo de códigos de barras para libros y usuarios"
+
+#: modules/lendings/tenderMenuCover.php:1030
+msgid "Advanced reporting and analytics"
+msgstr "Informes y analítica avanzados"
+
+#: modules/lendings/tenderMenuCover.php:1031
+msgid "Integration with library management systems"
+msgstr "Integración con sistemas de gestión bibliotecaria"
+
+#: modules/lendings/tenderMenuCover.php:1032
+msgid "Social features (ratings, reviews, recommendations)"
+msgstr "Funciones sociales (valoraciones, reseñas, recomendaciones)"
+
+#: modules/lendings/tenderMenuCover.php:1033
+msgid "Advanced statistics and usage tracking"
+msgstr "Estadísticas avanzadas y seguimiento de uso"
+
+#: modules/lendings/tenderMenuCover.php:1034
+msgid "Wishlist and favorites functionality"
+msgstr "Funcionalidad de lista de deseos y favoritos"
+
+#: modules/lendings/tenderMenuCover.php:1035
+msgid "Integration with external book databases (Google Books, Open Library)"
+msgstr "Integración con bases de datos externas de libros (Google Books, Open Library)"
+
+#: modules/lendings/tenderMenuCover.php:1036
+msgid "Multi-language support expansion"
+msgstr "Ampliación del soporte multilingüe"
+
+#: modules/lendings/tenderMenuCover.php:1037
+msgid "Advanced search filters and faceted navigation"
+msgstr "Filtros de búsqueda avanzados y navegación facetada"
+
+#: modules/lendings/tenderMenuCover.php:1044
+msgid "A comprehensive library management system for WordPress"
+msgstr "Un sistema integral de gestión de bibliotecas para WordPress"
+
+#: modules/lendings/tenderMenuCover.php:1046
+msgid "Version 0.1.0 • "
+msgstr "Versión 0.1.0 • "
+
+#: modules/lendings/tenderMenuCover.php:1050
+msgid "For more information or support, please contact the development team."
+msgstr "Para más información o soporte, contacta con el equipo de desarrollo."
+
+#: build/profile-links/index.js:1
+#: src/profile-links/edit.js:25
+msgid "Login / Profile (dynamic)"
+msgstr "Acceso / Perfil (dinámico)"
+
+#. translators: %s: weekday (e.g., martes)
+#: block-includes/event-date-functions.php:33
+#, php-format
+msgid "Recurring event, every %s"
+msgstr "Evento recurrente, cada %s"
+
+#. translators: %s: end date
+#: block-includes/event-date-functions.php:73
+#, php-format
+msgid "until %s"
+msgstr "hasta el %s"
+
+#: block-includes/event-date-functions.php:101
+#, php-format
+msgid "Since %1$s %2$s"
+msgstr "Desde el %1$s %2$s"
+
+#: modules/lendings/tenderMenuCover.php:602
+msgid "Genre - Book genre"
+msgstr "Género"
+
+#: modules/tender-event/tenderEventTemplate.php:42
+msgid "Single event"
+msgstr "Evento individual"
+
+#: modules/tender-event/tenderEventTemplate.php:43
+msgid "Single event custom template (CPT)."
+msgstr ""
+
+#: build/event-date/block.json
+#: src/event-date/block.json
+msgctxt "block title"
+msgid "Event date"
+msgstr "Fecha del evento"
