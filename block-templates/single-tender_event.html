@@ -1,27 +1,29 @@
-<!-- wp:template-part {"slug":"header","tagName":"header"} /-->
+<!-- wp:template-part {"slug":"header","theme":"twentytwentyfive","tagName":"header"} /-->
 
 <!-- wp:group {"tagName":"main","layout":{"type":"constrained"}} -->
 <main class="wp-block-group"><!-- wp:heading {"level":6,"align":"wide"} -->
-<h6 class="wp-block-heading alignwide">LIBRO</h6>
+<h6 class="wp-block-heading alignwide">EVENTO</h6>
 <!-- /wp:heading -->
 
 <!-- wp:post-title {"level":1,"align":"wide","fontSize":"x-large"} /-->
 
 <!-- wp:columns {"align":"wide"} -->
 <div class="wp-block-columns alignwide"><!-- wp:column {"width":"30%"} -->
-<div class="wp-block-column" style="flex-basis:30%"><!-- wp:tender-a-library/book-cover /--></div>
+<div class="wp-block-column" style="flex-basis:30%"><!-- wp:post-featured-image /--></div>
 <!-- /wp:column -->
 
 <!-- wp:column {"width":"30%"} -->
-<div class="wp-block-column" style="flex-basis:30%"><!-- wp:tender-a-library/book-data /--></div>
+<div class="wp-block-column" style="flex-basis:30%"><!-- wp:heading {"level":4} -->
+<h4 class="wp-block-heading">Fecha y hora</h4>
+<!-- /wp:heading -->
+
+<!-- wp:tender-a-library/event-date /--></div>
 <!-- /wp:column -->
 
 <!-- wp:column {"width":"40%"} -->
-<div class="wp-block-column" style="flex-basis:40%"><!-- wp:tender-a-library/book-summary /--></div>
+<div class="wp-block-column" style="flex-basis:40%"><!-- wp:post-content /--></div>
 <!-- /wp:column --></div>
-<!-- /wp:columns -->
-
-</main>
+<!-- /wp:columns --></main>
 <!-- /wp:group -->
 
-<!-- wp:template-part {"slug":"footer","tagName":"footer"} /-->
+<!-- wp:template-part {"slug":"footer","theme":"twentytwentyfive","tagName":"footer"} /-->

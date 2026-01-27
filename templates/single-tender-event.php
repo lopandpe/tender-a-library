@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Template para mostrar un libro individual (tender_book)
+ * Template para mostrar un evento individual (tender_event)
  */
 
 if (!defined('ABSPATH')) {
@@ -10,19 +10,20 @@ if (!defined('ABSPATH')) {
 
 get_header();
 
-echo '<main class="wp-block-group wrapper alignwide single-book-content" style="padding: 100px 20px;">';
+echo '<main class="wp-block-group wrapper alignwide single-event-content" style="padding: 100px 20px;">';
 	echo '<div class="container">';
-		echo '<h6 class="wp-block-heading alignwide">' . esc_html__('Book', 'tender-a-library') . '</h6>';
+		echo '<h6 class="wp-block-heading alignwide">' . esc_html__('Event', 'tender-a-library') . '</h6>';
 		echo '<h1 class="wp-block-post-title alignwide has-x-large-font-size">' . get_the_title() . '</h1>';
 		echo '<div class="wp-block-columns alignwide">';
 			echo '<div class="wp-block-column" style="flex-basis:30%; padding: 0 20px;">';
-				echo do_blocks('<!-- wp:tender-a-library/book-cover /-->');
+				echo do_blocks('<!-- wp:post-featured-image /-->');
 			echo '</div>';
 			echo '<div class="wp-block-column" style="flex-basis:30%; padding: 0 20px;">';
-				echo do_blocks('<!-- wp:tender-a-library/book-data /-->');
+				echo do_blocks('<!-- wp:heading {"level":4} --><h4 class="wp-block-heading">Fecha y hora</h4><!-- /wp:heading -->');
+				echo do_blocks('<!-- wp:tender-a-library/event-date /-->');
 			echo '</div>';
 			echo '<div class="wp-block-column" style="flex-basis:40%; padding: 0 20px;">';
-				echo do_blocks('<!-- wp:tender-a-library/book-summary /-->');
+				echo do_blocks('<!-- wp:post-content /-->');
 			echo '</div>';
 		echo '</div>';
 	echo '</div>';
