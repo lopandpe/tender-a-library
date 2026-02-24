@@ -39,7 +39,7 @@ export default function Edit( props ) {
 					<p>{ __( 'Preview: a monthly calendar of events will be displayed.', 'tender-a-library' ) }</p>
 				) : (
 					<p>
-						{ printf(__( 'Preview: a list of the next %s events will be displayed.', 'tender-a-library' ), limit) }
+						{ __( 'Preview: a list of the next', 'tender-a-library' ) } { limit } { __( 'events will be displayed.', 'tender-a-library' ) }
 					</p>
 				) }
 			</div>

@@ -60,7 +60,6 @@ msgstr "Ver libro"
 
 #: modules/customPostBook.php:42
 #: templates/single-tender-book.php:15
-#: templates/single-tender-event.php:15
 msgid "Book"
 msgstr "Libro"
 
@@ -1093,6 +1092,7 @@ msgstr "Reserva cancelada correctamente"
 
 #: modules/tender-event/customPostEvent.php:28
 #: modules/tender-event/tenderEventFields.php:22
+#: templates/single-tender-event.php:15
 msgid "Event"
 msgstr "Evento"
 
@@ -1234,12 +1234,6 @@ msgstr "Eventos a mostrar"
 #: src/upcoming-events/edit.js:39
 msgid "Preview: a monthly calendar of events will be displayed."
 msgstr "Previsualización: se mostrará un calendario mensual de eventos."
-
-#: build/upcoming-events/index.js:1
-#: src/upcoming-events/edit.js:42
-#, js-format
-msgid "Preview: a list of the next %s events will be displayed."
-msgstr "Previsualización: se mostrará un listado de los próximos %s eventos."
 
 #: block-includes/profile-links-functions.php:25
 msgid "Login"
@@ -2230,3 +2224,13 @@ msgstr ""
 msgctxt "block title"
 msgid "Event date"
 msgstr "Fecha del evento"
+
+#: build/upcoming-events/index.js:1
+#: src/upcoming-events/edit.js:42
+msgid "Preview: a list of the next"
+msgstr "Previsualización: una lista de los próximos"
+
+#: build/upcoming-events/index.js:1
+#: src/upcoming-events/edit.js:42
+msgid "events will be displayed."
+msgstr "eventos se mostrarán aquí."

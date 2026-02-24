@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-01-27T19:26:17+00:00\n"
+"POT-Creation-Date: 2026-02-10T19:26:12+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: tender-a-library\n"
@@ -337,7 +337,6 @@ msgstr ""
 
 #: modules/customPostBook.php:42
 #: templates/single-tender-book.php:15
-#: templates/single-tender-event.php:15
 msgid "Book"
 msgstr ""
 
@@ -1942,6 +1941,7 @@ msgstr ""
 
 #: modules/tender-event/customPostEvent.php:28
 #: modules/tender-event/tenderEventFields.php:22
+#: templates/single-tender-event.php:15
 msgid "Event"
 msgstr ""
 
@@ -2171,8 +2171,12 @@ msgstr ""
 
 #: build/upcoming-events/index.js:1
 #: src/upcoming-events/edit.js:42
-#, js-format
-msgid "Preview: a list of the next %s events will be displayed."
+msgid "Preview: a list of the next"
+msgstr ""
+
+#: build/upcoming-events/index.js:1
+#: src/upcoming-events/edit.js:42
+msgid "events will be displayed."
 msgstr ""
 
 #: build/book-cover/block.json

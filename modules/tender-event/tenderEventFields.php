@@ -8,16 +8,16 @@ if (!defined('ABSPATH')) {
 use Carbon_Fields\Field;
 use Carbon_Fields\Container;
 
-add_action( 'admin_enqueue_scripts', 'crb_flatpickr_locale_es' );
-function crb_flatpickr_locale_es() {
-    wp_enqueue_script(
-        'flatpickr-locale-es',
-        'https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/es.js',
-        array( 'carbon-fields-core' ), // en CF 3+ el handle es este
-        null,
-        true
-    );
-}
+// add_action( 'admin_enqueue_scripts', 'crb_flatpickr_locale_es' );
+// function crb_flatpickr_locale_es() {
+//     wp_enqueue_script(
+//         'flatpickr-locale-es',
+//         'https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/es.js',
+//         array( 'carbon-fields-core' ), // en CF 3+ el handle es este
+//         null,
+//         true
+//     );
+// }
 
 Container::make('post_meta', __('Event', 'tender-a-library'))
 	->where('post_type', '=', 'tender_event')
