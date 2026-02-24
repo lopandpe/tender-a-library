@@ -81,10 +81,9 @@ Container::make('post_meta', 'Categoría')
 		)
 	);
 
-// Solo registrar campos cuando el post está publicado
+// Signatura fields are always available and required.
 Container::make('post_meta', 'Signatura')
 	->where('post_type', '=', 'tender_book')
-	->where('post_status', '=', 'publish')
 	->add_fields(array(
 
 		Field::make('text', 'tender_book_sig1', __('Author', 'tender-a-library'))

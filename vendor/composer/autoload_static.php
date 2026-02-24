@@ -11,12 +11,20 @@ class ComposerStaticInit3fa05e84a9d9e76547eca142cddcfa2b
         array (
             'Pedro\\TenderALibrary\\' => 21,
         ),
+        'C' => 
+        array (
+            'Carbon_Fields\\' => 14,
+        ),
     );
 
     public static $prefixDirsPsr4 = array (
         'Pedro\\TenderALibrary\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
+        ),
+        'Carbon_Fields\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/htmlburger/carbon-fields/core',
         ),
     );
 

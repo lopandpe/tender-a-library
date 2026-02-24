@@ -1,5 +1,8 @@
 {
   "name": "pedro/tender-a-library",
+  "require": {
+    "htmlburger/carbon-fields": "^3.6"
+  },
   "autoload": {
     "psr-4": {
       "Pedro\\TenderALibrary\\": "src/"

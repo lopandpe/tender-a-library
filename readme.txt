@@ -1,115 +1,116 @@
-=== Plugin Biblioteca (A) ===
-Contributors: (this should be a list of wordpress.org userid's)
-Donate link: https://example.com/
-Tags: comments, spam
-Requires at least: 4.5
+=== Tender A Library ===
+Contributors: pedrolopez
+Tags: library, books, lending, reservations, carbon-fields, custom-post-type, gutenberg
+Requires at least: 6.0
 Tested up to: 6.7.1
 Requires PHP: 5.6
 Stable tag: 0.1.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Here is a short description of the plugin.  This should be no more than 150 characters.  No markup here.
+Library management plugin for Local Anarquista Magdalena: custom post types, Carbon Fields metadata, reservations, lendings, profile pages, and custom Gutenberg blocks.
 
 == Description ==
 
-This is the long description.  No limit, and you can use Markdown (as well as in the following sections).
+Tender A Library extends WordPress with:
 
-For backwards compatibility, if this section is missing, the full length of the short description will be used, and
-Markdown parsed.
+* Custom post types for books and events
+* Custom taxonomies (sections, languages, etc.)
+* Carbon Fields powered metadata
+* Library operations: lendings, reservations, profile and dashboard pages
+* REST endpoints for frontend search and filters
+* Custom Gutenberg blocks for book/event display
+* Email notifications related to reservations and overdue returns
 
-A few notes about the sections above:
-
-*   "Contributors" is a comma separated list of wp.org/wp-plugins.org usernames
-*   "Tags" is a comma separated list of tags that apply to the plugin
-*   "Requires at least" is the lowest version that the plugin will work on
-*   "Tested up to" is the highest version that you've *successfully used to test the plugin*. Note that it might work on
-higher versions... this is just the highest one you've verified.
-*   Stable tag should indicate the Subversion "tag" of the latest stable version, or "trunk," if you use `/trunk/` for
-stable.
-
-    Note that the `readme.txt` of the stable tag is the one that is considered the defining one for the plugin, so
-if the `/trunk/readme.txt` file says that the stable tag is `4.3`, then it is `/tags/4.3/readme.txt` that'll be used
-for displaying information about the plugin.  In this situation, the only thing considered from the trunk `readme.txt`
-is the stable tag pointer.  Thus, if you develop in trunk, you can update the trunk `readme.txt` to reflect changes in
-your in-development version, without having that information incorrectly disclosed about the current stable version
-that lacks those changes -- as long as the trunk's `readme.txt` points to the correct stable tag.
-
-    If no stable tag is provided, it is assumed that trunk is stable, but you should specify "trunk" if that's where
-you put the stable version, in order to eliminate any doubt.
+Carbon Fields is included as a Composer dependency in `vendor/`, so users do not need to install a second Carbon Fields plugin.
 
 == Installation ==
 
-This section describes how to install the plugin and get it working.
+= Option 1: Install from ZIP (recommended for site admins) =
 
-e.g.
+1. Get the release ZIP (see "How to Share the Plugin").
+2. In WordPress admin go to `Plugins > Add New > Upload Plugin`.
+3. Upload the ZIP and activate **Plugin Biblioteca (A)**.
+4. Go to `Settings > Permalinks` and click `Save` once (flush rewrite rules).
 
-1. Upload `plugin-name.php` to the `/wp-content/plugins/` directory
-1. Activate the plugin through the 'Plugins' menu in WordPress
-1. Place `<?php do_action('plugin_name_hook'); ?>` in your templates
+= Option 2: Install from source (recommended for developers) =
+
+1. Copy/clone this plugin to:
+`wp-content/plugins/tender-a-library`
+2. Install PHP dependencies:
+`composer install`
+3. Activate the plugin in WordPress admin.
+4. If frontend assets were changed, also run:
+`npm install`
+`npm run build`
+
+Notes:
+* Production/shared builds must include the `vendor/` directory.
+* `node_modules/` is not required in production.
+
+== How to Share the Plugin ==
+
+Use this flow when delivering to another site/server.
+
+1. Ensure dependencies are installed for distribution:
+`composer install --no-dev --optimize-autoloader`
+2. Ensure built assets are up to date (only if source assets changed):
+`npm ci`
+`npm run build`
+3. Build a clean ZIP (from plugin root):
+
+`mkdir -p /tmp/tender-a-library-release/tender-a-library`
+
+`rsync -a ./ /tmp/tender-a-library-release/tender-a-library/ \
+  --exclude-from=.distignore \
+  --exclude '.git/'`
+
+`cd /tmp/tender-a-library-release && zip -r tender-a-library-0.1.0.zip tender-a-library`
+
+4. Share `tender-a-library-0.1.0.zip` and install via WordPress Upload Plugin.
+
+== Project Management Notes ==
+
+Directory overview:
+
+* `tender-a-library.php`: plugin bootstrap and module loading
+* `modules/`: domain logic (books, lendings, reservations, profile, emails, search)
+* `modules/tender-book/`: book fields, templates, signature autofill module
+* `assets/`, `src/`, `build/`, `dist/`: frontend sources and compiled assets
+* `vendor/`: Composer dependencies (includes Carbon Fields)
+* `.distignore`: excluded files/folders for release packaging
+
+Recommended branch/release workflow:
+
+1. Feature branch per change.
+2. Validate locally:
+`php -l` on changed PHP files, plus manual wp-admin flow tests.
+3. Update version in plugin header and this readme for release.
+4. Build release ZIP with steps above.
+5. Tag release in Git (example: `v0.1.0`).
 
 == Frequently Asked Questions ==
 
-= A question that someone might have =
+= Do users need to install Carbon Fields separately? =
 
-An answer to that question.
+No. Carbon Fields is bundled through Composer in `vendor/`.
 
-= What about foo bar? =
+= Why does this repo not ship `node_modules/`? =
 
-Answer to foo bar dilemma.
+Because only compiled assets are needed in production. `node_modules/` is development-only.
 
-== Screenshots ==
+= What if plugin activation works but fields are missing? =
 
-1. This screen shot description corresponds to screenshot-1.(png|jpg|jpeg|gif). Note that the screenshot is taken from
-the /assets directory or the directory that contains the stable readme.txt (tags or trunk). Screenshots in the /assets
-directory take precedence. For example, `/assets/screenshot-1.png` would win over `/tags/4.3/screenshot-1.png`
-(or jpg, jpeg, gif).
-2. This is the second screen shot
+Check that `vendor/` exists in the deployed plugin. Without it, Carbon Fields cannot boot.
 
 == Changelog ==
 
-= 1.0 =
-* A change since the previous version.
-* Another change.
-
-= 0.5 =
-* List versions from most recent at top to oldest at bottom.
+= 0.1.0 =
+* Initial public project structure and module set.
+* Carbon Fields loading migrated to Composer-bundled dependency.
+* Signature fields workflow improved with admin autofill behavior.
 
 == Upgrade Notice ==
 
-= 1.0 =
-Upgrade notices describe the reason a user should upgrade.  No more than 300 characters.
-
-= 0.5 =
-This version fixes a security related bug.  Upgrade immediately.
-
-== Arbitrary section ==
-
-You may provide arbitrary sections, in the same format as the ones above.  This may be of use for extremely complicated
-plugins where more information needs to be conveyed that doesn't fit into the categories of "description" or
-"installation."  Arbitrary sections will be shown below the built-in sections outlined above.
-
-== A brief Markdown Example ==
-
-Ordered list:
-
-1. Some feature
-1. Another feature
-1. Something else about the plugin
-
-Unordered list:
-
-* something
-* something else
-* third thing
-
-Here's a link to [WordPress](https://wordpress.org/ "Your favorite software") and one to [Markdown's Syntax Documentation][markdown syntax].
-Titles are optional, naturally.
-
-[markdown syntax]: https://daringfireball.net/projects/markdown/syntax
-            "Markdown is what the parser uses to process much of the readme file"
-
-Markdown uses email style notation for blockquotes and I've been told:
-> Asterisks for *emphasis*. Double it up  for **strong**.
-
-`<?php code(); // goes in backticks ?>`
+= 0.1.0 =
+Initial stable baseline for deployment and collaborative maintenance.
