@@ -6,6 +6,26 @@ if (!defined('ABSPATH')) {
 
 global $wpdb;
 
+function tal_user_can_manage_lendings()
+{
+	return current_user_can('create_lendings') || current_user_can('manage_options');
+}
+
+function tal_require_lending_ajax_access($nonce_action = '', $nonce_field = 'nonce')
+{
+	if (!is_user_logged_in()) {
+		wp_send_json_error(['message' => __('Not authorized.', 'tender-a-library')], 401);
+	}
+
+	if (!tal_user_can_manage_lendings()) {
+		wp_send_json_error(['message' => __('Insufficient permissions.', 'tender-a-library')], 403);
+	}
+
+	if ($nonce_action) {
+		check_ajax_referer($nonce_action, $nonce_field);
+	}
+}
+
 function tender_create_lending($book_id, $user_id, $stimated_return_date, $old_laravel_id = null)
 {
 	global $wpdb;
@@ -86,7 +106,6 @@ function tender_mark_as_returned($lending_id)
 	));
 
 	if(tal_has_active_reservation($book_id)){
-		error_log('Marking reservation as available for book ID: ' . $book_id);
 		$res_update = tal_mark_reservation_as_available($book_id);
 		if($res_update === false){
 			return new WP_Error('reservation_error', __('Error updating reservation status', 'tender-a-library'));
@@ -253,7 +272,7 @@ add_action('wp_ajax_tender_create_lending_ajax', 'tender_create_lending_ajax'); 
 
 function tender_search_books()
 {
-	global $wpdb;
+	tal_require_lending_ajax_access('tal_search_books', 'nonce');
 
 	if (!isset($_POST['query'])) {
 		wp_send_json_error(['message' => 'Falta el parámetro de búsqueda']);
@@ -277,7 +296,11 @@ function tender_search_books()
 		$author = carbon_get_post_meta($book->ID, 'tender_book_author');
 		$year = carbon_get_post_meta($book->ID, 'tender_book_year');
 		$year = $year ? "[$year]" : '';
-		$options .= "<option value='{$book->ID}'>{$book->post_title} ({$author} {$year})</option>";
+		$options .= sprintf(
+			'<option value="%d">%s</option>',
+			(int) $book->ID,
+			esc_html($book->post_title . ' (' . $author . ' ' . $year . ')')
+		);
 	}
 
 	echo $options;
@@ -287,7 +310,7 @@ function tender_search_books()
 
 function tender_search_users()
 {
-	global $wpdb;
+	tal_require_lending_ajax_access('tal_search_users', 'nonce');
 
 	if (!isset($_POST['query'])) {
 		wp_send_json_error(['message' => 'Falta el parámetro de búsqueda']);
@@ -337,6 +360,8 @@ function tender_search_users()
 }
 function tender_create_lending_ajax()
 {
+	tal_require_lending_ajax_access('tal_create_lending', 'nonce');
+
 	// Verificar que los datos necesarios están presentes
 	if (!isset($_POST['book_id'], $_POST['user_id'])) {
 		wp_send_json_error(['message' => 'Faltan datos obligatorios']);
@@ -371,6 +396,10 @@ function tender_create_lending_ajax()
 	// No pasamos 'old_laravel_id' ya que en AJAX no es necesario
 	$lending_id = tender_create_lending($book_id, $user_id, $stimated_return_date);
 
+	if (is_wp_error($lending_id)) {
+		wp_send_json_error(['message' => $lending_id->get_error_message()]);
+	}
+
 	if ($lending_id) {
 		wp_send_json_success([
 			'message' => 'Préstamo registrado correctamente. La fecha de devolución es el ' . date('d-m-Y', strtotime($lending_date . ' +21 days')),
@@ -386,10 +415,25 @@ function tender_handle_lending_action()
 {
 	global $wpdb;
 
-	// Validar nonce (si lo usas) y permisos aquí (muy recomendable)
+	if (!is_user_logged_in()) {
+		wp_send_json_error(['message' => __('Not authorized.', 'tender-a-library')], 401);
+	}
+
+	check_ajax_referer('tal_lending_action', 'nonce');
 
 	$lending_id = isset($_POST['lending_id']) ? intval($_POST['lending_id']) : 0;
 	$action_type = isset($_POST['action_type']) ? sanitize_text_field($_POST['action_type']) : '';
+
+	$current_user_id = get_current_user_id();
+	$lending_owner_id = $lending_id > 0
+		? (int) $wpdb->get_var($wpdb->prepare("SELECT user_id FROM " . TENDER_TABLE_LENDINGS . " WHERE id = %d", $lending_id))
+		: 0;
+
+	$is_staff = tal_user_can_manage_lendings();
+	if (!$is_staff && $lending_owner_id !== $current_user_id) {
+		wp_send_json_error(['message' => __('Insufficient permissions.', 'tender-a-library')], 403);
+	}
+
 	$result = false;
 	$message = '';
 	if ($lending_id && in_array($action_type, ['return', 'renew'])) {
@@ -429,4 +473,3 @@ function tender_handle_lending_action()
 }
 
 add_action('wp_ajax_tender_handle_lending_action', 'tender_handle_lending_action');
-add_action("wp_ajax_nopriv_tender_handle_lending_action", "tender_handle_lending_action");

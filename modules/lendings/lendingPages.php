@@ -42,17 +42,21 @@ function tender_render_lending_page($args)
 		<?php endif; ?>
 	</div>
 
-	<script>
-		jQuery(document).ready(function($) {
-			// Función para cargar los préstamos mediante AJAX
-			function loadLendings(query = '', page = 1) {
-				$('#lendings-list').html('<div class="p-4 text-center">Cargando...</div>');
+		<script>
+			jQuery(document).ready(function($) {
+				const searchNonce = '<?php echo esc_js(wp_create_nonce('tal_search_lendings')); ?>';
+				const lendingActionNonce = '<?php echo esc_js(wp_create_nonce('tal_lending_action')); ?>';
 
-				$.post(ajaxurl, {
-					action: '<?php echo esc_js($ajax_action); ?>',
-					query: query,
-					page: page
-				}, function(response) {
+				// Función para cargar los préstamos mediante AJAX
+				function loadLendings(query = '', page = 1) {
+					$('#lendings-list').html('<div class="p-4 text-center">Cargando...</div>');
+
+					$.post(ajaxurl, {
+						action: '<?php echo esc_js($ajax_action); ?>',
+						query: query,
+						page: page,
+						nonce: searchNonce
+					}, function(response) {
 					$('#lendings-list').html(response);
 					window.scrollTo({
 						top: 0,
@@ -139,11 +143,12 @@ function tender_render_lending_page($args)
 					let lendingId = $(this).data('lending-id');
 					let action = $(this).data('action');
 					console.log(lendingId);
-					$.post(ajaxurl, {
-							action: 'tender_handle_lending_action',
-							lending_id: lendingId,
-							action_type: action
-						})
+						$.post(ajaxurl, {
+								action: 'tender_handle_lending_action',
+								lending_id: lendingId,
+								action_type: action,
+								nonce: lendingActionNonce
+							})
 						.done(function(response) {
 							// WordPress siempre devuelve success/data
 							if (response && response.data && response.data.message) {
@@ -235,6 +240,8 @@ add_action('wp_ajax_tender_search_old_lendings', 'tender_search_old_lendings');
 
 function tender_search_lendings_common($action, $returned)
 {
+	tal_require_lending_ajax_access('tal_search_lendings', 'nonce');
+
 	global $wpdb;
 
 	$query    = isset($_POST['query']) ? sanitize_text_field($_POST['query']) : '';

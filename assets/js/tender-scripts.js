@@ -47,6 +47,7 @@ jQuery(document).ready(function ($) {
       ajax_action: "tender_handle_lending_action", // hook PHP
       lending_id: lendingId,
       action_type: actionType,
+      nonce: tender.lending_action_nonce || "",
       reloadOnSuccess: true
     });
   });

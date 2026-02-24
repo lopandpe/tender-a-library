@@ -53,7 +53,7 @@ function tal_users_list_template($content)
                         <div class="tender-spinner"></div>
                     </div>
                 </div>
-                <ul id="users-list" class="tender-users-list">
+                <ul id="latest-users-list" class="tender-users-list">
                     <li><?php _e('Start typing to search for users', 'tender-a-library'); ?>
                 </ul>
             </fieldset>
@@ -87,6 +87,7 @@ function tal_users_list_template($content)
                     var usersList = $('#users-list');
                     var typingTimer;
                     var doneTypingInterval = 400;
+                    var searchUsersNonce = '<?php echo esc_js(wp_create_nonce('tal_search_users')); ?>';
 
                     // Búsqueda de usuarios
                     userSearch.on('input', function() {
@@ -101,7 +102,8 @@ function tal_users_list_template($content)
                         typingTimer = setTimeout(function() {
                             $.post('<?php echo admin_url('admin-ajax.php'); ?>', {
                                 action: 'tender_search_users',
-                                query: searchTerm
+                                query: searchTerm,
+                                nonce: searchUsersNonce
                             }, function(response) {
                                 $('#tender-search-loading').hide();
                                 if (response) {

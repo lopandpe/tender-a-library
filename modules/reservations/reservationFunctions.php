@@ -71,9 +71,10 @@ function tal_get_active_reservation_user($book_id){
 function tal_mark_reservation_as_available($book_id){
     global $wpdb;
     $res_table = $wpdb->prefix . 'tender_reservations';
-    error_log('Fetching active reservation for book ID: ' . $book_id);
     $reservation = tal_get_active_reservation_on_book($book_id);
-    error_log('Active reservation found: ' . print_r($reservation, true));
+    if (!$reservation) {
+        return false;
+    }
     $now = current_time('mysql');
     $ten_days = date('Y-m-d H:i:s', strtotime('+10 days', strtotime($now)));
     $upd = $wpdb->update(
@@ -87,7 +88,6 @@ function tal_mark_reservation_as_available($book_id){
         ['%s', '%s', '%s'],
         ['%d']
     );
-    error_log('Reservation update result: ' . $upd);
 
     tal_notify_availability_of_reservation($reservation, $book_id);
 
@@ -188,13 +188,30 @@ function tal_create_reservation($book_id, $user_id){
 
 function tender_create_reservation_ajax()
 {
+	if (!is_user_logged_in()) {
+		wp_send_json_error(['message' => __('Not authorized', 'tender-a-library')], 401);
+	}
+
+	check_ajax_referer('tal_create_reservation', 'nonce');
+
 	// Verificar que los datos necesarios están presentes
-	if (!isset($_POST['book_id'], $_POST['user_id'])) {
+	if (!isset($_POST['book_id'])) {
 		wp_send_json_error(['message' => 'Faltan datos obligatorios']);
 	}
 
 	$book_id = intval($_POST['book_id']);
-	$user_id = intval($_POST['user_id']);
+	$current_user_id = get_current_user_id();
+	$is_staff = current_user_can('create_lendings') || current_user_can('manage_options');
+	$user_id = isset($_POST['user_id']) ? intval($_POST['user_id']) : $current_user_id;
+
+	if (!$is_staff) {
+		$user_id = $current_user_id;
+	}
+
+	if ($user_id !== $current_user_id && !$is_staff) {
+		wp_send_json_error(['message' => __('Not authorized', 'tender-a-library')], 403);
+	}
+
     if (!get_post($book_id) || !get_user($user_id)) {
         wp_send_json_error(['message' => __('Invalid book or user', 'tender-a-library')]);
     }
@@ -207,7 +224,11 @@ function tender_create_reservation_ajax()
 	if (tal_has_active_reservation($book_id)) {
 		wp_send_json_error(['message' => __('This book has an active reservation by some other user.', 'tender-a-library')]);
 	}
-    $reservation_id = tal_create_reservation($book_id, $user_id);
+	    $reservation_id = tal_create_reservation($book_id, $user_id);
+
+	if (is_wp_error($reservation_id)) {
+		wp_send_json_error(['message' => $reservation_id->get_error_message()]);
+	}
 
 	if ($reservation_id) {
 		wp_send_json_success([
@@ -237,6 +258,7 @@ function tender_user_reservations_shortcode() {
     wp_enqueue_script( 'tender-reservations-js' );
     wp_localize_script( 'tender-reservations-js', 'TenderResAjax', array(
         'ajax_url' => admin_url( 'admin-ajax.php' ),
+        'create_nonce' => wp_create_nonce('tal_create_reservation'),
         'i18n'     => array(
             'confirm' => __( 'Do you really want to cancel this reservation?', 'tender-a-library' ),
             'error'   => __( 'Unexpected error. Please try again.', 'tender-a-library' ),

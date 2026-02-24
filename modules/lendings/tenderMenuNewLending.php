@@ -25,29 +25,35 @@ function tender_new_lending_page()
 			<button type="submit">Registrar Préstamo</button>
 		</form>
 		<div id="response-message"></div>
-		<a href="http://localhost:10008/wp-admin/user-new.php" target="_blank">Crear nuevo usuario</a>
+			<a href="<?php echo esc_url(admin_url('user-new.php')); ?>" target="_blank">Crear nuevo usuario</a>
 	</div>
 
-	<script>
-		jQuery(document).ready(function($) {
-			$('#return-date').val(new Date().toISOString().split('T')[0]);
+		<script>
+			jQuery(document).ready(function($) {
+				const searchBooksNonce = '<?php echo esc_js(wp_create_nonce('tal_search_books')); ?>';
+				const searchUsersNonce = '<?php echo esc_js(wp_create_nonce('tal_search_users')); ?>';
+				const createLendingNonce = '<?php echo esc_js(wp_create_nonce('tal_create_lending')); ?>';
 
-			function searchBooks(query) {
-				$.post(ajaxurl, {
-					action: 'tender_search_books',
-					query: query
-				}, function(response) {
-					$('#book-id').html(response);
-				});
+				$('#return-date').val(new Date().toISOString().split('T')[0]);
+
+				function searchBooks(query) {
+					$.post(ajaxurl, {
+						action: 'tender_search_books',
+						query: query,
+						nonce: searchBooksNonce
+					}, function(response) {
+						$('#book-id').html(response);
+					});
 			}
 
-			function searchUsers(query) {
-				$.post(ajaxurl, {
-					action: 'tender_search_users',
-					query: query
-				}, function(response) {
-					$('#user-id').html(response);
-				});
+				function searchUsers(query) {
+					$.post(ajaxurl, {
+						action: 'tender_search_users',
+						query: query,
+						nonce: searchUsersNonce
+					}, function(response) {
+						$('#user-id').html(response);
+					});
 			}
 
 			$('#search-book').on('keyup', function() {
@@ -60,12 +66,13 @@ function tender_new_lending_page()
 
 			$('#new-lending-form').submit(function(e) {
 				e.preventDefault();
-				$.post(ajaxurl, {
-					action: 'tender_create_lending_ajax',
-					book_id: $('#book-id').val(),
-					user_id: $('#user-id').val(),
-					return_date: $('#return-date').val()
-				}, function(response) {
+					$.post(ajaxurl, {
+						action: 'tender_create_lending_ajax',
+						book_id: $('#book-id').val(),
+						user_id: $('#user-id').val(),
+						return_date: $('#return-date').val(),
+						nonce: createLendingNonce
+					}, function(response) {
 					if (response.success) {
 						$('#response-message').html('<p style="color:green;">' + response.data.message + '</p>');
 						$('#new-lending-form')[0].reset();

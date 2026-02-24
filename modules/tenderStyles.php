@@ -66,7 +66,10 @@ function tender_load_scripts()
 	wp_localize_script(
 		'tender-script',
 		'tender',
-		array('ajax_url' => admin_url('admin-ajax.php'))
+		array(
+			'ajax_url' => admin_url('admin-ajax.php'),
+			'lending_action_nonce' => wp_create_nonce('tal_lending_action'),
+		)
 	);
 }
 

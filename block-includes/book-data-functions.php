@@ -217,6 +217,9 @@ function tender_book_data_render_callback($block_attributes, $block_content)
             var userSearch = $('#tender-user-search');
             var userIdSelect = $('#tender-user-id');
             var submit = $('#tender-lending-form button[type="submit"]');
+            var searchUsersNonce = '<?php echo esc_js(wp_create_nonce('tal_search_users')); ?>';
+            var createLendingNonce = '<?php echo esc_js(wp_create_nonce('tal_create_lending')); ?>';
+            var createReservationNonce = '<?php echo esc_js(wp_create_nonce('tal_create_reservation')); ?>';
             var typingTimer;
             var doneTypingInterval = 400;
 
@@ -270,7 +273,8 @@ function tender_book_data_render_callback($block_attributes, $block_content)
                     userIdSelect.html("");
                     $.post('<?php echo admin_url('admin-ajax.php'); ?>', {
                         action: 'tender_search_users',
-                        query: searchTerm
+                        query: searchTerm,
+                        nonce: searchUsersNonce
                     }, function(response) {
                         $('#tender-search-loading').hide();
                         if (response) {
@@ -310,7 +314,8 @@ function tender_book_data_render_callback($block_attributes, $block_content)
                 $.post('<?php echo admin_url('admin-ajax.php'); ?>', {
                     action: 'tender_create_lending_ajax',
                     book_id: $('#book-id').val(),
-                    user_id: userIdSelect.val()
+                    user_id: userIdSelect.val(),
+                    nonce: createLendingNonce
                 }, function(response) {
                     buttonText.show();
                     buttonSpinner.hide();
@@ -364,7 +369,8 @@ function tender_book_data_render_callback($block_attributes, $block_content)
                 $.post('<?php echo admin_url('admin-ajax.php'); ?>', {
                     action: 'tender_create_reservation_ajax',
                     book_id: $('#reservation-book-id').val(),
-                    user_id: $('#reservation-user-id').val()
+                    user_id: $('#reservation-user-id').val(),
+                    nonce: createReservationNonce
                 }, function(response) {
                     buttonText.show();
                     buttonSpinner.hide();
