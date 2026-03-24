@@ -16,8 +16,22 @@ require_once __DIR__ . '/modules/db/installDBFunctions.php';
 require_once __DIR__ . '/modules/createPagesOnActivation.php';
 require_once __DIR__ . '/modules/emails/notReturnedEmails.php';
 
-register_activation_hook(__FILE__, 'tender_create_database_tables');
+function tender_activate()
+{
+	require_once __DIR__ . '/modules/customPostBook.php';
+	tender_book(); // Register the custom post type and taxonomies
+	tender_create_database_tables();
+	flush_rewrite_rules(); // Flush rewrite rules
+}
+
+function tender_deactivate()
+{
+	flush_rewrite_rules(); // Flush rewrite rules
+}
+
 register_activation_hook(__FILE__, 'tal_create_plugin_pages_on_activation');
+register_activation_hook(__FILE__, 'tender_activate');
+register_deactivation_hook(__FILE__, 'tender_deactivate');
 
 /**
  * Boot Carbon Fields from an existing load or bundled Composer vendor.
@@ -94,12 +108,14 @@ function tender_bootstrap()
 			"modules/lendings/tenderMenuCover",
 			"modules/lendings/tenderMenuNewLending",
 			"modules/lendings/lendingPages",
+			"modules/migration/tenderMigration",
 			"modules/reservations/reservationFunctions",
 			"modules/profile/profilePage",
 			"modules/profile/editProfilePage",
 			"modules/profile/profileFunctions",
 			"modules/profile/usersListPage",
 			"modules/profile/profilePermissions",
+			"modules/profile/userCallLogs",
 			"modules/search/api-search",
 			"modules/search/api-filters",
 			"modules/search/searchPage",

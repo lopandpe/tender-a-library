@@ -112,7 +112,5 @@ function tal_attach_user_fields()
 			Field::make('text', 'phone_number', __('Phone number', 'tender-a-library'))
 				->set_attribute('placeholder', '+34 XXX XX XX XX')
 				->set_required(true)
-		));
+			));
 }
-add_action('after_setup_theme', 'crb_load');
-

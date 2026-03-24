@@ -358,7 +358,6 @@ function tender_book_data_render_callback($block_attributes, $block_content)
             $('#tender-reservation-form').submit(function(e) {
                 e.preventDefault();
                 //submit.prop('disabled', true);
-                console.log('here')
                 var submitButton = $(this).find('.tender-button-primary');
                 var buttonText = submitButton.find('.tender-button-text');
                 var buttonSpinner = submitButton.find('.tender-button-spinner');

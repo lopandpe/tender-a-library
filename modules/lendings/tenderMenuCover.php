@@ -266,6 +266,33 @@ function tender_library_dashboard()
 				margin: 20px 0;
 			}
 
+			.tender-process-grid {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+				gap: 16px;
+				margin: 20px 0;
+			}
+
+			.tender-process-step {
+				background: #f8f9fa;
+				padding: 18px;
+				border-radius: 8px;
+				border-left: 4px solid #667eea;
+			}
+
+			.tender-process-step strong {
+				display: block;
+				color: #667eea;
+				margin-bottom: 8px;
+				font-weight: 600;
+			}
+
+			.tender-process-step p {
+				color: #555;
+				line-height: 1.6;
+				margin: 0;
+			}
+
 			.tender-tech-item {
 				background: #f8f9fa;
 				padding: 15px;
@@ -482,6 +509,64 @@ function tender_library_dashboard()
 					<a href="<?php echo esc_url(admin_url('admin.php?page=tender-lendings')); ?>">📋 <?php _e('View Active Loans', 'tender-a-library'); ?></a>
 					<a href="<?php echo esc_url(admin_url('admin.php?page=tender-old-lendings')); ?>">✓ <?php _e('View Completed Loans', 'tender-a-library'); ?></a>
 					<a href="<?php echo esc_url(admin_url('edit.php?post_type=tender_book')); ?>">📖 <?php _e('Manage Books', 'tender-a-library'); ?></a>
+				</div>
+			</div>
+
+			<!-- WHAT'S INCLUDED -->
+			<div class="tender-section">
+				<h2>🧩 <?php _e('What The Plugin Includes', 'tender-a-library'); ?></h2>
+				<p><?php _e('Tender A Library is not a single screen. It combines catalog management, reader profiles, lending operations, search components, content blocks, and migration tools into one workflow for running a small community library inside WordPress.', 'tender-a-library'); ?></p>
+
+				<div class="tender-grid">
+					<div class="tender-card">
+						<h4><?php _e('Catalog', 'tender-a-library'); ?></h4>
+						<p><?php _e('Books as a custom post type, with structured metadata, cover images, signatures, sections, languages, and reusable content blocks.', 'tender-a-library'); ?></p>
+					</div>
+					<div class="tender-card">
+						<h4><?php _e('People', 'tender-a-library'); ?></h4>
+						<p><?php _e('Reader, opener, librarian, editor, and administrator flows with profile pages, profile editing, and permission-aware visibility.', 'tender-a-library'); ?></p>
+					</div>
+					<div class="tender-card">
+						<h4><?php _e('Lending Operations', 'tender-a-library'); ?></h4>
+						<p><?php _e('Active lendings, completed lendings, renewals, returns, reservations, call logs, and reminder emails for day-to-day circulation work.', 'tender-a-library'); ?></p>
+					</div>
+					<div class="tender-card">
+						<h4><?php _e('Import And Migration', 'tender-a-library'); ?></h4>
+						<p><?php _e('CSV tools for importing books, users, lendings, and calls, including automatic creation of sections, languages, and book cover media.', 'tender-a-library'); ?></p>
+					</div>
+				</div>
+			</div>
+
+			<!-- HOW IT WORKS -->
+			<div class="tender-section">
+				<h2>⚙️ <?php _e('How It Works', 'tender-a-library'); ?></h2>
+				<p><?php _e('The plugin is designed around a simple operating cycle: define your catalog structure, register books and readers, circulate books through lendings, and keep the public-facing library searchable and reusable in pages and templates.', 'tender-a-library'); ?></p>
+
+				<div class="tender-process-grid">
+					<div class="tender-process-step">
+						<strong><?php _e('1. Configure the library', 'tender-a-library'); ?></strong>
+						<p><?php _e('Set up pages, permalinks, roles, and taxonomy structure so the catalog and profile routes are ready to use.', 'tender-a-library'); ?></p>
+					</div>
+					<div class="tender-process-step">
+						<strong><?php _e('2. Load the catalog', 'tender-a-library'); ?></strong>
+						<p><?php _e('Create books manually or import them from CSV. During migration, the plugin can also create sections, languages, and download cover images.', 'tender-a-library'); ?></p>
+					</div>
+					<div class="tender-process-step">
+						<strong><?php _e('3. Manage readers', 'tender-a-library'); ?></strong>
+						<p><?php _e('Readers get profile pages, while openers and administrators can review user information, lending history, reservations, and follow-up calls.', 'tender-a-library'); ?></p>
+					</div>
+					<div class="tender-process-step">
+						<strong><?php _e('4. Run circulation', 'tender-a-library'); ?></strong>
+						<p><?php _e('Loans are created, renewed, returned, and archived through the lending tools, with availability and reservation state updating from those actions.', 'tender-a-library'); ?></p>
+					</div>
+					<div class="tender-process-step">
+						<strong><?php _e('5. Publish the library', 'tender-a-library'); ?></strong>
+						<p><?php _e('Use the included blocks, templates, and search interface to display books, events, and profile links across the frontend.', 'tender-a-library'); ?></p>
+					</div>
+					<div class="tender-process-step">
+						<strong><?php _e('6. Maintain and report', 'tender-a-library'); ?></strong>
+						<p><?php _e('Use exports, reminders, completed lending history, and call logs to keep operations tidy and visible over time.', 'tender-a-library'); ?></p>
+					</div>
 				</div>
 			</div>
 

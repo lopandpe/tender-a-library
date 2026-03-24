@@ -1,7 +1,7 @@
 @use '../variables' as *;
 
 .tender-book-preview {
-	font-size: 16px;
+	font-size: inherit;
 	width: 160px;
 	text-decoration: none;
 	color: #000;
@@ -19,7 +19,7 @@
 			object-position: center;
 		}
 		.dates {
-			font-size: 12px;
+			font-size: 0.75em;
 			background-color: #fff;
 			position: absolute;
 			bottom: 20px;
@@ -54,7 +54,7 @@
         align-items: center;
         justify-content: center;
         margin-top: 10px;
-        font-size: 10px;
+        font-size: 0.625em;
         position: absolute;
         padding: 2px 4px 2px 18px;
         background-color: #ffffff;

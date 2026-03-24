@@ -25,8 +25,8 @@ function save_tender_book_signature_on_creation($post_id)
 	if (!carbon_get_post_meta($post_id, 'tender_book_sig1')) {
 		// Example of building new meta values based on existing meta
 		$current_author_meta_key = 'tender_book_author';
-		$sig1_meta_key = '_tender_book_sig1';
-		$sig2_meta_key = '_tender_book_sig2';
+		$sig1_meta_key = 'tender_book_sig1';
+		$sig2_meta_key = 'tender_book_sig2';
 
 		// Fetch existing meta and title
 		$current_author_value = carbon_get_post_meta($post_id, $current_author_meta_key);
@@ -36,8 +36,13 @@ function save_tender_book_signature_on_creation($post_id)
 		$sig2_meta_value = $current_title ? generate_tender_sig2($current_title) : 'YYY';
 
 		// Save the new meta values
-		update_post_meta($post_id, $sig1_meta_key, $sig1_meta_value);
-		update_post_meta($post_id, $sig2_meta_key, $sig2_meta_value);
+		if (function_exists('carbon_set_post_meta')) {
+			carbon_set_post_meta($post_id, $sig1_meta_key, $sig1_meta_value);
+			carbon_set_post_meta($post_id, $sig2_meta_key, $sig2_meta_value);
+		} else {
+			update_post_meta($post_id, $sig1_meta_key, $sig1_meta_value);
+			update_post_meta($post_id, $sig2_meta_key, $sig2_meta_value);
+		}
 	}
 }
 

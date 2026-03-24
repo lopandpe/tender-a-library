@@ -1,7 +1,7 @@
 .wp-block-tender-a-library-book-data {
 	h2 {
 		margin-top: 0px;
-		font-size: 16px;
+		font-size: inherit;
 		text-transform: uppercase;
 	}
 	ul {
@@ -15,7 +15,7 @@
 	}
 	#lending-info { 
 		margin: 50px auto;
-		font-size: 16px;
+		font-size: inherit;
 		p {
 			// font-size: 0.8em;
 			text-transform: uppercase;
@@ -54,7 +54,7 @@
 	li {
 		padding: 10px 0;
 		border-bottom: 1px solid #eee;
-    font-size: 0.8em;
+		font-size: inherit;
 	}
 }
 
@@ -168,7 +168,7 @@
 	padding: 12px 14px;
 	border: 1px solid #dadce0;
 	border-radius: 8px;
-	font-size: 15px;
+	font-size: inherit;
 	transition: border-color 0.3s;
 
 	&:focus {
@@ -184,12 +184,12 @@
 	border: 1px solid #dadce0;
 	border-radius: 8px;
 	background: white;
-	font-size: 15px;
+	font-size: inherit;
 }
 
 .tender-form-hint {
 	margin: 8px 0 0;
-	font-size: 13px;
+	font-size: 0.875em;
 	color: #5f6368;
 }
 
@@ -250,7 +250,7 @@
 /* Alertas y mensajes */
 .tender-modal{
 	.tender-response-message{
-		font-size: 0.8em;
+		font-size: inherit;
 	}
 }
 .tender-alert {

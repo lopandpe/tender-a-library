@@ -21,6 +21,7 @@ Tender A Library extends WordPress with:
 * REST endpoints for frontend search and filters
 * Custom Gutenberg blocks for book/event display
 * Email notifications related to reservations and overdue returns
+* CSV migration tools for importing legacy library data (books, users, lendings, calls, sections, languages, media)
 
 Carbon Fields is included as a Composer dependency in `vendor/`, so users do not need to install a second Carbon Fields plugin.
 
@@ -75,6 +76,7 @@ Directory overview:
 
 * `tender-a-library.php`: plugin bootstrap and module loading
 * `modules/`: domain logic (books, lendings, reservations, profile, emails, search)
+* `modules/migration/`: CSV migration UI, import logic, and templates
 * `modules/tender-book/`: book fields, templates, signature autofill module
 * `assets/`, `src/`, `build/`, `dist/`: frontend sources and compiled assets
 * `vendor/`: Composer dependencies (includes Carbon Fields)
@@ -98,6 +100,69 @@ No. Carbon Fields is bundled through Composer in `vendor/`.
 = Why does this repo not ship `node_modules/`? =
 
 Because only compiled assets are needed in production. `node_modules/` is development-only.
+
+= How do I import legacy data from CSV? =
+
+Go to **Dashboard → Biblioteca → CSV Migration**.
+
+Features:
+* Dry-run mode (no data written) to preview counts and missing mappings.
+* Upload CSV files directly in the UI (each file can override the CSV directory for that run).
+* Downloadable CSV templates for each entity.
+* Media import supports full `url` downloads or local file paths.
+
+Recommended import order:
+1. Sections
+2. Languages
+3. Media
+4. Users
+5. Books
+6. Lendings
+7. Calls
+
+Legacy IDs:
+* The importer stores a legacy ID (`tender_old_id`) on users, books, attachments, and terms.
+* Lendings and calls store legacy IDs in their custom tables (`old_laravel_id`).
+* Keeping legacy IDs makes the import idempotent (safe to re-run) and preserves associations.
+
+CSV templates live in:
+* `modules/migration/templates/`
+
+Media CSV:
+* If `url` is provided, media is downloaded from the URL.
+* If `url` is empty, the importer uses `media base path + path + file_name`.
+
+= CSV schema summary =
+
+Below are the expected columns for each template. Columns marked “required” must be present.
+
+Sections (`sections-template.csv`)
+* required: `id`, `name`, `number`
+* optional: `parent_id` (parent legacy ID)
+
+Languages (`languages-template.csv`)
+* required: `id`, `language`
+
+Media (`media-template.csv`)
+* required: `id`, `url`, `title`
+* optional: `alt`, `mime_type`, `path`, `file_name`
+* Notes: If `url` is empty, then `path` + `file_name` are used with the media base path.
+
+Users (`users-template.csv`)
+* required: `id`, `name`, `email`, `role`
+* optional: `phone`
+
+Books (`books-template.csv`)
+* required: `id`, `title`, `author`, `publisher`, `quantity`, `section_id`, `lang_id`
+* optional: `subtitle`, `other_authors`, `year`, `edition`, `isbn`, `description`, `review`, `sig1`, `sig2`, `image`, `created_at`, `updated_at`
+
+Lendings (`lendings-template.csv`)
+* required: `id`, `book_id`, `user_id`, `lending_date`, `stimated_return_date`, `returned`
+* optional: `real_return_date`, `extensions`, `extension_date`
+
+Calls (`calls-template.csv`)
+* required: `id`, `user_id`, `subject`, `created_at`
+* optional: `comment`, `updated_at`
 
 = What if plugin activation works but fields are missing? =
 

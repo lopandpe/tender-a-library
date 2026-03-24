@@ -231,8 +231,6 @@ function tender_get_event_occurrences_in_range( $range_start_ts, $range_end_ts, 
 
             // Fecha/hora de inicio (date_time)
             $raw_start = carbon_get_post_meta( $post_id, 'tender_event_startdate' ); // ← CAMBIO
-            error_log("event_id: " . $post_id);
-            error_log("raw_start: " . $raw_start);
 
             if ( ! $raw_start ) {
                 continue;
@@ -246,13 +244,11 @@ function tender_get_event_occurrences_in_range( $range_start_ts, $range_end_ts, 
             
             // Recurrente semanal o no
             $is_recurrent = (bool) carbon_get_post_meta( $post_id, 'tender_event_recurrent' ); // checkbox yes/no
-            error_log("is_recurrent: " . $is_recurrent);
 
             // Fecha fin de evento recurrente (date, Y-m-d)
             $raw_end = carbon_get_post_meta( $post_id, 'tender_event_enddate' ); // ← CAMBIO
 
             if ( ! $is_recurrent ) {
-	            error_log("NO RECURRENTE: start: " . $start_ts . " range_start: " . $range_start_ts . " range_end: " . $range_end_ts);
                 // Evento “simple”: solo cuenta si cae dentro del rango
                 if ( $start_ts >= $range_start_ts && $start_ts <= $range_end_ts ) {
                     $occurrences[] = array(
@@ -307,4 +303,3 @@ function tender_get_event_occurrences_in_range( $range_start_ts, $range_end_ts, 
 
     return $occurrences;
 }
-

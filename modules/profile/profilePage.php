@@ -4,6 +4,22 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
+function tal_profile_tab_url($user, $tab = 'overview', $args = array())
+{
+	$base_url = get_user_profile_url_by_id($user->ID)['profile'];
+	$query_args = array();
+
+	if ($tab !== 'overview') {
+		$query_args['tal_profile_tab'] = $tab;
+	}
+
+	if (!empty($args)) {
+		$query_args = array_merge($query_args, $args);
+	}
+
+	return empty($query_args) ? $base_url : add_query_arg($query_args, $base_url);
+}
+
 // Mostrar el perfil en la página seleccionada
 function tal_profile_template($content)
 {
@@ -14,23 +30,68 @@ function tal_profile_template($content)
 		if (!is_user_logged_in()) {
 			ob_start(); ?>
 			<div class="login-form-container">
-				<h2>Iniciar Sesión</h2>
-				<p>Debes iniciar sesión para ver tu perfil.</p>
+				<h2><?php echo esc_html__('Login', 'tender-a-library'); ?></h2>
+				<p><?php echo esc_html__('You must be logged in to view your profile.', 'tender-a-library'); ?></p>
 				<?php
 				wp_login_form([
 					'redirect' => get_permalink($profile_page_id),
 					'remember' => true
 				]);
 				?>
-				<p><a href="<?php echo wp_lostpassword_url(); ?>">¿Olvidaste tu contraseña?</a></p>
+				<p><a href="<?php echo wp_lostpassword_url(); ?>"><?php echo esc_html__('Forgot your password?', 'tender-a-library'); ?></a></p>
 			</div>
 
 		<?php return ob_get_clean();
 		}
 
-		// Obtener el usuario desde la URL (query var 'tender_profile')
+		// Obtener el usuario desde la URL (query var 'tal_profile_user')
 		$username = get_query_var('tal_profile_user');
-		$current_user = $username ? $user = get_user_by('slug', $username) : wp_get_current_user();
+		$current_user = $username ? get_user_by('slug', $username) : wp_get_current_user();
+
+		if (!($current_user instanceof WP_User)) {
+			ob_start();
+		?>
+			<div class="no-results">
+				<p class=""><?php echo __('User not found.', 'tender-a-library'); ?></p>
+			</div>
+		<?php
+			return ob_get_clean();
+		}
+
+		$is_call_logs_manager = tal_current_user_can_manage_call_logs();
+		$active_tab = isset($_GET['tal_profile_tab']) ? sanitize_key(wp_unslash($_GET['tal_profile_tab'])) : 'overview';
+		if (!in_array($active_tab, array('overview', 'calls'), true)) {
+			$active_tab = 'overview';
+		}
+		if (!$is_call_logs_manager && $active_tab === 'calls') {
+			$active_tab = 'overview';
+		}
+
+		$call_log_message = '';
+		$call_log_notice_class = 'notice-success';
+		$editing_call = null;
+
+		if (isset($_GET['tal_call_msg'])) {
+			$call_msg = sanitize_key(wp_unslash($_GET['tal_call_msg']));
+			switch ($call_msg) {
+				case 'saved':
+					$call_log_message = __('Call log saved.', 'tender-a-library');
+					$call_log_notice_class = 'notice-success';
+					break;
+				case 'updated':
+					$call_log_message = __('Call log updated.', 'tender-a-library');
+					$call_log_notice_class = 'notice-success';
+					break;
+				case 'deleted':
+					$call_log_message = __('Call log deleted.', 'tender-a-library');
+					$call_log_notice_class = 'notice-success';
+					break;
+				case 'error':
+					$call_log_notice_class = 'notice-error';
+					$call_log_message = isset($_GET['tal_call_error']) ? sanitize_text_field(wp_unslash($_GET['tal_call_error'])) : __('Ha ocurrido un error.', 'tender-a-library');
+					break;
+			}
+		}
 		// Comprobación para ver perfil:
 		if ( tal_can_view_profile($current_user->ID) === false) {
 			ob_start(); 
@@ -45,6 +106,75 @@ function tal_profile_template($content)
 			<?php return ob_get_clean();
 		}
 		else {
+			if ($is_call_logs_manager) {
+				$edit_call_id = isset($_GET['tal_edit_call']) ? absint($_GET['tal_edit_call']) : 0;
+				if ($edit_call_id > 0) {
+					$editing_call = tal_get_user_call_log($edit_call_id, (int) $current_user->ID);
+					$active_tab = 'calls';
+				}
+
+				if (isset($_POST['tal_call_action'])) {
+					$redirect_args = array(
+						'tal_profile_tab' => 'calls',
+					);
+					$nonce_valid = isset($_POST['tal_call_log_nonce']) &&
+						wp_verify_nonce(
+							sanitize_text_field(wp_unslash($_POST['tal_call_log_nonce'])),
+							'tal_call_log_action_' . $current_user->ID
+						);
+
+					if (!$nonce_valid) {
+						$redirect_args['tal_call_msg'] = 'error';
+						$redirect_args['tal_call_error'] = __('Security check failed. Please try again.', 'tender-a-library');
+					} else {
+						$target_user_id = isset($_POST['tal_call_log_user_id']) ? (int) $_POST['tal_call_log_user_id'] : 0;
+						if ($target_user_id !== (int) $current_user->ID) {
+							$redirect_args['tal_call_msg'] = 'error';
+							$redirect_args['tal_call_error'] = __('Invalid target user.', 'tender-a-library');
+						} else {
+							$action = sanitize_key(wp_unslash($_POST['tal_call_action']));
+							$subject = isset($_POST['tal_call_subject']) ? sanitize_text_field(wp_unslash($_POST['tal_call_subject'])) : '';
+							$comment = isset($_POST['tal_call_comment']) ? wp_kses_post(wp_unslash($_POST['tal_call_comment'])) : '';
+							$call_date = isset($_POST['tal_call_date']) ? sanitize_text_field(wp_unslash($_POST['tal_call_date'])) : '';
+							$call_id = isset($_POST['tal_call_id']) ? absint($_POST['tal_call_id']) : 0;
+
+							if ($action === 'add') {
+								$result = tal_create_user_call_log($target_user_id, $subject, $comment, $call_date);
+								if (is_wp_error($result)) {
+									$redirect_args['tal_call_msg'] = 'error';
+									$redirect_args['tal_call_error'] = $result->get_error_message();
+								} else {
+									$redirect_args['tal_call_msg'] = 'saved';
+								}
+							} elseif ($action === 'update') {
+								$result = tal_update_user_call_log($call_id, $target_user_id, $subject, $comment, $call_date);
+								if (is_wp_error($result)) {
+									$redirect_args['tal_call_msg'] = 'error';
+									$redirect_args['tal_call_error'] = $result->get_error_message();
+								} else {
+									$redirect_args['tal_call_msg'] = 'updated';
+								}
+							} elseif ($action === 'delete') {
+								$result = tal_delete_user_call_log($call_id, $target_user_id);
+								if (is_wp_error($result)) {
+									$redirect_args['tal_call_msg'] = 'error';
+									$redirect_args['tal_call_error'] = $result->get_error_message();
+								} else {
+									$redirect_args['tal_call_msg'] = 'deleted';
+								}
+							}
+						}
+					}
+
+					$redirect_url = add_query_arg(
+						$redirect_args,
+						remove_query_arg(array('tal_call_msg', 'tal_call_error', 'tal_edit_call', 'tal_profile_tab'))
+					);
+					wp_safe_redirect($redirect_url);
+					exit;
+				}
+			}
+
 			ob_start(); ?>
 
 			<div class="profile">
@@ -89,6 +219,121 @@ function tal_profile_template($content)
 				</div>
 			</div>
 
+			<?php if ($is_call_logs_manager) : ?>
+			<div class="tal-profile-tabs">
+				<a class="tal-profile-tab <?php echo $active_tab === 'overview' ? 'is-active' : ''; ?>" href="<?php echo esc_url(tal_profile_tab_url($current_user, 'overview')); ?>">
+					<?php echo esc_html__('Profile', 'tender-a-library'); ?>
+				</a>
+					<a class="tal-profile-tab <?php echo $active_tab === 'calls' ? 'is-active' : ''; ?>" href="<?php echo esc_url(tal_profile_tab_url($current_user, 'calls')); ?>">
+						<?php echo esc_html__('Call history', 'tender-a-library'); ?>
+					</a>
+			</div>
+			<?php endif; ?>
+
+			<?php if ($active_tab === 'calls' && $is_call_logs_manager) : ?>
+				<?php $call_logs = tal_get_user_call_logs($current_user->ID, 200); ?>
+				<section class="tal-call-logs tal-call-log-page">
+					<div class="tal-call-log-hero">
+						<div>
+							<p class="tal-call-log-eyebrow"><?php echo esc_html__('Follow-up', 'tender-a-library'); ?></p>
+							<h2><?php echo esc_html__('Call history', 'tender-a-library'); ?></h2>
+							<p class="tal-call-log-intro"><?php echo esc_html__('Keep all follow-up calls for this user in one place, ordered by date and easy to edit later.', 'tender-a-library'); ?></p>
+						</div>
+						<div class="tal-call-log-count">
+							<span class="tal-call-log-count-number"><?php echo esc_html((string) count($call_logs)); ?></span>
+							<span class="tal-call-log-count-label"><?php echo esc_html__('entries', 'tender-a-library'); ?></span>
+						</div>
+					</div>
+
+					<?php if ($call_log_message) : ?>
+						<div class="notice <?php echo esc_attr($call_log_notice_class); ?> inline"><p><?php echo esc_html($call_log_message); ?></p></div>
+					<?php endif; ?>
+
+					<div class="tal-call-log-layout">
+						<div class="tal-call-log-form-card">
+							<h3><?php echo $editing_call ? esc_html__('Edit call entry', 'tender-a-library') : esc_html__('New call entry', 'tender-a-library'); ?></h3>
+							<form method="post" class="tal-call-log-form">
+								<?php wp_nonce_field('tal_call_log_action_' . $current_user->ID, 'tal_call_log_nonce'); ?>
+								<input type="hidden" name="tal_call_log_user_id" value="<?php echo esc_attr($current_user->ID); ?>">
+								<input type="hidden" name="tal_call_action" value="<?php echo $editing_call ? 'update' : 'add'; ?>">
+								<?php if ($editing_call) : ?>
+									<input type="hidden" name="tal_call_id" value="<?php echo esc_attr($editing_call->id); ?>">
+								<?php endif; ?>
+
+								<div class="tal-call-log-form-row">
+									<div class="tal-call-field">
+										<label class="tal-call-label" for="tal_call_subject"><?php _e('Title', 'tender-a-library'); ?></label>
+										<input id="tal_call_subject" type="text" name="tal_call_subject" maxlength="255" class="regular-text" value="<?php echo esc_attr($editing_call ? $editing_call->subject : ''); ?>" required>
+									</div>
+									<div class="tal-call-field tal-call-date">
+										<label class="tal-call-label" for="tal_call_date"><?php _e('Date', 'tender-a-library'); ?></label>
+										<input id="tal_call_date" type="date" name="tal_call_date" value="<?php echo esc_attr($editing_call ? $editing_call->call_date : wp_date('Y-m-d')); ?>" required>
+									</div>
+									<div class="tal-call-field tal-call-comment">
+										<label class="tal-call-label" for="tal_call_comment"><?php _e('Comment', 'tender-a-library'); ?></label>
+										<textarea id="tal_call_comment" name="tal_call_comment" rows="6"><?php echo esc_textarea($editing_call ? wp_strip_all_tags($editing_call->comment) : ''); ?></textarea>
+									</div>
+								</div>
+								<div class="tal-call-actions">
+									<div class="tal-call-buttons">
+										<button type="submit" class="button button-primary">
+											<?php echo $editing_call ? esc_html__('Update', 'tender-a-library') : esc_html__('Save', 'tender-a-library'); ?>
+										</button>
+										<?php if ($editing_call) : ?>
+											<a class="button button-secondary" href="<?php echo esc_url(tal_profile_tab_url($current_user, 'calls')); ?>">
+												<?php _e('Cancel', 'tender-a-library'); ?>
+											</a>
+										<?php endif; ?>
+									</div>
+								</div>
+							</form>
+						</div>
+
+						<div class="tal-call-log-list-card">
+							<h3><?php echo esc_html__('Timeline', 'tender-a-library'); ?></h3>
+							<?php if (!empty($call_logs)) : ?>
+								<ul class="tal-call-log-list">
+									<?php foreach ($call_logs as $call_log) : ?>
+										<li class="tal-call-log-item">
+											<div class="tal-call-log-date-badge">
+												<span class="tal-call-log-date-day"><?php echo esc_html(wp_date('d', strtotime($call_log->call_date))); ?></span>
+												<span class="tal-call-log-date-month"><?php echo esc_html(wp_date('M', strtotime($call_log->call_date))); ?></span>
+											</div>
+											<div class="tal-call-log-body">
+												<p class="tal-call-log-head">
+													<strong><?php echo esc_html($call_log->subject); ?></strong>
+													<small><?php echo esc_html(wp_date(get_option('date_format'), strtotime($call_log->call_date))); ?></small>
+												</p>
+												<?php if (!empty($call_log->comment)) : ?>
+													<div class="tal-call-log-comment"><?php echo wp_kses_post(wpautop($call_log->comment)); ?></div>
+												<?php else : ?>
+													<p class="tal-call-log-comment-empty"><?php echo esc_html__('No comment added.', 'tender-a-library'); ?></p>
+												<?php endif; ?>
+												<div class="tal-call-log-item-actions">
+													<a class="button button-secondary button-small" href="<?php echo esc_url(tal_profile_tab_url($current_user, 'calls', array('tal_edit_call' => (int) $call_log->id))); ?>">
+														<?php _e('Edit', 'tender-a-library'); ?>
+													</a>
+													<form method="post" class="tal-call-delete-form">
+														<?php wp_nonce_field('tal_call_log_action_' . $current_user->ID, 'tal_call_log_nonce'); ?>
+														<input type="hidden" name="tal_call_log_user_id" value="<?php echo esc_attr($current_user->ID); ?>">
+														<input type="hidden" name="tal_call_action" value="delete">
+														<input type="hidden" name="tal_call_id" value="<?php echo esc_attr($call_log->id); ?>">
+														<button type="submit" class="button button-link-delete button-small" onclick="return confirm('<?php echo esc_js(__('Delete this call log?', 'tender-a-library')); ?>');">
+															<?php _e('Delete', 'tender-a-library'); ?>
+														</button>
+													</form>
+												</div>
+											</div>
+										</li>
+									<?php endforeach; ?>
+								</ul>
+							<?php else : ?>
+								<p class="no-results"><?php echo __('No calls logged yet for this user.', 'tender-a-library'); ?></p>
+							<?php endif; ?>
+						</div>
+					</div>
+				</section>
+			<?php else : ?>
 			<div class="profile-lendings">
 				<h2 class=""><?php echo __('Active lendings', 'tender-a-library'); ?></h2>
 				<?php
@@ -103,8 +348,8 @@ function tal_profile_template($content)
 								$formatted_date = wp_date(get_option('date_format'), $return_date);
 								$formatted_lending_date = wp_date(get_option('date_format'), $lending_date);
 							} catch (Exception $e) {
-								$formatted_date = 'Fecha inválida';
-								$formatted_lending_date = 'Fecha inválida';
+								$formatted_date = 'Invalid date';
+								$formatted_lending_date = 'Invalid date';
 							}
 							$cover_id = carbon_get_post_meta($lending->book_id, 'tender_book_cover');
 							$delayed = $return_date < time() ? 'delayed' : '';
@@ -163,6 +408,7 @@ function tal_profile_template($content)
 					<p class="no-results"><?php echo __('There are no active lendings right now', 'tender-a-library'); ?></p>
 				<?php endif; ?>
 			</div>
+			<?php endif; ?>
 
  			<?php echo do_shortcode('[tender_user_reservations]'); ?>
 
@@ -182,8 +428,8 @@ function tal_profile_template($content)
 								$formatted_date = wp_date(get_option('date_format'), $return_date);
 								$formatted_lending_date = wp_date(get_option('date_format'), $lending_date);
 							} catch (Exception $e) {
-								$formatted_date = 'Fecha inválida';
-								$formatted_lending_date = 'Fecha inválida';
+								$formatted_date = 'Invalid date';
+								$formatted_lending_date = 'Invalid date';
 							}
 							$cover_id = carbon_get_post_meta($lending->book_id, 'tender_book_cover');
 						?>

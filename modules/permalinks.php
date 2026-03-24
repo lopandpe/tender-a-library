@@ -67,9 +67,9 @@ function tender_add_permalink_settings()
 
 	register_setting('permalink', 'tender_book_slug', 'sanitize_text_field');
 	register_setting('permalink', 'tal_library_search_page', 'sanitize_text_field');
-	register_setting('permalink', 'tal_profile_page');
-	register_setting('permalink', 'tal_edit_profile_page');
-	register_setting('permalink', 'tal_users_list_page');
+	register_setting('permalink', 'tal_profile_page', 'absint');
+	register_setting('permalink', 'tal_edit_profile_page', 'absint');
+	register_setting('permalink', 'tal_users_list_page', 'absint');
 
 }
 add_action('admin_init', 'tender_add_permalink_settings');
@@ -77,7 +77,7 @@ add_action('admin_init', 'tender_add_permalink_settings');
 add_filter('display_post_states', 'tal_add_special_pages_state', 10, 2);
 function tal_add_special_pages_state($post_states, $post) {
     $states = [
-        'tal_library_page_id'     => __('Searching page', 'tender-a-library'),
+        'tal_library_search_page' => __('Searching page', 'tender-a-library'),
         'tal_profile_page'        => __('Profile page', 'tender-a-library'),
         'tal_edit_profile_page'   => __('Profile edit page', 'tender-a-library'),
         'tal_users_list_page'     => __('Users management page', 'tender-a-library'),
@@ -97,17 +97,26 @@ function tal_add_special_pages_state($post_states, $post) {
 
 function tender_save_permalink_settings()
 {
-	$fields = ['permalink_structure', 'tender_book_slug', 'tal_library_search_page', 'tal_profile_page', 'tal_edit_profile_page', 'tal_users_list_page'];
+	$fields = [
+		'permalink_structure' => 'sanitize_text_field',
+		'tender_book_slug' => 'sanitize_text_field',
+		'tal_library_search_page' => 'absint',
+		'tal_profile_page' => 'absint',
+		'tal_edit_profile_page' => 'absint',
+		'tal_users_list_page' => 'absint',
+	];
 	$isAnyFieldSet = false;
 
 	// Verificar si se ha establecido algún campo
-	foreach ($fields as $field) {
+	foreach ($fields as $field => $sanitizer) {
 		if (isset($_POST[$field])) {
 			if (!isset($_POST['_wpnonce']) || !wp_verify_nonce($_POST['_wpnonce'], 'update-permalink')) {
 				return;
 			}
 			$isAnyFieldSet = true;
-			update_option($field, sanitize_text_field($_POST[$field]));
+			$value = wp_unslash($_POST[$field]);
+			$clean = is_callable($sanitizer) ? call_user_func($sanitizer, $value) : sanitize_text_field($value);
+			update_option($field, $clean);
 		}
 	}
 
@@ -159,19 +168,6 @@ function tal_users_list_page_callback()
 }
 
 
-function tender_activate()
-{
-	tender_book(); // Register the custom post type and taxonomies
-	tender_create_database_tables();
-	flush_rewrite_rules(); // Flush rewrite rules
-}
-register_activation_hook(__FILE__, 'tender_activate');
-
-function tender_deactivate()
-{
-	flush_rewrite_rules(); // Flush rewrite rules
-}
-register_deactivation_hook(__FILE__, 'tender_deactivate');
 
 function tender_add_body_classes($classes)
 {

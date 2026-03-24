@@ -1,9 +1,15 @@
 @use "variables" as *;
 
 .profile {
-	font-size: 16px;
+	font-size: inherit;
 	margin-bottom: 50px;
+	display: grid;
+	gap: 24px;
 	.user-info {
+		background: linear-gradient(135deg, #fffaf2 0%, #f4efe5 100%);
+		border: 1px solid rgba(0, 0, 0, 0.08);
+		border-radius: 18px;
+		padding: 24px;
 		ul {
 			display: flex;
 			padding: 0px;
@@ -24,6 +30,7 @@
 	}
 	.profile-actions {
 		display: flex;
+		flex-wrap: wrap;
 		gap: 20px;
 		a {
 			&.edit-profile {
@@ -80,7 +87,7 @@
 		gap: 20px;
 		position: relative;
 		text-decoration: none;
-		font-size: 16px;
+		font-size: inherit;
 		.lending-info {
 			color: #000;
 			.dates {
@@ -160,7 +167,7 @@
 		padding: 20px;
 		max-width: 500px;
 		.reservation-info{
-			font-size: 1rem;
+			font-size: inherit;
 			color: #000;
 		}
 		.tender-cancel-reservation{
@@ -185,7 +192,8 @@
 		width: 300px;
 		max-width: 100%;
 		h3 {
-			font-size: 20px;
+			font-size: inherit;
+			font-weight: 700;
 		}
 		.actions{
 			display: flex;
@@ -224,7 +232,7 @@
             flex: 0 0 140px;
             font-weight: 500;
             color: #333;
-            font-size: 15px;
+            font-size: inherit;
           }
           .data {
             flex: 1;
@@ -235,7 +243,7 @@
               padding: 8px 10px;
               border: 1px solid #ccc;
               border-radius: 4px;
-              font-size: 15px;
+              font-size: inherit;
               transition: border 0.2s;
               color: #222;
 
@@ -263,7 +271,7 @@
             border-radius: 4px;
             background: $primary-color;
             color: #fff;
-            font-size: 16px;
+            font-size: inherit;
             font-weight: 600;
             cursor: pointer;
             transition: background 0.2s;
@@ -281,7 +289,7 @@
       border-radius: 4px;
       background: #e5ffd8;
       color: #FFF;
-      font-size: 15px;
+      font-size: inherit;
     }
 
     p {
@@ -300,6 +308,245 @@
     }
   }
 
+.tal-profile-tabs {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 12px;
+	margin: 0 0 32px;
+}
+
+.tal-profile-tab {
+	font-size: inherit;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	padding: 10px 18px;
+	border-radius: 999px;
+	border: 1px solid rgba(0, 0, 0, 0.12);
+	background: #f5efe4;
+	color: #3f3428;
+	font-weight: 600;
+	text-decoration: none;
+	transition: all 0.2s ease;
+
+	&:hover,
+	&:focus {
+		background: #eadfcb;
+		color: #241b12;
+	}
+
+	&.is-active {
+		background: $primary-color;
+		border-color: $primary-color;
+		color: #fff;
+	}
+}
+
+
+.tal-call-logs {
+	margin: 24px 0 40px;
+
+	.tal-call-log-hero {
+		font-size: inherit;
+		display: flex;
+		justify-content: space-between;
+		align-items: flex-end;
+		gap: 20px;
+		margin-bottom: 20px;
+		padding: 28px;
+		border-radius: 22px;
+		background: linear-gradient(135deg, #18120e 0%, #564536 100%);
+		color: #f9f3eb;
+	}
+
+	.tal-call-log-eyebrow {
+		margin: 0 0 8px;
+		font-size: 0.75em;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		opacity: 0.75;
+	}
+
+	.tal-call-log-hero h2 {
+		margin: 0 0 8px;
+		color: inherit;
+	}
+
+	.tal-call-log-intro {
+		margin: 0;
+		max-width: 58ch;
+		color: rgba(249, 243, 235, 0.88);
+	}
+
+	.tal-call-log-count {
+		display: grid;
+		justify-items: end;
+		padding: 18px 20px;
+		border-radius: 18px;
+		background: rgba(255, 255, 255, 0.08);
+		min-width: 120px;
+	}
+
+	.tal-call-log-count-number {
+		font-size: 2.75em;
+		font-weight: 700;
+		line-height: 1;
+	}
+
+	.tal-call-log-count-label {
+		font-size: 0.8125em;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+		opacity: 0.75;
+	}
+
+	.tal-call-log-layout {
+		display: grid;
+		grid-template-columns: minmax(280px, 360px) minmax(0, 1fr);
+		gap: 24px;
+		align-items: start;
+	}
+
+	.tal-call-log-form-card,
+	.tal-call-log-list-card {
+		background: #fff;
+		border: 1px solid rgba(0, 0, 0, 0.08);
+		border-radius: 18px;
+		padding: 24px;
+		box-shadow: 0 16px 40px rgba(44, 30, 16, 0.08);
+	}
+
+	.tal-call-log-form-card h3,
+	.tal-call-log-list-card h3 {
+		margin-top: 0;
+		margin-bottom: 18px;
+	}
+
+	.tal-call-log-form-row {
+		display: grid;
+		gap: 14px;
+	}
+
+	.tal-call-field {
+		display: flex;
+		flex-direction: column;
+		gap: 6px;
+
+		input,
+		textarea {
+			max-width: 100%;
+			width: 100%;
+			padding: 12px 14px;
+			border: 1px solid #d8d0c7;
+			border-radius: 12px;
+			background: #fffdfa;
+			font: inherit;
+		}
+
+		textarea {
+			resize: vertical;
+			min-height: 140px;
+		}
+	}
+
+	.tal-call-actions {
+		margin-top: 16px;
+	}
+
+	.tal-call-buttons {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 10px;
+	}
+
+	.tal-call-label {
+		font-size: 0.75em;
+		font-weight: 700;
+		color: #5e5347;
+		text-transform: uppercase;
+		letter-spacing: 0.06em;
+		margin: 0;
+	}
+
+	.tal-call-log-list {
+		list-style: none;
+		padding-left: 0;
+		margin: 0;
+		display: grid;
+		gap: 16px;
+	}
+
+	.tal-call-log-item {
+		display: grid;
+		grid-template-columns: 76px minmax(0, 1fr);
+		gap: 16px;
+		padding: 18px;
+		border-radius: 16px;
+		background: #fcfaf7;
+		border: 1px solid #ece2d6;
+	}
+
+	.tal-call-log-date-badge {
+		display: grid;
+		align-content: center;
+		justify-items: center;
+		gap: 4px;
+		padding: 10px;
+		border-radius: 14px;
+		background: #f0e4d6;
+		color: #362619;
+		min-height: 74px;
+	}
+
+	.tal-call-log-date-day {
+		font-size: 1.75em;
+		font-weight: 700;
+		line-height: 1;
+	}
+
+	.tal-call-log-date-month {
+		font-size: 0.6875em;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+	}
+
+	.tal-call-log-body {
+		min-width: 0;
+	}
+
+	.tal-call-log-head {
+		margin: 0 0 10px 0;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		gap: 8px;
+		align-items: baseline;
+	}
+
+	.tal-call-log-comment,
+	.tal-call-log-comment-empty {
+		margin: 0 0 14px;
+		color: #3e342d;
+	}
+
+	.tal-call-log-comment-empty {
+		font-style: italic;
+		opacity: 0.7;
+	}
+
+	.tal-call-log-item-actions {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		flex-wrap: wrap;
+	}
+
+	.tal-call-delete-form {
+		display: inline;
+		margin: 0;
+	}
+}
 
 @media screen and (max-width: 768px) {
 	.profile-lendings {
@@ -311,6 +558,43 @@
 		}
 		.lending {
 			width: 100%;
+		}
+	}
+
+	.profile {
+		.user-info {
+			padding: 18px;
+		}
+	}
+
+	.tal-call-logs {
+		.tal-call-log-hero {
+			flex-direction: column;
+			align-items: stretch;
+		}
+
+		.tal-call-log-count {
+			justify-items: start;
+		}
+
+		.tal-call-log-layout {
+			grid-template-columns: 1fr;
+		}
+
+		.tal-call-log-item {
+			grid-template-columns: 1fr;
+		}
+
+		.tal-call-log-date-badge {
+			grid-auto-flow: column;
+			justify-content: start;
+			min-height: auto;
+			padding: 12px 14px;
+		}
+
+		.tal-call-log-head {
+			flex-direction: column;
+			align-items: flex-start;
 		}
 	}
 }

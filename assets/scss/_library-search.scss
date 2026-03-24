@@ -23,7 +23,7 @@
 		display: flex;
 		flex-wrap: wrap;
 		gap: 10px;
-		font-size: 14px;
+		font-size: inherit;
 		text-transform: uppercase;
 		color: $primary-color;
 		strong{
@@ -42,7 +42,7 @@
     background: #f0f0f0;
     border: 1px solid #ddd;
     color: #333;
-    font-size: 12px;
+    font-size: 0.75em;
     text-transform: uppercase;
     font-weight: bold;
     padding: 8px 16px;
@@ -86,7 +86,7 @@
 		float: right;
 		background: none;
 		border: none;
-		font-size: 12px;
+		font-size: 0.75em;
 		text-transform: uppercase;
 		cursor: pointer;
 		color: #333;
@@ -105,7 +105,7 @@
         margin-bottom: 20px;
     }
 	h2 {
-		font-size: 18px;
+		font-size: inherit;
 		color: #333;
 		margin-bottom: 20px;
 		text-transform: uppercase;
@@ -116,13 +116,13 @@
 	fieldset {
 		clear: both;
 		.category-tree {
-			font-size: 14px;
+			font-size: inherit;
 			color: #333;
 			.category-node {
 				position: relative;
 				padding: 0px 0 0px 24px;
 				transition: background 0.3s ease;
-                font-size: 12px;
+                font-size: 0.75em;
                 text-transform: uppercase;
 				&.level-0 {
 					font-weight: bold;
@@ -154,7 +154,7 @@
 				}
 
 				.item-count {
-					font-size: 12px;
+					font-size: 0.75em;
 					color: #888;
 					margin-left: 0.25rem;
 				}
@@ -164,7 +164,7 @@
 				background: none;
 				border: none;
 				cursor: pointer;
-				font-size: 14px;
+				font-size: inherit;
 				width: 24px;
 				height: 24px;
 				line-height: 24px;

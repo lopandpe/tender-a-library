@@ -8,6 +8,7 @@ global $wpdb;
 define('TENDER_TABLE_LENDINGS', $wpdb->prefix . 'tender_lendings');
 define('TENDER_TABLE_RENEWALS', $wpdb->prefix . 'tender_renewals');
 define('TENDER_TABLE_RESERVATIONS', $wpdb->prefix . 'tender_reservations');
+define('TENDER_TABLE_USER_CALLS', $wpdb->prefix . 'tender_user_calls');
 
 
 /**
@@ -22,6 +23,7 @@ function tender_create_database_tables()
 	$table_lendings = TENDER_TABLE_LENDINGS;
 	$table_renewals = TENDER_TABLE_RENEWALS;
 	$table_reservations = TENDER_TABLE_RESERVATIONS;
+	$table_user_calls = TENDER_TABLE_USER_CALLS;
 
 	// SQL para crear la tabla de préstamos
 	$sql_lendings = "CREATE TABLE IF NOT EXISTS $table_lendings (
@@ -69,9 +71,25 @@ function tender_create_database_tables()
         KEY pickup_until_idx (pickup_exclusive_until)
     ) $charset_collate;";
 
+	// SQL para crear la tabla de llamadas a usuarios
+	$sql_user_calls = "CREATE TABLE IF NOT EXISTS $table_user_calls (
+        id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+        user_id BIGINT UNSIGNED NOT NULL,
+        subject VARCHAR(255) NOT NULL,
+        comment LONGTEXT NULL,
+        call_date DATE NOT NULL,
+        created_at DATETIME NOT NULL,
+        updated_at DATETIME NOT NULL,
+        old_laravel_id BIGINT UNSIGNED NULL,
+        FOREIGN KEY (user_id) REFERENCES {$wpdb->prefix}users(ID) ON DELETE CASCADE,
+        KEY user_call_date (user_id, call_date),
+        KEY old_laravel_id (old_laravel_id)
+    ) $charset_collate;";
+
 
 	require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 	dbDelta($sql_lendings);
 	dbDelta($sql_renewals);
 	dbDelta($sql_reservations);
+	dbDelta($sql_user_calls);
 }

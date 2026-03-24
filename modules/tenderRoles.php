@@ -132,8 +132,12 @@ function tal_cleanup_opener_caps() {
 add_action('init', 'tal_cleanup_opener_caps');
 
 function tal_add_librarian_caps() {
-    $role = get_role('librarian');
-    if ($role) {
+    $roles = ['administrator', 'editor', 'librarian'];
+    foreach ($roles as $role_name) {
+        $role = get_role($role_name);
+        if (!$role) {
+            continue;
+        }
         $role->add_cap('manage_tender_sections');
         $role->add_cap('edit_tender_sections');
         $role->add_cap('delete_tender_sections');

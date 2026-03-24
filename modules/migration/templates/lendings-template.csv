@@ -1,0 +1,2 @@
+id,book_id,user_id,lending_date,stimated_return_date,real_return_date,returned,extensions,extension_date
+1,1,1,2024-01-10,2024-01-31,,0,0,

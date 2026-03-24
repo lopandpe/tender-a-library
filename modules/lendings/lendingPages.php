@@ -19,7 +19,7 @@ if (!defined('ABSPATH')) {
  */
 function tender_render_lending_page($args)
 {
-	$title                = isset($args['title']) ? $args['title'] : 'Préstamos';
+	$title                = isset($args['title']) ? $args['title'] : __('Lendings', 'tender-a-library');
 	$ajax_action          = isset($args['ajax_action']) ? $args['ajax_action'] : '';
 	$render_table_callback = isset($args['render_table_callback']) ? $args['render_table_callback'] : '';
 	$show_actions         = isset($args['show_actions']) ? $args['show_actions'] : false;
@@ -131,7 +131,6 @@ function tender_render_lending_page($args)
 					$("#confirm-action")
 						.data("lending-id", lendingId)
 						.data("action", action);
-					console.log($("#confirm-action").data("lending-id"));
 					$('#tal-confirmation-modal  button').show();
 					$('#tal-confirmation-modal #accept-action').hide();
 					$('#tal-confirmation-modal').show();
@@ -142,7 +141,6 @@ function tender_render_lending_page($args)
 				$(document).on('click', '#confirm-action', function() {
 					let lendingId = $(this).data('lending-id');
 					let action = $(this).data('action');
-					console.log(lendingId);
 						$.post(ajaxurl, {
 								action: 'tender_handle_lending_action',
 								lending_id: lendingId,
@@ -154,13 +152,13 @@ function tender_render_lending_page($args)
 							if (response && response.data && response.data.message) {
 								$("#modal-message").text(response.data.message);
 							} else {
-								$("#modal-message").text("No se recibió respuesta del servidor.");
+								$("#modal-message").text("No response received from server.");
 							}
 						})
 						.fail(function(jqXHR, textStatus, errorThrown) {
 							console.error(jqXHR, textStatus, errorThrown);
 							$("#modal-message").text(
-								"Ocurrió un error. No se recibió respuesta del servidor."
+								"An error occurred. No response received from server."
 							);
 						})
 						.always(function() {
@@ -193,7 +191,7 @@ function tender_render_lending_page($args)
 function tender_lendings_page()
 {
 	tender_render_lending_page(array(
-		'title'                 => 'Préstamos Activos',
+		'title'                 => __('Active Lendings', 'tender-a-library'),
 		'ajax_action'           => 'tender_search_lendings',
 		'render_table_callback' => 'render_lendings_table',
 		'show_actions'          => true,
@@ -206,7 +204,7 @@ function tender_lendings_page()
 function tender_old_lendings_page()
 {
 	tender_render_lending_page(array(
-		'title'                 => 'Préstamos Finalizados',
+		'title'                 => __('Finished Lendings', 'tender-a-library'),
 		'ajax_action'           => 'tender_search_old_lendings',
 		'render_table_callback' => 'render_old_lendings_table',
 		'show_actions'          => false,
@@ -296,7 +294,7 @@ function tender_search_lendings_common($action, $returned)
 		echo $action === 'tender_search_lendings' ? render_lendings_table($results) : render_old_lendings_table($results);
 		echo render_pagination($page, $total_pages);
 	} else {
-		echo '<p class="text-gray-500">' . esc_html__('No loans found.', 'tender-plugin') . '</p>';
+		echo '<p class="text-gray-500">' . esc_html__('No loans found.', 'tender-a-library') . '</p>';
 	}
 
 	wp_die();
@@ -322,7 +320,7 @@ function render_pagination($current_page, $total_pages)
 	<div class="tal_admin_pagination-links">
 		<?php if ($current_page > 1) : ?>
 			<a href="#" data-page="<?php echo $current_page - 1; ?>">
-				« <?php _e('Previous', 'tender-plugin'); ?>
+				« <?php _e('Previous', 'tender-a-library'); ?>
 			</a>
 		<?php endif; ?>
 
@@ -348,7 +346,7 @@ function render_pagination($current_page, $total_pages)
 
 		<?php if ($current_page < $total_pages) : ?>
 			<a href="#" data-page="<?php echo $current_page + 1; ?>">
-				<?php _e('Next', 'tender-plugin'); ?> »
+				<?php _e('Next', 'tender-a-library'); ?> »
 			</a>
 		<?php endif; ?>
 	</div>
@@ -390,7 +388,7 @@ function render_lendings_table($results)
 					$return_date  = new DateTime($row->stimated_return_date);
 					$formatted_date = $return_date->format('d-m-Y');
 				} catch (Exception $e) {
-					$formatted_date = 'Fecha inválida';
+					$formatted_date = 'Invalid date';
 				}
 				$user_profile = get_user_profile_url_by_id($row->user_id);
 			?>
@@ -449,7 +447,7 @@ function render_old_lendings_table($results)
 					$return_date  = new DateTime($row->stimated_return_date);
 					$formatted_date = $return_date->format('d-m-Y');
 				} catch (Exception $e) {
-					$formatted_date = 'Fecha inválida';
+					$formatted_date = 'Invalid date';
 				}
 				$user_profile = get_user_profile_url_by_id($row->user_id);
 			?>
