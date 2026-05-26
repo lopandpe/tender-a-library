@@ -4,7 +4,7 @@
   "main": "Gruntfile.js",
   "author": "Local Anarquista Magdalena",
   "scripts": {
-    "build": "npm run build:tailwind && npm run build:blocks",
+    "build": "npm run build:tailwind && npm run build:blocks && npm run webpack",
     "build:tailwind": "npx tailwindcss -i ./assets/css/tailwind.css -o ./css/tender-public.css --minify && npx tailwindcss -i ./assets/css/tailwind.css -o ./css/tender-admin.css --minify",
     "watch:tailwind": "npx tailwindcss -i ./assets/css/tailwind.css -o ./css/tender-public.css --minify && npx tailwindcss -i ./assets/css/tailwind.css -o ./css/tender-admin.css --watch",
     "webpack": "webpack --config webpack.config.js",

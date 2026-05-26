@@ -119,6 +119,15 @@ const Filters = ({ filters, setFilters, options }) => {
 				>
 					{wp.i18n.__("Show filters", "tender-a-library")}
 				</div>
+				<input
+					type="text" className="tender-search-input"
+					placeholder={wp.i18n.__(
+						"Search by title, author, etc",
+						"tender-a-library",
+					)}
+					value={filters.q ?? ""}
+					onChange={(e) => update("q", e.target.value)}
+				/>
 				<label className="tender-per-page-control">
 					<span>{wp.i18n.__("Books per page", "tender-a-library")}</span>
 					<select
@@ -202,18 +211,6 @@ const Filters = ({ filters, setFilters, options }) => {
 						{wp.i18n.__("Reset Filters", "tender-a-library")}
 					</button>
 				)}
-				<fieldset className="tender-fieldset">
-					<legend>{wp.i18n.__("Search", "tender-a-library")}</legend>
-					<input
-						type="text"
-						placeholder={wp.i18n.__(
-							"Search by title, author, etc",
-							"tender-a-library",
-						)}
-						value={filters.q ?? ""}
-						onChange={(e) => update("q", e.target.value)}
-					/>
-				</fieldset>
 				<fieldset className="tender-fieldset">
 					<legend>
 						{wp.i18n.__("Sections", "tender-a-library")}

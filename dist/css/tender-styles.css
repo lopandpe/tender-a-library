@@ -347,6 +347,16 @@
   opacity: 0.9;
 }
 
+.calls-button {
+  background-color: transparent;
+  color: var(--primary-color);
+  border: none;
+  font-weight: normal;
+}
+.calls-button.active {
+  text-decoration: underline;
+}
+
 *, *:after, *:before {
   box-sizing: border-box;
 }
@@ -1017,6 +1027,26 @@
 .tender-filters-toggle:focus,
 .tender-filters-reset:focus,
 #library-search-root .tender-book-search .tender-pagination button:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+#library-search-root .tender-book-search .tender-search-input {
+  background: var(--white-color);
+  border: 1px solid var(--primary-color);
+  color: var(--primary-color);
+  font-size: 0.75em;
+  text-transform: uppercase;
+  padding: 8px 16px;
+  margin: 0;
+  border-radius: 3px;
+  cursor: pointer;
+  line-height: 1.2;
+  transition: all 0.2s ease;
+  width: 300px;
+  max-width: 100%;
+}
+#library-search-root .tender-book-search .tender-search-input:focus {
   outline: 2px solid var(--primary-color);
   outline-offset: 2px;
 }
