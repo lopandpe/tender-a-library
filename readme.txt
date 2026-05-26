@@ -49,6 +49,21 @@ Notes:
 * Production/shared builds must include the `vendor/` directory.
 * `node_modules/` is not required in production.
 
+== Development ==
+
+Use npm to compile JavaScript and CSS assets.
+
+Available scripts in the plugin root:
+
+* `npm run build`: builds block assets and the custom webpack bundle
+* `npm run build:blocks`: builds Gutenberg block assets into `build/`
+* `npm run start:blocks`: watches and rebuilds Gutenberg block assets during development
+* `npm run webpack`: builds the custom frontend/admin bundle into `dist/`
+* `npm run webpack:watch`: watches and rebuilds the custom webpack bundle during development
+
+For a full production-style asset build, run:
+`npm run build`
+
 == How to Share the Plugin ==
 
 Use this flow when delivering to another site/server.
@@ -78,7 +93,10 @@ Directory overview:
 * `modules/`: domain logic (books, lendings, reservations, profile, emails, search)
 * `modules/migration/`: CSV migration UI, import logic, and templates
 * `modules/tender-book/`: book fields, templates, signature autofill module
-* `assets/`, `src/`, `build/`, `dist/`: frontend sources and compiled assets
+* `assets/`: custom JS and SCSS sources for the webpack bundle
+* `src/`: Gutenberg block source files
+* `build/`: compiled Gutenberg block assets
+* `dist/`: compiled custom webpack assets
 * `vendor/`: Composer dependencies (includes Carbon Fields)
 * `.distignore`: excluded files/folders for release packaging
 

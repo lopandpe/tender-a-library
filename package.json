@@ -1,12 +1,9 @@
 {
   "name": "tender-a-library",
   "version": "0.1.1",
-  "main": "Gruntfile.js",
   "author": "Local Anarquista Magdalena",
   "scripts": {
-    "build": "npm run build:tailwind && npm run build:blocks && npm run webpack",
-    "build:tailwind": "npx tailwindcss -i ./assets/css/tailwind.css -o ./css/tender-public.css --minify && npx tailwindcss -i ./assets/css/tailwind.css -o ./css/tender-admin.css --minify",
-    "watch:tailwind": "npx tailwindcss -i ./assets/css/tailwind.css -o ./css/tender-public.css --minify && npx tailwindcss -i ./assets/css/tailwind.css -o ./css/tender-admin.css --watch",
+    "build": "npm run build:blocks && npm run webpack",
     "webpack": "webpack --config webpack.config.js",
     "webpack:watch": "webpack --watch --config webpack.config.js",
     "build:blocks": "wp-scripts build --config webpack.blocks.config.js",
@@ -25,21 +22,14 @@
     "eslint-plugin-react": "^7.30.1",
     "fs-extra": "^11.3.0",
     "glob": "^11.0.3",
-    "grunt": "~0.4.5",
-    "grunt-wp-i18n": "~0.5.0",
-    "grunt-wp-readme-to-markdown": "~1.0.0",
     "mini-css-extract-plugin": "^2.9.2",
-    "postcss": "^8.5.3",
     "sass": "^1.89.2",
     "sass-loader": "^16.0.5",
-    "tailwindcss": "^4.0.9",
     "webpack": "^5.99.9",
     "webpack-cli": "^4.10.0"
   },
   "description": "=== Plugin Biblioteca (A)",
   "dependencies": {
-    "@tailwindcss/cli": "^4.0.9",
-    "@tailwindcss/postcss": "^4.0.9",
     "@wordpress/i18n": "^6.0.0"
   },
   "repository": {
