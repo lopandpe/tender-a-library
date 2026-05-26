@@ -21,8 +21,7 @@ Container::make('post_meta', 'Datos del libro')
 
 			Field::make('textarea', 'tender_book_other_authors', __('Otras autoras', 'tender-a-library')),
 
-			Field::make('text', 'tender_book_publisher', __('Publisher', 'tender-a-library'))
-				->set_required(true),
+			Field::make('text', 'tender_book_publisher', __('Publisher', 'tender-a-library')),
 
 			Field::make('text', 'tender_book_units', __('Copies', 'tender-a-library'))
 				->set_attribute('type', 'number')

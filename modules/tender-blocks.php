@@ -12,6 +12,7 @@ include_once __DIR__ . '/../block-includes/book-search-functions.php';
 include_once __DIR__ . '/../block-includes/upcoming-events-functions.php';
 include_once __DIR__ . '/../block-includes/profile-links-functions.php';
 include_once __DIR__ . '/../block-includes/event-date-functions.php';
+include_once __DIR__ . '/../block-includes/latest-books-functions.php';
 
 function tender_plugin_block_categories($categories)
 {
@@ -53,6 +54,9 @@ function tender_tender_block_init()
 	));
 	register_block_type(__DIR__ . '/../build/event-date', array(
 		'render_callback' => 'tender_event_date_render_callback',
+	));
+	register_block_type(__DIR__ . '/../build/latest-books', array(
+		'render_callback' => 'tender_latest_books_render_callback',
 	));
 }
 add_action('init', 'tender_tender_block_init');

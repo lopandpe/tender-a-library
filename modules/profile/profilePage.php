@@ -224,7 +224,7 @@ function tal_profile_template($content)
 				<a class="tal-profile-tab <?php echo $active_tab === 'overview' ? 'is-active' : ''; ?>" href="<?php echo esc_url(tal_profile_tab_url($current_user, 'overview')); ?>">
 					<?php echo esc_html__('Profile', 'tender-a-library'); ?>
 				</a>
-					<a class="tal-profile-tab <?php echo $active_tab === 'calls' ? 'is-active' : ''; ?>" href="<?php echo esc_url(tal_profile_tab_url($current_user, 'calls')); ?>">
+					<a class="tal-profile-tab calls-button <?php echo $active_tab === 'calls' ? 'is-active' : ''; ?>" href="<?php echo esc_url(tal_profile_tab_url($current_user, 'calls')); ?>">
 						<?php echo esc_html__('Call history', 'tender-a-library'); ?>
 					</a>
 			</div>

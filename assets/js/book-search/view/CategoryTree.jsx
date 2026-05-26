@@ -27,7 +27,7 @@ const CategoryNode = ({ node, level, filters, togleInArray }) => {
             className={`category-node level-${level} ${hasChildren ? 'has-children' : 'no-children'}`}
         >
             <div className="category-node-header">
-                {hasChildren && (
+                {hasChildren ? (
                     <span 
                         className="toggle-children"
                         onClick={() => setIsExpanded(!isExpanded)}
@@ -36,6 +36,8 @@ const CategoryNode = ({ node, level, filters, togleInArray }) => {
                     >
                         {isExpanded ? '−' : '+'}
                     </span>
+                ) : (
+                    <span className="toggle-children toggle-placeholder" aria-hidden="true"></span>
                 )}
                 
                 <label>

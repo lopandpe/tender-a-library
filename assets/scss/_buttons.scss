@@ -26,3 +26,12 @@
 		opacity: 0.9;
 	}
 }
+.calls-button{
+	background-color: transparent;
+	color: $primary-color;
+	border: none;
+	font-weight: normal;
+	&.active{
+		text-decoration: underline;
+	}
+}

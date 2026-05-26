@@ -11,6 +11,7 @@ const defaultFilters = {
     sections: [],
     languages: [],
     page: 1,
+    per_page: '12',
     orderby: 'date',
     order: 'desc',
 };

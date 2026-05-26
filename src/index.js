@@ -6,3 +6,4 @@ import "./book-search/";
 import "./upcoming-events";
 import "./profile-links";
 import "./event-date";
+import "./latest-books";

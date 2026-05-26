@@ -15,7 +15,7 @@ const Pagination = ({ filters, setFilters, pagination }) => {
             <span>
                 {wp.i18n.sprintf(
                     /* translators: 1: current page, 2: total pages */
-                    __('Page %1$d of %2$d', 'tender-a-library'),
+                    wp.i18n.__('Page %1$d of %2$d', 'tender-a-library'),
                     currentPage,
                     pagination.total
                 )}

@@ -1,2 +1,0 @@
-id,title,author,publisher,quantity,language_name,section_name,section_parent_path,section_path,section_number,created_at,updated_at,year,edition,isbn,description,review,other_authors,sig1,sig2,cover_url,cover_path
-1,Sample Book,"Author, Name",Sample Publisher,1,Spanish,Feminism,Politics,Feminism > Anarchism,2.5.1,2024-01-01 00:00:00,2024-01-01 00:00:00,2024,1,1234567890,Short summary,Review text,Other Author,ABC,sam,https://example.org/media/book-cover.jpg,

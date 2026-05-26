@@ -1,8 +1,37 @@
 import CategoryTree from "./CategoryTree";
-import { useState } from "@wordpress/element";
+import { useEffect, useRef, useState } from "@wordpress/element";
 
 const Filters = ({ filters, setFilters, options }) => {
 	const [active, setActive] = useState(false);
+	const wrapperRef = useRef(null);
+	const toggleRef = useRef(null);
+
+	useEffect(() => {
+		if (!active) {
+			return;
+		}
+
+		const handlePointerDown = (event) => {
+			const wrapper = wrapperRef.current;
+			const toggle = toggleRef.current;
+			const target = event.target;
+
+			if (wrapper && wrapper.contains(target)) {
+				return;
+			}
+			if (toggle && toggle.contains(target)) {
+				return;
+			}
+
+			setActive(false);
+		};
+
+		document.addEventListener("pointerdown", handlePointerDown);
+
+		return () => {
+			document.removeEventListener("pointerdown", handlePointerDown);
+		};
+	}, [active]);
 
 	const update = (key, value) => {
 		setFilters((prev) => ({
@@ -81,6 +110,7 @@ const Filters = ({ filters, setFilters, options }) => {
 		<aside className="tender-filters">
 			<div className="tender-filters-summary">
 				<div
+					ref={toggleRef}
 					className={`tender-filters-toggle ${
 						active ? "active" : ""
 					}`}
@@ -89,6 +119,21 @@ const Filters = ({ filters, setFilters, options }) => {
 				>
 					{wp.i18n.__("Show filters", "tender-a-library")}
 				</div>
+				<label className="tender-per-page-control">
+					<span>{wp.i18n.__("Books per page", "tender-a-library")}</span>
+					<select
+						value={filters.per_page || "12"}
+						onChange={(e) => {
+							update("per_page", e.target.value);
+							update("page", 1);
+						}}
+					>
+						<option value="12">12</option>
+						<option value="24">24</option>
+						<option value="68">68</option>
+						<option value="92">92</option>
+					</select>
+				</label>
 				<div id="selected-filters">
 					{Object.entries(filters)
 						.filter(
@@ -131,7 +176,11 @@ const Filters = ({ filters, setFilters, options }) => {
 				)}
 			</div>
 
-			<div id="filters-wrapper" className={active ? "active" : ""}>
+			<div
+				id="filters-wrapper"
+				className={active ? "active" : ""}
+				ref={wrapperRef}
+			>
 				<div
 					className="tender-filters-close"
 					onClick={() => setActive(false)}
@@ -195,22 +244,6 @@ const Filters = ({ filters, setFilters, options }) => {
 							{language.name}
 						</label>
 					))}
-				</fieldset>
-				<fieldset className="tender-fieldset">
-					<legend>
-						{wp.i18n.__("Books per page", "tender-a-library")}
-					</legend>
-					<select
-						value={filters.per_page || ""}
-						onChange={(e) => update("per_page", e.target.value)}
-					>
-						<option value="12" defaultChecked>
-							12
-						</option>
-						<option value="24">24</option>
-						<option value="68">68</option>
-						<option value="92">92</option>
-					</select>
 				</fieldset>
 			</div>
 		</aside>

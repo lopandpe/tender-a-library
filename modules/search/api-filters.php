@@ -28,9 +28,9 @@ function tender_api_filters($request) {
     }
     unset($term);
 
-    // Sort by section_number (as string comparison)
+    // Sort by dotted section number so 1.10 comes after 1.3.
     usort($sections, function($a, $b) {
-        return strcmp($a->section_number, $b->section_number);
+        return tal_compare_section_numbers($a->section_number, $b->section_number);
     });
 
     $filters['sections'] = tal_build_section_tree($sections);
@@ -58,4 +58,37 @@ function tal_build_section_tree($terms, $parent = 0) {
         }
     }
     return $branch;
+}
+
+function tal_compare_section_numbers($left, $right) {
+    $left = is_scalar($left) ? trim((string) $left) : '';
+    $right = is_scalar($right) ? trim((string) $right) : '';
+
+    if ($left === $right) {
+        return 0;
+    }
+    if ($left === '') {
+        return 1;
+    }
+    if ($right === '') {
+        return -1;
+    }
+
+    $left_parts = preg_split('/[^\d]+/', $left, -1, PREG_SPLIT_NO_EMPTY);
+    $right_parts = preg_split('/[^\d]+/', $right, -1, PREG_SPLIT_NO_EMPTY);
+    $max = max(count($left_parts), count($right_parts));
+
+    for ($i = 0; $i < $max; $i++) {
+        $left_part = isset($left_parts[$i]) ? (int) $left_parts[$i] : -1;
+        $right_part = isset($right_parts[$i]) ? (int) $right_parts[$i] : -1;
+
+        if ($left_part < $right_part) {
+            return -1;
+        }
+        if ($left_part > $right_part) {
+            return 1;
+        }
+    }
+
+    return strcmp($left, $right);
 }

@@ -1,3 +1,14 @@
+const decodeEntities = (value) => {
+    if (!value || typeof document === 'undefined') {
+        return value || '';
+    }
+
+    const textarea = document.createElement('textarea');
+    textarea.innerHTML = value;
+
+    return textarea.value;
+};
+
 const Results = ({ books, loading }) => {
     if (loading) {
         return <p>{wp.i18n.__('Loading...', 'tender-a-library')}</p>;
@@ -7,11 +18,15 @@ const Results = ({ books, loading }) => {
     }
     return (
         <section className="tender-results">
-            {books.map((book) => (
+            {books.map((book) => {
+                const decodedTitle = decodeEntities(book.title);
+                const decodedAuthor = decodeEntities(book.author);
+
+                return (
                 <article key={book.id} className="tender-book-preview">
 		            <a href={book.link} className="cover">
                         {book.thumbnail ? (
-                            <img src={book.thumbnail} alt={book.title} className="book-cover" />
+                            <img src={book.thumbnail} alt={decodedTitle} className="book-cover" />
                         ) : (
                             <svg
                                 viewBox="0 0 304 441"
@@ -34,8 +49,8 @@ const Results = ({ books, loading }) => {
                         )}
                     </a>
 		            <div className="book-info">
-                        <a className="title" href={book.link}>{book.title}</a>
-                        <div className="author">{book.author}</div>
+                        <a className="title" href={book.link}>{decodedTitle}</a>
+                        <div className="author">{decodedAuthor}</div>
                     </div>
                     <div className="book-availability">
                         {book.available ? (
@@ -45,7 +60,8 @@ const Results = ({ books, loading }) => {
                         )}
                     </div>
                 </article>
-            ))}
+                );
+            })}
         </section>
     );
 }

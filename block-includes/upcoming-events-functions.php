@@ -7,7 +7,7 @@ if (!defined('ABSPATH')) {
 
 function tender_upcoming_events_render_callback( $attributes, $content = '', $block = null ) {
     $mode  = isset( $attributes['mode'] ) ? $attributes['mode'] : 'calendar';
-    $limit = isset( $attributes['limit'] ) ? (int) $attributes['limit'] : 5;
+    $limit = isset( $attributes['limit'] ) ? (int) $attributes['limit'] : 4;
 
     if ( $mode === 'list' ) {
         return tender_render_events_list( $limit );
@@ -38,7 +38,7 @@ function tender_render_events_list( $limit = 5 ) {
             $post_id    = $event_post->ID;
             $thumb_html = get_the_post_thumbnail(
                 $post_id,
-                'thumbnail',
+                'medium',
                 array(
                     'class'   => 'tender-events-list__thumb-img',
                     'loading' => 'lazy',
@@ -59,16 +59,13 @@ function tender_render_events_list( $limit = 5 ) {
                     }
                 echo '</div>';
                 echo '<div class="tender-events-list__content">';
+
+                    echo '<span class="tender-events-list__time">';
+                        echo '<strong>' . esc_html( date_i18n( 'd M.', $ts ) ) . '</strong> - ' . esc_html( date_i18n( 'H:i', $ts ) );
+                    echo '</span>';
                     echo '<a href="' . esc_url( get_permalink( $post_id ) ) . '" class="tender-events-list__link">';
                         echo esc_html( get_the_title( $post_id ) );
                     echo '</a>';
-
-                    echo '<span class="tender-events-list__date">';
-                        echo esc_html( date_i18n( 'd/m/Y', $ts ) );
-                    echo '</span>';
-                    echo '<span class="tender-events-list__time">';
-                        echo esc_html( date_i18n( 'H:i', $ts ) );
-                    echo '</span>';
 
                     if ( $is_recurrent ) {
                         echo '<span class="tender-events-list__badge">' . esc_html__( 'Recurring event', 'tender-a-library' ) . '</span>';
