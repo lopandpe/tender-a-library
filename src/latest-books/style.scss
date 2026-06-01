@@ -1,7 +1,7 @@
 .wp-block-tender-a-library-latest-books {
 	.tender-latest-books-grid {
 		display: grid;
-		grid-template-columns: repeat(auto-fill, minmax(min(160px, 100%), 1fr));
+		grid-template-columns: repeat(auto-fill, minmax(min(160px, 100%), 1fr)) !important;
 		gap: 1.5rem;
 		justify-items: center;
 	}
