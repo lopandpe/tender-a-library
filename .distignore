@@ -41,3 +41,11 @@ node_modules
 *.sql
 *.tar.gz
 *.zip
+build-release.sh
+update.example.json
+CHANGELOG.md
+readme.txt
+release-build
+src
+assets/scss
+vendor/bin

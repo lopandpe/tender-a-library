@@ -7,14 +7,22 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
+function tal_current_user_manages_readers_only()
+{
+	if (!is_user_logged_in() || current_user_can('manage_options')) {
+		return false;
+	}
+
+	$user = wp_get_current_user();
+	$roles = (array) $user->roles;
+
+	return (bool) array_intersect($roles, ['opener', 'librarian']);
+}
+
 function limit_opener_roles($roles)
 {
-	// Si el usuario actual es "Opener" y NO es administrador:
-	if (current_user_can('opener') && !current_user_can('create_tender_books')) {
-		// Deja únicamente "reader" en la lista de roles
-		return array(
-			'reader' => $roles['reader'],
-		);
+	if (tal_current_user_manages_readers_only()) {
+		return isset($roles['reader']) ? array('reader' => $roles['reader']) : array();
 	}
 	return $roles;
 }
@@ -22,9 +30,7 @@ add_filter('editable_roles', 'limit_opener_roles');
 
 function force_reader_role_for_opener($user_id)
 {
-	// Si el usuario que está creando es "Opener"
-	if (current_user_can('opener') && !current_user_can('create_tender_books')) {
-		// Fuerza el rol del nuevo usuario a "reader"
+	if (tal_current_user_manages_readers_only()) {
 		$user = new WP_User($user_id);
 		$user->set_role('reader');
 	}
@@ -39,10 +45,9 @@ function filter_opener_user_list($query)
 	// Verificamos que estemos en el admin "users.php"
 	global $pagenow;
 
-	// Verificamos que el usuario actual sea "Opener" (y no sea Administrador)
 	if (
 		'users.php' === $pagenow
-		&& current_user_can('opener')
+		&& tal_current_user_manages_readers_only()
 	) {
 		// Forzamos la búsqueda de usuarios con rol "reader" únicamente
 		$query->set('role', 'reader');
@@ -51,7 +56,7 @@ function filter_opener_user_list($query)
 add_action('pre_get_users', 'filter_opener_user_list');
 
 /**
- * Evita que "Opener" edite usuarios que no sean "reader".
+ * Prevent reader managers from editing users that are not readers.
  */
 function restrict_opener_edit_non_reader($allcaps, $caps, $args, $user)
 {
@@ -65,8 +70,7 @@ function restrict_opener_edit_non_reader($allcaps, $caps, $args, $user)
 	if (
 		! empty($args[0])
 		&& in_array($args[0], array('edit_user', 'edit_users'), true)
-		&& current_user_can('opener')
-		&& ! current_user_can('create_tender_books')
+		&& tal_current_user_manages_readers_only()
 	) {
 		// $args[2] es el ID del usuario al que se intenta editar
 		if (isset($args[2]) && (int) $args[2] > 0) {

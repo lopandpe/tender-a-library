@@ -31,7 +31,7 @@ function tender_add_permalink_settings()
 		__('Book search page', 'tender-a-library'),              // Etiqueta
 		'tal_library_search_page_callback',     // Función de renderizado
 		'permalink',                     // Página donde se muestra
-		'tal_library_settings'           // ID de la sección
+		'tender_permalink_section'       // ID de la sección
 	);
 
 	add_settings_section(
@@ -66,13 +66,24 @@ function tender_add_permalink_settings()
 	);
 
 	register_setting('permalink', 'tender_book_slug', 'sanitize_text_field');
-	register_setting('permalink', 'tal_library_search_page', 'sanitize_text_field');
+	register_setting('permalink', 'tal_library_search_page', 'absint');
 	register_setting('permalink', 'tal_profile_page', 'absint');
 	register_setting('permalink', 'tal_edit_profile_page', 'absint');
 	register_setting('permalink', 'tal_users_list_page', 'absint');
 
 }
 add_action('admin_init', 'tender_add_permalink_settings');
+
+function tal_migrate_legacy_library_page_option()
+{
+	$legacy_page_id = absint(get_option('tal_library_page_id'));
+	$current_page_id = absint(get_option('tal_library_search_page'));
+
+	if (!$current_page_id && $legacy_page_id) {
+		update_option('tal_library_search_page', $legacy_page_id);
+	}
+}
+add_action('init', 'tal_migrate_legacy_library_page_option');
 
 add_filter('display_post_states', 'tal_add_special_pages_state', 10, 2);
 function tal_add_special_pages_state($post_states, $post) {

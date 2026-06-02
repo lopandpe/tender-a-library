@@ -131,6 +131,9 @@ function tender_render_events_calendar() {
             <h2 class="tender-calendar__title">
                 <?php echo esc_html( date_i18n( 'F Y', $first_of_month ) ); ?>
             </h2>
+            <?php if ( function_exists( 'tal_render_calendar_feed_links' ) ) : ?>
+                <?php echo tal_render_calendar_feed_links(); ?>
+            <?php endif; ?>
             <div class="tender-calendar__navs">
                 <a class="tender-calendar__nav tender-calendar__nav--prev"
                 href="<?php echo esc_url( add_query_arg( array( 'te_year' => $prev_year, 'te_month' => $prev_month ), $base_url ) ); ?>">

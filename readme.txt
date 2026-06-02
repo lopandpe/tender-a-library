@@ -1,10 +1,10 @@
-=== Tender A Library ===
+=== Tender Library ===
 Contributors: pedrolopez
 Tags: library, books, lending, reservations, carbon-fields, custom-post-type, gutenberg
-Requires at least: 6.0
+Requires at least: 6.4
 Tested up to: 6.7.1
-Requires PHP: 5.6
-Stable tag: 0.1.0
+Requires PHP: 8.1
+Stable tag: 1.0.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,7 +12,7 @@ Library management plugin for Local Anarquista Magdalena: custom post types, Car
 
 == Description ==
 
-Tender A Library extends WordPress with:
+Tender Library extends WordPress with:
 
 * Custom post types for books and events
 * Custom taxonomies (sections, languages, etc.)
@@ -31,13 +31,13 @@ Carbon Fields is included as a Composer dependency in `vendor/`, so users do not
 
 1. Get the release ZIP (see "How to Share the Plugin").
 2. In WordPress admin go to `Plugins > Add New > Upload Plugin`.
-3. Upload the ZIP and activate **Plugin Biblioteca (A)**.
+3. Upload the ZIP and activate **Tender Library**.
 4. Go to `Settings > Permalinks` and click `Save` once (flush rewrite rules).
 
 = Option 2: Install from source (recommended for developers) =
 
 1. Copy/clone this plugin to:
-`wp-content/plugins/tender-a-library`
+`wp-content/plugins/tender-library`
 2. Install PHP dependencies:
 `composer install`
 3. Activate the plugin in WordPress admin.
@@ -75,21 +75,21 @@ Use this flow when delivering to another site/server.
 `npm run build`
 3. Build a clean ZIP (from plugin root):
 
-`mkdir -p /tmp/tender-a-library-release/tender-a-library`
+`mkdir -p /tmp/tender-library-release/tender-library`
 
-`rsync -a ./ /tmp/tender-a-library-release/tender-a-library/ \
+`rsync -a ./ /tmp/tender-library-release/tender-library/ \
   --exclude-from=.distignore \
   --exclude '.git/'`
 
-`cd /tmp/tender-a-library-release && zip -r tender-a-library-0.1.0.zip tender-a-library`
+`cd /tmp/tender-library-release && zip -r tender-library-1.0.0.zip tender-library`
 
-4. Share `tender-a-library-0.1.0.zip` and install via WordPress Upload Plugin.
+4. Share `tender-library-1.0.0.zip` and install via WordPress Upload Plugin.
 
 == Project Management Notes ==
 
 Directory overview:
 
-* `tender-a-library.php`: plugin bootstrap and module loading
+* `tender-library.php`: plugin bootstrap and module loading
 * `modules/`: domain logic (books, lendings, reservations, profile, emails, search)
 * `modules/migration/`: CSV migration UI, import logic, and templates
 * `modules/tender-book/`: book fields, templates, signature autofill module
@@ -105,9 +105,9 @@ Recommended branch/release workflow:
 1. Feature branch per change.
 2. Validate locally:
 `php -l` on changed PHP files, plus manual wp-admin flow tests.
-3. Update version in plugin header and this readme for release.
+3. Update version in plugin header, `TENDER_LIBRARY_VERSION`, and this readme for release.
 4. Build release ZIP with steps above.
-5. Tag release in Git (example: `v0.1.0`).
+5. Tag release in Git (example: `v1.0.0`).
 
 == Frequently Asked Questions ==
 
@@ -188,12 +188,12 @@ Check that `vendor/` exists in the deployed plugin. Without it, Carbon Fields ca
 
 == Changelog ==
 
-= 0.1.0 =
+= 1.0.0 =
 * Initial public project structure and module set.
 * Carbon Fields loading migrated to Composer-bundled dependency.
 * Signature fields workflow improved with admin autofill behavior.
 
 == Upgrade Notice ==
 
-= 0.1.0 =
+= 1.0.0 =
 Initial stable baseline for deployment and collaborative maintenance.

@@ -106,6 +106,10 @@ function tender_event_date_render_callback( $block_attributes, $block_content ) 
 				</p>
 			<?php endif; ?>
 
+			<?php if ( function_exists( 'tal_render_event_feed_links' ) ) : ?>
+				<?php echo tal_render_event_feed_links( $post_id ); ?>
+			<?php endif; ?>
+
 		</div>
 	</section>
 	<?php

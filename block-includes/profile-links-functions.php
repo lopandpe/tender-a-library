@@ -44,10 +44,59 @@ function tender_profile_links_render_callback( $attributes, $content = '', $bloc
             </a>' .
         '</li>',
         esc_url( $url ),
-        $label,
+        esc_html( $label ),
         esc_attr( $extra_class ),
         $icon_svg
     );
 
+    $item_html .= tal_get_users_list_menu_item_html();
+
     return $item_html;
 }
+
+
+function tal_get_users_list_menu_item_html()
+{
+    if (!is_user_logged_in() || !function_exists('tal_can_see_users_list') || !tal_can_see_users_list()) {
+        return '';
+    }
+
+    $users_page_id = absint(get_option('tal_users_list_page'));
+    $users_url = $users_page_id ? get_permalink($users_page_id) : '';
+
+    if (!$users_url) {
+        return '';
+    }
+
+    return sprintf(
+        '<li class="wp-block-navigation-item menu-item-auth tender-users-link-block">' .
+            '<a href="%1$s" class="wp-block-navigation-item__content menu-item-auth__link">' .
+                '<span class="menu-item-auth__label">%2$s</span>' .
+            '</a>' .
+        '</li>',
+        esc_url($users_url),
+        esc_html(get_the_title($users_page_id) ?: __('Users', 'tender-a-library'))
+    );
+}
+
+function tal_add_users_link_to_classic_main_menu($items, $args)
+{
+    if (function_exists('wp_is_block_theme') && wp_is_block_theme()) {
+        return $items;
+    }
+
+    $main_locations = array('primary', 'main', 'menu-1', 'header');
+    $theme_location = isset($args->theme_location) ? (string) $args->theme_location : '';
+
+    if (!in_array($theme_location, $main_locations, true)) {
+        return $items;
+    }
+
+    $users_item = tal_get_users_list_menu_item_html();
+    if (!$users_item || false !== strpos($items, 'tender-users-link-block')) {
+        return $items;
+    }
+
+    return $items . $users_item;
+}
+add_filter('wp_nav_menu_items', 'tal_add_users_link_to_classic_main_menu', 10, 2);

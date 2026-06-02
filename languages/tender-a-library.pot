@@ -1,76 +1,64 @@
-# Copyright (C) 2026 Local Anarquista Magdalena
-# This file is distributed under the same license as the Plugin Biblioteca (A) plugin.
+# Copyright (C) 2026 Luis Gómez
+# This file is distributed under the same license as the Tender Library plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Plugin Biblioteca (A) 0.1.0\n"
+"Project-Id-Version: Tender Library 1.0.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/tender-a-library\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-03-24T18:17:22+00:00\n"
+"POT-Creation-Date: 2026-06-02T18:35:55+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: tender-a-library\n"
 
 #. Plugin Name of the plugin
-#: tender-a-library.php
+#: tender-library.php
 #: modules/lendings/tenderMenuCover.php:481
 #: modules/lendings/tenderMenuCover.php:1128
-msgid "Plugin Biblioteca (A)"
+msgid "Tender Library"
 msgstr ""
 
 #. Description of the plugin
-#: tender-a-library.php
-msgid "Adds library functionality to the core of WordPress, including books, readers, loans, etc."
+#: tender-library.php
+#: includes/class-tender-library-updater.php:168
+msgid "Private library/tender management plugin."
 msgstr ""
 
 #. Author of the plugin
-#: tender-a-library.php
-#: modules/lendings/tenderMenuCover.php:492
-#: modules/lendings/tenderMenuCover.php:1132
-msgid "Local Anarquista Magdalena"
-msgstr ""
-
-#. Author URI of the plugin
-#: tender-a-library.php
-msgid "https://localanarquistamagdalena.org"
+#: tender-library.php
+msgid "Luis Gómez"
 msgstr ""
 
 #: block-includes/book-data-functions.php:21
-#: src/book-data/edit.js:9
 msgid "Book data"
 msgstr ""
 
 #: block-includes/book-data-functions.php:23
 #: modules/lendings/tenderMenuCover.php:491
-#: modules/tender-book/tenderBookFields.php:89
-#: src/book-data/edit.js:11
+#: modules/tender-book/tenderBookFields.php:88
 msgid "Author"
 msgstr ""
 
 #: block-includes/book-data-functions.php:25
 #: modules/tender-book/tenderBookFields.php:24
-#: src/book-data/edit.js:13
 msgid "Publisher"
 msgstr ""
 
 #: block-includes/book-data-functions.php:36
-#: modules/tender-book/tenderBookFields.php:70
+#: modules/tender-book/tenderBookFields.php:69
 #: modules/tender-event/tenderEventFields.php:76
-#: src/book-data/edit.js:17
 msgid "Library section"
 msgstr ""
 
 #: block-includes/book-data-functions.php:40
-#: src/book-data/edit.js:22
 msgid "Publication year"
 msgstr ""
 
 #: block-includes/book-data-functions.php:46
 #: modules/lendings/downloadCsvLendings.php:54
-#: src/book-data/edit.js:24
 msgid "Signature"
 msgstr ""
 
@@ -214,13 +202,20 @@ msgstr ""
 msgid "Since %1$s %2$s"
 msgstr ""
 
-#: block-includes/mini-book-functions.php:62
-#: assets/js/book-search/view/Results.jsx:42
+#: block-includes/latest-books-functions.php:31
+msgid "There are no books in the library yet."
+msgstr ""
+
+#: block-includes/mini-book-functions.php:30
+#: block-includes/mini-book-functions.php:77
+msgid "No books selected"
+msgstr ""
+
+#: block-includes/mini-book-functions.php:61
 msgid "Available"
 msgstr ""
 
-#: block-includes/mini-book-functions.php:64
-#: assets/js/book-search/view/Results.jsx:44
+#: block-includes/mini-book-functions.php:63
 msgid "Not Available"
 msgstr ""
 
@@ -229,11 +224,15 @@ msgstr ""
 msgid "Login"
 msgstr ""
 
+#: block-includes/profile-links-functions.php:78
+msgid "Users"
+msgstr ""
+
 #: block-includes/upcoming-events-functions.php:31
 msgid "There are no upcoming events."
 msgstr ""
 
-#: block-includes/upcoming-events-functions.php:74
+#: block-includes/upcoming-events-functions.php:71
 msgid "Recurring event"
 msgstr ""
 
@@ -382,8 +381,6 @@ msgid "Language"
 msgstr ""
 
 #: modules/customPostBook.php:86
-#: assets/js/book-search/view/Filters.jsx:49
-#: assets/js/book-search/view/Filters.jsx:180
 msgid "Languages"
 msgstr ""
 
@@ -404,7 +401,7 @@ msgid "Someone else wants to read the book you have borrowed"
 msgstr ""
 
 #: modules/emails/lendingHasReservation.php:43
-#: modules/emails/notReturnedEmails.php:126
+#: modules/emails/notReturnedEmails.php:121
 #: modules/emails/reservationIsAvailableNow.php:34
 #, php-format
 msgid "Hello <strong>%s</strong>,"
@@ -419,48 +416,48 @@ msgid "From now, the book loan can not be renewed, and we ask you to please retu
 msgstr ""
 
 #: modules/emails/lendingHasReservation.php:48
-#: modules/emails/notReturnedEmails.php:132
+#: modules/emails/notReturnedEmails.php:127
 #: modules/emails/reservationIsAvailableNow.php:39
 msgid "Title:"
 msgstr ""
 
 #: modules/emails/lendingHasReservation.php:49
-#: modules/emails/notReturnedEmails.php:133
+#: modules/emails/notReturnedEmails.php:128
 #: modules/emails/reservationIsAvailableNow.php:40
 msgid "Author:"
 msgstr ""
 
 #: modules/emails/lendingHasReservation.php:53
-#: modules/emails/notReturnedEmails.php:139
+#: modules/emails/notReturnedEmails.php:134
 msgid "Remember that our library is a self-managed, non-profit space that relies on the individual and collective responsibility of all its members. Returning books on time ensures that more people can enjoy them, and helps keep the project alive for everyone."
 msgstr ""
 
 #: modules/emails/lendingHasReservation.php:59
-#: modules/emails/notReturnedEmails.php:145
+#: modules/emails/notReturnedEmails.php:140
 msgid "If you have lost the books, or if you think there has been a mistake, please contact us."
 msgstr ""
 
-#: modules/emails/notReturnedEmails.php:70
+#: modules/emails/notReturnedEmails.php:65
 msgid "[Deleted book]"
 msgstr ""
 
-#: modules/emails/notReturnedEmails.php:74
+#: modules/emails/notReturnedEmails.php:69
 msgid "Unknown"
 msgstr ""
 
-#: modules/emails/notReturnedEmails.php:92
+#: modules/emails/notReturnedEmails.php:87
 msgid "Reminder: Books pending return"
 msgstr ""
 
-#: modules/emails/notReturnedEmails.php:127
+#: modules/emails/notReturnedEmails.php:122
 msgid "We are contacting you because our system shows that you have the following books pending to return."
 msgstr ""
 
-#: modules/emails/notReturnedEmails.php:128
+#: modules/emails/notReturnedEmails.php:123
 msgid "Please come by the library to return them as soon as possible."
 msgstr ""
 
-#: modules/emails/notReturnedEmails.php:134
+#: modules/emails/notReturnedEmails.php:129
 msgid "Estimated return date:"
 msgstr ""
 
@@ -502,7 +499,7 @@ msgid "E-mail"
 msgstr ""
 
 #: modules/lendings/downloadCsvLendings.php:51
-#: modules/openerUserFunctions.php:112
+#: modules/openerUserFunctions.php:116
 msgid "Phone number"
 msgstr ""
 
@@ -533,9 +530,11 @@ msgstr ""
 
 #: modules/lendings/lendingFunctions.php:21
 #: modules/lendings/lendingFunctions.php:434
-#: modules/migration/tenderMigration.php:27
-#: modules/migration/tenderMigration.php:142
-#: modules/migration/tenderMigration.php:276
+#: modules/migration/tenderMigration.php:350
+#: modules/migration/tenderMigration.php:402
+#: modules/migration/tenderMigration.php:519
+#: modules/migration/tenderMigration.php:655
+#: modules/migration/tenderMigration.php:801
 msgid "Insufficient permissions."
 msgstr ""
 
@@ -609,18 +608,15 @@ msgid "No loans found."
 msgstr ""
 
 #: modules/lendings/lendingPages.php:323
-#: assets/js/book-search/view/Pagination.jsx:13
 msgid "Previous"
 msgstr ""
 
 #: modules/lendings/lendingPages.php:349
-#: assets/js/book-search/view/Pagination.jsx:27
 msgid "Next"
 msgstr ""
 
 #: modules/lendings/lendingPages.php:369
 #: modules/lendings/lendingPages.php:428
-#: src/mini-book/edit.js:30
 msgid "Book title"
 msgstr ""
 
@@ -652,7 +648,7 @@ msgid "You do not have permission to access this page."
 msgstr ""
 
 #: modules/lendings/tenderMenuCover.php:32
-msgid "Plugin Biblioteca (A) - Dashboard"
+msgid "Tender Library - Dashboard"
 msgstr ""
 
 #: modules/lendings/tenderMenuCover.php:483
@@ -661,6 +657,11 @@ msgstr ""
 
 #: modules/lendings/tenderMenuCover.php:487
 msgid "Version"
+msgstr ""
+
+#: modules/lendings/tenderMenuCover.php:492
+#: modules/lendings/tenderMenuCover.php:1132
+msgid "Local Anarquista Magdalena"
 msgstr ""
 
 #: modules/lendings/tenderMenuCover.php:495
@@ -1642,270 +1643,386 @@ msgid "A comprehensive library management system for WordPress"
 msgstr ""
 
 #: modules/lendings/tenderMenuCover.php:1131
-msgid "Version 0.1.0 • "
+#, php-format
+msgid "Version %s • "
 msgstr ""
 
 #: modules/lendings/tenderMenuCover.php:1135
 msgid "For more information or support, please contact the development team."
 msgstr ""
 
-#: modules/migration/tenderMigration.php:15
-#: modules/migration/tenderMigration.php:16
-#: modules/migration/tenderMigration.php:48
+#: modules/migration/tenderMigration.php:29
+#: modules/migration/tenderMigration.php:30
+#: modules/migration/tenderMigration.php:544
 msgid "CSV Migration"
 msgstr ""
 
-#: modules/migration/tenderMigration.php:49
-msgid "Run one step at a time or the full migration. The books import now creates languages, sections, and cover images from the same CSV."
+#: modules/migration/tenderMigration.php:268
+#, php-format
+msgid "Missing CSV path for step %s."
 msgstr ""
 
-#: modules/migration/tenderMigration.php:52
+#: modules/migration/tenderMigration.php:301
+msgid "Dry run enabled: no data will be written."
+msgstr ""
+
+#: modules/migration/tenderMigration.php:314
+msgid "Could not create migration job."
+msgstr ""
+
+#: modules/migration/tenderMigration.php:357
+#: modules/migration/tenderMigration.php:409
+msgid "Missing job ID."
+msgstr ""
+
+#: modules/migration/tenderMigration.php:362
+#: modules/migration/tenderMigration.php:376
+msgid "Migration job not found."
+msgstr ""
+
+#: modules/migration/tenderMigration.php:383
+msgid "Migration cancelled by user."
+msgstr ""
+
+#: modules/migration/tenderMigration.php:422
+msgid "Background Job"
+msgstr ""
+
+#: modules/migration/tenderMigration.php:426
+msgid "No migration job has been started yet."
+msgstr ""
+
+#: modules/migration/tenderMigration.php:431
+msgid "Status"
+msgstr ""
+
+#: modules/migration/tenderMigration.php:432
+msgid "Current step"
+msgstr ""
+
+#: modules/migration/tenderMigration.php:447
+msgid "Stop Migration"
+msgstr ""
+
+#: modules/migration/tenderMigration.php:461
+msgid "Recent errors"
+msgstr ""
+
+#: modules/migration/tenderMigration.php:545
+msgid "Run one step at a time or the full migration. Jobs are processed in the background in small batches so large imports can continue safely without keeping the browser request open."
+msgstr ""
+
+#: modules/migration/tenderMigration.php:553
 msgid "Last migration run"
 msgstr ""
 
-#: modules/migration/tenderMigration.php:63
+#: modules/migration/tenderMigration.php:565
 msgid "Errors"
 msgstr ""
 
-#: modules/migration/tenderMigration.php:73
+#: modules/migration/tenderMigration.php:578
 msgid "CSV Source"
 msgstr ""
 
-#: modules/migration/tenderMigration.php:79
+#: modules/migration/tenderMigration.php:584
 msgid "CSV directory"
 msgstr ""
 
-#: modules/migration/tenderMigration.php:81
+#: modules/migration/tenderMigration.php:586
 msgid "Folder containing the CSV exports."
 msgstr ""
 
-#: modules/migration/tenderMigration.php:83
+#: modules/migration/tenderMigration.php:588
 msgid "Media base path"
 msgstr ""
 
-#: modules/migration/tenderMigration.php:85
+#: modules/migration/tenderMigration.php:590
 msgid "Optional root folder for cover_path values in biblio_books.csv. Leave empty if your books CSV uses full cover URLs."
 msgstr ""
 
-#: modules/migration/tenderMigration.php:88
+#: modules/migration/tenderMigration.php:593
 msgid "Detected CSV Files"
 msgstr ""
 
-#: modules/migration/tenderMigration.php:92
+#: modules/migration/tenderMigration.php:597
 msgid "Found"
 msgstr ""
 
-#: modules/migration/tenderMigration.php:92
+#: modules/migration/tenderMigration.php:597
 msgid "Missing"
 msgstr ""
 
-#: modules/migration/tenderMigration.php:95
+#: modules/migration/tenderMigration.php:600
 msgid "Download template"
 msgstr ""
 
-#: modules/migration/tenderMigration.php:100
+#: modules/migration/tenderMigration.php:605
 msgid "Upload CSV Files"
 msgstr ""
 
-#: modules/migration/tenderMigration.php:101
+#: modules/migration/tenderMigration.php:606
 msgid "Upload a file to override the CSV directory for this run."
 msgstr ""
 
-#: modules/migration/tenderMigration.php:103
+#: modules/migration/tenderMigration.php:608
+msgid "Sections CSV"
+msgstr ""
+
+#: modules/migration/tenderMigration.php:609
 msgid "Books CSV"
 msgstr ""
 
-#: modules/migration/tenderMigration.php:104
+#: modules/migration/tenderMigration.php:610
 msgid "Users CSV"
 msgstr ""
 
-#: modules/migration/tenderMigration.php:105
+#: modules/migration/tenderMigration.php:611
 msgid "Lendings CSV"
 msgstr ""
 
-#: modules/migration/tenderMigration.php:106
+#: modules/migration/tenderMigration.php:612
 msgid "Calls CSV"
 msgstr ""
 
-#: modules/migration/tenderMigration.php:109
+#: modules/migration/tenderMigration.php:615
 msgid "Run Migration"
 msgstr ""
 
-#: modules/migration/tenderMigration.php:110
-msgid "Order matters: users, books, lendings, calls. The books CSV also handles sections, languages, and cover downloads."
+#: modules/migration/tenderMigration.php:616
+msgid "Order matters: sections, books, users, lendings, calls. The books CSV handles languages and cover downloads, and connects to previously imported sections."
 msgstr ""
 
-#: modules/migration/tenderMigration.php:124
+#: modules/migration/tenderMigration.php:631
 msgid "Dry run (no data will be written)"
 msgstr ""
 
-#: modules/migration/tenderMigration.php:125
+#: modules/migration/tenderMigration.php:632
 msgid "Use this to preview counts and missing mappings before running the real import."
 msgstr ""
 
-#: modules/migration/tenderMigration.php:128
+#: modules/migration/tenderMigration.php:635
+msgid "A migration job is currently running. Starting a second one is blocked until it finishes."
+msgstr ""
+
+#: modules/migration/tenderMigration.php:639
 msgid "Run Full Migration"
 msgstr ""
 
-#: modules/migration/tenderMigration.php:129
+#: modules/migration/tenderMigration.php:640
+msgid "Import Sections"
+msgstr ""
+
+#: modules/migration/tenderMigration.php:641
 msgid "Import Users"
 msgstr ""
 
-#: modules/migration/tenderMigration.php:130
+#: modules/migration/tenderMigration.php:642
 msgid "Import Books"
 msgstr ""
 
-#: modules/migration/tenderMigration.php:131
+#: modules/migration/tenderMigration.php:643
 msgid "Import Lendings"
 msgstr ""
 
-#: modules/migration/tenderMigration.php:132
+#: modules/migration/tenderMigration.php:644
 msgid "Import Calls"
 msgstr ""
 
-#: modules/migration/tenderMigration.php:165
-msgid "Dry run enabled: no data was written."
+#: modules/migration/tenderMigration.php:677
+msgid "Another migration job is already running."
 msgstr ""
 
-#: modules/migration/tenderMigration.php:215
+#: modules/migration/tenderMigration.php:739
+#: modules/migration/tenderMigration.php:1114
 #, php-format
 msgid "Unknown migration step: %s"
 msgstr ""
 
-#: modules/migration/tenderMigration.php:287
+#: modules/migration/tenderMigration.php:813
 msgid "Invalid template."
 msgstr ""
 
-#: modules/migration/tenderMigration.php:292
+#: modules/migration/tenderMigration.php:818
 msgid "Template not found."
 msgstr ""
 
-#: modules/migration/tenderMigration.php:322
+#: modules/migration/tenderMigration.php:848
+#: modules/migration/tenderMigration.php:904
+#: modules/migration/tenderMigration.php:933
 #, php-format
 msgid "CSV not found: %s"
 msgstr ""
 
-#: modules/migration/tenderMigration.php:327
+#: modules/migration/tenderMigration.php:853
+#: modules/migration/tenderMigration.php:909
+#: modules/migration/tenderMigration.php:938
 #, php-format
 msgid "Could not open CSV: %s"
 msgstr ""
 
-#: modules/migration/tenderMigration.php:333
+#: modules/migration/tenderMigration.php:859
+#: modules/migration/tenderMigration.php:915
+#: modules/migration/tenderMigration.php:944
 #, php-format
 msgid "Empty CSV: %s"
 msgstr ""
 
-#: modules/migration/tenderMigration.php:451
+#: modules/migration/tenderMigration.php:1025
+#, php-format
+msgid "Missing source path for step %s."
+msgstr ""
+
+#: modules/migration/tenderMigration.php:1227
+msgid "Sections hierarchy updated."
+msgstr ""
+
+#: modules/migration/tenderMigration.php:1329
+#, php-format
+msgid "Book row %1$d old_id %2$d section error: %3$s"
+msgstr ""
+
+#: modules/migration/tenderMigration.php:1335
+#, php-format
+msgid "Book row %1$d old_id %2$d language error: %3$s"
+msgstr ""
+
+#: modules/migration/tenderMigration.php:1351
+#: modules/migration/tenderMigration.php:2047
+msgid "Untitled book"
+msgstr ""
+
+#: modules/migration/tenderMigration.php:1373
+#, php-format
+msgid "Book row %1$d old_id %2$d cover error: %3$s"
+msgstr ""
+
+#: modules/migration/tenderMigration.php:1421
+#, php-format
+msgid "Lending row %1$d old_id %2$d missing book/user mapping."
+msgstr ""
+
+#: modules/migration/tenderMigration.php:1447
+#, php-format
+msgid "Failed to insert lending row %1$d old_id %2$d."
+msgstr ""
+
+#: modules/migration/tenderMigration.php:1487
+#, php-format
+msgid "Call row %1$d old_id %2$d missing user mapping."
+msgstr ""
+
+#: modules/migration/tenderMigration.php:1514
+#, php-format
+msgid "Failed to insert call row %1$d old_id %2$d."
+msgstr ""
+
+#: modules/migration/tenderMigration.php:1601
 #, php-format
 msgid "Sections imported. Created: %d, updated: %d."
 msgstr ""
 
-#: modules/migration/tenderMigration.php:522
+#: modules/migration/tenderMigration.php:1672
 #, php-format
 msgid "Languages imported. Created: %d, updated: %d."
 msgstr ""
 
-#: modules/migration/tenderMigration.php:559
+#: modules/migration/tenderMigration.php:1709
 #, php-format
 msgid "Media %d missing URL or file path."
 msgstr ""
 
-#: modules/migration/tenderMigration.php:564
-#: modules/migration/tenderMigration.php:1053
+#: modules/migration/tenderMigration.php:1714
+#: modules/migration/tenderMigration.php:2308
 #, php-format
 msgid "Missing media file: %s"
 msgstr ""
 
-#: modules/migration/tenderMigration.php:599
+#: modules/migration/tenderMigration.php:1749
 #, php-format
 msgid "Images imported. Created: %d, skipped: %d."
 msgstr ""
 
-#: modules/migration/tenderMigration.php:617
+#: modules/migration/tenderMigration.php:1772
 #, php-format
 msgid "Could not copy file: %s"
 msgstr ""
 
-#: modules/migration/tenderMigration.php:741
+#: modules/migration/tenderMigration.php:1992
 #, php-format
 msgid "Users imported. Created: %d, updated: %d."
 msgstr ""
 
-#: modules/migration/tenderMigration.php:778
+#: modules/migration/tenderMigration.php:2025
 #, php-format
 msgid "Book %d section error: %s"
 msgstr ""
 
-#: modules/migration/tenderMigration.php:784
+#: modules/migration/tenderMigration.php:2031
 #, php-format
 msgid "Book %d language error: %s"
 msgstr ""
 
-#: modules/migration/tenderMigration.php:796
-msgid "Untitled book"
-msgstr ""
-
-#: modules/migration/tenderMigration.php:812
+#: modules/migration/tenderMigration.php:2070
 #, php-format
 msgid "Book %d cover error: %s"
 msgstr ""
 
-#: modules/migration/tenderMigration.php:822
+#: modules/migration/tenderMigration.php:2084
 #, php-format
-msgid "Books imported. Created: %d, skipped: %d."
+msgid "Books imported. Created: %d, updated: %d."
 msgstr ""
 
-#: modules/migration/tenderMigration.php:892
+#: modules/migration/tenderMigration.php:2166
 msgid "Missing language mapping."
 msgstr ""
 
-#: modules/migration/tenderMigration.php:894
+#: modules/migration/tenderMigration.php:2168
 msgid "Missing language_name."
 msgstr ""
 
-#: modules/migration/tenderMigration.php:951
-msgid "Missing section mapping."
+#: modules/migration/tenderMigration.php:2211
+msgid "No imported section matches the provided section_id."
 msgstr ""
 
-#: modules/migration/tenderMigration.php:953
-msgid "Missing section_name or section_path."
+#: modules/migration/tenderMigration.php:2218
+msgid "No imported section matches the provided section_name and section_number."
 msgstr ""
 
-#: modules/migration/tenderMigration.php:1113
+#: modules/migration/tenderMigration.php:2368
 #, php-format
 msgid "Lending %d missing book/user mapping."
 msgstr ""
 
-#: modules/migration/tenderMigration.php:1139
+#: modules/migration/tenderMigration.php:2394
 #, php-format
 msgid "Failed to insert lending %d."
 msgstr ""
 
-#: modules/migration/tenderMigration.php:1147
+#: modules/migration/tenderMigration.php:2402
 #, php-format
 msgid "Lendings imported. Created: %d, skipped: %d."
 msgstr ""
 
-#: modules/migration/tenderMigration.php:1183
+#: modules/migration/tenderMigration.php:2438
 #, php-format
 msgid "Call %d missing user mapping."
 msgstr ""
 
-#: modules/migration/tenderMigration.php:1210
+#: modules/migration/tenderMigration.php:2465
 #, php-format
 msgid "Failed to insert call %d."
 msgstr ""
 
-#: modules/migration/tenderMigration.php:1218
+#: modules/migration/tenderMigration.php:2473
 #, php-format
 msgid "Calls imported. Created: %d, skipped: %d."
 msgstr ""
 
-#: modules/openerUserFunctions.php:108
+#: modules/openerUserFunctions.php:112
 msgid "More info"
 msgstr ""
 
-#: modules/openerUserFunctions.php:110
+#: modules/openerUserFunctions.php:114
 msgid "Receive newsletter by e-mail"
 msgstr ""
 
@@ -1930,28 +2047,28 @@ msgid "Profile settings"
 msgstr ""
 
 #: modules/permalinks.php:46
-#: modules/permalinks.php:83
+#: modules/permalinks.php:94
 msgid "Users management page"
 msgstr ""
 
 #: modules/permalinks.php:54
-#: modules/permalinks.php:81
+#: modules/permalinks.php:92
 msgid "Profile page"
 msgstr ""
 
 #: modules/permalinks.php:62
-#: modules/permalinks.php:82
+#: modules/permalinks.php:93
 msgid "Profile edit page"
 msgstr ""
 
-#: modules/permalinks.php:80
+#: modules/permalinks.php:91
 msgid "Searching page"
 msgstr ""
 
-#: modules/permalinks.php:138
-#: modules/permalinks.php:147
-#: modules/permalinks.php:157
-#: modules/permalinks.php:166
+#: modules/permalinks.php:149
+#: modules/permalinks.php:158
+#: modules/permalinks.php:168
+#: modules/permalinks.php:177
 msgid "Select page"
 msgstr ""
 
@@ -2100,7 +2217,7 @@ msgid "New call entry"
 msgstr ""
 
 #: modules/profile/profilePage.php:265
-#: modules/tender-book/tenderBookFields.php:93
+#: modules/tender-book/tenderBookFields.php:92
 msgid "Title"
 msgstr ""
 
@@ -2237,7 +2354,7 @@ msgstr ""
 
 #: modules/reservations/reservationFunctions.php:192
 #: modules/reservations/reservationFunctions.php:212
-#: modules/reservations/reservationFunctions.php:346
+#: modules/reservations/reservationFunctions.php:347
 msgid "Not authorized"
 msgstr ""
 
@@ -2269,55 +2386,59 @@ msgstr ""
 msgid "You do not have active reservations."
 msgstr ""
 
-#: modules/reservations/reservationFunctions.php:304
+#: modules/reservations/reservationFunctions.php:292
+msgid "No cover"
+msgstr ""
+
+#: modules/reservations/reservationFunctions.php:305
 msgid "Reservation date"
 msgstr ""
 
 #. translators: %s: formatted date
-#: modules/reservations/reservationFunctions.php:309
+#: modules/reservations/reservationFunctions.php:310
 #, php-format
 msgid "Status: Available for pickup until %s"
 msgstr ""
 
 #. translators: Status label
-#: modules/reservations/reservationFunctions.php:317
+#: modules/reservations/reservationFunctions.php:318
 #, php-format
 msgid "Status: %s"
 msgstr ""
 
-#: modules/reservations/reservationFunctions.php:318
+#: modules/reservations/reservationFunctions.php:319
 msgid "Reserved"
 msgstr ""
 
-#: modules/reservations/reservationFunctions.php:327
+#: modules/reservations/reservationFunctions.php:328
 msgid "Cancel reservation"
 msgstr ""
 
-#: modules/reservations/reservationFunctions.php:351
+#: modules/reservations/reservationFunctions.php:352
 msgid "Invalid request"
 msgstr ""
 
-#: modules/reservations/reservationFunctions.php:362
+#: modules/reservations/reservationFunctions.php:363
 msgid "Reservation not found"
 msgstr ""
 
-#: modules/reservations/reservationFunctions.php:374
+#: modules/reservations/reservationFunctions.php:375
 msgid "You cannot cancel this reservation"
 msgstr ""
 
-#: modules/reservations/reservationFunctions.php:382
+#: modules/reservations/reservationFunctions.php:383
 msgid "Reservation is not active"
 msgstr ""
 
-#: modules/reservations/reservationFunctions.php:394
+#: modules/reservations/reservationFunctions.php:395
 msgid "Database error"
 msgstr ""
 
-#: modules/reservations/reservationFunctions.php:398
+#: modules/reservations/reservationFunctions.php:399
 msgid "Reservation cancelled successfully"
 msgstr ""
 
-#: modules/tender-blocks.php:23
+#: modules/tender-blocks.php:24
 msgid "Tender Blocks"
 msgstr ""
 
@@ -2341,35 +2462,35 @@ msgstr ""
 msgid "Otras autoras"
 msgstr ""
 
-#: modules/tender-book/tenderBookFields.php:27
+#: modules/tender-book/tenderBookFields.php:26
 msgid "Copies"
 msgstr ""
 
-#: modules/tender-book/tenderBookFields.php:37
+#: modules/tender-book/tenderBookFields.php:36
 msgid "Language"
 msgstr ""
 
-#: modules/tender-book/tenderBookFields.php:49
+#: modules/tender-book/tenderBookFields.php:48
 msgid "Year of publication"
 msgstr ""
 
-#: modules/tender-book/tenderBookFields.php:51
+#: modules/tender-book/tenderBookFields.php:50
 msgid "Edition number"
 msgstr ""
 
-#: modules/tender-book/tenderBookFields.php:56
+#: modules/tender-book/tenderBookFields.php:55
 msgid "Summary"
 msgstr ""
 
-#: modules/tender-book/tenderBookFields.php:58
+#: modules/tender-book/tenderBookFields.php:57
 msgid "Review"
 msgstr ""
 
-#: modules/tender-book/tenderBookFields.php:92
+#: modules/tender-book/tenderBookFields.php:91
 msgid "First three letters of the author's first surname."
 msgstr ""
 
-#: modules/tender-book/tenderBookFields.php:96
+#: modules/tender-book/tenderBookFields.php:95
 msgid "Three first letters of the first word of more than three characters in the title, avoiding articles."
 msgstr ""
 
@@ -2461,6 +2582,51 @@ msgstr ""
 msgid "Event in the library"
 msgstr ""
 
+#: modules/tender-event/eventFeeds.php:56
+#: modules/tender-event/eventFeeds.php:286
+msgid "Library events"
+msgstr ""
+
+#: modules/tender-event/eventFeeds.php:67
+msgid "Event not found."
+msgstr ""
+
+#: modules/tender-event/eventFeeds.php:72
+msgid "Event date is missing."
+msgstr ""
+
+#: modules/tender-event/eventFeeds.php:287
+msgid "Upcoming library events"
+msgstr ""
+
+#: modules/tender-event/eventFeeds.php:331
+#: modules/tender-event/eventFeeds.php:346
+msgid "ICS"
+msgstr ""
+
+#: modules/tender-event/eventFeeds.php:332
+#: modules/tender-event/eventFeeds.php:347
+msgid "iCal"
+msgstr ""
+
+#: modules/tender-event/eventFeeds.php:336
+#: modules/tender-event/eventFeeds.php:348
+msgid "Subscribe"
+msgstr ""
+
+#: modules/tender-event/eventFeeds.php:337
+#: modules/tender-event/eventFeeds.php:349
+msgid "RSS"
+msgstr ""
+
+#: modules/tender-event/eventFeeds.php:340
+msgid "Add to calendar"
+msgstr ""
+
+#: modules/tender-event/eventFeeds.php:352
+msgid "Subscribe to calendar"
+msgstr ""
+
 #: modules/tender-event/tenderEventFields.php:28
 msgid "Date of the event"
 msgstr ""
@@ -2501,185 +2667,80 @@ msgstr ""
 msgid "Opener"
 msgstr ""
 
-#: modules/tenderRoles.php:48
-msgid "Librarian"
+#: modules/tenderRoles.php:52
+#: modules/tenderRoles.php:68
+msgid "Bibliotecarix"
 msgstr ""
 
-#: modules/tenderRoles.php:95
+#: modules/tenderRoles.php:115
 msgid "Reader"
 msgstr ""
 
-#: tender-a-library.php:75
+#: tender-library.php:113
 msgid "Tender A Library: Carbon Fields could not be loaded. Run Composer install for this plugin or activate Carbon Fields."
 msgstr ""
 
-#: assets/js/book-search/view/Filters.jsx:47
-#: assets/js/book-search/view/Filters.jsx:157
-msgid "Search"
-msgstr ""
-
-#: assets/js/book-search/view/Filters.jsx:48
-#: assets/js/book-search/view/Filters.jsx:170
-msgid "Sections"
-msgstr ""
-
-#: assets/js/book-search/view/Filters.jsx:50
-msgid "Page"
-msgstr ""
-
-#: assets/js/book-search/view/Filters.jsx:51
-msgid "Per Page"
-msgstr ""
-
-#: assets/js/book-search/view/Filters.jsx:52
-msgid "Order By"
-msgstr ""
-
-#: assets/js/book-search/view/Filters.jsx:53
-msgid "Order"
-msgstr ""
-
-#: assets/js/book-search/view/Filters.jsx:88
-#: assets/js/book-search/view/Filters.jsx:90
-msgid "Show filters"
-msgstr ""
-
-#: assets/js/book-search/view/Filters.jsx:124
-#: assets/js/book-search/view/Filters.jsx:148
-msgid "Reset all filters"
-msgstr ""
-
-#: assets/js/book-search/view/Filters.jsx:129
-#: assets/js/book-search/view/Filters.jsx:153
-msgid "Reset Filters"
-msgstr ""
-
-#: assets/js/book-search/view/Filters.jsx:138
-msgid "Close filters"
-msgstr ""
-
-#: assets/js/book-search/view/Filters.jsx:140
-msgid "Hide filters"
-msgstr ""
-
-#: assets/js/book-search/view/Filters.jsx:142
-msgid "Filters"
-msgstr ""
-
-#: assets/js/book-search/view/Filters.jsx:160
-msgid "Search by title, author, etc"
-msgstr ""
-
-#: assets/js/book-search/view/Filters.jsx:201
-msgid "Books per page"
-msgstr ""
-
-#. translators: 1: current page, 2: total pages
-#: assets/js/book-search/view/Pagination.jsx:18
-#, js-format
-msgid "Page %1$d of %2$d"
-msgstr ""
-
-#: assets/js/book-search/view/Results.jsx:3
-msgid "Loading..."
-msgstr ""
-
-#: assets/js/book-search/view/Results.jsx:6
-msgid "No results found."
-msgstr ""
-
-#: src/book-search/edit.js:9
-msgid "Book search"
-msgstr ""
-
-#: src/book-search/edit.js:10
-msgid "This block can only be seen on the frontend."
-msgstr ""
-
-#: src/book-summary/edit.js:9
-msgid "Book summary"
-msgstr ""
-
-#: src/mini-book/edit.js:31
-msgid "Book Author"
-msgstr ""
-
-#: src/profile-links/edit.js:25
-msgid "Login / Profile (dynamic)"
-msgstr ""
-
-#: src/upcoming-events/edit.js:14
-msgid "Events adjustments"
-msgstr ""
-
-#: src/upcoming-events/edit.js:16
-msgid "Visualization mode"
-msgstr ""
-
-#: src/upcoming-events/edit.js:19
-msgid "Monthly calendar"
-msgstr ""
-
-#: src/upcoming-events/edit.js:20
-msgid "List of upcoming events"
-msgstr ""
-
-#: src/upcoming-events/edit.js:27
-msgid "Events to show"
-msgstr ""
-
-#: src/upcoming-events/edit.js:39
-msgid "Preview: a monthly calendar of events will be displayed."
-msgstr ""
-
-#: src/upcoming-events/edit.js:42
-msgid "Preview: a list of the next"
-msgstr ""
-
-#: src/upcoming-events/edit.js:42
-msgid "events will be displayed."
-msgstr ""
-
+#: build/book-cover/block.json
 #: src/book-cover/block.json
 msgctxt "block title"
 msgid "Book Cover"
 msgstr ""
 
+#: build/book-data/block.json
 #: src/book-data/block.json
 msgctxt "block title"
 msgid "Book Data"
 msgstr ""
 
+#: build/book-search/block.json
 #: src/book-search/block.json
 msgctxt "block title"
 msgid "Book Search"
 msgstr ""
 
+#: build/book-summary/block.json
 #: src/book-summary/block.json
 msgctxt "block title"
 msgid "Book Summary"
 msgstr ""
 
+#: build/event-date/block.json
 #: src/event-date/block.json
 msgctxt "block title"
 msgid "Event date"
 msgstr ""
 
+#: build/latest-books/block.json
+#: src/latest-books/block.json
+msgctxt "block title"
+msgid "Latest Books"
+msgstr ""
+
+#: build/latest-books/block.json
+#: src/latest-books/block.json
+msgctxt "block description"
+msgid "Display the latest books added to the library in a responsive grid."
+msgstr ""
+
+#: build/mini-book/block.json
 #: src/mini-book/block.json
 msgctxt "block title"
 msgid "Mini Book"
 msgstr ""
 
+#: build/profile-links/block.json
 #: src/profile-links/block.json
 msgctxt "block title"
 msgid "Profile Links"
 msgstr ""
 
+#: build/profile-links/block.json
 #: src/profile-links/block.json
 msgctxt "block description"
 msgid "Block to display tender profile links."
 msgstr ""
 
+#: build/upcoming-events/block.json
 #: src/upcoming-events/block.json
 msgctxt "block title"
 msgid "Upcoming Events"

@@ -5,19 +5,18 @@ if (!defined('ABSPATH')) {
 }
 
 function tal_can_see_users_list() {
-    $current_user = wp_get_current_user();
+    if (!is_user_logged_in()) {
+        return false;
+    }
 
-    // Admins pueden ver todos los usuarios
-    if (user_can($current_user, 'administrator')) return true;
-
-    // Librarian, opener y editor pueden ver la lista de usuarios
-    $roles = (array) $current_user->roles;
-    if (array_intersect($roles, ['librarian', 'opener', 'editor'])) {
+    if (current_user_can('manage_options')) {
         return true;
     }
 
-    // Reader no puede ver la lista de usuarios
-    return false;
+    $current_user = wp_get_current_user();
+    $roles = (array) $current_user->roles;
+
+    return (bool) array_intersect($roles, ['opener', 'librarian']);
 }
 
 
@@ -36,7 +35,7 @@ function tal_can_view_profile($profile_user_id) {
 
     // Librarian, opener y editor pueden ver todos, pero solo editar algunos (gestión abajo)
     $roles = (array) $current_user->roles;
-    if (array_intersect($roles, ['librarian', 'opener', 'editor'])) {
+    if (array_intersect($roles, ['librarian', 'opener'])) {
         return true;
     }
 
@@ -62,7 +61,7 @@ function tal_can_edit_profile($profile_user_id) {
     $editable_roles = ['reader'];
 
     $roles = (array) $current_user->roles;
-    if (array_intersect($roles, ['librarian', 'opener', 'editor'])) {
+    if (array_intersect($roles, ['librarian', 'opener'])) {
         foreach ($profile_user->roles as $profile_role) {
             if (in_array($profile_role, $editable_roles, true)) {
                 return true;

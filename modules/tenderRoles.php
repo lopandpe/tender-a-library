@@ -31,21 +31,41 @@ function create_opener_role()
 			'create_tender_books'            => false,
 			
 
-			// Capacidades para crear y editar usuarios:
-			'create_users' => false,  // Permite añadir usuarios
-			'edit_users'   => false,  // Permite editar usuarios (cambiar datos, resetear contraseña, etc.)
-			'list_users'   => false,  // Permite ver el listado de usuarios (importante si quieres que vea la tabla)
-			// No agregamos 'delete_users' => true, para que NO pueda eliminarlos
-			// No agregamos 'promote_users' => true, si no quieres que cambie roles existentes (ver siguiente sección)
+			// Reader/user management and lending desk access.
+			'create_users' => true,
+			'edit_users'   => true,
+			'list_users'   => true,
+			'create_lendings' => true,
+			// No delete/promote caps: openers can manage reader accounts only.
 		)
 	);
 }
+add_action('init', 'tal_sync_librarian_role_label', 1);
+function tal_sync_librarian_role_label()
+{
+	global $wp_roles;
+
+	if (!isset($wp_roles) || !isset($wp_roles->roles['librarian'])) {
+		return;
+	}
+
+	$label = __('Bibliotecarix', 'tender-a-library');
+
+	if (isset($wp_roles->roles['librarian']['name']) && $wp_roles->roles['librarian']['name'] === $label) {
+		return;
+	}
+
+	$wp_roles->roles['librarian']['name'] = $label;
+	$wp_roles->role_names['librarian'] = $label;
+	update_option($wp_roles->role_key, $wp_roles->roles);
+}
+
 add_action('init', 'create_librarian_role', 0);
 function create_librarian_role()
 {
 	add_role(
 		'librarian',
-		__('Librarian', 'tender-a-library'),  // Nombre que aparecerá en WP
+		__('Bibliotecarix', 'tender-a-library'),  // Nombre que aparecerá en WP
 		array(
 			// Para acceder al Dashboard, ver su perfil
 			'read' => true,
@@ -77,12 +97,12 @@ function create_librarian_role()
 			'assign_tender_languages'         => true,
 			
 
-			// Capacidades para crear y editar usuarios:
-			'create_users' => false,  // Permite añadir usuarios
-			'edit_users'   => false,  // Permite editar usuarios (cambiar datos, resetear contraseña, etc.)
-			'list_users'   => false,  // Permite ver el listado de usuarios (importante si quieres que vea la tabla)
-			// No agregamos 'delete_users' => true, para que NO pueda eliminarlos
-			// No agregamos 'promote_users' => true, si no quieres que cambie roles existentes (ver siguiente sección)
+			// Same reader/user management and lending desk access as opener.
+			'create_users' => true,
+			'edit_users'   => true,
+			'list_users'   => true,
+			'create_lendings' => true,
+			// No delete/promote caps: librarians can manage reader accounts only.
 		)
 	);
 }
@@ -104,35 +124,43 @@ function create_reader_role()
 
 add_action('init', 'tal_add_library_capability', 0);
 function tal_add_library_capability() {
-    // Roles a los que se le asignará la capability
-    $roles = ['administrator', 'opener', 'librarian', 'author', 'editor'];
+    $roles = ['administrator', 'opener', 'librarian'];
 
     foreach ($roles as $role_name) {
         $role = get_role($role_name);
-        if ($role && !$role->has_cap('create_lendings')) {
+        if ($role) {
             $role->add_cap('create_lendings');
+        }
+    }
+
+    foreach (['author', 'contributor', 'editor'] as $role_name) {
+        $role = get_role($role_name);
+        if ($role) {
+            $role->remove_cap('create_lendings');
         }
     }
 }
 
-function tal_cleanup_opener_caps() {
-    $role = get_role('opener');
-    if ($role) {
-        $role->remove_cap('list_users');
-        $role->remove_cap('edit_users');
+function tal_sync_reader_manager_caps() {
+    foreach (['opener', 'librarian'] as $role_name) {
+        $role = get_role($role_name);
+        if (!$role) {
+            continue;
+        }
+
+        $role->add_cap('create_users');
+        $role->add_cap('edit_users');
+        $role->add_cap('list_users');
         $role->remove_cap('delete_users');
-        $role->remove_cap('create_users');
         $role->remove_cap('promote_users');
         $role->remove_cap('remove_users');
         $role->remove_cap('add_users');
-        $role->remove_cap('edit_user');
-        $role->remove_cap('edit_others_users');
     }
 }
-add_action('init', 'tal_cleanup_opener_caps');
+add_action('init', 'tal_sync_reader_manager_caps');
 
 function tal_add_librarian_caps() {
-    $roles = ['administrator', 'editor', 'librarian'];
+    $roles = ['administrator', 'librarian'];
     foreach ($roles as $role_name) {
         $role = get_role($role_name);
         if (!$role) {

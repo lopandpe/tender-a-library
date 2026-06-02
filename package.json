@@ -1,6 +1,6 @@
 {
-  "name": "tender-a-library",
-  "version": "0.1.1",
+  "name": "tender-library",
+  "version": "1.0.0",
   "author": "Local Anarquista Magdalena",
   "scripts": {
     "build": "npm run build:blocks && npm run webpack",
@@ -28,7 +28,7 @@
     "webpack": "^5.99.9",
     "webpack-cli": "^4.10.0"
   },
-  "description": "=== Plugin Biblioteca (A)",
+  "description": "Tender Library private WordPress plugin",
   "dependencies": {
     "@wordpress/i18n": "^6.0.0"
   },

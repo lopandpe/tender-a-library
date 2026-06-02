@@ -27,11 +27,6 @@ add_action('init', function () {
     }
 });
 
-// Limpia el cron al desactivar el plugin
-register_deactivation_hook(__FILE__, function () {
-    wp_clear_scheduled_hook('tal_send_not_returned_emails');
-});
-
 // Hook principal: ejecuta el proceso de avisos
 add_action('tal_send_not_returned_emails', function () {
     // Sólo ejecutar domingos a las 2:00am (servidor/local)

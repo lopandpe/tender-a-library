@@ -1,0 +1,42 @@
+
+.tender-feed-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 0.75rem;
+  margin-top: 1rem;
+}
+
+.tender-feed-links__label {
+  font-weight: 600;
+}
+
+.tender-feed-links__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.tender-feed-links__link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2rem;
+  padding: 0.25rem 0.6rem;
+  border: 1px solid currentColor;
+  border-radius: 4px;
+  font-size: 0.875rem;
+  line-height: 1.2;
+  text-decoration: none;
+}
+
+.tender-feed-links__link:hover,
+.tender-feed-links__link:focus {
+  text-decoration: underline;
+}
+
+.tender-calendar-feed-links {
+  margin-top: 0;
+}

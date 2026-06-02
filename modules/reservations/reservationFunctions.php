@@ -289,11 +289,12 @@ function tender_user_reservations_shortcode() {
                                 <?php if ($cover_id): ?>
                                     <?php echo wp_get_attachment_image($cover_id, 'medium'); ?>
                                 <?php else: ?>
-                                    <img src="<?php echo plugin_dir_url(__FILE__); ?>../../assets/svg/default-book.svg"" alt=" No cover"> <?php endif; ?>
+                                    <img src="<?php echo esc_url(plugin_dir_url(__FILE__) . '../../assets/svg/default-book.svg'); ?>" alt="<?php esc_attr_e('No cover', 'tender-a-library'); ?>">
+                                <?php endif; ?>
                             </div>
                             <div class="book-info">
-                                <a class="title" href="<?php echo get_permalink($reservation->book_id); ?>"><?php echo get_the_title($reservation->book_id); ?></a>
-                                <div class="author"><?php echo carbon_get_post_meta($reservation->book_id, 'tender_book_author'); ?></div>
+                                <a class="title" href="<?php echo esc_url(get_permalink($reservation->book_id)); ?>"><?php echo esc_html(get_the_title($reservation->book_id)); ?></a>
+                                <div class="author"><?php echo esc_html(carbon_get_post_meta($reservation->book_id, 'tender_book_author')); ?></div>
 
                             </div>
                         </div>

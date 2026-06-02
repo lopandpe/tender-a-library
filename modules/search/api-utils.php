@@ -116,6 +116,8 @@ function tender_api_build_query_args($request) {
         'post__in'       => $paged_ids ?: [0], // avoid returning all if empty
         'posts_per_page' => $posts_per_page ?: 12, // default to 12 if not set
         'paged'          => 1, // already paginated
+        '_tal_found_posts' => count($all_ids),
+        '_tal_max_num_pages' => $posts_per_page > 0 ? (int) ceil(count($all_ids) / $posts_per_page) : 0,
     ];
 
     return $final_args;

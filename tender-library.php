@@ -1,31 +1,69 @@
 <?php
 
 /**
- * Plugin Name:     Plugin Biblioteca (A)
- * Description:     Adds library functionality to the core of WordPress, including books, readers, loans, etc.
- * Author:          Local Anarquista Magdalena
- * Author URI:      https://localanarquistamagdalena.org
- * Text Domain:     tender-a-library
- * Domain Path:     /languages
- * Version:         0.1.0
+ * Plugin Name: Tender Library
+ * Description: Private library/tender management plugin.
+ * Version: 1.0.0
+ * Author: Luis Gómez
+ * Text Domain: tender-library
+ * Domain Path: /languages
+ * Requires at least: 6.4
+ * Requires PHP: 8.1
+ * Update URI: https://example.com/tender-library
  *
- * @package         Tender_A_Library
+ * @package Tender_Library
  */
+
+
+define('TENDER_LIBRARY_VERSION', '1.0.0');
+define('TENDER_LIBRARY_UPDATE_URI', 'https://example.com/tender-library');
+define('TENDER_LIBRARY_UPDATE_METADATA_URL', 'https://example.com/tender-library/update.json');
+define('TENDER_LIBRARY_PLUGIN_FILE', __FILE__);
 
 require_once __DIR__ . '/modules/db/installDBFunctions.php';
 require_once __DIR__ . '/modules/createPagesOnActivation.php';
 require_once __DIR__ . '/modules/emails/notReturnedEmails.php';
+require_once __DIR__ . '/includes/class-tender-library-updater.php';
+
+
+function tender_library_run_version_migrations()
+{
+	$installed_version = get_option('tender_library_version', '0.0.0');
+
+	if (version_compare($installed_version, TENDER_LIBRARY_VERSION, '<')) {
+		update_option('tender_library_version', TENDER_LIBRARY_VERSION);
+	}
+}
+
+function tender_library_register_private_updater()
+{
+	$metadata_url = apply_filters(
+		'tender_library_update_metadata_url',
+		TENDER_LIBRARY_UPDATE_METADATA_URL
+	);
+
+	$updater = new Tender_Library_Updater(
+		TENDER_LIBRARY_PLUGIN_FILE,
+		TENDER_LIBRARY_VERSION,
+		$metadata_url
+	);
+	$updater->register();
+}
+add_action('plugins_loaded', 'tender_library_register_private_updater');
+add_action('admin_init', 'tender_library_run_version_migrations');
 
 function tender_activate()
 {
 	require_once __DIR__ . '/modules/customPostBook.php';
 	tender_book(); // Register the custom post type and taxonomies
 	tender_create_database_tables();
+	tender_library_run_version_migrations();
 	flush_rewrite_rules(); // Flush rewrite rules
 }
 
 function tender_deactivate()
 {
+	wp_clear_scheduled_hook('tal_send_not_returned_emails');
 	flush_rewrite_rules(); // Flush rewrite rules
 }
 
@@ -123,6 +161,7 @@ function tender_bootstrap()
             "modules/emails/notReturnedEmails",
 			"modules/emails/lendingHasReservation",
 			"modules/emails/reservationIsAvailableNow",
+			"modules/tender-event/eventFeeds",
 			"modules/tender-event/customPostEvent",
 			"modules/tender-event/tenderEventFields",
 			"modules/tender-event/tenderEventTemplate",

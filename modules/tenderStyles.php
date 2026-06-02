@@ -19,7 +19,7 @@ function tender_load_styles()
 				$handle,
 				plugin_dir_url(__FILE__) . '../' . $path,
 				[],
-				'1.0',
+				defined('TENDER_LIBRARY_VERSION') ? TENDER_LIBRARY_VERSION : '1.0.0',
 				'all'
 			);
 		}
@@ -40,7 +40,7 @@ function tender_load_admin_styles()
 				$handle,
 				plugin_dir_url(__FILE__) . '../' . $path,
 				[],
-				'1.0',
+				defined('TENDER_LIBRARY_VERSION') ? TENDER_LIBRARY_VERSION : '1.0.0',
 				'all'
 			);
 		}
@@ -58,7 +58,7 @@ function tender_load_scripts()
 		'tender-script',
 		plugin_dir_url(__FILE__) . '../dist/js/tender-scripts.js',
 		['jquery'],
-		'1.0',
+		defined('TENDER_LIBRARY_VERSION') ? TENDER_LIBRARY_VERSION : '1.0.0',
 		true
 	);
 	wp_enqueue_script('tender-script');

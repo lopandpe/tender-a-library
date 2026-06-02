@@ -19,8 +19,9 @@ function tender_api_search($request) {
 
     
     $args = tender_api_build_query_args($request);
-
-    
+    $found_posts = isset($args['_tal_found_posts']) ? (int) $args['_tal_found_posts'] : null;
+    $max_num_pages = isset($args['_tal_max_num_pages']) ? (int) $args['_tal_max_num_pages'] : null;
+    unset($args['_tal_found_posts'], $args['_tal_max_num_pages']);
 
     $query = new WP_Query($args);
 
@@ -44,11 +45,11 @@ function tender_api_search($request) {
     }, $query->posts);
 
     return rest_ensure_response(array(
-        'total'      => $query->found_posts,
+        'total'      => null !== $found_posts ? $found_posts : $query->found_posts,
         'results'    => $results,
         'page'       => $args['paged'],
         'per_page'   => $args['posts_per_page'],
-        'total_pages'=> $query->max_num_pages,
+        'total_pages'=> null !== $max_num_pages ? $max_num_pages : $query->max_num_pages,
     ));
 }
 

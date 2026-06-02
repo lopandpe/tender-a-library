@@ -7,8 +7,8 @@ if (!defined('ABSPATH')) {
 add_action('init', 'add_tender_book_caps_to_existing_roles', 0);
 function add_tender_book_caps_to_existing_roles()
 {
-	// Lista de roles a los que darás permisos completos sobre tu CPT
-	$roles = array('administrator', 'editor', 'author', 'contributor','librarian', 'opener');
+	// Roles with full management access to the library catalog.
+	$roles = array('administrator', 'librarian');
 
 	// Las mismas capacidades que definiste arriba en $capabilities
 	$caps = array(
@@ -34,6 +34,19 @@ function add_tender_book_caps_to_existing_roles()
 
 		foreach ($caps as $cap) {
 			$role->add_cap($cap);
+		}
+	}
+
+	// Earlier versions granted full catalog permissions to roles that should not
+	// manage books. Remove persisted write caps while preserving public read.
+	$restricted_roles = array('author', 'contributor', 'editor', 'opener');
+	$write_caps = array_diff($caps, array('read_tender_book'));
+	foreach ($restricted_roles as $role_name) {
+		$role = get_role($role_name);
+		if (!$role) continue;
+
+		foreach ($write_caps as $cap) {
+			$role->remove_cap($cap);
 		}
 	}
 }

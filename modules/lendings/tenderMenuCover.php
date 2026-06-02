@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Biblioteca (A) - Dashboard Page
+ * Tender Library - Dashboard Page
  * 
- * Displays a comprehensive overview of the "Plugin Biblioteca (A)" plugin
+ * Displays a comprehensive overview of the "Tender Library" plugin
  * with information about functionalities, blocks, configuration pages, and more.
  * 
  * @package Tender_A_Library
@@ -29,7 +29,7 @@ function tender_library_dashboard()
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title><?php _e('Plugin Biblioteca (A) - Dashboard', 'tender-a-library'); ?></title>
+		<title><?php _e('Tender Library - Dashboard', 'tender-a-library'); ?></title>
 		<style>
 			* {
 				margin: 0;
@@ -478,14 +478,14 @@ function tender_library_dashboard()
 			<div class="tender-header">
 				<h1>
 					<span>📚</span>
-					<?php _e('Plugin Biblioteca (A)', 'tender-a-library'); ?>
+					<?php _e('Tender Library', 'tender-a-library'); ?>
 				</h1>
 				<p><?php _e('Adds library functionality to the core of WordPress, including books, readers, loans, and more.', 'tender-a-library'); ?></p>
 				
 				<div class="tender-plugin-info">
 					<div class="tender-info-card">
 						<label><?php _e('Version', 'tender-a-library'); ?></label>
-						<span>0.1.0</span>
+						<span><?php echo esc_html(defined('TENDER_LIBRARY_VERSION') ? TENDER_LIBRARY_VERSION : '1.0.0'); ?></span>
 					</div>
 					<div class="tender-info-card">
 						<label><?php _e('Author', 'tender-a-library'); ?></label>
@@ -1125,10 +1125,10 @@ function tender_library_dashboard()
 
 			<!-- FOOTER -->
 			<div class="tender-footer">
-				<h3><?php _e('Plugin Biblioteca (A)', 'tender-a-library'); ?></h3>
+				<h3><?php _e('Tender Library', 'tender-a-library'); ?></h3>
 				<p><?php _e('A comprehensive library management system for WordPress', 'tender-a-library'); ?></p>
 				<p>
-					<?php _e('Version 0.1.0 • ', 'tender-a-library'); ?>
+					<?php printf(esc_html__('Version %s • ', 'tender-a-library'), esc_html(defined('TENDER_LIBRARY_VERSION') ? TENDER_LIBRARY_VERSION : '1.0.0')); ?>
 					<a href="https://localanarquistamagdalena.org" target="_blank"><?php _e('Local Anarquista Magdalena', 'tender-a-library'); ?></a>
 				</p>
 				<p style="margin-top: 20px; font-size: 0.9em;">

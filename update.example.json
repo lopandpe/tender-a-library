@@ -1,0 +1,16 @@
+{
+  "name": "Tender Library",
+  "slug": "tender-library",
+  "version": "1.0.1",
+  "download_url": "https://example.com/tender-library/releases/tender-library-1.0.1.zip",
+  "requires": "6.4",
+  "tested": "6.6",
+  "requires_php": "8.1",
+  "last_updated": "2026-06-02",
+  "homepage": "https://example.com/tender-library",
+  "author": "Luis Gómez",
+  "sections": {
+    "description": "Private library/tender management plugin.",
+    "changelog": "<h4>1.0.1</h4><ul><li>Describe changes here.</li></ul>"
+  }
+}

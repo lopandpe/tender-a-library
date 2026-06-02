@@ -32,7 +32,7 @@ function tal_create_plugin_pages_on_activation() {
         [
             'slug'        => $is_spanish ? 'biblioteca' : 'library',
             'title'       => __('Library', 'tender-a-library'),
-            'option_name' => 'tal_library_page_id',
+            'option_name' => 'tal_library_search_page',
             // Usa tu shortcode o bloque real aquí
             'content'     => '<!-- wp:tender-a-library/book-search /-->', 
         ],

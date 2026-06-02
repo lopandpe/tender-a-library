@@ -1,150 +1,225 @@
-# Tender A Library
+# Tender Library
 
-Library management plugin for Local Anarquista Magdalena: custom post types, Carbon Fields metadata, reservations, lendings, profile pages, and custom Gutenberg blocks.
+Private WordPress plugin for small local libraries. It provides book/event custom post types, Carbon Fields metadata, lending and reservation workflows, user/profile pages, search blocks, event feeds, email reminders, and CSV migration tools.
 
-## Description
+This plugin is **not** distributed through WordPress.org. The first install is done manually from a ZIP file. Future releases are delivered through a private update metadata endpoint and can be installed from the WordPress dashboard.
 
-Tender A Library extends WordPress with:
+## Requirements
 
-- Custom post types for books and events
-- Custom taxonomies (sections, languages, etc.)
-- Carbon Fields powered metadata
-- Library operations: lendings, reservations, profile and dashboard pages
-- REST endpoints for frontend search and filters
-- Custom Gutenberg blocks for book/event display
-- Email notifications related to reservations and overdue returns
-- CSV migration tools for importing legacy library data (books, users, lendings, calls, sections, languages, media)
+- WordPress 6.4 or newer
+- PHP 8.1 or newer
+- Composer for PHP dependency installation during release builds
+- Node/npm for asset builds during development/release
 
-Carbon Fields is included as a Composer dependency in `vendor/`, so users do not need to install a second Carbon Fields plugin.
+## Important Slug Details
 
-## Installation
+The distributed plugin slug is:
 
-### Option 1: Install from ZIP
+```text
+tender-library
+```
 
-1. Get the release ZIP.
-2. In WordPress admin go to `Plugins > Add New > Upload Plugin`.
-3. Upload the ZIP and activate **Plugin Biblioteca (A)**.
-4. Go to `Settings > Permalinks` and click `Save` once.
+The distributed main plugin file is:
 
-### Option 2: Install from Source
+```text
+tender-library.php
+```
 
-1. Copy or clone this plugin to `wp-content/plugins/tender-a-library`.
-2. Install PHP dependencies:
+Release ZIPs must contain this top-level folder:
+
+```text
+tender-library/
+```
+
+The plugin header includes `Update URI: https://example.com/tender-library`. This prevents WordPress from matching this private plugin with any WordPress.org plugin that might use the same slug.
+
+## Local Development
+
+Install PHP dependencies:
 
 ```bash
 composer install
 ```
 
-3. Activate the plugin in WordPress admin.
-4. If frontend assets changed, run:
+Install JS dependencies and build assets:
 
 ```bash
 npm install
 npm run build
 ```
 
-Notes:
-
-- Production/shared builds must include the `vendor/` directory.
-- `node_modules/` is not required in production.
-
-## Development
-
-Use npm to compile JavaScript and CSS assets.
-
-Available scripts:
-
-- `npm run build`: builds block assets and the custom webpack bundle
-- `npm run build:blocks`: builds Gutenberg block assets into `build/`
-- `npm run start:blocks`: watches and rebuilds Gutenberg block assets
-- `npm run webpack`: builds the custom frontend/admin bundle into `dist/`
-- `npm run webpack:watch`: watches and rebuilds the custom webpack bundle
-
-For a full production-style asset build:
+Useful asset commands:
 
 ```bash
 npm run build
+npm run build:blocks
+npm run webpack
+npm run start:blocks
+npm run webpack:watch
 ```
 
-## Release Flow
+## Private Update Configuration
 
-1. Install production PHP dependencies:
+The private update metadata URL is defined in `tender-library.php`:
+
+```php
+define('TENDER_LIBRARY_UPDATE_METADATA_URL', 'https://example.com/tender-library/update.json');
+```
+
+It can be changed without editing plugin files:
+
+```php
+add_filter('tender_library_update_metadata_url', function () {
+    return 'https://your-domain.example/tender-library/update.json';
+});
+```
+
+The default placeholder must be replaced before production distribution.
+
+## update.json Format
+
+A minimal metadata file looks like this:
+
+```json
+{
+  "name": "Tender Library",
+  "slug": "tender-library",
+  "version": "1.0.1",
+  "download_url": "https://example.com/tender-library/releases/tender-library-1.0.1.zip",
+  "requires": "6.4",
+  "tested": "6.6",
+  "requires_php": "8.1",
+  "last_updated": "2026-06-02",
+  "homepage": "https://example.com/tender-library",
+  "author": "Luis Gómez",
+  "sections": {
+    "description": "Private library/tender management plugin.",
+    "changelog": "<h4>1.0.1</h4><ul><li>Describe changes here.</li></ul>"
+  }
+}
+```
+
+An example lives in `update.example.json`.
+
+## Creating a Production ZIP
+
+1. Update the plugin version in `tender-library.php`:
+   - plugin header `Version`
+   - `TENDER_LIBRARY_VERSION`
+2. Update `CHANGELOG.md`.
+3. Install production PHP dependencies:
 
 ```bash
 composer install --no-dev --optimize-autoloader
 ```
 
-2. Build assets:
+4. Build final assets:
 
 ```bash
 npm ci
 npm run build
 ```
 
-3. Build a clean ZIP from the plugin root:
+5. Build the release ZIP:
 
 ```bash
-mkdir -p /tmp/tender-a-library-release/tender-a-library
-rsync -a ./ /tmp/tender-a-library-release/tender-a-library/ \
-  --exclude-from=.distignore \
-  --exclude '.git/'
-cd /tmp/tender-a-library-release && zip -r tender-a-library-0.1.0.zip tender-a-library
+./build-release.sh 1.0.0
 ```
 
-## Project Structure
+The script creates:
 
-- `tender-a-library.php`: plugin bootstrap and module loading
-- `modules/`: domain logic (books, lendings, reservations, profile, emails, search)
-- `modules/migration/`: CSV migration UI, import logic, and templates
-- `modules/tender-book/`: book fields, templates, signature autofill module
-- `assets/`: custom JS and SCSS sources for the webpack bundle
-- `src/`: Gutenberg block source files
-- `build/`: compiled Gutenberg block assets
-- `dist/`: compiled custom webpack assets
-- `vendor/`: Composer dependencies, including Carbon Fields
-- `.distignore`: excluded files/folders for release packaging
+```text
+tender-library-1.0.0.zip
+```
 
-## FAQ
+The ZIP contains a top-level `tender-library/` folder and excludes development files such as `.git`, `node_modules`, `src`, SCSS sources, test/config files, temp files, documentation, and release scripts.
 
-### Do users need to install Carbon Fields separately?
+## Publishing a New Version
 
-No. Carbon Fields is bundled through Composer in `vendor/`.
+Example for `1.0.1`:
 
-### Why does this repo not ship `node_modules/`?
+1. Update `Version` and `TENDER_LIBRARY_VERSION` to `1.0.1` in `tender-library.php`.
+2. Update `CHANGELOG.md`.
+3. Run:
 
-Because only compiled assets are needed in production. `node_modules/` is development-only.
+```bash
+composer install --no-dev --optimize-autoloader
+npm ci
+npm run build
+./build-release.sh 1.0.1
+```
 
-### How do I import legacy data from CSV?
+4. Upload the ZIP to:
 
-Go to **Dashboard -> Biblioteca -> CSV Migration**.
+```text
+https://example.com/tender-library/releases/tender-library-1.0.1.zip
+```
 
-Features:
+5. Update and upload `update.json` to:
 
-- Dry-run mode (no data written) to preview counts and missing mappings
-- Upload CSV files directly in the UI
-- Downloadable CSV templates for each entity
-- Media import supports full `url` downloads or local file paths
+```text
+https://example.com/tender-library/update.json
+```
 
-Recommended import order:
+6. In a WordPress installation with the plugin already installed, go to:
 
-1. Sections
-2. Languages
-3. Media
-4. Users
-5. Books
-6. Lendings
-7. Calls
+```text
+WordPress Admin > Dashboard > Updates
+```
 
-CSV templates live in `modules/migration/templates/`.
+or:
 
-### What if plugin activation works but fields are missing?
+```text
+WordPress Admin > Plugins
+```
 
-Check that `vendor/` exists in the deployed plugin. Without it, Carbon Fields cannot boot.
+7. Confirm that Tender Library shows the update and install it from the dashboard.
 
-## Changelog
+## First Manual Installation
 
-### 0.1.0
+1. Build `tender-library-1.0.0.zip`.
+2. In WordPress Admin, go to `Plugins > Add New > Upload Plugin`.
+3. Upload the ZIP.
+4. Activate **Tender Library**.
+5. Go to `Settings > Permalinks` and click `Save Changes` once.
+6. Confirm the plugin creates its library pages/tables and the admin menu appears for allowed roles.
 
-- Initial public project structure and module set
-- Carbon Fields loading migrated to Composer-bundled dependency
-- Signature fields workflow improved with admin autofill behavior
+## How Dashboard Updates Work
+
+The plugin registers a private updater class in `includes/class-tender-library-updater.php`.
+
+It:
+
+- Fetches update metadata with `wp_remote_get()`.
+- Caches valid metadata in a site transient.
+- Validates and sanitizes remote fields before use.
+- Compares remote and installed versions with `version_compare()`.
+- Injects update data into WordPress' plugin update transient.
+- Supports the plugin details modal through the `plugins_api` filter.
+- Fails silently if the update server is unreachable or returns invalid JSON.
+
+## Version Storage and Migrations
+
+The source of truth for runtime code is:
+
+```php
+define('TENDER_LIBRARY_VERSION', '1.0.0');
+```
+
+The plugin stores the installed version in:
+
+```text
+tender_library_version
+```
+
+Current migration logic only records the installed version. Add version-gated migrations there when schema/data changes are needed.
+
+## Manual Test Checklist
+
+See `docs/release-checklist.md`.
+
+## Notes
+
+- Do not commit real license keys, tokens, server credentials, or private endpoint secrets.
+- Replace `https://example.com/tender-library` before distributing production builds.
+- Keep the ZIP folder name, plugin slug, and update metadata slug as `tender-library`.

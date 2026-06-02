@@ -34,8 +34,6 @@ function tender_event()
 		'has_archive'           => false,
 		'rewrite'               => array('slug' => $event_slug),
 		'menu_icon'             => 'dashicons-calendar-alt',
-		'capability_type'       => array('tender_event', 'tender_events'),
-		'map_meta_cap'          => true,
 		'capability_type'       => 'post',
 		'show_in_rest'          => true,
 	);
