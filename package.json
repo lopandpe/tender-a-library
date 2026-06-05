@@ -1,6 +1,6 @@
 {
   "name": "tender-library",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "author": "Local Anarquista Magdalena",
   "scripts": {
     "build": "npm run build:blocks && npm run webpack",

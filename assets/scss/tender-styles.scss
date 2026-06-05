@@ -10,3 +10,9 @@
 @use "modal";
 @use "library-search"; 
 @use "admin/lendings";
+
+#tal-header-topbar{
+    @media screen and (max-width: 768px) {
+        display: none;
+    }
+}
