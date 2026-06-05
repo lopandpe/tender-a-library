@@ -21,7 +21,7 @@ function tender_plugin_block_categories($categories)
 		[
 			[
 				'slug'  => 'tender-blocks',
-				'title' => __('Tender Blocks', 'tender-a-library'),
+				'title' => __('Tender Blocks', 'tender-library'),
 			],
 		]
 	);

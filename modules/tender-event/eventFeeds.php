@@ -53,7 +53,7 @@ function tal_render_events_calendar_feed($request)
 {
 	$format = $request->get_param('format') === 'ical' ? 'ical' : 'ics';
 	$events = tal_get_events_for_ical_feed();
-	$ics = tal_build_ics_calendar($events, __('Library events', 'tender-a-library'));
+	$ics = tal_build_ics_calendar($events, __('Library events', 'tender-library'));
 
 	tal_send_raw_feed_response($ics, 'text/calendar; charset=utf-8', 'tender-events.' . $format);
 }
@@ -64,12 +64,12 @@ function tal_render_single_event_calendar_feed($request)
 	$post = get_post($post_id);
 
 	if (!$post || $post->post_type !== 'tender_event' || $post->post_status !== 'publish') {
-		return new WP_Error('not_found', __('Event not found.', 'tender-a-library'), array('status' => 404));
+		return new WP_Error('not_found', __('Event not found.', 'tender-library'), array('status' => 404));
 	}
 
 	$event = tal_get_event_ical_data($post);
 	if (!$event) {
-		return new WP_Error('missing_date', __('Event date is missing.', 'tender-a-library'), array('status' => 404));
+		return new WP_Error('missing_date', __('Event date is missing.', 'tender-library'), array('status' => 404));
 	}
 
 	$format = $request->get_param('format') === 'ical' ? 'ical' : 'ics';
@@ -283,8 +283,8 @@ function tal_ics_fold_line($line)
 function tal_build_events_rss($occurrences)
 {
 	$site_name = get_bloginfo('name');
-	$title = sprintf('%s - %s', $site_name, __('Library events', 'tender-a-library'));
-	$description = __('Upcoming library events', 'tender-a-library');
+	$title = sprintf('%s - %s', $site_name, __('Library events', 'tender-library'));
+	$description = __('Upcoming library events', 'tender-library');
 
 	$xml = array(
 		'<?xml version="1.0" encoding="UTF-8"?>',
@@ -328,28 +328,28 @@ function tal_render_event_feed_links($post_id = 0, $include_calendar_links = tru
 	}
 
 	$links = array(
-		array('url' => tal_get_single_event_ics_url($post_id, 'ics'), 'label' => __('ICS', 'tender-a-library')),
-		array('url' => tal_get_single_event_ics_url($post_id, 'ical'), 'label' => __('iCal', 'tender-a-library')),
+		array('url' => tal_get_single_event_ics_url($post_id, 'ics'), 'label' => __('ICS', 'tender-library')),
+		array('url' => tal_get_single_event_ics_url($post_id, 'ical'), 'label' => __('iCal', 'tender-library')),
 	);
 
 	if ($include_calendar_links) {
-		$links[] = array('url' => tal_get_events_webcal_url(), 'label' => __('Subscribe', 'tender-a-library'));
-		$links[] = array('url' => tal_get_events_rss_url(), 'label' => __('RSS', 'tender-a-library'));
+		$links[] = array('url' => tal_get_events_webcal_url(), 'label' => __('Subscribe', 'tender-library'));
+		$links[] = array('url' => tal_get_events_rss_url(), 'label' => __('RSS', 'tender-library'));
 	}
 
-	return tal_render_feed_links_markup($links, __('Add to calendar', 'tender-a-library'), 'tender-event-feed-links');
+	return tal_render_feed_links_markup($links, __('Add to calendar', 'tender-library'), 'tender-event-feed-links');
 }
 
 function tal_render_calendar_feed_links()
 {
 	$links = array(
-		array('url' => tal_get_events_ics_url('ics'), 'label' => __('ICS', 'tender-a-library')),
-		array('url' => tal_get_events_ics_url('ical'), 'label' => __('iCal', 'tender-a-library')),
-		array('url' => tal_get_events_webcal_url(), 'label' => __('Subscribe', 'tender-a-library')),
-		array('url' => tal_get_events_rss_url(), 'label' => __('RSS', 'tender-a-library')),
+		array('url' => tal_get_events_ics_url('ics'), 'label' => __('ICS', 'tender-library')),
+		array('url' => tal_get_events_ics_url('ical'), 'label' => __('iCal', 'tender-library')),
+		array('url' => tal_get_events_webcal_url(), 'label' => __('Subscribe', 'tender-library')),
+		array('url' => tal_get_events_rss_url(), 'label' => __('RSS', 'tender-library')),
 	);
 
-	return tal_render_feed_links_markup($links, __('Subscribe to calendar', 'tender-a-library'), 'tender-calendar-feed-links');
+	return tal_render_feed_links_markup($links, __('Subscribe to calendar', 'tender-library'), 'tender-calendar-feed-links');
 }
 
 function tal_render_feed_links_markup($links, $label, $class_name)

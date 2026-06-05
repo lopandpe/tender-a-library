@@ -131,13 +131,13 @@ function tal_get_active_reservation_on_book($book_id){
 
 function tal_create_reservation($book_id, $user_id){
     if(!get_post($book_id) || !get_user($user_id)){
-        return new WP_Error('invalid_data', __('Invalid book or user', 'tender-a-library'));
+        return new WP_Error('invalid_data', __('Invalid book or user', 'tender-library'));
     }
     if(!tal_book_is_on_loan($book_id)){
-        return new WP_Error('not_on_loan', __('This book is not currently on loan', 'tender-a-library'));
+        return new WP_Error('not_on_loan', __('This book is not currently on loan', 'tender-library'));
     }
     if(tal_has_active_reservation($book_id)){
-        return new WP_Error('has_reservation', __('This book has already a reservation', 'tender-a-library'));
+        return new WP_Error('has_reservation', __('This book has already a reservation', 'tender-library'));
     }
 
     global $wpdb;
@@ -163,7 +163,7 @@ function tal_create_reservation($book_id, $user_id){
 
     if($has_active){
         $wpdb->query('ROLLBACK');
-        return new WP_Error('race_condition', __('Another reservation has been made right now', 'tender-a-library'));
+        return new WP_Error('race_condition', __('Another reservation has been made right now', 'tender-library'));
     }
 
     $ok = $wpdb->insert($res_table, [
@@ -175,7 +175,7 @@ function tal_create_reservation($book_id, $user_id){
 
     if(!$ok){
         $wpdb->query('ROLLBACK');
-        return new WP_Error('db_error', __('Error creating reservation', 'tender-a-library'));
+        return new WP_Error('db_error', __('Error creating reservation', 'tender-library'));
     }
 
     $wpdb->query('COMMIT');
@@ -189,7 +189,7 @@ function tal_create_reservation($book_id, $user_id){
 function tender_create_reservation_ajax()
 {
 	if (!is_user_logged_in()) {
-		wp_send_json_error(['message' => __('Not authorized', 'tender-a-library')], 401);
+		wp_send_json_error(['message' => __('Not authorized', 'tender-library')], 401);
 	}
 
 	check_ajax_referer('tal_create_reservation', 'nonce');
@@ -209,20 +209,20 @@ function tender_create_reservation_ajax()
 	}
 
 	if ($user_id !== $current_user_id && !$is_staff) {
-		wp_send_json_error(['message' => __('Not authorized', 'tender-a-library')], 403);
+		wp_send_json_error(['message' => __('Not authorized', 'tender-library')], 403);
 	}
 
     if (!get_post($book_id) || !get_user($user_id)) {
-        wp_send_json_error(['message' => __('Invalid book or user', 'tender-a-library')]);
+        wp_send_json_error(['message' => __('Invalid book or user', 'tender-library')]);
     }
     if (!tal_book_is_on_loan($book_id)) {
-        wp_send_json_error(['message' => __('This book is not currently on loan', 'tender-a-library')]);
+        wp_send_json_error(['message' => __('This book is not currently on loan', 'tender-library')]);
     }
     if(tender_user_has_borrowed_book($user_id, $book_id)) {
-        wp_send_json_error(['message' => __('You have have an active lending for this book', 'tender-a-library')]);
+        wp_send_json_error(['message' => __('You have have an active lending for this book', 'tender-library')]);
     }
 	if (tal_has_active_reservation($book_id)) {
-		wp_send_json_error(['message' => __('This book has an active reservation by some other user.', 'tender-a-library')]);
+		wp_send_json_error(['message' => __('This book has an active reservation by some other user.', 'tender-library')]);
 	}
 	    $reservation_id = tal_create_reservation($book_id, $user_id);
 
@@ -232,11 +232,11 @@ function tender_create_reservation_ajax()
 
 	if ($reservation_id) {
 		wp_send_json_success([
-			'message' => __('Reservation created successfully.', 'tender-a-library'),
+			'message' => __('Reservation created successfully.', 'tender-library'),
 			'reservation_id' => $reservation_id
 		]);
 	} else {
-		wp_send_json_error(['message' => __('Error creating reservation', 'tender-a-library')]);
+		wp_send_json_error(['message' => __('Error creating reservation', 'tender-library')]);
 	}
 }
 add_action('wp_ajax_tender_create_reservation_ajax', 'tender_create_reservation_ajax'); // Nuevo nombre para evitar conflictos
@@ -245,7 +245,7 @@ add_action('wp_ajax_tender_create_reservation_ajax', 'tender_create_reservation_
 // Render de reservas activas del usuario + botón Cancelar (AJAX)
 function tender_user_reservations_shortcode() {
     if ( ! is_user_logged_in() ) {
-        return '<p>' . esc_html__( 'You must be logged in to view your reservations.', 'tender-a-library' ) . '</p>';
+        return '<p>' . esc_html__( 'You must be logged in to view your reservations.', 'tender-library' ) . '</p>';
     }
 
     $username = get_query_var('tal_profile_user');
@@ -260,8 +260,8 @@ function tender_user_reservations_shortcode() {
         'ajax_url' => admin_url( 'admin-ajax.php' ),
         'create_nonce' => wp_create_nonce('tal_create_reservation'),
         'i18n'     => array(
-            'confirm' => __( 'Do you really want to cancel this reservation?', 'tender-a-library' ),
-            'error'   => __( 'Unexpected error. Please try again.', 'tender-a-library' ),
+            'confirm' => __( 'Do you really want to cancel this reservation?', 'tender-library' ),
+            'error'   => __( 'Unexpected error. Please try again.', 'tender-library' ),
         )
     ) );
 
@@ -269,10 +269,10 @@ function tender_user_reservations_shortcode() {
     ?>
     <div class="profile-reservations">
 
-        <h2 class=""><?php _e('My active reservations', 'tender-a-library'); ?></h2>
+        <h2 class=""><?php _e('My active reservations', 'tender-library'); ?></h2>
 
         <?php if ( empty( $rows ) ) : ?>
-            <p><?php esc_html_e('You do not have active reservations.', 'tender-a-library'); ?></p>
+            <p><?php esc_html_e('You do not have active reservations.', 'tender-library'); ?></p>
         <?php else : ?>
             <ul class="active-reservations">
                 <?php foreach ($rows as $reservation) :
@@ -289,7 +289,7 @@ function tender_user_reservations_shortcode() {
                                 <?php if ($cover_id): ?>
                                     <?php echo wp_get_attachment_image($cover_id, 'medium'); ?>
                                 <?php else: ?>
-                                    <img src="<?php echo esc_url(plugin_dir_url(__FILE__) . '../../assets/svg/default-book.svg'); ?>" alt="<?php esc_attr_e('No cover', 'tender-a-library'); ?>">
+                                    <img src="<?php echo esc_url(plugin_dir_url(__FILE__) . '../../assets/svg/default-book.svg'); ?>" alt="<?php esc_attr_e('No cover', 'tender-library'); ?>">
                                 <?php endif; ?>
                             </div>
                             <div class="book-info">
@@ -302,12 +302,12 @@ function tender_user_reservations_shortcode() {
 
                         <div class="reservation-info">
                             <div class="dates">
-                                <div class="reservation-date"><?php _e('Reservation date', 'tender-a-library'); ?>: <span><?php echo $formatted_date; ?></span></div>
+                                <div class="reservation-date"><?php _e('Reservation date', 'tender-library'); ?>: <span><?php echo $formatted_date; ?></span></div>
                                 <?php if ($reservation->status === 'available') : ?>
                                     <div class="reservation-date available">
                                         <?php printf(
                                             /* translators: %s: formatted date */
-                                            esc_html__('Status: Available for pickup until %s', 'tender-a-library'),
+                                            esc_html__('Status: Available for pickup until %s', 'tender-library'),
                                             '<span>' . esc_html($formatted_until_date) . '</span>'
                                         ); ?>
                                     </div>
@@ -315,8 +315,8 @@ function tender_user_reservations_shortcode() {
                                     <div class="reservation-date">
                                         <?php printf(
                                             /* translators: Status label */
-                                            esc_html__('Status: %s', 'tender-a-library'),
-                                            '<span>' . esc_html__('Reserved', 'tender-a-library') . '</span>'
+                                            esc_html__('Status: %s', 'tender-library'),
+                                            '<span>' . esc_html__('Reserved', 'tender-library') . '</span>'
                                         ); 
                                         
                                         ?>
@@ -325,7 +325,7 @@ function tender_user_reservations_shortcode() {
 
                                 <div class="reservation-actions">
                                         <button class="tal-button tender-cancel-reservation button" data-res-id="<?php echo (int) $reservation->id; ?>" data-nonce="<?php echo esc_attr( $nonce ); ?>">
-                                            <?php _e('Cancel reservation', 'tender-a-library'); ?>
+                                            <?php _e('Cancel reservation', 'tender-library'); ?>
                                         </button>
                                 </div>
                             </div>
@@ -344,12 +344,12 @@ add_shortcode( 'tender_user_reservations', 'tender_user_reservations_shortcode' 
 
 function tender_cancel_reservation_ajax() {
     if ( ! is_user_logged_in() ) {
-        wp_send_json_error( ['message' => __( 'Not authorized', 'tender-a-library' )], 401 );
+        wp_send_json_error( ['message' => __( 'Not authorized', 'tender-library' )], 401 );
     }
 
     $res_id = isset($_POST['res_id']) ? (int) $_POST['res_id'] : 0;
     if ( ! $res_id ) {
-        wp_send_json_error( ['message' => __( 'Invalid request', 'tender-a-library' )], 400 );
+        wp_send_json_error( ['message' => __( 'Invalid request', 'tender-library' )], 400 );
     }
 
     // Usa check_ajax_referer con nombre standard 'nonce'
@@ -360,7 +360,7 @@ function tender_cancel_reservation_ajax() {
     $res = $wpdb->get_row( $wpdb->prepare( "SELECT * FROM $res_table WHERE id = %d", $res_id ) );
 
     if ( ! $res ) {
-        wp_send_json_error( ['message' => __( 'Reservation not found', 'tender-a-library' )], 404 );
+        wp_send_json_error( ['message' => __( 'Reservation not found', 'tender-library' )], 404 );
     }
 
     $current_user = wp_get_current_user();
@@ -372,7 +372,7 @@ function tender_cancel_reservation_ajax() {
              || in_array('opener', $roles, true);
 
     if ( (int) $res->user_id !== $user_id && ! $is_staff ) {
-        wp_send_json_error( ['message' => __( 'You cannot cancel this reservation', 'tender-a-library' )], 403 );
+        wp_send_json_error( ['message' => __( 'You cannot cancel this reservation', 'tender-library' )], 403 );
     }
 
     $now = current_time('mysql');
@@ -380,7 +380,7 @@ function tender_cancel_reservation_ajax() {
               || ( $res->status === 'available' && ( empty($res->pickup_exclusive_until) || $res->pickup_exclusive_until >= $now ) );
 
     if ( ! $is_active ) {
-        wp_send_json_error( ['message' => __( 'Reservation is not active', 'tender-a-library' )], 409 );
+        wp_send_json_error( ['message' => __( 'Reservation is not active', 'tender-library' )], 409 );
     }
 
     $ok = $wpdb->update(
@@ -392,11 +392,11 @@ function tender_cancel_reservation_ajax() {
     );
 
     if ( false === $ok ) {
-        wp_send_json_error( ['message' => __( 'Database error', 'tender-a-library' )], 500 );
+        wp_send_json_error( ['message' => __( 'Database error', 'tender-library' )], 500 );
     }
 
     wp_send_json_success([
-        'message' => __( 'Reservation cancelled successfully', 'tender-a-library' ),
+        'message' => __( 'Reservation cancelled successfully', 'tender-library' ),
         'res_id'  => $res_id,
         'reload'  => true, // la UI puede recargar si quieres
     ]);

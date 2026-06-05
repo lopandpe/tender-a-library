@@ -12,7 +12,7 @@ function tal_notify_current_borrower_about_hold($book_id){
             $borrower = get_user($user_id);
             $book = get_post($book_id);
             
-            $subject = __('Someone else wants to read the book you have borrowed', 'tender-a-library');
+            $subject = __('Someone else wants to read the book you have borrowed', 'tender-library');
 
             $message = tal_get_your_loan_has_reservation_email_html($borrower, $book);
 
@@ -40,23 +40,23 @@ function tal_get_your_loan_has_reservation_email_html($user, $book) {
                 <span style="font-size:1.8em;font-weight:bold;"><?php echo esc_html($site_name); ?></span>
             <?php endif; ?>
         </div>
-        <h4><?php printf(__('Hello <strong>%s</strong>,', 'tender-a-library'), esc_html($user->display_name)); ?></h4>
-        <p><?php _e('We are contacting you because someone has made a reservation on the book you have borrowed.', 'tender-a-library'); ?></p>
-        <p><?php _e('From now, the book loan can not be renewed, and we ask you to please return it as soon as you finish reading it.', 'tender-a-library'); ?></p>
+        <h4><?php printf(__('Hello <strong>%s</strong>,', 'tender-library'), esc_html($user->display_name)); ?></h4>
+        <p><?php _e('We are contacting you because someone has made a reservation on the book you have borrowed.', 'tender-library'); ?></p>
+        <p><?php _e('From now, the book loan can not be renewed, and we ask you to please return it as soon as you finish reading it.', 'tender-library'); ?></p>
 
             <ul>
-                <li><strong><?php _e('Title:', 'tender-a-library'); ?></strong> <?php echo esc_html($book->get_the_title()); ?></li>
-                <li><?php _e('Author:', 'tender-a-library'); ?> <?php echo esc_html(carbon_get_post_meta($book->ID, 'tender_book_author')); ?></li>
+                <li><strong><?php _e('Title:', 'tender-library'); ?></strong> <?php echo esc_html($book->get_the_title()); ?></li>
+                <li><?php _e('Author:', 'tender-library'); ?> <?php echo esc_html(carbon_get_post_meta($book->ID, 'tender_book_author')); ?></li>
             </ul>
 
         <p style="color:#1b5e20;">
             <?php _e(
                 'Remember that our library is a self-managed, non-profit space that relies on the individual and collective responsibility of all its members. Returning books on time ensures that more people can enjoy them, and helps keep the project alive for everyone.',
-                'tender-a-library'
+                'tender-library'
             ); ?>
         </p>
 
-        <p><?php _e('If you have lost the books, or if you think there has been a mistake, please contact us.', 'tender-a-library'); ?></p>
+        <p><?php _e('If you have lost the books, or if you think there has been a mistake, please contact us.', 'tender-library'); ?></p>
     </div>
     <?php
     return ob_get_clean();

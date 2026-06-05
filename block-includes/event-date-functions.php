@@ -30,7 +30,7 @@ function tender_event_recurrence_label_from_start_ts( int $start_ts ): string {
 	$weekday = date_i18n( 'l', $start_ts );
 	return sprintf(
 		/* translators: %s: weekday (e.g., martes) */
-		__( 'Recurring event, every %s', 'tender-a-library' ),
+		__( 'Recurring event, every %s', 'tender-library' ),
 		mb_strtolower( $weekday )
 	);
 }
@@ -70,7 +70,7 @@ function tender_event_date_render_callback( $block_attributes, $block_content ) 
 		if ( $raw_end && ( $end_day_ts = strtotime( $raw_end . ' 00:00:00' ) ) ) {
 			$end_date = sprintf(
 				/* translators: %s: end date */
-				__( 'until %s', 'tender-a-library' ),
+				__( 'until %s', 'tender-library' ),
 				date_i18n( $date_format, $end_day_ts )
 			);
 		}
@@ -98,7 +98,7 @@ function tender_event_date_render_callback( $block_attributes, $block_content ) 
 					<?php
 					// Mismo resultado visual: "Since {date} {until ...}"
 					echo esc_html( sprintf(
-						__( 'Since %1$s %2$s', 'tender-a-library' ),
+						__( 'Since %1$s %2$s', 'tender-library' ),
 						date_i18n( $date_format, $start_ts ),
 						$end_date
 					) );

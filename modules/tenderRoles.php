@@ -10,7 +10,7 @@ function create_opener_role()
 {
 	add_role(
 		'opener',
-		__('Opener', 'tender-a-library'),  // Nombre que aparecerá en WP
+		__('Opener', 'tender-library'),  // Nombre que aparecerá en WP
 		array(
 			// Para acceder al Dashboard, ver su perfil
 			'read' => true,
@@ -49,7 +49,7 @@ function tal_sync_librarian_role_label()
 		return;
 	}
 
-	$label = __('Bibliotecarix', 'tender-a-library');
+	$label = __('Bibliotecarix', 'tender-library');
 
 	if (isset($wp_roles->roles['librarian']['name']) && $wp_roles->roles['librarian']['name'] === $label) {
 		return;
@@ -65,7 +65,7 @@ function create_librarian_role()
 {
 	add_role(
 		'librarian',
-		__('Bibliotecarix', 'tender-a-library'),  // Nombre que aparecerá en WP
+		__('Bibliotecarix', 'tender-library'),  // Nombre que aparecerá en WP
 		array(
 			// Para acceder al Dashboard, ver su perfil
 			'read' => true,
@@ -112,7 +112,7 @@ function create_reader_role()
 {
 	add_role(
 		'reader',        // Identificador interno del rol
-		__('Reader', 'tender-a-library'),  // Nombre que aparecerá en WP
+		__('Reader', 'tender-library'),  // Nombre que aparecerá en WP
 		array(
 			'read' => true,  // Puede iniciar sesión y ver su propio perfil
 			// No añadimos más capacidades, así no podrá editar posts/páginas ni contenidos

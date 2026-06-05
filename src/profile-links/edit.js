@@ -22,7 +22,7 @@ export default function Edit() {
                     <path d="M12 12a5 5 0 1 0-5-5 5.006 5.006 0 0 0 5 5Zm0 2c-4 0-8 2-8 5v1h16v-1c0-3-4-5-8-5Z" />
                 </svg>
 				<span className="tender-auth-link-block__label">
-					{ __( 'Login / Profile (dynamic)', 'tender-a-library' ) }
+					{ __( 'Login / Profile (dynamic)', 'tender-library' ) }
 				</span>
             </span>
         </div>

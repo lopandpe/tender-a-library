@@ -50,19 +50,19 @@ function tal_create_user_call_log($user_id, $subject, $comment, $call_date)
 	tal_ensure_user_calls_table_exists();
 
 	if ($user_id <= 0 || !get_user_by('id', $user_id)) {
-		return new WP_Error('invalid_user', __('Invalid user.', 'tender-a-library'));
+		return new WP_Error('invalid_user', __('Invalid user.', 'tender-library'));
 	}
 
 	$call_date = sanitize_text_field($call_date);
 	if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $call_date)) {
-		return new WP_Error('invalid_date', __('Invalid date format.', 'tender-a-library'));
+		return new WP_Error('invalid_date', __('Invalid date format.', 'tender-library'));
 	}
 
 	$subject = sanitize_text_field($subject);
 	$comment = wp_kses_post($comment);
 
 	if ($subject === '') {
-		return new WP_Error('missing_subject', __('Title is required.', 'tender-a-library'));
+		return new WP_Error('missing_subject', __('Title is required.', 'tender-library'));
 	}
 
 	global $wpdb;
@@ -82,7 +82,7 @@ function tal_create_user_call_log($user_id, $subject, $comment, $call_date)
 	);
 
 	if ($inserted === false) {
-		return new WP_Error('db_error', __('Could not save call log.', 'tender-a-library'));
+		return new WP_Error('db_error', __('Could not save call log.', 'tender-library'));
 	}
 
 	return (int) $wpdb->insert_id;
@@ -128,19 +128,19 @@ function tal_update_user_call_log($call_id, $user_id, $subject, $comment, $call_
 
 	$existing = tal_get_user_call_log($call_id, $user_id);
 	if (!$existing) {
-		return new WP_Error('not_found', __('Call log entry not found.', 'tender-a-library'));
+		return new WP_Error('not_found', __('Call log entry not found.', 'tender-library'));
 	}
 
 	$call_date = sanitize_text_field($call_date);
 	if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $call_date)) {
-		return new WP_Error('invalid_date', __('Invalid date format.', 'tender-a-library'));
+		return new WP_Error('invalid_date', __('Invalid date format.', 'tender-library'));
 	}
 
 	$subject = sanitize_text_field($subject);
 	$comment = wp_kses_post($comment);
 
 	if ($subject === '') {
-		return new WP_Error('missing_subject', __('Title is required.', 'tender-a-library'));
+		return new WP_Error('missing_subject', __('Title is required.', 'tender-library'));
 	}
 
 	global $wpdb;
@@ -161,7 +161,7 @@ function tal_update_user_call_log($call_id, $user_id, $subject, $comment, $call_
 	);
 
 	if ($updated === false) {
-		return new WP_Error('db_error', __('Could not update call log.', 'tender-a-library'));
+		return new WP_Error('db_error', __('Could not update call log.', 'tender-library'));
 	}
 
 	return true;
@@ -180,7 +180,7 @@ function tal_delete_user_call_log($call_id, $user_id)
 
 	$existing = tal_get_user_call_log($call_id, $user_id);
 	if (!$existing) {
-		return new WP_Error('not_found', __('Call log entry not found.', 'tender-a-library'));
+		return new WP_Error('not_found', __('Call log entry not found.', 'tender-library'));
 	}
 
 	global $wpdb;
@@ -194,7 +194,7 @@ function tal_delete_user_call_log($call_id, $user_id)
 	);
 
 	if ($deleted === false) {
-		return new WP_Error('db_error', __('Could not delete call log.', 'tender-a-library'));
+		return new WP_Error('db_error', __('Could not delete call log.', 'tender-library'));
 	}
 
 	return true;

@@ -10,12 +10,12 @@ const Pagination = ({ filters, setFilters, pagination }) => {
                 disabled={currentPage === 1}
                 onClick={() => setFilters({ ...filters, page: currentPage - 1 })}
             >
-                {wp.i18n.__('Previous', 'tender-a-library')}
+                {wp.i18n.__('Previous', 'tender-library')}
             </button>
             <span>
                 {wp.i18n.sprintf(
                     /* translators: 1: current page, 2: total pages */
-                    wp.i18n.__('Page %1$d of %2$d', 'tender-a-library'),
+                    wp.i18n.__('Page %1$d of %2$d', 'tender-library'),
                     currentPage,
                     pagination.total
                 )}
@@ -24,7 +24,7 @@ const Pagination = ({ filters, setFilters, pagination }) => {
                 disabled={currentPage === pagination.total}
                 onClick={() => setFilters({ ...filters, page: currentPage + 1 })}
             >
-                {wp.i18n.__('Next', 'tender-a-library')}
+                {wp.i18n.__('Next', 'tender-library')}
             </button>
         </nav>
     );

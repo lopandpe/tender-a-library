@@ -32,7 +32,7 @@ const CategoryNode = ({ node, level, filters, togleInArray }) => {
                         className="toggle-children"
                         onClick={() => setIsExpanded(!isExpanded)}
                         aria-expanded={isExpanded}
-                        aria-label={isExpanded ? wp.i18n.__('Collapse section', 'textdomain') : wp.i18n.__('Expand section', 'textdomain')}
+                        aria-label={isExpanded ? wp.i18n.__('Collapse section', 'tender-library') : wp.i18n.__('Expand section', 'tender-library')}
                     >
                         {isExpanded ? '−' : '+'}
                     </span>

@@ -12,7 +12,7 @@ get_header();
 
 echo '<main class="wp-block-group wrapper alignwide single-event-content" style="padding: 100px 20px;">';
 	echo '<div class="container">';
-		echo '<h6 class="wp-block-heading alignwide">' . esc_html__('Event', 'tender-a-library') . '</h6>';
+		echo '<h6 class="wp-block-heading alignwide">' . esc_html__('Event', 'tender-library') . '</h6>';
 		echo '<h1 class="wp-block-post-title alignwide has-x-large-font-size">' . get_the_title() . '</h1>';
 		echo '<div class="wp-block-columns alignwide">';
 			echo '<div class="wp-block-column" style="flex-basis:30%; padding: 0 20px;">';

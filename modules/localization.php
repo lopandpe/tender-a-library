@@ -9,6 +9,6 @@ function tal_localization()
 		? dirname(plugin_basename(TENDER_LIBRARY_PLUGIN_FILE))
 		: basename(dirname(__DIR__));
 
-	load_plugin_textdomain('tender-a-library', false, $plugin_dir . '/languages');
+	load_plugin_textdomain('tender-library', false, $plugin_dir . '/languages');
 }
 add_action('init', 'tal_localization');

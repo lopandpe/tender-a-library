@@ -1,9 +1,9 @@
 {
-   "domain": "tender-a-library",
+   "domain": "tender-library",
    "locale_data": {
-      "tender-a-library": {
+      "tender-library": {
          "": {
-            "domain": "tender-a-library",
+            "domain": "tender-library",
             "plural_forms": "nplurals=2; plural=(n != 1);",
             "lang": "es_ES"
          },

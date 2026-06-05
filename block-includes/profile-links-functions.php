@@ -22,7 +22,7 @@ function tender_profile_links_render_callback( $attributes, $content = '', $bloc
         $label       = get_the_title( $profile_page_option );
         $extra_class = 'menu-item-auth--profile';
     } else {
-        $label       = esc_html__( 'Login', 'tender-a-library' );
+        $label       = esc_html__( 'Login', 'tender-library' );
         $extra_class = 'menu-item-auth--login';
     }
 
@@ -75,7 +75,7 @@ function tal_get_users_list_menu_item_html()
             '</a>' .
         '</li>',
         esc_url($users_url),
-        esc_html(get_the_title($users_page_id) ?: __('Users', 'tender-a-library'))
+        esc_html(get_the_title($users_page_id) ?: __('Users', 'tender-library'))
     );
 }
 

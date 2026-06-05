@@ -18,11 +18,11 @@ function tender_book_data_render_callback($block_attributes, $block_content)
 ?>
     <section class="<?php echo $block_classes; ?>">
         <div class="block-container">
-            <h2><?php _e("Book data", "tender-a-library"); ?></h2>
+            <h2><?php _e("Book data", "tender-library"); ?></h2>
             <ul class="tender-book-meta">
-                <li><strong><?php _e("Author", "tender-a-library"); ?></strong>: <?php echo $author; ?></li>
+                <li><strong><?php _e("Author", "tender-library"); ?></strong>: <?php echo $author; ?></li>
                 <li>
-                    <strong><?php _e("Publisher", "tender-a-library"); ?></strong>: <?php echo $publisher; ?>
+                    <strong><?php _e("Publisher", "tender-library"); ?></strong>: <?php echo $publisher; ?>
                 </li>
                 <?php if ($section) :
 
@@ -33,17 +33,17 @@ function tender_book_data_render_callback($block_attributes, $block_content)
 
                 ?>
                     <li>
-                        <strong><?php _e("Library section", "tender-a-library"); ?></strong>:
+                        <strong><?php _e("Library section", "tender-library"); ?></strong>:
                         <?php echo '<a href="' . esc_url($url) . '">' . esc_html($section->name) . '</a>'; ?>
                     </li>
                 <?php endif; ?>
-                <li><strong><?php _e("Publication year", "tender-a-library"); ?></strong>: <?php echo $year; ?></li>
+                <li><strong><?php _e("Publication year", "tender-library"); ?></strong>: <?php echo $year; ?></li>
                 <?php if ($section) :
                     $section_number = carbon_get_term_meta($section->term_id, 'tender_section_number');
                     $section_number .= ', ' . carbon_get_post_meta($current_post_id, 'tender_book_sig1') . ' - ' . carbon_get_post_meta($current_post_id, 'tender_book_sig2');
                 ?>
                     <li>
-                        <strong><?php _e("Signature", "tender-a-library"); ?></strong>: <?php echo $section_number; ?>
+                        <strong><?php _e("Signature", "tender-library"); ?></strong>: <?php echo $section_number; ?>
                     </li>
                 <?php endif; ?>
             </ul>
@@ -60,8 +60,8 @@ function tender_book_data_render_callback($block_attributes, $block_content)
 
                     if (!$is_logged_in) {
                         echo $is_available
-                            ? '<p class="tender-status tender-available">' . __("Available for loan.", "tender-a-library") . '</p>'
-                            : '<p class="tender-status tender-unavailable">' . __("Not available.", "tender-a-library") . '</p>';
+                            ? '<p class="tender-status tender-available">' . __("Available for loan.", "tender-library") . '</p>'
+                            : '<p class="tender-status tender-unavailable">' . __("Not available.", "tender-library") . '</p>';
 
                     } else {
                         $current_user = wp_get_current_user();
@@ -74,22 +74,22 @@ function tender_book_data_render_callback($block_attributes, $block_content)
                         if ($is_staff) {
                             if ($is_available) {
                                 // Disponible => prestar (NO reservar)
-                                echo '<p class="tender-status tender-available">' . __("Available for loan.", "tender-a-library") . '</p>';
-                                echo '<button id="lend_book" class="tender-button tender-lend-button">' . __("Lend this book", "tender-a-library") . '</button>';
+                                echo '<p class="tender-status tender-available">' . __("Available for loan.", "tender-library") . '</p>';
+                                echo '<button id="lend_book" class="tender-button tender-lend-button">' . __("Lend this book", "tender-library") . '</button>';
                             } else {
                                 // No disponible
-                                echo '<p class="tender-status tender-unavailable">' . __("Not available.", "tender-a-library") . '</p>';
+                                echo '<p class="tender-status tender-unavailable">' . __("Not available.", "tender-library") . '</p>';
 
                                 if ($has_active_res) {
                                     if ($res_user_id && (int) $res_user_id === $user_id) {
-                                        echo '<p class="tender-note">' . __("You already have an active reservation for this book.", "tender-a-library") . '</p>';
+                                        echo '<p class="tender-note">' . __("You already have an active reservation for this book.", "tender-library") . '</p>';
                                     } else {
-                                        echo '<p class="tender-note">' . __("This book already has an active reservation.", "tender-a-library") . '</p>';
+                                        echo '<p class="tender-note">' . __("This book already has an active reservation.", "tender-library") . '</p>';
                                     }
                                     // Sin botón de reserva
                                 } else {
                                     // No hay reserva activa -> permitir reservar
-                                    echo '<button id="reserve_book" class="tender-button tender-reserve-button">' . __("Reserve this book", "tender-a-library") . '</button>';
+                                    echo '<button id="reserve_book" class="tender-button tender-reserve-button">' . __("Reserve this book", "tender-library") . '</button>';
                                 }
                             }
 
@@ -98,24 +98,24 @@ function tender_book_data_render_callback($block_attributes, $block_content)
 
                             if (tender_user_has_borrowed_book($user_id, $book_id)) {
                                 // Tiene un préstamo activo de este libro
-                                echo '<a href="' . esc_url(get_author_posts_url($user_id)) . '" class="tender-button tender-renew-button">' . __("Renew this lending", "tender-a-library") . '</a>';
+                                echo '<a href="' . esc_url(get_author_posts_url($user_id)) . '" class="tender-button tender-renew-button">' . __("Renew this lending", "tender-library") . '</a>';
 
                             } elseif ($is_available) {
                                 // Disponible => solo aviso (NO reservar)
-                                echo '<p class="tender-status tender-available">' . __("Available for loan.", "tender-a-library") . '</p>';
+                                echo '<p class="tender-status tender-available">' . __("Available for loan.", "tender-library") . '</p>';
 
                             } else {
                                 // No disponible
                                 if ($has_active_res) {
                                     if ($res_user_id && (int) $res_user_id === $user_id) {
-                                        echo '<p class="tender-note">' . __("You already have an active reservation for this book.", "tender-a-library") . '</p>';
+                                        echo '<p class="tender-note">' . __("You already have an active reservation for this book.", "tender-library") . '</p>';
                                     } else {
-                                        echo '<p class="tender-note">' . __("This book already has an active reservation by another user.", "tender-a-library") . '</p>';
+                                        echo '<p class="tender-note">' . __("This book already has an active reservation by another user.", "tender-library") . '</p>';
                                     }
                                     // Sin botón de reserva
                                 } else {
-                                    echo '<p class="tender-status tender-unavailable">' . __("Not available.", "tender-a-library") . '</p>';
-                                    echo '<button id="reserve_book" class="tender-button tender-reserve-button">' . __("Reserve this book", "tender-a-library") . '</button>';
+                                    echo '<p class="tender-status tender-unavailable">' . __("Not available.", "tender-library") . '</p>';
+                                    echo '<button id="reserve_book" class="tender-button tender-reserve-button">' . __("Reserve this book", "tender-library") . '</button>';
                                 }
                             }
                         }
@@ -124,23 +124,23 @@ function tender_book_data_render_callback($block_attributes, $block_content)
                     if (!empty($lendings) && tal_current_user_opener_or_admin()) {
                         echo '<div class="tender-active-lendings">';
                         echo (count($lendings) > 1)
-                            ? '<h4>' . __('Current active lendings', 'tender-a-library') . '</h4>'
-                            : '<h4>' . __('Current active lending', 'tender-a-library') . '</h4>';
+                            ? '<h4>' . __('Current active lendings', 'tender-library') . '</h4>'
+                            : '<h4>' . __('Current active lending', 'tender-library') . '</h4>';
 
                         echo '<ul class="tender-lendings-list">';
                         foreach ($lendings as $index => $lending) {
                             $return_date = date_i18n(get_option('date_format'), strtotime($lending->stimated_return_date));
                             $lending_user = get_userdata($lending->user_id);
-                            $user_name = $lending_user ? $lending_user->display_name : __('Unknown user', 'tender-a-library');
+                            $user_name = $lending_user ? $lending_user->display_name : __('Unknown user', 'tender-library');
                             $user_profile = get_user_profile_url_by_id($lending->user_id);
 
                             echo '<li class="tender-lending-item">';
                             if (count($lendings) > 1) {
-                                echo '<div class="tender-lending-number">' . sprintf(__('Lending #%d', 'tender-a-library'), ($index + 1)) . '</div>';
+                                echo '<div class="tender-lending-number">' . sprintf(__('Lending #%d', 'tender-library'), ($index + 1)) . '</div>';
                             }
                             echo '<div class="tender-lending-details">';
-                            echo '<div class="tender-lending-user">' . __('User:', 'tender-a-library') . ' <strong>' . '<a href="' . esc_url(is_array($user_profile) ? $user_profile['profile'] : '') . '">' . esc_html($user_name) . '</a></strong></div>';
-                            echo '<div class="tender-lending-date">' . __('Estimated return:', 'tender-a-library') . ' <strong>' . esc_html($return_date) . '</strong></div>';
+                            echo '<div class="tender-lending-user">' . __('User:', 'tender-library') . ' <strong>' . '<a href="' . esc_url(is_array($user_profile) ? $user_profile['profile'] : '') . '">' . esc_html($user_name) . '</a></strong></div>';
+                            echo '<div class="tender-lending-date">' . __('Estimated return:', 'tender-library') . ' <strong>' . esc_html($return_date) . '</strong></div>';
                             echo '</div>';
                             echo '</li>';
                         }
@@ -155,32 +155,32 @@ function tender_book_data_render_callback($block_attributes, $block_content)
     <div id="tender-lend-modal" class="tender-modal">
         <div class="tender-modal-content">
             <button class="tender-modal-close tender-top-close">&times;</button>
-            <h2 class="tender-modal-title"><?php _e('Lend this book', 'tender-a-library'); ?></h2>
-            <p class="tender-modal-subtitle"><?php _e('Select the user who will borrow this book', 'tender-a-library'); ?></p>
+            <h2 class="tender-modal-title"><?php _e('Lend this book', 'tender-library'); ?></h2>
+            <p class="tender-modal-subtitle"><?php _e('Select the user who will borrow this book', 'tender-library'); ?></p>
 
             <form id="tender-lending-form" class="tender-form">
                 <input type="hidden" name="book_id" id="book-id" value="<?php echo $current_post_id; ?>">
 
                 <div class="tender-form-group">
                     <label for="tender-user-search" class="tender-form-label">
-                        <?php _e('Search user', 'tender-a-library'); ?>
+                        <?php _e('Search user', 'tender-library'); ?>
                     </label>
                     <div class="tender-search-container">
-                        <input type="text" id="tender-user-search" class="tender-form-input" autocomplete="off" placeholder="<?php _e('Name, email, or phone', 'tender-a-library'); ?>">
+                        <input type="text" id="tender-user-search" class="tender-form-input" autocomplete="off" placeholder="<?php _e('Name, email, or phone', 'tender-library'); ?>">
                         <div id="tender-search-loading" class="tender-search-loading" style="display:none;">
                             <div class="tender-spinner"></div>
                         </div>
                     </div>
                     <select id="tender-user-id" class="tender-form-select" required style="display:none;"></select>
-                    <p class="tender-form-hint"><?php _e('Start typing to search for users', 'tender-a-library'); ?></p>
+                    <p class="tender-form-hint"><?php _e('Start typing to search for users', 'tender-library'); ?></p>
                 </div>
 
                 <div id="tender-response-message" class="tender-response-message"></div>
 
                 <div class="tender-form-actions">
-                    <button type="button" class="tender-button tender-button-secondary tender-modal-close"><?php _e('Cancel', 'tender-a-library'); ?></button>
+                    <button type="button" class="tender-button tender-button-secondary tender-modal-close"><?php _e('Cancel', 'tender-library'); ?></button>
                     <button type="submit" class="tender-button tender-button-primary" disabled>
-                        <span class="tender-button-text"><?php _e('Create Lending', 'tender-a-library'); ?></span>
+                        <span class="tender-button-text"><?php _e('Create Lending', 'tender-library'); ?></span>
                         <span class="tender-button-spinner" style="display:none;"></span>
                     </button>
                 </div>
@@ -191,8 +191,8 @@ function tender_book_data_render_callback($block_attributes, $block_content)
     <div id="tender-reserve-modal" class="tender-modal">
         <div class="tender-modal-content">
             <button class="tender-modal-close tender-top-close">&times;</button>
-            <h2 class="tender-modal-title"><?php _e('Reserve this book', 'tender-a-library'); ?></h2>
-            <h3 class="tender-modal-title"><?php _e('A reservation will be created for user: ', 'tender-a-library'); ?><?php echo esc_html($current_user->display_name); ?></h3>
+            <h2 class="tender-modal-title"><?php _e('Reserve this book', 'tender-library'); ?></h2>
+            <h3 class="tender-modal-title"><?php _e('A reservation will be created for user: ', 'tender-library'); ?><?php echo esc_html($current_user->display_name); ?></h3>
             <form id="tender-reservation-form" class="tender-form">
                 <input type="hidden" name="book_id" id="reservation-book-id" value="<?php echo $current_post_id; ?>">
                 <input type="hidden" name="user_id" id="reservation-user-id" value="<?php echo $current_user->ID; ?>">
@@ -200,9 +200,9 @@ function tender_book_data_render_callback($block_attributes, $block_content)
                 <div id="tender-reservation-message" class="tender-response-message"></div>
 
                 <div class="tender-form-actions">
-                    <button type="button" class="tender-button tender-button-secondary tender-modal-close"><?php _e('Cancel', 'tender-a-library'); ?></button>
+                    <button type="button" class="tender-button tender-button-secondary tender-modal-close"><?php _e('Cancel', 'tender-library'); ?></button>
                     <button type="submit" class="tender-button tender-button-primary">
-                        <span class="tender-button-text"><?php _e('Create Reservation', 'tender-a-library'); ?></span>
+                        <span class="tender-button-text"><?php _e('Create Reservation', 'tender-library'); ?></span>
                         <span class="tender-button-spinner" style="display:none;"></span>
                     </button>
                 </div>
@@ -286,7 +286,7 @@ function tender_book_data_render_callback($block_attributes, $block_content)
                             userIdSelect.show();
                             submit.prop('disabled', false);
                         } else {
-                            userIdSelect.html('<option value=""><?php _e('No users found', 'tender-a-library'); ?></option>').show();
+                            userIdSelect.html('<option value=""><?php _e('No users found', 'tender-library'); ?></option>').show();
                             $('.tender-search-container').removeClass('active');
                             submit.prop('disabled', true);
                         }
@@ -300,7 +300,7 @@ function tender_book_data_render_callback($block_attributes, $block_content)
                 submit.prop('disabled', true);
                 // Validación
                 if (!userIdSelect.val()) {
-                    $('#tender-response-message').html('<div class="tender-alert tender-alert-error"><?php _e('Please select a user', 'tender-a-library'); ?></div>');
+                    $('#tender-response-message').html('<div class="tender-alert tender-alert-error"><?php _e('Please select a user', 'tender-library'); ?></div>');
                     return;
                 }
 
@@ -349,7 +349,7 @@ function tender_book_data_render_callback($block_attributes, $block_content)
 
                     var errorMsg = jqXHR.responseJSON && jqXHR.responseJSON.data && jqXHR.responseJSON.data.message ?
                         jqXHR.responseJSON.data.message :
-                        '<?php _e("An error occurred. Please try again.", "tender-a-library"); ?>';
+                        '<?php _e("An error occurred. Please try again.", "tender-library"); ?>';
 
                     $('#tender-response-message').html('<div class="tender-alert tender-alert-error">' + errorMsg + '</div>');
                 });
@@ -403,7 +403,7 @@ function tender_book_data_render_callback($block_attributes, $block_content)
 
                     var errorMsg = jqXHR.responseJSON && jqXHR.responseJSON.data && jqXHR.responseJSON.data.message ?
                         jqXHR.responseJSON.data.message :
-                        '<?php _e("An error occurred. Please try again.", "tender-a-library"); ?>';
+                        '<?php _e("An error occurred. Please try again.", "tender-library"); ?>';
 
                     $('#tender-reservation-message').html('<div class="tender-alert tender-alert-error">' + errorMsg + '</div>');
                 });

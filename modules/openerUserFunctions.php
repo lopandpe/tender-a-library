@@ -109,11 +109,11 @@ add_action('carbon_fields_register_fields', 'tal_attach_user_fields');
 
 function tal_attach_user_fields()
 {
-	Container::make('user_meta', __('More info', 'tender-a-library'))
+	Container::make('user_meta', __('More info', 'tender-library'))
 		->add_fields(array(
-			Field::make('checkbox', 'newsletter', __('Receive newsletter by e-mail', 'tender-a-library'))
+			Field::make('checkbox', 'newsletter', __('Receive newsletter by e-mail', 'tender-library'))
 				->set_option_value('1'),
-			Field::make('text', 'phone_number', __('Phone number', 'tender-a-library'))
+			Field::make('text', 'phone_number', __('Phone number', 'tender-library'))
 				->set_attribute('placeholder', '+34 XXX XX XX XX')
 				->set_required(true)
 			));

@@ -26,8 +26,8 @@ function tal_migration_register_menu()
 {
 	add_submenu_page(
 		'tender-library',
-		__('CSV Migration', 'tender-a-library'),
-		__('CSV Migration', 'tender-a-library'),
+		__('CSV Migration', 'tender-library'),
+		__('CSV Migration', 'tender-library'),
 		'manage_options',
 		'tal-csv-migration',
 		'tal_migration_render_page'
@@ -265,7 +265,7 @@ function tal_migration_create_job($step, $csv_dir, $media_base, $dry_run, $sourc
 	foreach ($steps as $current_step) {
 		$path = isset($source_paths[$current_step]) ? $source_paths[$current_step] : '';
 		if ($path === '') {
-			return new WP_Error('missing_source_path', sprintf(__('Missing CSV path for step %s.', 'tender-a-library'), $current_step));
+			return new WP_Error('missing_source_path', sprintf(__('Missing CSV path for step %s.', 'tender-library'), $current_step));
 		}
 
 		$count = tal_migration_count_csv_rows($path);
@@ -298,7 +298,7 @@ function tal_migration_create_job($step, $csv_dir, $media_base, $dry_run, $sourc
 			'steps' => tal_migration_encode_json_field($steps),
 			'step_totals' => tal_migration_encode_json_field($step_totals),
 			'source_paths' => tal_migration_encode_json_field($source_paths),
-			'messages' => tal_migration_encode_json_field($dry_run ? [__('Dry run enabled: no data will be written.', 'tender-a-library')] : []),
+			'messages' => tal_migration_encode_json_field($dry_run ? [__('Dry run enabled: no data will be written.', 'tender-library')] : []),
 			'errors' => tal_migration_encode_json_field([]),
 			'last_error' => '',
 			'created_at' => $now,
@@ -311,7 +311,7 @@ function tal_migration_create_job($step, $csv_dir, $media_base, $dry_run, $sourc
 	);
 
 	if ($inserted === false) {
-		return new WP_Error('job_insert_failed', __('Could not create migration job.', 'tender-a-library'));
+		return new WP_Error('job_insert_failed', __('Could not create migration job.', 'tender-library'));
 	}
 
 	$job_id = (int) $wpdb->insert_id;
@@ -347,19 +347,19 @@ function tal_migration_store_last_result_from_job($job)
 function tal_migration_ajax_job_status()
 {
 	if (!current_user_can('manage_options')) {
-		wp_send_json_error(['message' => __('Insufficient permissions.', 'tender-a-library')], 403);
+		wp_send_json_error(['message' => __('Insufficient permissions.', 'tender-library')], 403);
 	}
 
 	check_ajax_referer('tal_migration_job_status', 'nonce');
 
 	$job_id = isset($_GET['job_id']) ? (int) $_GET['job_id'] : 0;
 	if ($job_id <= 0) {
-		wp_send_json_error(['message' => __('Missing job ID.', 'tender-a-library')], 400);
+		wp_send_json_error(['message' => __('Missing job ID.', 'tender-library')], 400);
 	}
 
 	$job = tal_migration_get_job($job_id);
 	if (!$job) {
-		wp_send_json_error(['message' => __('Migration job not found.', 'tender-a-library')], 404);
+		wp_send_json_error(['message' => __('Migration job not found.', 'tender-library')], 404);
 	}
 
 	if ($job['active']) {
@@ -373,14 +373,14 @@ function tal_migration_cancel_job($job_id)
 {
 	$job = tal_migration_get_job($job_id);
 	if (!$job) {
-		return new WP_Error('job_not_found', __('Migration job not found.', 'tender-a-library'));
+		return new WP_Error('job_not_found', __('Migration job not found.', 'tender-library'));
 	}
 
 	if (!$job['active']) {
 		return $job;
 	}
 
-	$messages = tal_migration_append_log_items($job['messages'], [__('Migration cancelled by user.', 'tender-a-library')]);
+	$messages = tal_migration_append_log_items($job['messages'], [__('Migration cancelled by user.', 'tender-library')]);
 	tal_migration_update_job($job['id'], [
 		'status' => TAL_MIGRATION_JOB_STATUS_CANCELLED,
 		'messages' => $messages,
@@ -399,14 +399,14 @@ function tal_migration_cancel_job($job_id)
 function tal_migration_ajax_cancel_job()
 {
 	if (!current_user_can('manage_options')) {
-		wp_send_json_error(['message' => __('Insufficient permissions.', 'tender-a-library')], 403);
+		wp_send_json_error(['message' => __('Insufficient permissions.', 'tender-library')], 403);
 	}
 
 	check_ajax_referer('tal_migration_job_status', 'nonce');
 
 	$job_id = isset($_POST['job_id']) ? (int) $_POST['job_id'] : 0;
 	if ($job_id <= 0) {
-		wp_send_json_error(['message' => __('Missing job ID.', 'tender-a-library')], 400);
+		wp_send_json_error(['message' => __('Missing job ID.', 'tender-library')], 400);
 	}
 
 	$job = tal_migration_cancel_job($job_id);
@@ -419,17 +419,17 @@ function tal_migration_ajax_cancel_job()
 
 function tal_migration_render_job_panel($job)
 {
-	echo '<h2>' . esc_html__('Background Job', 'tender-a-library') . '</h2>';
+	echo '<h2>' . esc_html__('Background Job', 'tender-library') . '</h2>';
 	echo '<div id="tal-migration-job-panel" class="tal-migration-note">';
 
 	if (!$job) {
-		echo '<p>' . esc_html__('No migration job has been started yet.', 'tender-a-library') . '</p>';
+		echo '<p>' . esc_html__('No migration job has been started yet.', 'tender-library') . '</p>';
 		echo '</div>';
 		return;
 	}
 
-	echo '<p><strong>' . esc_html__('Status', 'tender-a-library') . ':</strong> <span data-tal-job-status>' . esc_html($job['status']) . '</span></p>';
-	echo '<p><strong>' . esc_html__('Current step', 'tender-a-library') . ':</strong> <span data-tal-job-step>' . esc_html($job['current_step']) . '</span></p>';
+	echo '<p><strong>' . esc_html__('Status', 'tender-library') . ':</strong> <span data-tal-job-status>' . esc_html($job['status']) . '</span></p>';
+	echo '<p><strong>' . esc_html__('Current step', 'tender-library') . ':</strong> <span data-tal-job-step>' . esc_html($job['current_step']) . '</span></p>';
 	echo '<div style="max-width:720px;background:#e2e4e7;height:18px;border-radius:999px;overflow:hidden;">';
 	echo '<div data-tal-job-progress-bar style="background:#2271b1;height:100%;width:' . esc_attr((string) $job['progress_percent']) . '%;"></div>';
 	echo '</div>';
@@ -444,7 +444,7 @@ function tal_migration_render_job_panel($job)
 	));
 	echo '</p>';
 	if ($job['active']) {
-		echo '<p><button type="button" class="button button-secondary" data-tal-cancel-job>' . esc_html__('Stop Migration', 'tender-a-library') . '</button></p>';
+		echo '<p><button type="button" class="button button-secondary" data-tal-cancel-job>' . esc_html__('Stop Migration', 'tender-library') . '</button></p>';
 	}
 	echo '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;max-width:720px;">';
 	foreach ((array) $job['step_totals'] as $step => $count) {
@@ -458,7 +458,7 @@ function tal_migration_render_job_panel($job)
 	echo '<div data-tal-job-errors>';
 	if (!empty($job['errors'])) {
 		echo '<div class="tal-migration-log-box">';
-		echo '<p><strong>' . esc_html__('Recent errors', 'tender-a-library') . ':</strong></p><ul>';
+		echo '<p><strong>' . esc_html__('Recent errors', 'tender-library') . ':</strong></p><ul>';
 		foreach (array_slice($job['errors'], -20) as $error) {
 			echo '<li>' . esc_html($error) . '</li>';
 		}
@@ -516,7 +516,7 @@ function tal_migration_render_job_panel_script($job)
 function tal_migration_render_page()
 {
 	if (!current_user_can('manage_options')) {
-		wp_die(__('Insufficient permissions.', 'tender-a-library'));
+		wp_die(__('Insufficient permissions.', 'tender-library'));
 	}
 
 	$csv_dir = tal_migration_get_csv_dir();
@@ -541,8 +541,8 @@ function tal_migration_render_page()
 	];
 
 	echo '<div class="wrap">';
-	echo '<h1>' . esc_html__('CSV Migration', 'tender-a-library') . '</h1>';
-	echo '<p>' . esc_html__('Run one step at a time or the full migration. Jobs are processed in the background in small batches so large imports can continue safely without keeping the browser request open.', 'tender-a-library') . '</p>';
+	echo '<h1>' . esc_html__('CSV Migration', 'tender-library') . '</h1>';
+	echo '<p>' . esc_html__('Run one step at a time or the full migration. Jobs are processed in the background in small batches so large imports can continue safely without keeping the browser request open.', 'tender-library') . '</p>';
 	echo '<style>
 	.tal-migration-log-box {max-height:240px; overflow:auto; background:#fff; border:1px solid #ccd0d4; padding:10px 14px; margin:10px 0;}
 	.tal-migration-log-box ul {margin:0 0 0 18px;}
@@ -550,7 +550,7 @@ function tal_migration_render_page()
 	</style>';
 
 	if (is_array($result)) {
-		echo '<div class="notice notice-info"><p><strong>' . esc_html__('Last migration run', 'tender-a-library') . ':</strong> ';
+		echo '<div class="notice notice-info"><p><strong>' . esc_html__('Last migration run', 'tender-library') . ':</strong> ';
 		echo esc_html($result['step'] ?? '-') . ' · ';
 		echo esc_html($result['timestamp'] ?? '-') . '</p>';
 		echo '<div class="tal-migration-log-box">';
@@ -562,7 +562,7 @@ function tal_migration_render_page()
 			echo '</ul>';
 		}
 		if (!empty($result['errors'])) {
-			echo '<p><strong>' . esc_html__('Errors', 'tender-a-library') . ':</strong></p>';
+			echo '<p><strong>' . esc_html__('Errors', 'tender-library') . ':</strong></p>';
 			echo '<ul>';
 			foreach ($result['errors'] as $error) {
 				echo '<li>' . esc_html($error) . '</li>';
@@ -575,45 +575,45 @@ function tal_migration_render_page()
 
 	tal_migration_render_job_panel($job);
 
-	echo '<h2>' . esc_html__('CSV Source', 'tender-a-library') . '</h2>';
+	echo '<h2>' . esc_html__('CSV Source', 'tender-library') . '</h2>';
 	echo '<form method="post" action="' . esc_url(admin_url('admin-post.php')) . '" enctype="multipart/form-data">';
 	wp_nonce_field('tal_run_migration');
 	echo '<input type="hidden" name="action" value="tal_run_migration" />';
 
 	echo '<table class="form-table"><tbody>';
-	echo '<tr><th scope="row"><label for="tal_migration_csv_dir">' . esc_html__('CSV directory', 'tender-a-library') . '</label></th>';
+	echo '<tr><th scope="row"><label for="tal_migration_csv_dir">' . esc_html__('CSV directory', 'tender-library') . '</label></th>';
 	echo '<td><input type="text" class="regular-text" id="tal_migration_csv_dir" name="tal_migration_csv_dir" value="' . esc_attr($csv_dir) . '" />';
-	echo '<p class="description">' . esc_html__('Folder containing the CSV exports.', 'tender-a-library') . '</p></td></tr>';
+	echo '<p class="description">' . esc_html__('Folder containing the CSV exports.', 'tender-library') . '</p></td></tr>';
 
-	echo '<tr><th scope="row"><label for="tal_migration_media_base">' . esc_html__('Media base path', 'tender-a-library') . '</label></th>';
+	echo '<tr><th scope="row"><label for="tal_migration_media_base">' . esc_html__('Media base path', 'tender-library') . '</label></th>';
 	echo '<td><input type="text" class="regular-text" id="tal_migration_media_base" name="tal_migration_media_base" value="' . esc_attr($media_base) . '" />';
-	echo '<p class="description">' . esc_html__('Optional root folder for cover_path values in biblio_books.csv. Leave empty if your books CSV uses full cover URLs.', 'tender-a-library') . '</p></td></tr>';
+	echo '<p class="description">' . esc_html__('Optional root folder for cover_path values in biblio_books.csv. Leave empty if your books CSV uses full cover URLs.', 'tender-library') . '</p></td></tr>';
 	echo '</tbody></table>';
 
-	echo '<h2>' . esc_html__('Detected CSV Files', 'tender-a-library') . '</h2>';
+	echo '<h2>' . esc_html__('Detected CSV Files', 'tender-library') . '</h2>';
 	echo '<ul>';
 	foreach ($csv_files as $file) {
 		$path = trailingslashit($csv_dir) . $file;
-		$status = file_exists($path) ? __('Found', 'tender-a-library') : __('Missing', 'tender-a-library');
+		$status = file_exists($path) ? __('Found', 'tender-library') : __('Missing', 'tender-library');
 		$template = $template_links[$file] ?? '';
 		$download_url = $template ? tal_migration_template_download_url($template) : '';
-		$download_html = $download_url ? ' · <a href="' . esc_url($download_url) . '">' . esc_html__('Download template', 'tender-a-library') . '</a>' : '';
+		$download_html = $download_url ? ' · <a href="' . esc_url($download_url) . '">' . esc_html__('Download template', 'tender-library') . '</a>' : '';
 		echo '<li>' . esc_html($file) . ' · ' . esc_html($status) . $download_html . '</li>';
 	}
 	echo '</ul>';
 
-	echo '<h2>' . esc_html__('Upload CSV Files', 'tender-a-library') . '</h2>';
-	echo '<p>' . esc_html__('Upload a file to override the CSV directory for this run.', 'tender-a-library') . '</p>';
+	echo '<h2>' . esc_html__('Upload CSV Files', 'tender-library') . '</h2>';
+	echo '<p>' . esc_html__('Upload a file to override the CSV directory for this run.', 'tender-library') . '</p>';
 	echo '<table class="form-table"><tbody>';
-	echo '<tr><th scope="row">' . esc_html__('Sections CSV', 'tender-a-library') . '</th><td><input type="file" name="tal_upload_sections" accept=".csv" /></td></tr>';
-	echo '<tr><th scope="row">' . esc_html__('Books CSV', 'tender-a-library') . '</th><td><input type="file" name="tal_upload_books" accept=".csv" /></td></tr>';
-	echo '<tr><th scope="row">' . esc_html__('Users CSV', 'tender-a-library') . '</th><td><input type="file" name="tal_upload_users" accept=".csv" /></td></tr>';
-	echo '<tr><th scope="row">' . esc_html__('Lendings CSV', 'tender-a-library') . '</th><td><input type="file" name="tal_upload_lendings" accept=".csv" /></td></tr>';
-	echo '<tr><th scope="row">' . esc_html__('Calls CSV', 'tender-a-library') . '</th><td><input type="file" name="tal_upload_calls" accept=".csv" /></td></tr>';
+	echo '<tr><th scope="row">' . esc_html__('Sections CSV', 'tender-library') . '</th><td><input type="file" name="tal_upload_sections" accept=".csv" /></td></tr>';
+	echo '<tr><th scope="row">' . esc_html__('Books CSV', 'tender-library') . '</th><td><input type="file" name="tal_upload_books" accept=".csv" /></td></tr>';
+	echo '<tr><th scope="row">' . esc_html__('Users CSV', 'tender-library') . '</th><td><input type="file" name="tal_upload_users" accept=".csv" /></td></tr>';
+	echo '<tr><th scope="row">' . esc_html__('Lendings CSV', 'tender-library') . '</th><td><input type="file" name="tal_upload_lendings" accept=".csv" /></td></tr>';
+	echo '<tr><th scope="row">' . esc_html__('Calls CSV', 'tender-library') . '</th><td><input type="file" name="tal_upload_calls" accept=".csv" /></td></tr>';
 	echo '</tbody></table>';
 
-	echo '<h2>' . esc_html__('Run Migration', 'tender-a-library') . '</h2>';
-	echo '<p>' . esc_html__('Order matters: sections, books, users, lendings, calls. The books CSV handles languages and cover downloads, and connects to previously imported sections.', 'tender-a-library') . '</p>';
+	echo '<h2>' . esc_html__('Run Migration', 'tender-library') . '</h2>';
+	echo '<p>' . esc_html__('Order matters: sections, books, users, lendings, calls. The books CSV handles languages and cover downloads, and connects to previously imported sections.', 'tender-library') . '</p>';
 	echo '<style>
 	.tal-migration-steps {display:flex; flex-wrap:wrap; gap:12px; margin:16px 0;}
 	.tal-migration-step {background:#fff; border:1px solid #ccd0d4; border-left:4px solid #1d2327; padding:12px 14px; min-width:180px;}
@@ -628,20 +628,20 @@ function tal_migration_render_page()
 	echo '<div class="tal-migration-step"><strong>5. Calls</strong>Custom table rows.</div>';
 	echo '</div>';
 	echo '<div class="tal-migration-note">';
-	echo '<label><input type="checkbox" name="tal_migration_dry_run" value="1" /> ' . esc_html__('Dry run (no data will be written)', 'tender-a-library') . '</label>';
-	echo '<p class="description">' . esc_html__('Use this to preview counts and missing mappings before running the real import.', 'tender-a-library') . '</p>';
+	echo '<label><input type="checkbox" name="tal_migration_dry_run" value="1" /> ' . esc_html__('Dry run (no data will be written)', 'tender-library') . '</label>';
+	echo '<p class="description">' . esc_html__('Use this to preview counts and missing mappings before running the real import.', 'tender-library') . '</p>';
 	echo '</div>';
 	if ($job && $job['active']) {
-		echo '<p><em>' . esc_html__('A migration job is currently running. Starting a second one is blocked until it finishes.', 'tender-a-library') . '</em></p>';
+		echo '<p><em>' . esc_html__('A migration job is currently running. Starting a second one is blocked until it finishes.', 'tender-library') . '</em></p>';
 	}
 	echo '<p>';
 	$disabled = ($job && $job['active']) ? ' disabled="disabled"' : '';
-	echo '<button class="button button-primary" type="submit" name="tal_migration_step" value="all"' . $disabled . '>' . esc_html__('Run Full Migration', 'tender-a-library') . '</button> ';
-	echo '<button class="button" type="submit" name="tal_migration_step" value="sections"' . $disabled . '>' . esc_html__('Import Sections', 'tender-a-library') . '</button> ';
-	echo '<button class="button" type="submit" name="tal_migration_step" value="users"' . $disabled . '>' . esc_html__('Import Users', 'tender-a-library') . '</button> ';
-	echo '<button class="button" type="submit" name="tal_migration_step" value="books"' . $disabled . '>' . esc_html__('Import Books', 'tender-a-library') . '</button> ';
-	echo '<button class="button" type="submit" name="tal_migration_step" value="lendings"' . $disabled . '>' . esc_html__('Import Lendings', 'tender-a-library') . '</button> ';
-	echo '<button class="button" type="submit" name="tal_migration_step" value="calls"' . $disabled . '>' . esc_html__('Import Calls', 'tender-a-library') . '</button>';
+	echo '<button class="button button-primary" type="submit" name="tal_migration_step" value="all"' . $disabled . '>' . esc_html__('Run Full Migration', 'tender-library') . '</button> ';
+	echo '<button class="button" type="submit" name="tal_migration_step" value="sections"' . $disabled . '>' . esc_html__('Import Sections', 'tender-library') . '</button> ';
+	echo '<button class="button" type="submit" name="tal_migration_step" value="users"' . $disabled . '>' . esc_html__('Import Users', 'tender-library') . '</button> ';
+	echo '<button class="button" type="submit" name="tal_migration_step" value="books"' . $disabled . '>' . esc_html__('Import Books', 'tender-library') . '</button> ';
+	echo '<button class="button" type="submit" name="tal_migration_step" value="lendings"' . $disabled . '>' . esc_html__('Import Lendings', 'tender-library') . '</button> ';
+	echo '<button class="button" type="submit" name="tal_migration_step" value="calls"' . $disabled . '>' . esc_html__('Import Calls', 'tender-library') . '</button>';
 	echo '</p>';
 
 	echo '</form>';
@@ -652,7 +652,7 @@ function tal_migration_render_page()
 function tal_migration_handle_run()
 {
 	if (!current_user_can('manage_options')) {
-		wp_die(__('Insufficient permissions.', 'tender-a-library'));
+		wp_die(__('Insufficient permissions.', 'tender-library'));
 	}
 
 	check_admin_referer('tal_run_migration');
@@ -674,7 +674,7 @@ function tal_migration_handle_run()
 			'step' => $step,
 			'timestamp' => current_time('mysql'),
 			'messages' => [],
-			'errors' => [__('Another migration job is already running.', 'tender-a-library')],
+			'errors' => [__('Another migration job is already running.', 'tender-library')],
 		], 30 * MINUTE_IN_SECONDS);
 		wp_safe_redirect(admin_url('admin.php?page=tal-csv-migration'));
 		exit;
@@ -736,7 +736,7 @@ function tal_migration_run_step($step, $csv_dir, $media_base, $dry_run, $uploade
 		default:
 			return [
 				'messages' => [],
-				'errors' => [sprintf(__('Unknown migration step: %s', 'tender-a-library'), $step)],
+				'errors' => [sprintf(__('Unknown migration step: %s', 'tender-library'), $step)],
 			];
 	}
 
@@ -798,7 +798,7 @@ function tal_migration_template_download_url($template)
 function tal_migration_handle_template_download()
 {
 	if (!current_user_can('manage_options')) {
-		wp_die(__('Insufficient permissions.', 'tender-a-library'));
+		wp_die(__('Insufficient permissions.', 'tender-library'));
 	}
 
 	$template = isset($_GET['template']) ? sanitize_file_name(wp_unslash($_GET['template'])) : '';
@@ -810,12 +810,12 @@ function tal_migration_handle_template_download()
 		'calls-template.csv',
 	];
 	if (!in_array($template, $allowed, true)) {
-		wp_die(__('Invalid template.', 'tender-a-library'));
+		wp_die(__('Invalid template.', 'tender-library'));
 	}
 
 	$path = __DIR__ . '/templates/' . $template;
 	if (!file_exists($path)) {
-		wp_die(__('Template not found.', 'tender-a-library'));
+		wp_die(__('Template not found.', 'tender-library'));
 	}
 
 	header('Content-Type: text/csv');
@@ -845,18 +845,18 @@ function tal_migration_csv_path($dir, $filename)
 function tal_migration_read_csv($path)
 {
 	if (!file_exists($path)) {
-		return new WP_Error('missing_csv', sprintf(__('CSV not found: %s', 'tender-a-library'), $path));
+		return new WP_Error('missing_csv', sprintf(__('CSV not found: %s', 'tender-library'), $path));
 	}
 
 	$handle = fopen($path, 'r');
 	if (!$handle) {
-		return new WP_Error('csv_open_failed', sprintf(__('Could not open CSV: %s', 'tender-a-library'), $path));
+		return new WP_Error('csv_open_failed', sprintf(__('Could not open CSV: %s', 'tender-library'), $path));
 	}
 
 	$header = fgetcsv($handle, 0, ',', '"');
 	if (!$header) {
 		fclose($handle);
-		return new WP_Error('csv_empty', sprintf(__('Empty CSV: %s', 'tender-a-library'), $path));
+		return new WP_Error('csv_empty', sprintf(__('Empty CSV: %s', 'tender-library'), $path));
 	}
 
 	$header[0] = tal_migration_strip_bom($header[0]);
@@ -901,18 +901,18 @@ function tal_migration_normalize_value($value)
 function tal_migration_count_csv_rows($path)
 {
 	if (!file_exists($path)) {
-		return new WP_Error('missing_csv', sprintf(__('CSV not found: %s', 'tender-a-library'), $path));
+		return new WP_Error('missing_csv', sprintf(__('CSV not found: %s', 'tender-library'), $path));
 	}
 
 	$handle = fopen($path, 'r');
 	if (!$handle) {
-		return new WP_Error('csv_open_failed', sprintf(__('Could not open CSV: %s', 'tender-a-library'), $path));
+		return new WP_Error('csv_open_failed', sprintf(__('Could not open CSV: %s', 'tender-library'), $path));
 	}
 
 	$header = fgetcsv($handle, 0, ',', '"');
 	if (!$header) {
 		fclose($handle);
-		return new WP_Error('csv_empty', sprintf(__('Empty CSV: %s', 'tender-a-library'), $path));
+		return new WP_Error('csv_empty', sprintf(__('Empty CSV: %s', 'tender-library'), $path));
 	}
 
 	$count = 0;
@@ -930,18 +930,18 @@ function tal_migration_count_csv_rows($path)
 function tal_migration_read_csv_batch($path, $offset, $limit)
 {
 	if (!file_exists($path)) {
-		return new WP_Error('missing_csv', sprintf(__('CSV not found: %s', 'tender-a-library'), $path));
+		return new WP_Error('missing_csv', sprintf(__('CSV not found: %s', 'tender-library'), $path));
 	}
 
 	$handle = fopen($path, 'r');
 	if (!$handle) {
-		return new WP_Error('csv_open_failed', sprintf(__('Could not open CSV: %s', 'tender-a-library'), $path));
+		return new WP_Error('csv_open_failed', sprintf(__('Could not open CSV: %s', 'tender-library'), $path));
 	}
 
 	$header = fgetcsv($handle, 0, ',', '"');
 	if (!$header) {
 		fclose($handle);
-		return new WP_Error('csv_empty', sprintf(__('Empty CSV: %s', 'tender-a-library'), $path));
+		return new WP_Error('csv_empty', sprintf(__('Empty CSV: %s', 'tender-library'), $path));
 	}
 
 	$header[0] = tal_migration_strip_bom($header[0]);
@@ -1022,7 +1022,7 @@ function tal_migration_process_job_runner($job_id)
 		$source_paths = (array) $job['source_paths'];
 		$path = isset($source_paths[$current_step]) ? $source_paths[$current_step] : '';
 		if ($path === '') {
-			tal_migration_mark_job_failed($job, [sprintf(__('Missing source path for step %s.', 'tender-a-library'), $current_step)]);
+			tal_migration_mark_job_failed($job, [sprintf(__('Missing source path for step %s.', 'tender-library'), $current_step)]);
 			return;
 		}
 
@@ -1111,7 +1111,7 @@ function tal_migration_process_step_batch($step, $path, $offset, $limit, $media_
 		case 'calls':
 			return tal_migration_import_calls_batch($path, $offset, $limit, $dry_run);
 		default:
-			return new WP_Error('unknown_step', sprintf(__('Unknown migration step: %s', 'tender-a-library'), $step));
+			return new WP_Error('unknown_step', sprintf(__('Unknown migration step: %s', 'tender-library'), $step));
 	}
 }
 
@@ -1224,7 +1224,7 @@ function tal_migration_finalize_sections($path, $dry_run = false)
 		wp_update_term($map[$old_id], 'tender_section', ['parent' => $map[$parent_old]]);
 	}
 
-	return ['messages' => [__('Sections hierarchy updated.', 'tender-a-library')], 'errors' => []];
+	return ['messages' => [__('Sections hierarchy updated.', 'tender-library')], 'errors' => []];
 }
 
 function tal_migration_import_users_batch($path, $offset, $limit, $dry_run = false)
@@ -1326,13 +1326,13 @@ function tal_migration_import_books_batch($path, $offset, $limit, $media_base = 
 
 		$section_id = tal_migration_resolve_book_section($row, $section_lookup, $section_old_id_map);
 		if (is_wp_error($section_id)) {
-			$result['errors'][] = sprintf(__('Book row %1$d old_id %2$d section error: %3$s', 'tender-a-library'), $row_number, $old_id, $section_id->get_error_message());
+			$result['errors'][] = sprintf(__('Book row %1$d old_id %2$d section error: %3$s', 'tender-library'), $row_number, $old_id, $section_id->get_error_message());
 			continue;
 		}
 
 		$lang_id = tal_migration_resolve_book_language($row, $lang_map, $dry_run);
 		if (is_wp_error($lang_id)) {
-			$result['errors'][] = sprintf(__('Book row %1$d old_id %2$d language error: %3$s', 'tender-a-library'), $row_number, $old_id, $lang_id->get_error_message());
+			$result['errors'][] = sprintf(__('Book row %1$d old_id %2$d language error: %3$s', 'tender-library'), $row_number, $old_id, $lang_id->get_error_message());
 			continue;
 		}
 
@@ -1348,7 +1348,7 @@ function tal_migration_import_books_batch($path, $offset, $limit, $media_base = 
 		$title = $row['title'] ?? '';
 		$post_args = [
 			'post_type' => 'tender_book',
-			'post_title' => $title ?: __('Untitled book', 'tender-a-library'),
+			'post_title' => $title ?: __('Untitled book', 'tender-library'),
 			'post_status' => 'publish',
 			'post_date' => !empty($row['created_at']) ? $row['created_at'] : current_time('mysql'),
 			'post_modified' => !empty($row['updated_at']) ? $row['updated_at'] : current_time('mysql'),
@@ -1370,7 +1370,7 @@ function tal_migration_import_books_batch($path, $offset, $limit, $media_base = 
 
 		$attachment_id = tal_migration_import_book_cover($row, $media_base, $dry_run);
 		if (is_wp_error($attachment_id)) {
-			$result['errors'][] = sprintf(__('Book row %1$d old_id %2$d cover error: %3$s', 'tender-a-library'), $row_number, $old_id, $attachment_id->get_error_message());
+			$result['errors'][] = sprintf(__('Book row %1$d old_id %2$d cover error: %3$s', 'tender-library'), $row_number, $old_id, $attachment_id->get_error_message());
 		} elseif ($attachment_id) {
 			tal_migration_set_book_cover($post_id, (int) $attachment_id);
 		}
@@ -1418,7 +1418,7 @@ function tal_migration_import_lendings_batch($path, $offset, $limit, $dry_run = 
 		$book_old = (int) ($row['book_id'] ?? 0);
 		$user_old = (int) ($row['user_id'] ?? 0);
 		if (!isset($book_map[$book_old], $user_map[$user_old])) {
-			$result['errors'][] = sprintf(__('Lending row %1$d old_id %2$d missing book/user mapping.', 'tender-a-library'), $row_number, $old_id);
+			$result['errors'][] = sprintf(__('Lending row %1$d old_id %2$d missing book/user mapping.', 'tender-library'), $row_number, $old_id);
 			continue;
 		}
 
@@ -1444,7 +1444,7 @@ function tal_migration_import_lendings_batch($path, $offset, $limit, $dry_run = 
 		);
 
 		if ($insert === false) {
-			$result['errors'][] = sprintf(__('Failed to insert lending row %1$d old_id %2$d.', 'tender-a-library'), $row_number, $old_id);
+			$result['errors'][] = sprintf(__('Failed to insert lending row %1$d old_id %2$d.', 'tender-library'), $row_number, $old_id);
 			continue;
 		}
 
@@ -1484,7 +1484,7 @@ function tal_migration_import_calls_batch($path, $offset, $limit, $dry_run = fal
 
 		$user_old = (int) ($row['user_id'] ?? 0);
 		if (!isset($user_map[$user_old])) {
-			$result['errors'][] = sprintf(__('Call row %1$d old_id %2$d missing user mapping.', 'tender-a-library'), $row_number, $old_id);
+			$result['errors'][] = sprintf(__('Call row %1$d old_id %2$d missing user mapping.', 'tender-library'), $row_number, $old_id);
 			continue;
 		}
 
@@ -1511,7 +1511,7 @@ function tal_migration_import_calls_batch($path, $offset, $limit, $dry_run = fal
 		);
 
 		if ($insert === false) {
-			$result['errors'][] = sprintf(__('Failed to insert call row %1$d old_id %2$d.', 'tender-a-library'), $row_number, $old_id);
+			$result['errors'][] = sprintf(__('Failed to insert call row %1$d old_id %2$d.', 'tender-library'), $row_number, $old_id);
 			continue;
 		}
 
@@ -1598,7 +1598,7 @@ function tal_migration_import_sections($path, $dry_run = false)
 	}
 
 	return [
-		'messages' => [sprintf(__('Sections imported. Created: %d, updated: %d.', 'tender-a-library'), $created, $updated)],
+		'messages' => [sprintf(__('Sections imported. Created: %d, updated: %d.', 'tender-library'), $created, $updated)],
 		'errors' => $errors,
 	];
 }
@@ -1669,7 +1669,7 @@ function tal_migration_import_languages($path, $dry_run = false)
 	}
 
 	return [
-		'messages' => [sprintf(__('Languages imported. Created: %d, updated: %d.', 'tender-a-library'), $created, $updated)],
+		'messages' => [sprintf(__('Languages imported. Created: %d, updated: %d.', 'tender-library'), $created, $updated)],
 		'errors' => $errors,
 	];
 }
@@ -1706,12 +1706,12 @@ function tal_migration_import_media($path, $media_base, $dry_run = false)
 
 		if (!$media_url) {
 			if (!$file_name || empty($media_base)) {
-				$errors[] = sprintf(__('Media %d missing URL or file path.', 'tender-a-library'), $old_id);
+				$errors[] = sprintf(__('Media %d missing URL or file path.', 'tender-library'), $old_id);
 				continue;
 			}
 			$source_path = $media_base . '/' . $relative_path . $file_name;
 			if (!file_exists($source_path)) {
-				$errors[] = sprintf(__('Missing media file: %s', 'tender-a-library'), $source_path);
+				$errors[] = sprintf(__('Missing media file: %s', 'tender-library'), $source_path);
 				continue;
 			}
 		}
@@ -1746,7 +1746,7 @@ function tal_migration_import_media($path, $media_base, $dry_run = false)
 
 	return [
 		'messages' => [
-			sprintf(__('Images imported. Created: %d, skipped: %d.', 'tender-a-library'), $created, $skipped),
+			sprintf(__('Images imported. Created: %d, skipped: %d.', 'tender-library'), $created, $skipped),
 		],
 		'errors' => $errors,
 	];
@@ -1769,7 +1769,7 @@ function tal_migration_create_attachment_from_path($source_path, $title, $mime_t
 	$destination = trailingslashit($uploads['path']) . $filename;
 
 	if (!copy($source_path, $destination)) {
-		return new WP_Error('copy_failed', sprintf(__('Could not copy file: %s', 'tender-a-library'), $source_path));
+		return new WP_Error('copy_failed', sprintf(__('Could not copy file: %s', 'tender-library'), $source_path));
 	}
 
 	$attachment = [
@@ -1989,7 +1989,7 @@ function tal_migration_import_users($path, $dry_run = false)
 	}
 
 	return [
-		'messages' => [sprintf(__('Users imported. Created: %d, updated: %d.', 'tender-a-library'), $created, $updated)],
+		'messages' => [sprintf(__('Users imported. Created: %d, updated: %d.', 'tender-library'), $created, $updated)],
 		'errors' => $errors,
 	];
 }
@@ -2022,13 +2022,13 @@ function tal_migration_import_books($path, $media_base = '', $dry_run = false)
 
 		$section_id = tal_migration_resolve_book_section($row, $section_lookup, $section_old_id_map);
 		if (is_wp_error($section_id)) {
-			$errors[] = sprintf(__('Book %d section error: %s', 'tender-a-library'), $old_id, $section_id->get_error_message());
+			$errors[] = sprintf(__('Book %d section error: %s', 'tender-library'), $old_id, $section_id->get_error_message());
 			continue;
 		}
 
 		$lang_id = tal_migration_resolve_book_language($row, $lang_map, $dry_run);
 		if (is_wp_error($lang_id)) {
-			$errors[] = sprintf(__('Book %d language error: %s', 'tender-a-library'), $old_id, $lang_id->get_error_message());
+			$errors[] = sprintf(__('Book %d language error: %s', 'tender-library'), $old_id, $lang_id->get_error_message());
 			continue;
 		}
 
@@ -2044,7 +2044,7 @@ function tal_migration_import_books($path, $media_base = '', $dry_run = false)
 		$title = $row['title'] ?? '';
 		$post_args = [
 			'post_type' => 'tender_book',
-			'post_title' => $title ?: __('Untitled book', 'tender-a-library'),
+			'post_title' => $title ?: __('Untitled book', 'tender-library'),
 			'post_status' => 'publish',
 			'post_date' => !empty($row['created_at']) ? $row['created_at'] : current_time('mysql'),
 			'post_modified' => !empty($row['updated_at']) ? $row['updated_at'] : current_time('mysql'),
@@ -2067,7 +2067,7 @@ function tal_migration_import_books($path, $media_base = '', $dry_run = false)
 
 		$attachment_id = tal_migration_import_book_cover($row, $media_base, $dry_run);
 		if (is_wp_error($attachment_id)) {
-			$errors[] = sprintf(__('Book %d cover error: %s', 'tender-a-library'), $old_id, $attachment_id->get_error_message());
+			$errors[] = sprintf(__('Book %d cover error: %s', 'tender-library'), $old_id, $attachment_id->get_error_message());
 		} elseif ($attachment_id) {
 			tal_migration_set_book_cover($post_id, (int) $attachment_id);
 		}
@@ -2081,7 +2081,7 @@ function tal_migration_import_books($path, $media_base = '', $dry_run = false)
 	}
 
 	return [
-		'messages' => [sprintf(__('Books imported. Created: %d, updated: %d.', 'tender-a-library'), $created, $updated)],
+		'messages' => [sprintf(__('Books imported. Created: %d, updated: %d.', 'tender-library'), $created, $updated)],
 		'errors' => $errors,
 	];
 }
@@ -2163,9 +2163,9 @@ function tal_migration_resolve_book_language($row, &$lang_map, $dry_run = false)
 	$name = tal_migration_first_non_empty($row, ['language_name', 'language', 'lang']);
 	if ($name === '') {
 		if ($lang_old) {
-			return new WP_Error('missing_language_mapping', __('Missing language mapping.', 'tender-a-library'));
+			return new WP_Error('missing_language_mapping', __('Missing language mapping.', 'tender-library'));
 		}
-		return new WP_Error('missing_language_name', __('Missing language_name.', 'tender-a-library'));
+		return new WP_Error('missing_language_name', __('Missing language_name.', 'tender-library'));
 	}
 
 	$existing = term_exists($name, 'tender_language');
@@ -2208,14 +2208,14 @@ function tal_migration_resolve_book_section($row, $section_lookup, $section_old_
 
 	if ($section_name === '' || $number === '') {
 		if ($section_old_id) {
-			return new WP_Error('missing_section_mapping', __('No imported section matches the provided section_id.', 'tender-a-library'));
+			return new WP_Error('missing_section_mapping', __('No imported section matches the provided section_id.', 'tender-library'));
 		}
 		return tal_migration_get_or_create_default_section();
 	}
 
 	$key = tal_migration_get_section_lookup_key($section_name, $number);
 	if (!isset($section_lookup[$key])) {
-		return new WP_Error('missing_section_mapping', __('No imported section matches the provided section_name and section_number.', 'tender-a-library'));
+		return new WP_Error('missing_section_mapping', __('No imported section matches the provided section_name and section_number.', 'tender-library'));
 	}
 
 	return (int) $section_lookup[$key];
@@ -2305,7 +2305,7 @@ function tal_migration_import_book_cover($row, $media_base = '', $dry_run = fals
 
 	$source_path = trailingslashit(rtrim((string) $media_base, '/')) . $relative_path;
 	if (!file_exists($source_path)) {
-		return new WP_Error('missing_cover_file', sprintf(__('Missing media file: %s', 'tender-a-library'), $source_path));
+		return new WP_Error('missing_cover_file', sprintf(__('Missing media file: %s', 'tender-library'), $source_path));
 	}
 
 	if ($dry_run) {
@@ -2365,7 +2365,7 @@ function tal_migration_import_lendings($path, $dry_run = false)
 		$book_old = (int) ($row['book_id'] ?? 0);
 		$user_old = (int) ($row['user_id'] ?? 0);
 		if (!isset($book_map[$book_old], $user_map[$user_old])) {
-			$errors[] = sprintf(__('Lending %d missing book/user mapping.', 'tender-a-library'), $old_id);
+			$errors[] = sprintf(__('Lending %d missing book/user mapping.', 'tender-library'), $old_id);
 			continue;
 		}
 
@@ -2391,7 +2391,7 @@ function tal_migration_import_lendings($path, $dry_run = false)
 		);
 
 		if ($insert === false) {
-			$errors[] = sprintf(__('Failed to insert lending %d.', 'tender-a-library'), $old_id);
+			$errors[] = sprintf(__('Failed to insert lending %d.', 'tender-library'), $old_id);
 			continue;
 		}
 
@@ -2399,7 +2399,7 @@ function tal_migration_import_lendings($path, $dry_run = false)
 	}
 
 	return [
-		'messages' => [sprintf(__('Lendings imported. Created: %d, skipped: %d.', 'tender-a-library'), $created, $skipped)],
+		'messages' => [sprintf(__('Lendings imported. Created: %d, skipped: %d.', 'tender-library'), $created, $skipped)],
 		'errors' => $errors,
 	];
 }
@@ -2435,7 +2435,7 @@ function tal_migration_import_calls($path, $dry_run = false)
 
 		$user_old = (int) ($row['user_id'] ?? 0);
 		if (!isset($user_map[$user_old])) {
-			$errors[] = sprintf(__('Call %d missing user mapping.', 'tender-a-library'), $old_id);
+			$errors[] = sprintf(__('Call %d missing user mapping.', 'tender-library'), $old_id);
 			continue;
 		}
 
@@ -2462,7 +2462,7 @@ function tal_migration_import_calls($path, $dry_run = false)
 		);
 
 		if ($insert === false) {
-			$errors[] = sprintf(__('Failed to insert call %d.', 'tender-a-library'), $old_id);
+			$errors[] = sprintf(__('Failed to insert call %d.', 'tender-library'), $old_id);
 			continue;
 		}
 
@@ -2470,7 +2470,7 @@ function tal_migration_import_calls($path, $dry_run = false)
 	}
 
 	return [
-		'messages' => [sprintf(__('Calls imported. Created: %d, skipped: %d.', 'tender-a-library'), $created, $skipped)],
+		'messages' => [sprintf(__('Calls imported. Created: %d, skipped: %d.', 'tender-library'), $created, $skipped)],
 		'errors' => $errors,
 	];
 }

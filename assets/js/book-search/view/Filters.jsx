@@ -73,13 +73,13 @@ const Filters = ({ filters, setFilters, options }) => {
 	};
 
 	const FILTER_LABELS = {
-		q: wp.i18n.__("Search", "tender-a-library"),
-		sections: wp.i18n.__("Sections", "tender-a-library"),
-		languages: wp.i18n.__("Languages", "tender-a-library"),
-		page: wp.i18n.__("Page", "tender-a-library"),
-		per_page: wp.i18n.__("Per Page", "tender-a-library"),
-		orderby: wp.i18n.__("Order By", "tender-a-library"),
-		order: wp.i18n.__("Order", "tender-a-library"),
+		q: wp.i18n.__("Search", "tender-library"),
+		sections: wp.i18n.__("Sections", "tender-library"),
+		languages: wp.i18n.__("Languages", "tender-library"),
+		page: wp.i18n.__("Page", "tender-library"),
+		per_page: wp.i18n.__("Per Page", "tender-library"),
+		orderby: wp.i18n.__("Order By", "tender-library"),
+		order: wp.i18n.__("Order", "tender-library"),
 	};
 
 	const getSectionName = (slug) => {
@@ -115,21 +115,21 @@ const Filters = ({ filters, setFilters, options }) => {
 						active ? "active" : ""
 					}`}
 					onClick={() => setActive((prev) => !prev)}
-					aria-label={wp.i18n.__("Show filters", "tender-a-library")}
+					aria-label={wp.i18n.__("Show filters", "tender-library")}
 				>
-					{wp.i18n.__("Show filters", "tender-a-library")}
+					{wp.i18n.__("Show filters", "tender-library")}
 				</div>
 				<input
 					type="text" className="tender-search-input"
 					placeholder={wp.i18n.__(
 						"Search by title, author, etc",
-						"tender-a-library",
+						"tender-library",
 					)}
 					value={filters.q ?? ""}
 					onChange={(e) => update("q", e.target.value)}
 				/>
 				<label className="tender-per-page-control">
-					<span>{wp.i18n.__("Books per page", "tender-a-library")}</span>
+					<span>{wp.i18n.__("Books per page", "tender-library")}</span>
 					<select
 						value={filters.per_page || "12"}
 						onChange={(e) => {
@@ -177,10 +177,10 @@ const Filters = ({ filters, setFilters, options }) => {
 						onClick={resetFilters}
 						aria-label={wp.i18n.__(
 							"Reset all filters",
-							"tender-a-library",
+							"tender-library",
 						)}
 					>
-						{wp.i18n.__("Reset Filters", "tender-a-library")}
+						{wp.i18n.__("Reset Filters", "tender-library")}
 					</button>
 				)}
 			</div>
@@ -193,11 +193,11 @@ const Filters = ({ filters, setFilters, options }) => {
 				<div
 					className="tender-filters-close"
 					onClick={() => setActive(false)}
-					aria-label={wp.i18n.__("Close filters", "tender-a-library")}
+					aria-label={wp.i18n.__("Close filters", "tender-library")}
 				>
-					{wp.i18n.__("Hide filters", "tender-a-library")}
+					{wp.i18n.__("Hide filters", "tender-library")}
 				</div>
-				<h2>{wp.i18n.__("Filters", "tender-a-library")}</h2>
+				<h2>{wp.i18n.__("Filters", "tender-library")}</h2>
 				
 				{hasActiveFilters && (
 					<button
@@ -205,15 +205,15 @@ const Filters = ({ filters, setFilters, options }) => {
 						onClick={resetFilters}
 						aria-label={wp.i18n.__(
 							"Reset all filters",
-							"tender-a-library",
+							"tender-library",
 						)}
 					>
-						{wp.i18n.__("Reset Filters", "tender-a-library")}
+						{wp.i18n.__("Reset Filters", "tender-library")}
 					</button>
 				)}
 				<fieldset className="tender-fieldset">
 					<legend>
-						{wp.i18n.__("Sections", "tender-a-library")}
+						{wp.i18n.__("Sections", "tender-library")}
 					</legend>
 					<CategoryTree
 						sections={sections}
@@ -223,7 +223,7 @@ const Filters = ({ filters, setFilters, options }) => {
 				</fieldset>
 				<fieldset className="tender-fieldset">
 					<legend>
-						{wp.i18n.__("Languages", "tender-a-library")}
+						{wp.i18n.__("Languages", "tender-library")}
 					</legend>
 					{languages.map((language) => (
 						<label key={language.term_id}>

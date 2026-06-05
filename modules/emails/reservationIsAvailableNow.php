@@ -5,7 +5,7 @@ function tal_notify_availability_of_reservation($reservation, $book_id){
     $book = get_post($book_id);
     $user = get_user($reservation->user_id);
    
-    $subject = __('The book you want is already available for ten days', 'tender-a-library');
+    $subject = __('The book you want is already available for ten days', 'tender-library');
 
     $message = tal_get_your_reservation_is_available_email_html($user, $book);
 
@@ -31,19 +31,19 @@ function tal_get_your_reservation_is_available_email_html($user, $book) {
                 <span style="font-size:1.8em;font-weight:bold;"><?php echo esc_html($site_name); ?></span>
             <?php endif; ?>
         </div>
-        <h4><?php printf(__('Hello <strong>%s</strong>,', 'tender-a-library'), esc_html($user->display_name)); ?></h4>
-        <p><?php _e('We are contacting you because the book you reserved is available now.', 'tender-a-library'); ?></p>
-        <p><?php _e('If you do not borrow it on ten days, the book will be available for everyone.', 'tender-a-library'); ?></p>
+        <h4><?php printf(__('Hello <strong>%s</strong>,', 'tender-library'), esc_html($user->display_name)); ?></h4>
+        <p><?php _e('We are contacting you because the book you reserved is available now.', 'tender-library'); ?></p>
+        <p><?php _e('If you do not borrow it on ten days, the book will be available for everyone.', 'tender-library'); ?></p>
 
             <ul>
-                <li><strong><?php _e('Title:', 'tender-a-library'); ?></strong> <?php echo esc_html($book->post_title); ?></li>
-                <li><?php _e('Author:', 'tender-a-library'); ?> <?php echo esc_html(carbon_get_post_meta($book->ID, 'tender_book_author')); ?></li>
+                <li><strong><?php _e('Title:', 'tender-library'); ?></strong> <?php echo esc_html($book->post_title); ?></li>
+                <li><?php _e('Author:', 'tender-library'); ?> <?php echo esc_html(carbon_get_post_meta($book->ID, 'tender_book_author')); ?></li>
             </ul>
 
         <p style="color:#1b5e20;">
             <?php _e(
                 'Thank you.',
-                'tender-a-library'
+                'tender-library'
             ); ?>
         </p>
     </div>

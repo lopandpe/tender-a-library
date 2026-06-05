@@ -27,7 +27,7 @@ function tender_render_mini_book_markup($book_id, $extra_classes = '')
 	$book_id = (int) $book_id;
 
 	if (!$book_id) {
-		return '<p class="miniatura-placeholder">' . esc_html__('No books selected', 'tender-a-library') . '</p>';
+		return '<p class="miniatura-placeholder">' . esc_html__('No books selected', 'tender-library') . '</p>';
 	}
 
 	$image_id = carbon_get_post_meta($book_id, 'tender_book_cover');
@@ -58,9 +58,9 @@ function tender_render_mini_book_markup($book_id, $extra_classes = '')
 		</div>
 		<div class="book-availability">
 			<?php if (tender_can_book_be_lent($book_id)) : ?>
-				<span class="available"><?php esc_html_e('Available', 'tender-a-library'); ?></span>
+				<span class="available"><?php esc_html_e('Available', 'tender-library'); ?></span>
 			<?php else : ?>
-				<span class="unavailable"><?php esc_html_e('Not Available', 'tender-a-library'); ?></span>
+				<span class="unavailable"><?php esc_html_e('Not Available', 'tender-library'); ?></span>
 			<?php endif; ?>
 		</div>
 	</div>
@@ -74,7 +74,7 @@ function tender_mini_book_render_callback($block_attributes, $block_content)
 	$book_id = get_the_ID();
 
 	if (!$book_id) {
-		return '<p class="miniatura-placeholder">' . esc_html__('No books selected', 'tender-a-library') . '</p>';
+		return '<p class="miniatura-placeholder">' . esc_html__('No books selected', 'tender-library') . '</p>';
 	}
 
 	$block_classes = tender_get_block_classes($block_attributes);

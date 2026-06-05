@@ -16,7 +16,7 @@ function tender_book_summary_render_callback($block_attributes, $block_content)
 	<section class="<?php echo $block_classes; ?>">
 		<div className="block-container">
 			<p> <?php if ($summary) : echo $summary;
-				else: _e("There is no summary", "tender-a-library");
+				else: _e("There is no summary", "tender-library");
 				endif; ?></p>
 
 		</div>

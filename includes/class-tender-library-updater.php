@@ -165,7 +165,7 @@ class Tender_Library_Updater
 		}
 
 		if (empty($sections['description'])) {
-			$sections['description'] = __('Private library/tender management plugin.', 'tender-a-library');
+			$sections['description'] = __('Private library/tender management plugin.', 'tender-library');
 		}
 
 		return array(

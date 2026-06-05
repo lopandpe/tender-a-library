@@ -28,7 +28,7 @@ function tender_latest_books_render_callback($block_attributes, $block_content)
 					<?php echo tender_render_mini_book_markup($book_post->ID, 'tender-latest-books-grid__item'); ?>
 				<?php endforeach; ?>
 			<?php else : ?>
-				<p class="tender-latest-books-empty"><?php esc_html_e('There are no books in the library yet.', 'tender-a-library'); ?></p>
+				<p class="tender-latest-books-empty"><?php esc_html_e('There are no books in the library yet.', 'tender-library'); ?></p>
 			<?php endif; ?>
 		</div>
 	</section>

@@ -10,10 +10,10 @@ function tal_render_export_lendings_page() {
     ?>
     <div class="wrap">
         <form method="post" class="download_csv_form" action="">
-            <label for="tal_export_lendings_csv"><?php _e('Export active lendings to CSV', 'tender-a-library'); ?></label>
+            <label for="tal_export_lendings_csv"><?php _e('Export active lendings to CSV', 'tender-library'); ?></label>
             <?php wp_nonce_field('tal_export_lendings_action', 'tal_export_lendings_nonce'); ?>
             <button type="submit" class="button button-primary" name="tal_export_lendings_csv">
-                <?php _e('CSV Download', 'tender-a-library'); ?>
+                <?php _e('CSV Download', 'tender-library'); ?>
             </button>
         </form>
     </div>
@@ -46,14 +46,14 @@ function tal_export_lendings_to_csv() {
     // 3. Cabecera del CSV
     fputcsv($output, [
         'ID',
-        __('User', 'tender-a-library'),
-        __('E-mail', 'tender-a-library'),
-        __('Phone number', 'tender-a-library'),
-        __('Book Title', 'tender-a-library'),
-        __('Author(s)', 'tender-a-library'),
-        __('Signature', 'tender-a-library'),
-        __('Loan date', 'tender-a-library'),
-        __('Estimated return date', 'tender-a-library')
+        __('User', 'tender-library'),
+        __('E-mail', 'tender-library'),
+        __('Phone number', 'tender-library'),
+        __('Book Title', 'tender-library'),
+        __('Author(s)', 'tender-library'),
+        __('Signature', 'tender-library'),
+        __('Loan date', 'tender-library'),
+        __('Estimated return date', 'tender-library')
     ]);
 
     foreach ($lendings as $lending) {

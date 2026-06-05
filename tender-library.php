@@ -110,7 +110,7 @@ function tal_carbon_fields_missing_notice()
 	}
 
 	echo '<div class="notice notice-error"><p>';
-	echo esc_html__('Tender A Library: Carbon Fields could not be loaded. Run Composer install for this plugin or activate Carbon Fields.', 'tender-a-library');
+	echo esc_html__('Tender A Library: Carbon Fields could not be loaded. Run Composer install for this plugin or activate Carbon Fields.', 'tender-library');
 	echo '</p></div>';
 }
 

@@ -12,18 +12,18 @@ Container::make('post_meta', 'Datos del libro')
 	->where('post_type', '=', 'tender_book')
 	->add_fields(
 		array(
-			Field::make('image', 'tender_book_cover', __('Cover', 'tender-a-library')),
+			Field::make('image', 'tender_book_cover', __('Cover', 'tender-library')),
 
-			Field::make('text', 'tender_book_author', __('Authors', 'tender-a-library'))
+			Field::make('text', 'tender_book_author', __('Authors', 'tender-library'))
 				->set_required(true)
-				->set_attribute('placeholder', __('Surname, First name', 'tender-a-library'))
-				->set_help_text(__('This value determines the call sign. It must begin with at least three letters.', 'tender-a-library')),
+				->set_attribute('placeholder', __('Surname, First name', 'tender-library'))
+				->set_help_text(__('This value determines the call sign. It must begin with at least three letters.', 'tender-library')),
 
-			Field::make('textarea', 'tender_book_other_authors', __('Otras autoras', 'tender-a-library')),
+			Field::make('textarea', 'tender_book_other_authors', __('Otras autoras', 'tender-library')),
 
-			Field::make('text', 'tender_book_publisher', __('Publisher', 'tender-a-library')),
+			Field::make('text', 'tender_book_publisher', __('Publisher', 'tender-library')),
 
-			Field::make('text', 'tender_book_units', __('Copies', 'tender-a-library'))
+			Field::make('text', 'tender_book_units', __('Copies', 'tender-library'))
 				->set_attribute('type', 'number')
 				->set_attribute('min', 0)
 				->set_required(true)
@@ -33,7 +33,7 @@ Container::make('post_meta', 'Datos del libro')
 			Field::make(
 				'association',
 				'tender_book_language',
-				__('Language', 'tender-a-library')
+				__('Language', 'tender-library')
 			)
 				->set_types(array(
 					array(
@@ -45,16 +45,16 @@ Container::make('post_meta', 'Datos del libro')
 				->set_min(1)
 				->set_required(true),
 
-			Field::make('text', 'tender_book_year', __('Year of publication', 'tender-a-library')),
+			Field::make('text', 'tender_book_year', __('Year of publication', 'tender-library')),
 
-			Field::make('text', 'tender_book_edition', __('Edition number', 'tender-a-library')),
+			Field::make('text', 'tender_book_edition', __('Edition number', 'tender-library')),
 
 			Field::make('text', 'tender_book_isbn', __('ISBN')),
 
 
-			Field::make('rich_text', 'tender_book_excerpt', __('Summary', 'tender-a-library')),
+			Field::make('rich_text', 'tender_book_excerpt', __('Summary', 'tender-library')),
 
-			Field::make('rich_text', 'tender_book_review', __('Review', 'tender-a-library')),
+			Field::make('rich_text', 'tender_book_review', __('Review', 'tender-library')),
 		)
 	);
 
@@ -66,7 +66,7 @@ Container::make('post_meta', 'Categoría')
 			Field::make(
 				'association',
 				'tender_book_section',
-				__('Library section', 'tender-a-library')
+				__('Library section', 'tender-library')
 			)
 				->set_types(array(
 					array(
@@ -85,12 +85,12 @@ Container::make('post_meta', 'Signatura')
 	->where('post_type', '=', 'tender_book')
 	->add_fields(array(
 
-		Field::make('text', 'tender_book_sig1', __('Author', 'tender-a-library'))
+		Field::make('text', 'tender_book_sig1', __('Author', 'tender-library'))
 			->set_required(true)
 			->set_attribute('placeholder', 'XXX')
-			->set_help_text(__('First three letters of the author\'s first surname.', 'tender-a-library')),
-		Field::make('text', 'tender_book_sig2', __('Title', 'tender-a-library'))
+			->set_help_text(__('First three letters of the author\'s first surname.', 'tender-library')),
+		Field::make('text', 'tender_book_sig2', __('Title', 'tender-library'))
 			->set_required(true)
 			->set_attribute('placeholder', 'yyy')
-			->set_help_text(__('Three first letters of the first word of more than three characters in the title, avoiding articles.', 'tender-a-library')),
+			->set_help_text(__('Three first letters of the first word of more than three characters in the title, avoiding articles.', 'tender-library')),
 	));

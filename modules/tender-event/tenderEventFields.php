@@ -19,13 +19,13 @@ use Carbon_Fields\Container;
 //     );
 // }
 
-Container::make('post_meta', __('Event', 'tender-a-library'))
+Container::make('post_meta', __('Event', 'tender-library'))
 	->where('post_type', '=', 'tender_event')
     ->set_context('side')
 	->add_fields(
 		array(
             // Date event field
-            Field::make('date_time', 'tender_event_startdate', __('Date of the event', 'tender-a-library'))
+            Field::make('date_time', 'tender_event_startdate', __('Date of the event', 'tender-library'))
                 ->set_required(true)
                 // Set date picker options as spanish format
                 ->set_picker_options( array(
@@ -36,15 +36,15 @@ Container::make('post_meta', __('Event', 'tender-a-library'))
                 ) )
                 ->set_storage_format( 'Y-m-d H:i:s' )
                 ->set_input_format( 'd/m/Y H:i', 'd/m/Y H:i' )
-                ->set_attribute( 'placeholder', __('Start datetime of the event', 'tender-a-library') ),
+                ->set_attribute( 'placeholder', __('Start datetime of the event', 'tender-library') ),
 
-            Field::make( 'checkbox', 'tender_event_recurrent', __( 'It repeats every week', 'tender-a-library' ) )
+            Field::make( 'checkbox', 'tender_event_recurrent', __( 'It repeats every week', 'tender-library' ) )
                 ->set_option_value( 'yes' ) // valor cuando está marcado
-                ->set_help_text( __( 'Check this box if the event is recurring. Remember to add end date to the event.', 'tender-a-library' ) ),
+                ->set_help_text( __( 'Check this box if the event is recurring. Remember to add end date to the event.', 'tender-library' ) ),
 
 
             // Date event field
-            Field::make('date', 'tender_event_enddate', __('End date of the event', 'tender-a-library'))
+            Field::make('date', 'tender_event_enddate', __('End date of the event', 'tender-library'))
                 ->set_required(true)
                 // Set date picker options as spanish format
                 ->set_picker_options( array(
@@ -53,7 +53,7 @@ Container::make('post_meta', __('Event', 'tender-a-library'))
                 ) )
                 ->set_storage_format( 'Y-m-d' )
                 ->set_input_format( 'd/m/Y 23:59:59', 'd/m/Y 23:59:59' )
-                ->set_attribute( 'placeholder', __('End date of the repeating event', 'tender-a-library') )
+                ->set_attribute( 'placeholder', __('End date of the repeating event', 'tender-library') )
                 ->set_conditional_logic( array(
                     'relation' => 'AND',
                     array(
@@ -73,7 +73,7 @@ Container::make('post_meta', 'Categoría')
 			Field::make(
 				'association',
 				'tender_book_section',
-				__('Library section', 'tender-a-library') . __(' (optional)', 'tender-a-library')
+				__('Library section', 'tender-library') . __(' (optional)', 'tender-library')
 			)
 				->set_types(array(
 					array(

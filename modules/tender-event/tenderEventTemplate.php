@@ -39,8 +39,8 @@ function tender_event_register_fse_template() {
     $templates = [
         [
             'id'          => 'single-tender_event',
-            'title'       => __( 'Single event', 'tender-a-library' ),
-            'description' => __( 'Single event custom template (CPT).', 'tender-a-library' ),
+            'title'       => __( 'Single event', 'tender-library' ),
+            'description' => __( 'Single event custom template (CPT).', 'tender-library' ),
             'args'        => [
                 'slug'       => 'single-tender_event',
                 'post_types' => [ 'tender_event' ],

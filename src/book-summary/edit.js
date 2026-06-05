@@ -6,7 +6,7 @@ export default function Edit() {
 	return (
 		<section className="wp-block-tender-book-summary" {...useBlockProps()}>
 			<div className="block-container">
-				<h2>{__("Book summary", "tender-a-library")}</h2>
+				<h2>{__("Book summary", "tender-library")}</h2>
 				<p>
 					Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 					Integer imperdiet tincidunt lacus molestie malesuada.

@@ -19,7 +19,7 @@ if (!defined('ABSPATH')) {
  */
 function tender_render_lending_page($args)
 {
-	$title                = isset($args['title']) ? $args['title'] : __('Lendings', 'tender-a-library');
+	$title                = isset($args['title']) ? $args['title'] : __('Lendings', 'tender-library');
 	$ajax_action          = isset($args['ajax_action']) ? $args['ajax_action'] : '';
 	$render_table_callback = isset($args['render_table_callback']) ? $args['render_table_callback'] : '';
 	$show_actions         = isset($args['show_actions']) ? $args['show_actions'] : false;
@@ -34,9 +34,9 @@ function tender_render_lending_page($args)
 			<div id="tal-confirmation-modal" style="display: none;">
 				<div class="tal-modal-content">
 					<h3 id="modal-message" class=""></h3>
-					<button id="confirm-action"><?php _e('Confirm', 'tender-a-library') ?></button>
-					<button id="cancel-action" class="error"><?php _e('Cancel', 'tender-a-library') ?></button>
-					<button id="accept-action" style="display: none"><?php _e('Accept', 'tender-a-library') ?></button>
+					<button id="confirm-action"><?php _e('Confirm', 'tender-library') ?></button>
+					<button id="cancel-action" class="error"><?php _e('Cancel', 'tender-library') ?></button>
+					<button id="accept-action" style="display: none"><?php _e('Accept', 'tender-library') ?></button>
 				</div>
 			</div>
 		<?php endif; ?>
@@ -126,7 +126,7 @@ function tender_render_lending_page($args)
 				$(document).on('click', '.lending-return, .lending-renew', function() {
 					let lendingId = $(this).closest('tr').attr('id');
 					let action = $(this).data('action');
-					let message = (action === 'return') ? '<?php _e('Are you sure you want to FINISH this loan?', 'tender-a-library') ?>' : '<?php _e('Are you sure you want to RENEW this loan?', 'tender-a-library') ?>';
+					let message = (action === 'return') ? '<?php _e('Are you sure you want to FINISH this loan?', 'tender-library') ?>' : '<?php _e('Are you sure you want to RENEW this loan?', 'tender-library') ?>';
 					
 					$("#confirm-action")
 						.data("lending-id", lendingId)
@@ -191,7 +191,7 @@ function tender_render_lending_page($args)
 function tender_lendings_page()
 {
 	tender_render_lending_page(array(
-		'title'                 => __('Active Lendings', 'tender-a-library'),
+		'title'                 => __('Active Lendings', 'tender-library'),
 		'ajax_action'           => 'tender_search_lendings',
 		'render_table_callback' => 'render_lendings_table',
 		'show_actions'          => true,
@@ -204,7 +204,7 @@ function tender_lendings_page()
 function tender_old_lendings_page()
 {
 	tender_render_lending_page(array(
-		'title'                 => __('Finished Lendings', 'tender-a-library'),
+		'title'                 => __('Finished Lendings', 'tender-library'),
 		'ajax_action'           => 'tender_search_old_lendings',
 		'render_table_callback' => 'render_old_lendings_table',
 		'show_actions'          => false,
@@ -294,7 +294,7 @@ function tender_search_lendings_common($action, $returned)
 		echo $action === 'tender_search_lendings' ? render_lendings_table($results) : render_old_lendings_table($results);
 		echo render_pagination($page, $total_pages);
 	} else {
-		echo '<p class="text-gray-500">' . esc_html__('No loans found.', 'tender-a-library') . '</p>';
+		echo '<p class="text-gray-500">' . esc_html__('No loans found.', 'tender-library') . '</p>';
 	}
 
 	wp_die();
@@ -320,7 +320,7 @@ function render_pagination($current_page, $total_pages)
 	<div class="tal_admin_pagination-links">
 		<?php if ($current_page > 1) : ?>
 			<a href="#" data-page="<?php echo $current_page - 1; ?>">
-				« <?php _e('Previous', 'tender-a-library'); ?>
+				« <?php _e('Previous', 'tender-library'); ?>
 			</a>
 		<?php endif; ?>
 
@@ -346,7 +346,7 @@ function render_pagination($current_page, $total_pages)
 
 		<?php if ($current_page < $total_pages) : ?>
 			<a href="#" data-page="<?php echo $current_page + 1; ?>">
-				<?php _e('Next', 'tender-a-library'); ?> »
+				<?php _e('Next', 'tender-library'); ?> »
 			</a>
 		<?php endif; ?>
 	</div>
@@ -366,19 +366,19 @@ function render_lendings_table($results)
 		<thead>
 			<tr>
 				<th>
-					<?php _e('Book title', 'tender-a-library'); ?>
+					<?php _e('Book title', 'tender-library'); ?>
 				</th>
 				<th>
-					<?php _e('User', 'tender-a-library'); ?>
+					<?php _e('User', 'tender-library'); ?>
 				</th>
 				<th>
-					<?php _e('Loan date', 'tender-a-library'); ?>
+					<?php _e('Loan date', 'tender-library'); ?>
 				</th>
 				<th>
-					<?php _e('Estimated return date', 'tender-a-library'); ?>
+					<?php _e('Estimated return date', 'tender-library'); ?>
 				</th>
 				<th>
-					<?php _e('Actions', 'tender-a-library'); ?>
+					<?php _e('Actions', 'tender-library'); ?>
 				</th>
 			</tr>
 		</thead>
@@ -399,10 +399,10 @@ function render_lendings_table($results)
 					<td><?php echo esc_html($formatted_date); ?></td>
 					<td>
 						<button class="lending-return" data-action="return" data-id="<?php echo esc_attr($row->id); ?>">
-							<?php _e('Return', 'tender-a-library'); ?>
+							<?php _e('Return', 'tender-library'); ?>
 						</button>
 						<button class="lending-renew" data-action="renew" data-id="<?php echo esc_attr($row->id); ?>">
-							<?php _e('Loan renewal', 'tender-a-library'); ?>
+							<?php _e('Loan renewal', 'tender-library'); ?>
 						</button>
 
 					</td>
@@ -425,19 +425,19 @@ function render_old_lendings_table($results)
 		<thead>
 			<tr>
 				<th>
-					<?php _e('Book title', 'tender-a-library'); ?>
+					<?php _e('Book title', 'tender-library'); ?>
 				</th>
 				<th>
-					<?php _e('User', 'tender-a-library'); ?>
+					<?php _e('User', 'tender-library'); ?>
 				</th>
 				<th>
-					<?php _e('Loan date', 'tender-a-library'); ?>
+					<?php _e('Loan date', 'tender-library'); ?>
 				</th>
 				<th>
-					<?php _e('Return date', 'tender-a-library'); ?>
+					<?php _e('Return date', 'tender-library'); ?>
 				</th>
 				<th>
-					<?php _e('Renewals count', 'tender-a-library'); ?>
+					<?php _e('Renewals count', 'tender-library'); ?>
 				</th>
 			</tr>
 		</thead>

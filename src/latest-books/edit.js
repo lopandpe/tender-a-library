@@ -12,9 +12,9 @@ export default function Edit( { attributes, setAttributes } ) {
 	return (
 		<>
 			<InspectorControls>
-				<PanelBody title={ __( "Latest books settings", "tender-a-library" ) }>
+				<PanelBody title={ __( "Latest books settings", "tender-library" ) }>
 					<RangeControl
-						label={ __( "Books to show", "tender-a-library" ) }
+						label={ __( "Books to show", "tender-library" ) }
 						value={ booksToShow }
 						onChange={ ( value ) => setAttributes( { booksToShow: value } ) }
 						min={ 1 }
@@ -27,7 +27,7 @@ export default function Edit( { attributes, setAttributes } ) {
 				<p className="tender-latest-books-editor__label">
 					{ sprintf(
 						/* translators: %d: number of books shown */
-						__( "Preview: showing the latest %d books.", "tender-a-library" ),
+						__( "Preview: showing the latest %d books.", "tender-library" ),
 						booksToShow
 					) }
 				</p>
@@ -40,15 +40,15 @@ export default function Edit( { attributes, setAttributes } ) {
 							<div className="cover tender-latest-books-editor__cover" />
 							<div className="book-info">
 								<div className="title">
-									{ __( "Latest book title", "tender-a-library" ) }
+									{ __( "Latest book title", "tender-library" ) }
 								</div>
 								<div className="author">
-									{ __( "Author name", "tender-a-library" ) }
+									{ __( "Author name", "tender-library" ) }
 								</div>
 							</div>
 							<div className="book-availability">
 								<span className="available">
-									{ __( "Available", "tender-a-library" ) }
+									{ __( "Available", "tender-library" ) }
 								</span>
 							</div>
 						</div>

@@ -14,11 +14,11 @@ function tal_user_can_manage_lendings()
 function tal_require_lending_ajax_access($nonce_action = '', $nonce_field = 'nonce')
 {
 	if (!is_user_logged_in()) {
-		wp_send_json_error(['message' => __('Not authorized.', 'tender-a-library')], 401);
+		wp_send_json_error(['message' => __('Not authorized.', 'tender-library')], 401);
 	}
 
 	if (!tal_user_can_manage_lendings()) {
-		wp_send_json_error(['message' => __('Insufficient permissions.', 'tender-a-library')], 403);
+		wp_send_json_error(['message' => __('Insufficient permissions.', 'tender-library')], 403);
 	}
 
 	if ($nonce_action) {
@@ -33,7 +33,7 @@ function tender_create_lending($book_id, $user_id, $stimated_return_date, $old_l
 	if(tal_has_active_reservation($book_id)){
 		$res_return = tal_finish_reservation_proccess($book_id);
 		if($res_return === false){
-			return new WP_Error('reservation_error', __('Error updating reservation', 'tender-a-library'));
+			return new WP_Error('reservation_error', __('Error updating reservation', 'tender-library'));
 		}
 	}
 	$wpdb->insert(
@@ -108,7 +108,7 @@ function tender_mark_as_returned($lending_id)
 	if(tal_has_active_reservation($book_id)){
 		$res_update = tal_mark_reservation_as_available($book_id);
 		if($res_update === false){
-			return new WP_Error('reservation_error', __('Error updating reservation status', 'tender-a-library'));
+			return new WP_Error('reservation_error', __('Error updating reservation status', 'tender-library'));
 		}
 	}
 
@@ -383,7 +383,7 @@ function tender_create_lending_ajax()
 	if(tal_has_active_reservation($book_id)){
 		$borrower = tal_get_active_reservation_on_book($book_id);
 		if($borrower->user_id != $user_id){
-			wp_send_json_error(['message' => __('This book has an active reservation by some other user.', 'tender-a-library')]);
+			wp_send_json_error(['message' => __('This book has an active reservation by some other user.', 'tender-library')]);
 		}
 	}
 
@@ -416,7 +416,7 @@ function tender_handle_lending_action()
 	global $wpdb;
 
 	if (!is_user_logged_in()) {
-		wp_send_json_error(['message' => __('Not authorized.', 'tender-a-library')], 401);
+		wp_send_json_error(['message' => __('Not authorized.', 'tender-library')], 401);
 	}
 
 	check_ajax_referer('tal_lending_action', 'nonce');
@@ -431,7 +431,7 @@ function tender_handle_lending_action()
 
 	$is_staff = tal_user_can_manage_lendings();
 	if (!$is_staff && $lending_owner_id !== $current_user_id) {
-		wp_send_json_error(['message' => __('Insufficient permissions.', 'tender-a-library')], 403);
+		wp_send_json_error(['message' => __('Insufficient permissions.', 'tender-library')], 403);
 	}
 
 	$result = false;
@@ -439,10 +439,10 @@ function tender_handle_lending_action()
 	if ($lending_id && in_array($action_type, ['return', 'renew'])) {
 		if ($action_type == 'return') {
 			if (tender_mark_as_returned($lending_id)) {
-				$message = __('Loan successfully returned.', 'tender-a-library');
+				$message = __('Loan successfully returned.', 'tender-library');
 				$result = true;
 			} else {
-				$message = __('Could not return the loan.', 'tender-a-library');
+				$message = __('Could not return the loan.', 'tender-library');
 			}
 		} elseif ($action_type == 'renew') {
 			if (tender_register_renewal($lending_id)) {
@@ -452,12 +452,12 @@ function tender_handle_lending_action()
 					$lending_id
 				));
 				$message = sprintf(
-					__('Loan renewed successfully. New return date: %s', 'tender-a-library'),
+					__('Loan renewed successfully. New return date: %s', 'tender-library'),
 					$new_date ? date_i18n('d/m/Y', strtotime($new_date)) : '-'
 				);
 				$result = true;
 			} else {
-				$message = __('Could not renew the loan.', 'tender-a-library');
+				$message = __('Could not renew the loan.', 'tender-library');
 			}
 		}
 		if ($result) {
@@ -466,7 +466,7 @@ function tender_handle_lending_action()
 			wp_send_json_error(['message' => $message]);
 		}
 	} else {
-		wp_send_json_error(['message' => __('Action could not be performed.', 'tender-a-library')]);
+		wp_send_json_error(['message' => __('Action could not be performed.', 'tender-library')]);
 	}
 
 	wp_die();

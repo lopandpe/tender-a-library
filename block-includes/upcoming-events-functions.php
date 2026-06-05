@@ -28,7 +28,7 @@ function tender_render_events_list( $limit = 5 ) {
 
     echo '<div class="wp-block-tender-events wp-block-tender-events--list">';
     if ( empty( $occurrences ) ) {
-        echo '<p>' . esc_html__( 'There are no upcoming events.', 'tender-a-library' ) . '</p>';
+        echo '<p>' . esc_html__( 'There are no upcoming events.', 'tender-library' ) . '</p>';
     } else {
         echo '<ul class="tender-events-list">';
         foreach ( $occurrences as $occ ) {
@@ -68,7 +68,7 @@ function tender_render_events_list( $limit = 5 ) {
                     echo '</a>';
 
                     if ( $is_recurrent ) {
-                        echo '<span class="tender-events-list__badge">' . esc_html__( 'Recurring event', 'tender-a-library' ) . '</span>';
+                        echo '<span class="tender-events-list__badge">' . esc_html__( 'Recurring event', 'tender-library' ) . '</span>';
                     }
                 echo '</div>';
 
@@ -137,23 +137,23 @@ function tender_render_events_calendar() {
             <div class="tender-calendar__navs">
                 <a class="tender-calendar__nav tender-calendar__nav--prev"
                 href="<?php echo esc_url( add_query_arg( array( 'te_year' => $prev_year, 'te_month' => $prev_month ), $base_url ) ); ?>">
-                    &laquo; <?php esc_html_e( 'Previous month', 'tender-a-library' ); ?>
+                    &laquo; <?php esc_html_e( 'Previous month', 'tender-library' ); ?>
                 </a>
                 <a class="tender-calendar__nav tender-calendar__nav--next"
                 href="<?php echo esc_url( add_query_arg( array( 'te_year' => $next_year, 'te_month' => $next_month ), $base_url ) ); ?>">
-                    <?php esc_html_e( 'Next month', 'tender-a-library' ); ?> &raquo;
+                    <?php esc_html_e( 'Next month', 'tender-library' ); ?> &raquo;
                 </a>
             </div>
         </div>
 
         <div class="tender-calendar__weekdays">
-            <div class="tender-calendar__weekday"><?php esc_html_e( 'Mon', 'tender-a-library' ); ?></div>
-            <div class="tender-calendar__weekday"><?php esc_html_e( 'Tue', 'tender-a-library' ); ?></div>
-            <div class="tender-calendar__weekday"><?php esc_html_e( 'Wed', 'tender-a-library' ); ?></div>
-            <div class="tender-calendar__weekday"><?php esc_html_e( 'Thu', 'tender-a-library' ); ?></div>
-            <div class="tender-calendar__weekday"><?php esc_html_e( 'Fri', 'tender-a-library' ); ?></div>
-            <div class="tender-calendar__weekday"><?php esc_html_e( 'Sat', 'tender-a-library' ); ?></div>
-            <div class="tender-calendar__weekday"><?php esc_html_e( 'Sun', 'tender-a-library' ); ?></div>
+            <div class="tender-calendar__weekday"><?php esc_html_e( 'Mon', 'tender-library' ); ?></div>
+            <div class="tender-calendar__weekday"><?php esc_html_e( 'Tue', 'tender-library' ); ?></div>
+            <div class="tender-calendar__weekday"><?php esc_html_e( 'Wed', 'tender-library' ); ?></div>
+            <div class="tender-calendar__weekday"><?php esc_html_e( 'Thu', 'tender-library' ); ?></div>
+            <div class="tender-calendar__weekday"><?php esc_html_e( 'Fri', 'tender-library' ); ?></div>
+            <div class="tender-calendar__weekday"><?php esc_html_e( 'Sat', 'tender-library' ); ?></div>
+            <div class="tender-calendar__weekday"><?php esc_html_e( 'Sun', 'tender-library' ); ?></div>
         </div>
 
         <div class="tender-calendar__grid">
@@ -187,7 +187,7 @@ function tender_render_events_calendar() {
 
                                     <?php if ( $is_recurrent ) : ?>
                                         <span class="tender-calendar__event-badge">
-                                            <?php echo esc_html__( 'R', 'tender-a-library' ); ?>
+                                            <?php echo esc_html__( 'R', 'tender-library' ); ?>
                                         </span>
                                     <?php endif; ?>
                                 </li>

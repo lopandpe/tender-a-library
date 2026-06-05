@@ -62,11 +62,11 @@ function tal_send_late_books_reminders() {
 
         // Título y autor del libro
         $book_title = get_the_title($book_id);
-        if (!$book_title) $book_title = __('[Deleted book]', 'tender-a-library');
+        if (!$book_title) $book_title = __('[Deleted book]', 'tender-library');
         $book_author = function_exists('carbon_get_post_meta')
             ? carbon_get_post_meta($book_id, 'tender_book_author')
             : '';
-        if (!$book_author) $book_author = __('Unknown', 'tender-a-library');
+        if (!$book_author) $book_author = __('Unknown', 'tender-library');
         $due_date = date_i18n(get_option('date_format'), strtotime($row->stimated_return_date));
 
         if (!isset($loans_by_user[$user_id])) {
@@ -84,7 +84,7 @@ function tal_send_late_books_reminders() {
         $user = get_userdata($user_id);
         if (!$user || empty($user->user_email)) continue;
 
-        $subject = __('Reminder: Books pending return', 'tender-a-library');
+        $subject = __('Reminder: Books pending return', 'tender-library');
         $message = tal_get_overdue_email_html($user, $lendings);
 
         // Puedes personalizar el remitente aquí si lo deseas
@@ -118,26 +118,26 @@ function tal_get_overdue_email_html($user, $lendings) {
                 <span style="font-size:1.8em;font-weight:bold;"><?php echo esc_html($site_name); ?></span>
             <?php endif; ?>
         </div>
-        <h4><?php printf(__('Hello <strong>%s</strong>,', 'tender-a-library'), esc_html($user->display_name)); ?></h4>
-        <p><?php _e('We are contacting you because our system shows that you have the following books pending to return.', 'tender-a-library'); ?></p>
-        <p><?php _e('Please come by the library to return them as soon as possible.', 'tender-a-library'); ?></p>
+        <h4><?php printf(__('Hello <strong>%s</strong>,', 'tender-library'), esc_html($user->display_name)); ?></h4>
+        <p><?php _e('We are contacting you because our system shows that you have the following books pending to return.', 'tender-library'); ?></p>
+        <p><?php _e('Please come by the library to return them as soon as possible.', 'tender-library'); ?></p>
 
         <?php foreach ($lendings as $lending): ?>
             <ul>
-                <li><strong><?php _e('Title:', 'tender-a-library'); ?></strong> <?php echo esc_html($lending['title']); ?></li>
-                <li><?php _e('Author:', 'tender-a-library'); ?> <?php echo esc_html($lending['author']); ?></li>
-                <li><?php _e('Estimated return date:', 'tender-a-library'); ?> <?php echo esc_html($lending['due_date']); ?></li>
+                <li><strong><?php _e('Title:', 'tender-library'); ?></strong> <?php echo esc_html($lending['title']); ?></li>
+                <li><?php _e('Author:', 'tender-library'); ?> <?php echo esc_html($lending['author']); ?></li>
+                <li><?php _e('Estimated return date:', 'tender-library'); ?> <?php echo esc_html($lending['due_date']); ?></li>
             </ul>
         <?php endforeach; ?>
 
         <p style="color:#1b5e20;">
             <?php _e(
                 'Remember that our library is a self-managed, non-profit space that relies on the individual and collective responsibility of all its members. Returning books on time ensures that more people can enjoy them, and helps keep the project alive for everyone.',
-                'tender-a-library'
+                'tender-library'
             ); ?>
         </p>
 
-        <p><?php _e('If you have lost the books, or if you think there has been a mistake, please contact us.', 'tender-a-library'); ?></p>
+        <p><?php _e('If you have lost the books, or if you think there has been a mistake, please contact us.', 'tender-library'); ?></p>
     </div>
     <?php
     return ob_get_clean();

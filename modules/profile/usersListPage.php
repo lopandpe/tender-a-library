@@ -23,7 +23,7 @@ function tal_users_list_template($content)
             <div class="no-results">
                 <div class="">
                     <div class="">
-                        <p class=""><?php echo __('You do not have permission to view this page.', 'tender-a-library'); ?></p>
+                        <p class=""><?php echo __('You do not have permission to view this page.', 'tender-library'); ?></p>
                     </div>
                 </div>
             </div>
@@ -45,21 +45,21 @@ function tal_users_list_template($content)
 
             <fieldset class="tender-fieldset">
                 <legend>
-                    <?php _e('Search user', 'tender-a-library'); ?>
+                    <?php _e('Search user', 'tender-library'); ?>
                 </legend>
                 <div class="tender-search-container">
-                    <input type="text" id="tender-user-search" class="tender-form-input" autocomplete="off" placeholder="<?php _e('Name, email, or phone', 'tender-a-library'); ?>">
+                    <input type="text" id="tender-user-search" class="tender-form-input" autocomplete="off" placeholder="<?php _e('Name, email, or phone', 'tender-library'); ?>">
                     <div id="tender-search-loading" class="tender-search-loading" style="display:none;">
                         <div class="tender-spinner"></div>
                     </div>
                 </div>
                 <ul id="latest-users-list" class="tender-users-list">
-                    <li><?php _e('Start typing to search for users', 'tender-a-library'); ?>
+                    <li><?php _e('Start typing to search for users', 'tender-library'); ?>
                 </ul>
             </fieldset>
             <fieldset class="tender-fieldset">
                 <legend>
-                    <?php _e('Latest users created', 'tender-a-library'); ?>
+                    <?php _e('Latest users created', 'tender-library'); ?>
                 </legend>
                 <ul id="users-list" class="tender-users-list">
                     <?php if ($users) : ?>
@@ -71,13 +71,13 @@ function tal_users_list_template($content)
                             </li>
                         <?php endforeach; ?>
                     <?php else : ?>
-                        <li><?php _e('No users found', 'tender-a-library'); ?></li>
+                        <li><?php _e('No users found', 'tender-library'); ?></li>
                     <?php endif; ?>
                 </ul>
             </fieldset>
             <fieldset class="tender-fieldset">
                 <legend>
-                    <?php _e('Create new user (reader)', 'tender-a-library'); ?>
+                    <?php _e('Create new user (reader)', 'tender-library'); ?>
                 </legend>
                 <?php require_once 'newUserForm.php'; ?>
             </fieldset>
@@ -113,7 +113,7 @@ function tal_users_list_template($content)
                                     });
                                     usersList.show();
                                 } else {
-                                    usersList.html('<li><?php _e('No users found', 'tender-a-library'); ?></li>').show();
+                                    usersList.html('<li><?php _e('No users found', 'tender-library'); ?></li>').show();
                                     $('.tender-search-container').removeClass('active');
                                 }
                             }, 'html');

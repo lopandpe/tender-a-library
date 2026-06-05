@@ -11,10 +11,10 @@ const decodeEntities = (value) => {
 
 const Results = ({ books, loading }) => {
     if (loading) {
-        return <p>{wp.i18n.__('Loading...', 'tender-a-library')}</p>;
+        return <p>{wp.i18n.__('Loading...', 'tender-library')}</p>;
     }
     if (!books || books.length === 0) {
-        return <p>{wp.i18n.__('No results found.', 'tender-a-library')}</p>;
+        return <p>{wp.i18n.__('No results found.', 'tender-library')}</p>;
     }
     return (
         <section className="tender-results">
@@ -54,9 +54,9 @@ const Results = ({ books, loading }) => {
                     </div>
                     <div className="book-availability">
                         {book.available ? (
-                            <span className="available">{wp.i18n.__('Available', 'tender-a-library')}</span>
+                            <span className="available">{wp.i18n.__('Available', 'tender-library')}</span>
                         ) : (
-                            <span className="unavailable">{wp.i18n.__('Not Available', 'tender-a-library')}</span>
+                            <span className="unavailable">{wp.i18n.__('Not Available', 'tender-library')}</span>
                         )}
                     </div>
                 </article>

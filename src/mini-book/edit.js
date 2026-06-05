@@ -27,8 +27,8 @@ export default function Edit() {
 			/>
 		</svg>
 	  </div>
-	  <div class="book-title">{__("Book title", "tender-a-library")}</div>
-	  <div class="book-author">{__("Book Author", "tender-a-library")}</div>
+	  <div class="book-title">{__("Book title", "tender-library")}</div>
+	  <div class="book-author">{__("Book Author", "tender-library")}</div>
     </div>
   );
 };

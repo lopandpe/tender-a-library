@@ -63,7 +63,7 @@ add_action('wp_enqueue_scripts', function () {
     );
     wp_set_script_translations(
         'tender-search-scripts',
-        'tender-a-library',
+        'tender-library',
         plugin_dir_path(__FILE__) . '../../languages' // o el path correcto si cambia
     );
 });

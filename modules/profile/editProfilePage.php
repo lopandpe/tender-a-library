@@ -22,7 +22,7 @@ function tal_edit_profile_template($content)
 			<div class="no-results">
 				<div class="">
 					<div class="">
-						<p class=""><?php echo __('You do not have permission to view this page.', 'tender-a-library'); ?></p>
+						<p class=""><?php echo __('You do not have permission to view this page.', 'tender-library'); ?></p>
 					</div>
 				</div>
 			</div>
@@ -40,9 +40,9 @@ function tal_edit_profile_template($content)
 			$newsletter = isset($_POST['newsletter']) ? 1 : 0;
 
 			if (!is_email($email)) {
-				$mensaje = '<p class="text-error text-sm font-medium">' . __('Invalid email address.', 'tender-a-library') . '</p>';
+				$mensaje = '<p class="text-error text-sm font-medium">' . __('Invalid email address.', 'tender-library') . '</p>';
 			} elseif (email_exists($email) && $email !== $current_user->user_email) {
-				$mensaje = '<p class="text-error text-sm font-medium">' . __('This email is already in use.', 'tender-a-library') . '</p>';
+				$mensaje = '<p class="text-error text-sm font-medium">' . __('This email is already in use.', 'tender-library') . '</p>';
 			} else {
 				wp_update_user([
 					'ID'         => $user_id,
@@ -53,7 +53,7 @@ function tal_edit_profile_template($content)
 				carbon_set_user_meta($user_id, 'phone_number', $phone);
 				carbon_set_user_meta($user_id, 'newsletter', $newsletter);
 				update_user_meta($user_id, 'phone_number', $phone);
-				$mensaje = '<p class="text-success text-sm font-medium">' . __('Profile updated successfully.', 'tender-a-library') . '</p>';
+				$mensaje = '<p class="text-success text-sm font-medium">' . __('Profile updated successfully.', 'tender-library') . '</p>';
 
 				$current_user = get_user($user_id);
 			}
@@ -67,33 +67,33 @@ function tal_edit_profile_template($content)
 
 					<ul class="">
 						<li class="form-row">
-							<span class="label"><?php _e('Name', 'tender-a-library') ?>:</span>
+							<span class="label"><?php _e('Name', 'tender-library') ?>:</span>
 							<span class="data"><input type="text" name="first_name" value="<?php echo esc_attr($current_user->first_name); ?>" required class="w-full p-1.5 border rounded text-sm"></span>
 						</li>
 						<li class="form-row">
-							<span class="label"><?php _e('Last Name', 'tender-a-library') ?>:</span>
+							<span class="label"><?php _e('Last Name', 'tender-library') ?>:</span>
 							<span class="data"><input type="text" name="last_name" value="<?php echo esc_attr($current_user->last_name); ?>" required class="w-full p-1.5 border rounded text-sm"></span>
 						</li>
 						<li class="form-row">
-							<span class="label"><?php _e('E-mail', 'tender-a-library') ?>:</span>
+							<span class="label"><?php _e('E-mail', 'tender-library') ?>:</span>
 							<span class="data"><input type="email" name="email" value="<?php echo esc_attr($current_user->user_email); ?>" required class="w-full p-1.5 border rounded text-sm"></span>
 						</li>
 						<li class="form-row">
-							<span class="label"><?php _e('Phone', 'tender-a-library') ?>:</span>
+							<span class="label"><?php _e('Phone', 'tender-library') ?>:</span>
 							<span class="data"><input type="text" name="phone" value="<?php echo esc_attr(carbon_get_user_meta($current_user->ID, 'phone_number')); ?>" class="w-full p-1.5 border rounded text-sm"></span>
 						</li>
 						<li class="form-row">
-							<span class="label"><?php _e('Consents to receive news by e-mail:', 'tender-a-library') ?></span>
+							<span class="label"><?php _e('Consents to receive news by e-mail:', 'tender-library') ?></span>
 							<span class="data"><input type="checkbox" name="newsletter" <?php echo carbon_get_user_meta($current_user->ID, 'newsletter') ? 'checked' : ''; ?> class="w-full p-1.5 border rounded text-sm"></span>
 						</li>
 						<li class="form-row">
-							<button type="submit" name="tal_edit_profile" class="tal-button"><?php echo __('Save Changes', 'tender-a-library'); ?></button>
+							<button type="submit" name="tal_edit_profile" class="tal-button"><?php echo __('Save Changes', 'tender-library'); ?></button>
 
 						</li>
 					</ul>
 				</form>
 				<div class="message success"><?php echo $mensaje; ?></div>
-				<p><a href="<?php echo esc_url(get_permalink(get_option('tal_profile_page'))) . $current_user->user_nicename; ?>" class="primary go-back"><?php echo __('Back to Profile', 'tender-a-library'); ?></a></p>
+				<p><a href="<?php echo esc_url(get_permalink(get_option('tal_profile_page'))) . $current_user->user_nicename; ?>" class="primary go-back"><?php echo __('Back to Profile', 'tender-library'); ?></a></p>
 			</div>
 
 		</div>

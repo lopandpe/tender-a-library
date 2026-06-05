@@ -13,25 +13,25 @@ function tal_create_plugin_pages_on_activation() {
     $pages = [
         [
             'slug'        => $is_spanish ? 'perfil' : 'profile',
-            'title'       => $is_spanish ? __('Perfil', 'tender-a-library') : __('Profile', 'tender-a-library'),
+            'title'       => $is_spanish ? __('Perfil', 'tender-library') : __('Profile', 'tender-library'),
             'option_name' => 'tal_profile_page',
             'content'     => '',
         ],
         [
             'slug'        => $is_spanish ? 'editar-perfil' : 'edit-profile',
-            'title'       => __('Edit Profile', 'tender-a-library'),
+            'title'       => __('Edit Profile', 'tender-library'),
             'option_name' => 'tal_edit_profile_page',
             'content'     => '',
         ],
         [
             'slug'        => $is_spanish ? 'usuarios' : 'users',
-            'title'       => __('Users list', 'tender-a-library'),
+            'title'       => __('Users list', 'tender-library'),
             'option_name' => 'tal_users_list_page',
             'content'     => '',
         ],
         [
             'slug'        => $is_spanish ? 'biblioteca' : 'library',
-            'title'       => __('Library', 'tender-a-library'),
+            'title'       => __('Library', 'tender-library'),
             'option_name' => 'tal_library_search_page',
             // Usa tu shortcode o bloque real aquí
             'content'     => '<!-- wp:tender-a-library/book-search /-->', 

@@ -24,11 +24,11 @@ if (isset($_POST['tal_create_user'])) {
     $success = false;
     // Validaciones
     if (empty($form_data['first_name']) || empty($form_data['last_name'])) {
-        $mensaje = '<p class="text-error text-sm font-medium">' . __('Name and surname are required.', 'tender-a-library') . '</p>';
+        $mensaje = '<p class="text-error text-sm font-medium">' . __('Name and surname are required.', 'tender-library') . '</p>';
     } elseif (!is_email($form_data['email'])) {
-        $mensaje = '<p class="text-error text-sm font-medium">' . __('Invalid email address.', 'tender-a-library') . '</p>';
+        $mensaje = '<p class="text-error text-sm font-medium">' . __('Invalid email address.', 'tender-library') . '</p>';
     } elseif (email_exists($form_data['email'])) {
-        $mensaje = '<p class="text-error text-sm font-medium">' . __('This email is already in use.', 'tender-a-library') . '</p>';
+        $mensaje = '<p class="text-error text-sm font-medium">' . __('This email is already in use.', 'tender-library') . '</p>';
     } else {
         // Generar un username único
         $base_user = sanitize_user(explode('@', $form_data['email'])[0], true);
@@ -49,7 +49,7 @@ if (isset($_POST['tal_create_user'])) {
             'role'         => 'reader'
         ]);
         if (is_wp_error($user_id)) {
-            $mensaje = '<p class="text-error text-sm font-medium">' . __('Could not create user. Please try again.', 'tender-a-library') . '</p>';
+            $mensaje = '<p class="text-error text-sm font-medium">' . __('Could not create user. Please try again.', 'tender-library') . '</p>';
         } else {
             // Extra: Guarda campos personalizados
             update_user_meta($user_id, 'phone_number', $form_data['phone']);
@@ -62,7 +62,7 @@ if (isset($_POST['tal_create_user'])) {
             // Opcional: enviar email de bienvenida
             wp_new_user_notification($user_id, null, 'user');
             $success = true;
-            $mensaje = '<p class="text-success text-sm font-medium">' . __('User created successfully.', 'tender-a-library') . '</p>';
+            $mensaje = '<p class="text-success text-sm font-medium">' . __('User created successfully.', 'tender-library') . '</p>';
             $form_data = [
                 'first_name' => '',
                 'last_name' => '',
@@ -82,27 +82,27 @@ if (isset($_POST['tal_create_user'])) {
 
             <ul class="">
                 <li class="form-row">
-                    <span class="label"><?php _e('Name', 'tender-a-library') ?>:</span>
+                    <span class="label"><?php _e('Name', 'tender-library') ?>:</span>
                     <span class="data"><input type="text" name="first_name" value="<?php echo esc_attr($form_data['first_name']); ?>" required class="w-full p-1.5 border rounded text-sm"></span>
                 </li>
                 <li class="form-row">
-                    <span class="label"><?php _e('Last Name', 'tender-a-library') ?>:</span>
+                    <span class="label"><?php _e('Last Name', 'tender-library') ?>:</span>
                     <span class="data"><input type="text" name="last_name" value="<?php echo esc_attr($form_data['last_name']); ?>" required class="w-full p-1.5 border rounded text-sm"></span>
                 </li>
                 <li class="form-row">
-                    <span class="label"><?php _e('E-mail', 'tender-a-library') ?>:</span>
+                    <span class="label"><?php _e('E-mail', 'tender-library') ?>:</span>
                     <span class="data"><input type="email" name="email" value="<?php echo esc_attr($form_data['email']); ?>" required class="w-full p-1.5 border rounded text-sm"></span>
                 </li>
                 <li class="form-row">
-                    <span class="label"><?php _e('Phone', 'tender-a-library') ?>:</span>
+                    <span class="label"><?php _e('Phone', 'tender-library') ?>:</span>
                     <span class="data"><input type="text" name="phone" value="<?php echo esc_attr($form_data['phone']); ?>" class="w-full p-1.5 border rounded text-sm"></span>
                 </li>
                 <li class="form-row">
-                    <span class="label"><?php _e('Consents to receive news by e-mail:', 'tender-a-library') ?></span>
+                    <span class="label"><?php _e('Consents to receive news by e-mail:', 'tender-library') ?></span>
                     <span class="data"><input type="checkbox" name="newsletter" <?php checked($form_data['newsletter'], 1); ?> class="w-full p-1.5 border rounded text-sm"></span>
                 </li>
                 <li class="form-row">
-                    <button type="submit" name="tal_create_user" class="tal-button"><?php echo __('Create user', 'tender-a-library'); ?></button>
+                    <button type="submit" name="tal_create_user" class="tal-button"><?php echo __('Create user', 'tender-library'); ?></button>
                 </li>
             </ul>
         </form>
@@ -111,7 +111,7 @@ if (isset($_POST['tal_create_user'])) {
                 <div class="wrapper">
                     <?php echo $mensaje; ?>
                     <div class="actions">
-                        <button id="accept-action" class="tal-button" <?php if ($success) {echo "data-reload='reload'";}?>><?php _e('Accept', 'tender-a-library') ?></button>
+                        <button id="accept-action" class="tal-button" <?php if ($success) {echo "data-reload='reload'";}?>><?php _e('Accept', 'tender-library') ?></button>
                     </div>
             </div>
         <?php endif; ?>

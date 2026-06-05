@@ -8,16 +8,16 @@ function tender_add_permalink_settings()
 {
 	add_settings_section(
 		'tender_permalink_section',
-		__('Library settings', 'tender-a-library'),
+		__('Library settings', 'tender-library'),
 		function () {
-			echo '<p>' . __('Set up slugs for books and their taxonomies.', 'tender-a-library') . '</p>';
+			echo '<p>' . __('Set up slugs for books and their taxonomies.', 'tender-library') . '</p>';
 		},
 		'permalink'
 	);
 
 	add_settings_field(
 		'tender_book_slug',
-		__('Slug for books', 'tender-a-library'),
+		__('Slug for books', 'tender-library'),
 		function () {
 			$value = get_option('tender_book_slug', 'libro');
 			echo '<input type="text" name="tender_book_slug" value="' . esc_attr($value) . '" class="regular-text" />';
@@ -28,7 +28,7 @@ function tender_add_permalink_settings()
 
 	add_settings_field(
 		'tal_library_search_page',              // ID del campo
-		__('Book search page', 'tender-a-library'),              // Etiqueta
+		__('Book search page', 'tender-library'),              // Etiqueta
 		'tal_library_search_page_callback',     // Función de renderizado
 		'permalink',                     // Página donde se muestra
 		'tender_permalink_section'       // ID de la sección
@@ -36,14 +36,14 @@ function tender_add_permalink_settings()
 
 	add_settings_section(
 		'tal_profile_settings',          // ID de la sección
-		__('Profile settings', 'tender-a-library'),       // Título de la sección
+		__('Profile settings', 'tender-library'),       // Título de la sección
 		'__return_false',                // Callback (no necesitamos descripción)
 		'permalink'                      // Página donde se muestra
 	);
 
 	add_settings_field(
 		'tal_users_page',
-		__('Users management page', 'tender-a-library'),
+		__('Users management page', 'tender-library'),
 		'tal_users_list_page_callback',
 		'permalink',
 		'tal_profile_settings'
@@ -51,7 +51,7 @@ function tender_add_permalink_settings()
 
 	add_settings_field(
 		'tal_profile_page',              // ID del campo
-		__('Profile page', 'tender-a-library'),              // Etiqueta
+		__('Profile page', 'tender-library'),              // Etiqueta
 		'tal_profile_page_callback',     // Función de renderizado
 		'permalink',                     // Página donde se muestra
 		'tal_profile_settings'           // ID de la sección
@@ -59,7 +59,7 @@ function tender_add_permalink_settings()
 
 	add_settings_field(
 		'tal_edit_profile_page',
-		__('Profile edit page', 'tender-a-library'),
+		__('Profile edit page', 'tender-library'),
 		'tal_edit_profile_page_callback',
 		'permalink',
 		'tal_profile_settings'
@@ -88,10 +88,10 @@ add_action('init', 'tal_migrate_legacy_library_page_option');
 add_filter('display_post_states', 'tal_add_special_pages_state', 10, 2);
 function tal_add_special_pages_state($post_states, $post) {
     $states = [
-        'tal_library_search_page' => __('Searching page', 'tender-a-library'),
-        'tal_profile_page'        => __('Profile page', 'tender-a-library'),
-        'tal_edit_profile_page'   => __('Profile edit page', 'tender-a-library'),
-        'tal_users_list_page'     => __('Users management page', 'tender-a-library'),
+        'tal_library_search_page' => __('Searching page', 'tender-library'),
+        'tal_profile_page'        => __('Profile page', 'tender-library'),
+        'tal_edit_profile_page'   => __('Profile edit page', 'tender-library'),
+        'tal_users_list_page'     => __('Users management page', 'tender-library'),
     ];
 
     foreach ($states as $option => $label) {
@@ -146,7 +146,7 @@ function tal_library_search_page_callback()
 	wp_dropdown_pages([
 		'name' => 'tal_library_search_page',
 		'selected' => $selected,
-		'show_option_none' => __('Select page', 'tender-a-library'),
+		'show_option_none' => __('Select page', 'tender-library'),
 	]);
 }
 function tal_profile_page_callback()
@@ -155,7 +155,7 @@ function tal_profile_page_callback()
 	wp_dropdown_pages([
 		'name' => 'tal_profile_page',
 		'selected' => $selected,
-		'show_option_none' => __('Select page', 'tender-a-library'),
+		'show_option_none' => __('Select page', 'tender-library'),
 	]);
 }
 
@@ -165,7 +165,7 @@ function tal_edit_profile_page_callback()
 	wp_dropdown_pages([
 		'name' => 'tal_edit_profile_page',
 		'selected' => $selected,
-		'show_option_none' => __('Select page', 'tender-a-library'),
+		'show_option_none' => __('Select page', 'tender-library'),
 	]);
 }
 function tal_users_list_page_callback()
@@ -174,7 +174,7 @@ function tal_users_list_page_callback()
 	wp_dropdown_pages([
 		'name' => 'tal_users_list_page',
 		'selected' => $selected,
-		'show_option_none' => __('Select page', 'tender-a-library'),
+		'show_option_none' => __('Select page', 'tender-library'),
 	]);
 }
 

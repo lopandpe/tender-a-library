@@ -39,8 +39,8 @@ function tender_book_register_fse_template() {
     $templates = [
         [
             'id'          => 'single-tender_book',
-            'title'       => __( 'Single book', 'tender-a-library' ),
-            'description' => __( 'Single book custom template (CPT).', 'tender-a-library' ),
+            'title'       => __( 'Single book', 'tender-library' ),
+            'description' => __( 'Single book custom template (CPT).', 'tender-library' ),
             'args'        => [
                 'slug'       => 'single-tender_book',
                 'post_types' => [ 'tender_book' ],
@@ -48,8 +48,8 @@ function tender_book_register_fse_template() {
         ],
         [
             'id'          => 'archive-tender_book',
-            'title'       => __( 'Tender books archive', 'tender-a-library' ),
-            'description' => __( 'Tender books archive template (CPT).', 'tender-a-library' ),
+            'title'       => __( 'Tender books archive', 'tender-library' ),
+            'description' => __( 'Tender books archive template (CPT).', 'tender-library' ),
             'args'        => [
                 'slug'       => 'archive-tender_book',
                 'post_types' => [ 'tender_book' ],
@@ -57,8 +57,8 @@ function tender_book_register_fse_template() {
         ],
         [
             'id'          => 'taxonomy-tender_section',
-            'title'       => __( 'Taxonomy: Tender Section', 'tender-a-library' ),
-            'description' => __( 'Custom template for Tender Section taxonomy.', 'tender-a-library' ),
+            'title'       => __( 'Taxonomy: Tender Section', 'tender-library' ),
+            'description' => __( 'Custom template for Tender Section taxonomy.', 'tender-library' ),
             'args'        => [
                 'slug'       => 'taxonomy-tender_section',
                 'taxonomies' => [ 'tender_section' ],
@@ -66,8 +66,8 @@ function tender_book_register_fse_template() {
         ],
         [
             'id'          => 'taxonomy-tender_language',
-            'title'       => __( 'Taxonomy: Tender Language', 'tender-a-library' ),
-            'description' => __( 'Custom template for Tender Language taxonomy.', 'tender-a-library' ),
+            'title'       => __( 'Taxonomy: Tender Language', 'tender-library' ),
+            'description' => __( 'Custom template for Tender Language taxonomy.', 'tender-library' ),
             'args'        => [
                 'slug'       => 'taxonomy-tender_language',
                 'taxonomies' => [ 'tender_language' ],

@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Tender (A) Library 0.1.0\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/tender-a-library\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/tender-library\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -12,9 +12,9 @@ msgstr ""
 "Language: es_ES\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.6\n"
-"X-Domain: tender-a-library\n"
-"Domain: tender-a-library\n"
-"domain: tender-a-library\n"
+"X-Domain: tender-library\n"
+"Domain: tender-library\n"
+"domain: tender-library\n"
 
 #: modules/lendings/tenderMenuCover.php:492
 #: modules/lendings/tenderMenuCover.php:1132
@@ -105,6 +105,8 @@ msgid "Language"
 msgstr "Idioma"
 
 #: modules/customPostBook.php:86
+#: assets/js/book-search/view/Filters.jsx:78
+#: assets/js/book-search/view/Filters.jsx:226
 msgid "Languages"
 msgstr "Idiomas"
 
@@ -180,6 +182,7 @@ msgstr "Otras autoras"
 
 #: block-includes/book-data-functions.php:25
 #: modules/tender-book/tenderBookFields.php:24
+#: src/book-data/edit.js:13
 msgid "Publisher"
 msgstr "Editorial"
 
@@ -210,12 +213,14 @@ msgstr "Reseña"
 #: block-includes/book-data-functions.php:36
 #: modules/tender-book/tenderBookFields.php:69
 #: modules/tender-event/tenderEventFields.php:76
+#: src/book-data/edit.js:17
 msgid "Library section"
 msgstr "Sección de la biblioteca"
 
 #: block-includes/book-data-functions.php:23
 #: modules/lendings/tenderMenuCover.php:491
 #: modules/tender-book/tenderBookFields.php:88
+#: src/book-data/edit.js:11
 msgid "Author"
 msgstr "Autor(a)"
 
@@ -257,15 +262,18 @@ msgid "Reader"
 msgstr "Lector(a)"
 
 #: block-includes/book-data-functions.php:21
+#: src/book-data/edit.js:9
 msgid "Book data"
 msgstr "Datos del libro"
 
 #: block-includes/book-data-functions.php:40
+#: src/book-data/edit.js:22
 msgid "Publication year"
 msgstr "Año de publicación"
 
 #: block-includes/book-data-functions.php:46
 #: modules/lendings/downloadCsvLendings.php:54
+#: src/book-data/edit.js:24
 msgid "Signature"
 msgstr "Signatura"
 
@@ -472,10 +480,13 @@ msgid "An error occurred. Please try again."
 msgstr "Ha ocurrido un error, por favor vuelva a intentarlo."
 
 #: block-includes/mini-book-functions.php:61
+#: assets/js/book-search/view/Results.jsx:57
+#: src/latest-books/edit.js:51
 msgid "Available"
 msgstr "Disponible"
 
 #: block-includes/mini-book-functions.php:63
+#: assets/js/book-search/view/Results.jsx:59
 msgid "Not Available"
 msgstr "No disponible"
 
@@ -512,10 +523,12 @@ msgid "Custom template for Tender Language taxonomy."
 msgstr "Plantilla personalizada para la taxonomía Idioma."
 
 #: modules/lendings/lendingPages.php:323
+#: assets/js/book-search/view/Pagination.jsx:13
 msgid "Previous"
 msgstr "Anterior"
 
 #: modules/lendings/lendingPages.php:349
+#: assets/js/book-search/view/Pagination.jsx:27
 msgid "Next"
 msgstr "Siguiente"
 
@@ -562,6 +575,7 @@ msgstr "Biblioteca"
 
 #: modules/lendings/lendingPages.php:369
 #: modules/lendings/lendingPages.php:428
+#: src/mini-book/edit.js:30
 msgid "Book title"
 msgstr "Título del libro"
 
@@ -1690,8 +1704,8 @@ msgid "Mobile Object (MO) files for compiled translations"
 msgstr "Archivos MO (Mobile Object) para traducciones compiladas"
 
 #: modules/lendings/tenderMenuCover.php:973
-msgid "Text domain: tender-a-library"
-msgstr "Dominio de texto: tender-a-library"
+msgid "Text domain: tender-library"
+msgstr "Dominio de texto: tender-library"
 
 #: modules/lendings/tenderMenuCover.php:974
 msgid "WordPress Locale support"
@@ -2092,55 +2106,46 @@ msgstr "Debes iniciar sesión para ver tu perfil."
 msgid "Forgot your password?"
 msgstr "¿Olvidaste tu contraseña?"
 
-#: build/book-cover/block.json
 #: src/book-cover/block.json
 msgctxt "block title"
 msgid "Book Cover"
 msgstr "Portada del libro"
 
-#: build/book-data/block.json
 #: src/book-data/block.json
 msgctxt "block title"
 msgid "Book Data"
 msgstr "Datos del libro"
 
-#: build/book-search/block.json
 #: src/book-search/block.json
 msgctxt "block title"
 msgid "Book Search"
 msgstr "Búsqueda de libros"
 
-#: build/book-summary/block.json
 #: src/book-summary/block.json
 msgctxt "block title"
 msgid "Book Summary"
 msgstr "Resumen del libro"
 
-#: build/event-date/block.json
 #: src/event-date/block.json
 msgctxt "block title"
 msgid "Event date"
 msgstr "Fecha del evento"
 
-#: build/mini-book/block.json
 #: src/mini-book/block.json
 msgctxt "block title"
 msgid "Mini Book"
 msgstr "Mini libro"
 
-#: build/profile-links/block.json
 #: src/profile-links/block.json
 msgctxt "block title"
 msgid "Profile Links"
 msgstr "Enlaces de perfil"
 
-#: build/profile-links/block.json
 #: src/profile-links/block.json
 msgctxt "block description"
 msgid "Block to display tender profile links."
 msgstr "Bloque para mostrar enlaces de perfil de Tender."
 
-#: build/upcoming-events/block.json
 #: src/upcoming-events/block.json
 msgctxt "block title"
 msgid "Upcoming Events"
@@ -2736,14 +2741,168 @@ msgstr "Suscribirse al calendario"
 msgid "Bibliotecarix"
 msgstr "Bibliotecarix"
 
-#: build/latest-books/block.json
 #: src/latest-books/block.json
 msgctxt "block title"
 msgid "Latest Books"
 msgstr ""
 
-#: build/latest-books/block.json
 #: src/latest-books/block.json
 msgctxt "block description"
 msgid "Display the latest books added to the library in a responsive grid."
+msgstr ""
+
+#: assets/js/book-search/view/CategoryTree.jsx:35
+msgid "Collapse section"
+msgstr ""
+
+#: assets/js/book-search/view/CategoryTree.jsx:35
+msgid "Expand section"
+msgstr ""
+
+#: assets/js/book-search/view/Filters.jsx:76
+msgid "Search"
+msgstr ""
+
+#: assets/js/book-search/view/Filters.jsx:77
+#: assets/js/book-search/view/Filters.jsx:216
+msgid "Sections"
+msgstr ""
+
+#: assets/js/book-search/view/Filters.jsx:79
+msgid "Page"
+msgstr ""
+
+#: assets/js/book-search/view/Filters.jsx:80
+msgid "Per Page"
+msgstr ""
+
+#: assets/js/book-search/view/Filters.jsx:81
+msgid "Order By"
+msgstr ""
+
+#: assets/js/book-search/view/Filters.jsx:82
+msgid "Order"
+msgstr ""
+
+#: assets/js/book-search/view/Filters.jsx:118
+#: assets/js/book-search/view/Filters.jsx:120
+msgid "Show filters"
+msgstr ""
+
+#: assets/js/book-search/view/Filters.jsx:124
+msgid "Search by title, author, etc"
+msgstr ""
+
+#: assets/js/book-search/view/Filters.jsx:132
+msgid "Books per page"
+msgstr ""
+
+#: assets/js/book-search/view/Filters.jsx:178
+#: assets/js/book-search/view/Filters.jsx:206
+msgid "Reset all filters"
+msgstr ""
+
+#: assets/js/book-search/view/Filters.jsx:183
+#: assets/js/book-search/view/Filters.jsx:211
+msgid "Reset Filters"
+msgstr ""
+
+#: assets/js/book-search/view/Filters.jsx:196
+msgid "Close filters"
+msgstr ""
+
+#: assets/js/book-search/view/Filters.jsx:198
+msgid "Hide filters"
+msgstr ""
+
+#: assets/js/book-search/view/Filters.jsx:200
+msgid "Filters"
+msgstr ""
+
+#. translators: 1: current page, 2: total pages
+#: assets/js/book-search/view/Pagination.jsx:18
+#, js-format
+msgid "Page %1$d of %2$d"
+msgstr ""
+
+#: assets/js/book-search/view/Results.jsx:14
+msgid "Loading..."
+msgstr ""
+
+#: assets/js/book-search/view/Results.jsx:17
+msgid "No results found."
+msgstr ""
+
+#: src/book-search/edit.js:9
+msgid "Book search"
+msgstr ""
+
+#: src/book-search/edit.js:10
+msgid "This block can only be seen on the frontend."
+msgstr ""
+
+#: src/book-summary/edit.js:9
+msgid "Book summary"
+msgstr ""
+
+#: src/latest-books/edit.js:15
+msgid "Latest books settings"
+msgstr ""
+
+#: src/latest-books/edit.js:17
+msgid "Books to show"
+msgstr ""
+
+#. translators: %d: number of books shown
+#: src/latest-books/edit.js:30
+#, js-format
+msgid "Preview: showing the latest %d books."
+msgstr ""
+
+#: src/latest-books/edit.js:43
+msgid "Latest book title"
+msgstr ""
+
+#: src/latest-books/edit.js:46
+msgid "Author name"
+msgstr ""
+
+#: src/mini-book/edit.js:31
+msgid "Book Author"
+msgstr ""
+
+#: src/profile-links/edit.js:25
+msgid "Login / Profile (dynamic)"
+msgstr ""
+
+#: src/upcoming-events/edit.js:14
+msgid "Events adjustments"
+msgstr ""
+
+#: src/upcoming-events/edit.js:16
+msgid "Visualization mode"
+msgstr ""
+
+#: src/upcoming-events/edit.js:19
+msgid "Monthly calendar"
+msgstr ""
+
+#: src/upcoming-events/edit.js:20
+msgid "List of upcoming events"
+msgstr ""
+
+#: src/upcoming-events/edit.js:27
+msgid "Events to show"
+msgstr ""
+
+#: src/upcoming-events/edit.js:39
+msgid "Preview: a monthly calendar of events will be displayed."
+msgstr ""
+
+#: src/upcoming-events/edit.js:42
+msgid "Preview: a list of the next"
+msgstr ""
+
+#: src/upcoming-events/edit.js:42
+msgid "events will be displayed."
 msgstr ""
