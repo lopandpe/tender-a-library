@@ -31,12 +31,8 @@ function create_opener_role()
 			'create_tender_books'            => false,
 			
 
-			// Reader/user management and lending desk access.
-			'create_users' => true,
-			'edit_users'   => true,
-			'list_users'   => true,
+			// Lending desk access. Reader management is handled by plugin UI.
 			'create_lendings' => true,
-			// No delete/promote caps: openers can manage reader accounts only.
 		)
 	);
 }
@@ -97,12 +93,8 @@ function create_librarian_role()
 			'assign_tender_languages'         => true,
 			
 
-			// Same reader/user management and lending desk access as opener.
-			'create_users' => true,
-			'edit_users'   => true,
-			'list_users'   => true,
+			// Same lending desk access as opener. Reader management is handled by plugin UI.
 			'create_lendings' => true,
-			// No delete/promote caps: librarians can manage reader accounts only.
 		)
 	);
 }
@@ -148,9 +140,9 @@ function tal_sync_reader_manager_caps() {
             continue;
         }
 
-        $role->add_cap('create_users');
-        $role->add_cap('edit_users');
-        $role->add_cap('list_users');
+        $role->remove_cap('create_users');
+        $role->remove_cap('edit_users');
+        $role->remove_cap('list_users');
         $role->remove_cap('delete_users');
         $role->remove_cap('promote_users');
         $role->remove_cap('remove_users');

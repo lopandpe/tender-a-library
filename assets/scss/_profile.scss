@@ -1,15 +1,17 @@
 @use "variables" as *;
 
-.profile {
+body.tender-profile-page .profile,
+body.tender-edit-profile-page .profile,
+body.tender-users-list-page .profile {
 	font-size: inherit;
 	margin-bottom: 50px;
 	display: grid;
 	gap: 24px;
 	.user-info {
-		background: linear-gradient(135deg, #fffaf2 0%, #f4efe5 100%);
-		border: 1px solid rgba(0, 0, 0, 0.08);
-		border-radius: 18px;
-		padding: 24px;
+		background: $white-color;
+		border: 1px solid $secondary-color;
+		border-radius: 5px;
+		padding: 20px;
 		ul {
 			display: flex;
 			padding: 0px;
@@ -27,6 +29,31 @@
 				}
 			}
 		}
+	}
+	.tal-profile-role-indicator {
+		border-top: 1px solid rgba(0, 0, 0, 0.08);
+		display: grid;
+		gap: 6px;
+		margin-top: 18px;
+		padding-top: 18px;
+	}
+
+	.tal-profile-role-label {
+		color: $black-color;
+		font-size: inherit;
+		font-weight: 700;
+	}
+
+	.tal-profile-role-name {
+		color: $primary-color;
+		display: inline;
+		font-size: 1rem;
+		line-height: 1.35;
+	}
+
+	.tal-profile-role-description {
+		color: $black-color;
+		line-height: 1.45;
 	}
 	.profile-actions {
 		display: flex;
@@ -54,7 +81,7 @@
 		align-items: center;
 	}
 }
-.profile-lendings {
+body.tender-profile-page .profile-lendings {
 	margin-bottom: 50px;
 	.active-lendings {
 		list-style: none;
@@ -155,7 +182,7 @@
 		}
 	}
 }
-.active-reservations{
+body.tender-profile-page .active-reservations{
 	list-style: none;
 	padding: 0px;;
 	.reservation{
@@ -177,7 +204,7 @@
 		}
 	}
 }
-.tal-confirmation-modal {
+body.tender-profile-page .tal-confirmation-modal {
 	position: fixed;
 	inset: 0px;
 	background-color: rgba(0, 0, 0, 0.6);
@@ -216,7 +243,7 @@
 	}
 }
 
-.user-info {
+body.tender-edit-profile-page .user-info {
     form {
       ul {
         padding: 0;
@@ -308,31 +335,31 @@
     }
   }
 
-.tal-profile-tabs {
+body.tender-profile-page .tal-profile-tabs {
 	display: flex;
 	flex-wrap: wrap;
 	gap: 12px;
 	margin: 0 0 32px;
 }
 
-.tal-profile-tab {
+body.tender-profile-page .tal-profile-tab {
 	font-size: inherit;
 	display: inline-flex;
 	align-items: center;
 	justify-content: center;
 	padding: 10px 18px;
-	border-radius: 999px;
-	border: 1px solid rgba(0, 0, 0, 0.12);
-	background: #f5efe4;
-	color: #3f3428;
-	font-weight: 600;
+	border-radius: 3px;
+	border: 1px solid $primary-color;
+	background: $white-color;
+	color: $primary-color;
+	font-weight: bold;
 	text-decoration: none;
 	transition: all 0.2s ease;
 
 	&:hover,
 	&:focus {
-		background: #eadfcb;
-		color: #241b12;
+		background: $primary-color;
+		color: $white-color;
 	}
 
 	&.is-active {
@@ -343,7 +370,7 @@
 }
 
 
-.tal-call-logs {
+body.tender-profile-page .tal-call-logs {
 	margin: 24px 0 40px;
 
 	.tal-call-log-hero {
@@ -353,18 +380,19 @@
 		align-items: flex-end;
 		gap: 20px;
 		margin-bottom: 20px;
-		padding: 28px;
-		border-radius: 22px;
-		background: linear-gradient(135deg, #18120e 0%, #564536 100%);
-		color: #f9f3eb;
+		padding: 20px;
+		border: 1px solid $secondary-color;
+		border-left: 4px solid $primary-color;
+		border-radius: 5px;
+		background: $white-color;
+		color: $black-color;
 	}
 
 	.tal-call-log-eyebrow {
 		margin: 0 0 8px;
 		font-size: 0.75em;
-		letter-spacing: 0.12em;
-		text-transform: uppercase;
-		opacity: 0.75;
+		font-weight: bold;
+		color: $primary-color;
 	}
 
 	.tal-call-log-hero h2 {
@@ -375,16 +403,14 @@
 	.tal-call-log-intro {
 		margin: 0;
 		max-width: 58ch;
-		color: rgba(249, 243, 235, 0.88);
+		color: $black-color;
 	}
 
 	.tal-call-log-count {
 		display: grid;
 		justify-items: end;
-		padding: 18px 20px;
-		border-radius: 18px;
-		background: rgba(255, 255, 255, 0.08);
-		min-width: 120px;
+		padding: 0;
+		min-width: 80px;
 	}
 
 	.tal-call-log-count-number {
@@ -395,9 +421,7 @@
 
 	.tal-call-log-count-label {
 		font-size: 0.8125em;
-		text-transform: uppercase;
-		letter-spacing: 0.08em;
-		opacity: 0.75;
+		color: $black-color;
 	}
 
 	.tal-call-log-layout {
@@ -411,9 +435,8 @@
 	.tal-call-log-list-card {
 		background: #fff;
 		border: 1px solid rgba(0, 0, 0, 0.08);
-		border-radius: 18px;
-		padding: 24px;
-		box-shadow: 0 16px 40px rgba(44, 30, 16, 0.08);
+		border-radius: 5px;
+		padding: 20px;
 	}
 
 	.tal-call-log-form-card h3,
@@ -437,9 +460,9 @@
 			max-width: 100%;
 			width: 100%;
 			padding: 12px 14px;
-			border: 1px solid #d8d0c7;
-			border-radius: 12px;
-			background: #fffdfa;
+			border: 1px solid #ddd;
+			border-radius: 3px;
+			background: $white-color;
 			font: inherit;
 		}
 
@@ -460,11 +483,9 @@
 	}
 
 	.tal-call-label {
-		font-size: 0.75em;
+		font-size: inherit;
 		font-weight: 700;
-		color: #5e5347;
-		text-transform: uppercase;
-		letter-spacing: 0.06em;
+		color: $black-color;
 		margin: 0;
 	}
 
@@ -481,9 +502,9 @@
 		grid-template-columns: 76px minmax(0, 1fr);
 		gap: 16px;
 		padding: 18px;
-		border-radius: 16px;
-		background: #fcfaf7;
-		border: 1px solid #ece2d6;
+		border-radius: 5px;
+		background: $white-color;
+		border: 1px solid #ddd;
 	}
 
 	.tal-call-log-date-badge {
@@ -492,9 +513,10 @@
 		justify-items: center;
 		gap: 4px;
 		padding: 10px;
-		border-radius: 14px;
-		background: #f0e4d6;
-		color: #362619;
+		border: 1px solid $primary-color;
+		border-radius: 3px;
+		background: $white-color;
+		color: $primary-color;
 		min-height: 74px;
 	}
 
@@ -507,7 +529,6 @@
 	.tal-call-log-date-month {
 		font-size: 0.6875em;
 		font-weight: 700;
-		letter-spacing: 0.08em;
 		text-transform: uppercase;
 	}
 
@@ -549,7 +570,7 @@
 }
 
 @media screen and (max-width: 768px) {
-	.profile-lendings {
+	body.tender-profile-page .profile-lendings {
 		.active-lendings {
 			grid-template-columns: 1fr;
 		}
@@ -561,13 +582,15 @@
 		}
 	}
 
-	.profile {
+	body.tender-profile-page .profile,
+body.tender-edit-profile-page .profile,
+body.tender-users-list-page .profile {
 		.user-info {
 			padding: 18px;
 		}
 	}
 
-	.tal-call-logs {
+	body.tender-profile-page .tal-call-logs {
 		.tal-call-log-hero {
 			flex-direction: column;
 			align-items: stretch;

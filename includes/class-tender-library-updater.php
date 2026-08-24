@@ -153,7 +153,7 @@ class Tender_Library_Updater
 		$download_url = isset($data['download_url']) ? esc_url_raw($data['download_url']) : '';
 		$slug = isset($data['slug']) ? sanitize_key($data['slug']) : '';
 
-		if ($slug !== 'tender-library' || !$version || !$this->is_valid_http_url($download_url)) {
+		if ($slug !== "tender-library" || !$version || !$this->is_valid_http_url($download_url) || !$this->is_same_host_as_metadata($download_url)) {
 			return false;
 		}
 
@@ -183,6 +183,16 @@ class Tender_Library_Updater
 		);
 	}
 
+	private function is_same_host_as_metadata($url)
+	{
+		$url_parts = wp_parse_url($url);
+		$metadata_parts = wp_parse_url($this->metadata_url);
+
+		return !empty($url_parts["host"])
+			&& !empty($metadata_parts["host"])
+			&& strtolower($url_parts["host"]) === strtolower($metadata_parts["host"]);
+	}
+
 	private function is_valid_http_url($url)
 	{
 		if (!$url) {
@@ -191,7 +201,7 @@ class Tender_Library_Updater
 
 		$parts = wp_parse_url($url);
 		return !empty($parts['scheme'])
-			&& in_array($parts['scheme'], array('http', 'https'), true)
+			&& $parts["scheme"] === "https"
 			&& !empty($parts['host']);
 	}
 }

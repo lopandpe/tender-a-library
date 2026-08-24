@@ -3,21 +3,21 @@
 /**
  * Plugin Name: Tender Library
  * Description: Private library/tender management plugin.
- * Version: 1.0.2
+ * Version: 1.0.0
  * Author: Luis Gómez
  * Text Domain: tender-library
  * Domain Path: /languages
  * Requires at least: 6.4
  * Requires PHP: 8.1
- * Update URI: https://example.com/tender-library
+ * Update URI: https://localanarquistamagdalena.org/
  *
  * @package Tender_Library
  */
 
 
-define('TENDER_LIBRARY_VERSION', '1.0.2');
-define('TENDER_LIBRARY_UPDATE_URI', 'https://example.com/tender-library');
-define('TENDER_LIBRARY_UPDATE_METADATA_URL', 'https://example.com/tender-library/update.json');
+define('TENDER_LIBRARY_VERSION', '1.0.0');
+define('TENDER_LIBRARY_UPDATE_URI', 'https://localanarquistamagdalena.org/');
+define('TENDER_LIBRARY_UPDATE_METADATA_URL', 'https://localanarquistamagdalena.org/tender-library/releases/update.json');
 define('TENDER_LIBRARY_PLUGIN_FILE', __FILE__);
 
 require_once __DIR__ . '/modules/db/installDBFunctions.php';
@@ -161,6 +161,7 @@ function tender_bootstrap()
             "modules/emails/notReturnedEmails",
 			"modules/emails/lendingHasReservation",
 			"modules/emails/reservationIsAvailableNow",
+			"modules/emails/passwordSetupEmails",
 			"modules/tender-event/eventFeeds",
 			"modules/tender-event/customPostEvent",
 			"modules/tender-event/tenderEventFields",

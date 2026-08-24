@@ -1698,9 +1698,9 @@ function tal_migration_import_media($path, $media_base, $dry_run = false)
 			continue;
 		}
 
-		$media_url = $row['url'] ?? '';
-		$relative_path = ltrim($row['path'] ?? '', '/');
-		$file_name = $row['file_name'] ?? '';
+		$media_url = tal_migration_normalize_source_url($row["url"] ?? "");
+		$relative_path = ltrim((string) ($row["path"] ?? ""), "/");
+		$file_name = sanitize_file_name($row["file_name"] ?? "");
 		$title = $row['title'] ?: ($file_name ? pathinfo($file_name, PATHINFO_FILENAME) : '');
 		$mime = $row['mime_type'] ?? '';
 
@@ -1709,9 +1709,13 @@ function tal_migration_import_media($path, $media_base, $dry_run = false)
 				$errors[] = sprintf(__('Media %d missing URL or file path.', 'tender-library'), $old_id);
 				continue;
 			}
-			$source_path = $media_base . '/' . $relative_path . $file_name;
+			$source_path = tal_migration_resolve_media_source_path($media_base, $relative_path, $file_name);
+			if (is_wp_error($source_path)) {
+				$errors[] = sprintf("%d: %s", $old_id, $source_path->get_error_message());
+				continue;
+			}
 			if (!file_exists($source_path)) {
-				$errors[] = sprintf(__('Missing media file: %s', 'tender-library'), $source_path);
+				$errors[] = sprintf(__("Missing media file: %s", "tender-library"), $source_path);
 				continue;
 			}
 		}
@@ -1750,6 +1754,27 @@ function tal_migration_import_media($path, $media_base, $dry_run = false)
 		],
 		'errors' => $errors,
 	];
+}
+
+function tal_migration_resolve_media_source_path($media_base, $relative_path, $file_name)
+{
+	$base = realpath((string) $media_base);
+	if (!$base || !$file_name) {
+		return new WP_Error("invalid_media_path", __("Invalid media source path.", "tender-library"));
+	}
+
+	$relative_path = trim(str_replace("\\", "/", (string) $relative_path), "/");
+	if (str_contains($relative_path, "../") || str_starts_with($relative_path, "..")) {
+		return new WP_Error("invalid_media_path", __("Media path escapes the configured base directory.", "tender-library"));
+	}
+
+	$candidate = $base . "/" . ($relative_path ? trailingslashit($relative_path) : "") . $file_name;
+	$resolved = realpath($candidate);
+	if (!$resolved || !str_starts_with($resolved, trailingslashit($base))) {
+		return new WP_Error("invalid_media_path", __("Media path escapes the configured base directory.", "tender-library"));
+	}
+
+	return $resolved;
 }
 
 function tal_migration_create_attachment_from_path($source_path, $title, $mime_type)
@@ -1794,6 +1819,11 @@ function tal_migration_create_attachment_from_path($source_path, $title, $mime_t
 
 function tal_migration_create_attachment_from_url($url, $title, $mime_type)
 {
+	$url = tal_migration_normalize_source_url($url);
+	if (!$url || !wp_http_validate_url($url)) {
+		return new WP_Error("invalid_media_url", __("Invalid media URL.", "tender-library"));
+	}
+
 	$tmp = download_url($url);
 	if (is_wp_error($tmp)) {
 		return $tmp;

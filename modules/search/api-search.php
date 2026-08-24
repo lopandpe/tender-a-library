@@ -54,6 +54,10 @@ function tender_api_search($request) {
 }
 
 add_action('wp_enqueue_scripts', function () {
+    if (function_exists('tender_should_load_search_assets') && !tender_should_load_search_assets()) {
+        return;
+    }
+
     wp_enqueue_script(
         'tender-search-scripts',
         plugin_dir_url(__FILE__) . '../../dist/js/tender-search-scripts.js',

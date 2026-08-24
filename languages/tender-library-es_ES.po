@@ -105,8 +105,6 @@ msgid "Language"
 msgstr "Idioma"
 
 #: modules/customPostBook.php:86
-#: assets/js/book-search/view/Filters.jsx:78
-#: assets/js/book-search/view/Filters.jsx:226
 msgid "Languages"
 msgstr "Idiomas"
 
@@ -138,25 +136,25 @@ msgstr "Configurar slugs para los libros y sus taxonomías."
 msgid "Slug for books"
 msgstr "Slug para los libros"
 
-#: modules/profile/profilePage.php:205
+#: modules/profile/profilePage.php:244
 msgid "Edit profile"
 msgstr "Editar perfil"
 
-#: modules/profile/profilePage.php:216
+#: modules/profile/profilePage.php:255
 msgid "Logout"
 msgstr "Cerrar sesión"
 
-#: modules/profile/profilePage.php:338
+#: modules/profile/profilePage.php:377
 msgid "Active lendings"
 msgstr "Préstamos activos"
 
-#: modules/profile/profilePage.php:375
+#: modules/profile/profilePage.php:414
 msgid "Lending date"
 msgstr "Fecha del préstamo"
 
 #: modules/lendings/downloadCsvLendings.php:56
 #: modules/lendings/lendingPages.php:378
-#: modules/profile/profilePage.php:378
+#: modules/profile/profilePage.php:417
 msgid "Estimated return date"
 msgstr "Fecha estimada de devolución"
 
@@ -182,7 +180,6 @@ msgstr "Otras autoras"
 
 #: block-includes/book-data-functions.php:25
 #: modules/tender-book/tenderBookFields.php:24
-#: src/book-data/edit.js:13
 msgid "Publisher"
 msgstr "Editorial"
 
@@ -213,14 +210,12 @@ msgstr "Reseña"
 #: block-includes/book-data-functions.php:36
 #: modules/tender-book/tenderBookFields.php:69
 #: modules/tender-event/tenderEventFields.php:76
-#: src/book-data/edit.js:17
 msgid "Library section"
 msgstr "Sección de la biblioteca"
 
 #: block-includes/book-data-functions.php:23
 #: modules/lendings/tenderMenuCover.php:491
 #: modules/tender-book/tenderBookFields.php:88
-#: src/book-data/edit.js:11
 msgid "Author"
 msgstr "Autor(a)"
 
@@ -228,7 +223,7 @@ msgstr "Autor(a)"
 msgid "First three letters of the author's first surname."
 msgstr "Tres primeras letras del primer apellido de la autora."
 
-#: modules/profile/profilePage.php:265
+#: modules/profile/profilePage.php:304
 #: modules/tender-book/tenderBookFields.php:92
 msgid "Title"
 msgstr "Título"
@@ -253,27 +248,26 @@ msgstr "El formato es una secuencia de números de la sección padre, en orden, 
 msgid "Number"
 msgstr "Número"
 
+#: modules/profile/profilePage.php:35
 #: modules/tenderRoles.php:13
 msgid "Opener"
 msgstr "Abridor(a)"
 
-#: modules/tenderRoles.php:115
+#: modules/profile/profilePage.php:39
+#: modules/tenderRoles.php:107
 msgid "Reader"
 msgstr "Lector(a)"
 
 #: block-includes/book-data-functions.php:21
-#: src/book-data/edit.js:9
 msgid "Book data"
 msgstr "Datos del libro"
 
 #: block-includes/book-data-functions.php:40
-#: src/book-data/edit.js:22
 msgid "Publication year"
 msgstr "Año de publicación"
 
 #: block-includes/book-data-functions.php:46
 #: modules/lendings/downloadCsvLendings.php:54
-#: src/book-data/edit.js:24
 msgid "Signature"
 msgstr "Signatura"
 
@@ -350,7 +344,7 @@ msgstr "El perfil se ha actualizado correctamente."
 
 #: modules/profile/editProfilePage.php:70
 #: modules/profile/newUserForm.php:85
-#: modules/profile/profilePage.php:185
+#: modules/profile/profilePage.php:219
 msgid "Name"
 msgstr "Nombre"
 
@@ -362,19 +356,19 @@ msgstr "Apellidos"
 #: modules/lendings/downloadCsvLendings.php:50
 #: modules/profile/editProfilePage.php:78
 #: modules/profile/newUserForm.php:93
-#: modules/profile/profilePage.php:189
+#: modules/profile/profilePage.php:223
 msgid "E-mail"
 msgstr "E-mail"
 
 #: modules/profile/editProfilePage.php:82
 #: modules/profile/newUserForm.php:97
-#: modules/profile/profilePage.php:193
+#: modules/profile/profilePage.php:227
 msgid "Phone"
 msgstr "Teléfono"
 
 #: modules/profile/editProfilePage.php:86
 #: modules/profile/newUserForm.php:101
-#: modules/profile/profilePage.php:197
+#: modules/profile/profilePage.php:231
 msgid "Consents to receive news by e-mail:"
 msgstr "Acepta el envío de novedades por e-mail:"
 
@@ -386,34 +380,34 @@ msgstr "Guardar cambios"
 msgid "Back to Profile"
 msgstr "Volver al perfil"
 
-#: modules/profile/profilePage.php:198
+#: modules/profile/profilePage.php:232
 msgid "Yes"
 msgstr "Sí"
 
-#: modules/profile/profilePage.php:198
+#: modules/profile/profilePage.php:232
 msgid "No"
 msgstr "No"
 
-#: modules/profile/profilePage.php:382
+#: modules/profile/profilePage.php:421
 msgid "This loan cannot be extended"
 msgstr "Este préstamo no puede prorrogarse"
 
 #: modules/lendings/lendingPages.php:405
-#: modules/profile/profilePage.php:385
+#: modules/profile/profilePage.php:424
 msgid "Loan renewal"
 msgstr "Renovar préstamo"
 
 #: modules/lendings/lendingPages.php:402
-#: modules/profile/profilePage.php:392
-#: modules/profile/profilePage.php:445
+#: modules/profile/profilePage.php:431
+#: modules/profile/profilePage.php:484
 msgid "Return"
 msgstr "Devolución"
 
-#: modules/profile/profilePage.php:408
+#: modules/profile/profilePage.php:447
 msgid "There are no active lendings right now"
 msgstr "No hay préstamos activos en este momento"
 
-#: modules/profile/profilePage.php:421
+#: modules/profile/profilePage.php:460
 msgid "Past lendings"
 msgstr "Préstamos pasados"
 
@@ -455,8 +449,8 @@ msgstr "Empieza a escribir para buscar usuarios"
 #: block-includes/book-data-functions.php:181
 #: block-includes/book-data-functions.php:203
 #: modules/lendings/lendingPages.php:38
-#: modules/profile/profilePage.php:284
-#: modules/profile/profilePage.php:465
+#: modules/profile/profilePage.php:323
+#: modules/profile/profilePage.php:504
 msgid "Cancel"
 msgstr "Cancelar"
 
@@ -466,7 +460,7 @@ msgstr "Crear préstamo"
 
 #: block-includes/book-data-functions.php:289
 #: modules/profile/usersListPage.php:74
-#: modules/profile/usersListPage.php:116
+#: modules/profile/usersListPage.php:122
 msgid "No users found"
 msgstr "No se encontraron usuarios"
 
@@ -480,13 +474,10 @@ msgid "An error occurred. Please try again."
 msgstr "Ha ocurrido un error, por favor vuelva a intentarlo."
 
 #: block-includes/mini-book-functions.php:61
-#: assets/js/book-search/view/Results.jsx:57
-#: src/latest-books/edit.js:51
 msgid "Available"
 msgstr "Disponible"
 
 #: block-includes/mini-book-functions.php:63
-#: assets/js/book-search/view/Results.jsx:59
 msgid "Not Available"
 msgstr "No disponible"
 
@@ -523,12 +514,10 @@ msgid "Custom template for Tender Language taxonomy."
 msgstr "Plantilla personalizada para la taxonomía Idioma."
 
 #: modules/lendings/lendingPages.php:323
-#: assets/js/book-search/view/Pagination.jsx:13
 msgid "Previous"
 msgstr "Anterior"
 
 #: modules/lendings/lendingPages.php:349
-#: assets/js/book-search/view/Pagination.jsx:27
 msgid "Next"
 msgstr "Siguiente"
 
@@ -552,7 +541,7 @@ msgstr "Página de edición de perfil"
 msgid "Select page"
 msgstr "Seleccionar página"
 
-#: modules/profile/profilePage.php:444
+#: modules/profile/profilePage.php:483
 msgid "Lending"
 msgstr "Préstamo"
 
@@ -561,7 +550,7 @@ msgid "Perfil"
 msgstr "Perfil"
 
 #: modules/createPagesOnActivation.php:16
-#: modules/profile/profilePage.php:225
+#: modules/profile/profilePage.php:264
 msgid "Profile"
 msgstr "Perfil"
 
@@ -575,7 +564,6 @@ msgstr "Biblioteca"
 
 #: modules/lendings/lendingPages.php:369
 #: modules/lendings/lendingPages.php:428
-#: src/mini-book/edit.js:30
 msgid "Book title"
 msgstr "Título del libro"
 
@@ -696,6 +684,7 @@ msgstr "Descargar CSV"
 #: modules/lendings/downloadCsvLendings.php:49
 #: modules/lendings/lendingPages.php:372
 #: modules/lendings/lendingPages.php:431
+#: modules/profile/profilePage.php:51
 msgid "User"
 msgstr "Usuario"
 
@@ -748,13 +737,13 @@ msgid "Action could not be performed."
 msgstr "La acción no se ha podido realizar."
 
 #: modules/lendings/lendingPages.php:37
-#: modules/profile/profilePage.php:464
+#: modules/profile/profilePage.php:503
 msgid "Confirm"
 msgstr "Confirmar"
 
 #: modules/lendings/lendingPages.php:39
 #: modules/profile/newUserForm.php:114
-#: modules/profile/profilePage.php:466
+#: modules/profile/profilePage.php:505
 msgid "Accept"
 msgstr "Aceptar"
 
@@ -788,7 +777,7 @@ msgid "Searching page"
 msgstr "Página de búsqueda"
 
 #: modules/profile/editProfilePage.php:25
-#: modules/profile/profilePage.php:102
+#: modules/profile/profilePage.php:135
 #: modules/profile/usersListPage.php:26
 msgid "You do not have permission to view this page."
 msgstr "No tienes permisos para ver esta página."
@@ -809,8 +798,8 @@ msgstr "Usuario creado correctamente."
 msgid "Create user"
 msgstr "Crear usuario"
 
-#: modules/profile/profilePage.php:400
-#: modules/profile/profilePage.php:401
+#: modules/profile/profilePage.php:439
+#: modules/profile/profilePage.php:440
 msgid "Delayed"
 msgstr "Retrasado"
 
@@ -1001,7 +990,7 @@ msgid "Event in the library"
 msgstr "Evento en la biblioteca"
 
 #: block-includes/profile-links-functions.php:25
-#: modules/profile/profilePage.php:33
+#: modules/profile/profilePage.php:66
 msgid "Login"
 msgstr "Login"
 
@@ -1977,6 +1966,9 @@ msgstr "Plantilla personalizada de evento individual (CPT)."
 msgid "Not authorized."
 msgstr "No autorizado."
 
+#: modules/emails/passwordSetupEmails.php:186
+#: modules/emails/passwordSetupEmails.php:209
+#: modules/emails/passwordSetupEmails.php:253
 #: modules/lendings/lendingFunctions.php:21
 #: modules/lendings/lendingFunctions.php:434
 #: modules/migration/tenderMigration.php:350
@@ -1991,63 +1983,63 @@ msgstr "Permisos insuficientes."
 msgid "No loans found."
 msgstr "No se han encontrado préstamos."
 
-#: modules/profile/profilePage.php:55
+#: modules/profile/profilePage.php:88
 msgid "User not found."
 msgstr "Usuario no encontrado."
 
-#: modules/profile/profilePage.php:78
+#: modules/profile/profilePage.php:111
 msgid "Call log saved."
 msgstr "Registro de llamada guardado."
 
-#: modules/profile/profilePage.php:82
+#: modules/profile/profilePage.php:115
 msgid "Call log updated."
 msgstr "Registro de llamada actualizado."
 
-#: modules/profile/profilePage.php:86
+#: modules/profile/profilePage.php:119
 msgid "Call log deleted."
 msgstr "Registro de llamada eliminado."
 
-#: modules/profile/profilePage.php:91
+#: modules/profile/profilePage.php:124
 msgid "Ha ocurrido un error."
 msgstr "Ha ocurrido un error."
 
-#: modules/profile/profilePage.php:128
+#: modules/profile/profilePage.php:162
 msgid "Security check failed. Please try again."
 msgstr "La verificación de seguridad ha fallado. Inténtalo de nuevo."
 
-#: modules/profile/profilePage.php:133
+#: modules/profile/profilePage.php:167
 msgid "Invalid target user."
 msgstr "Usuario de destino no válido."
 
-#: modules/profile/profilePage.php:269
+#: modules/profile/profilePage.php:308
 msgid "Date"
 msgstr "Fecha"
 
-#: modules/profile/profilePage.php:273
+#: modules/profile/profilePage.php:312
 msgid "Comment"
 msgstr "Comentario"
 
-#: modules/profile/profilePage.php:280
+#: modules/profile/profilePage.php:319
 msgid "Update"
 msgstr "Actualizar"
 
-#: modules/profile/profilePage.php:280
+#: modules/profile/profilePage.php:319
 msgid "Save"
 msgstr "Guardar"
 
-#: modules/profile/profilePage.php:314
+#: modules/profile/profilePage.php:353
 msgid "Edit"
 msgstr "Editar"
 
-#: modules/profile/profilePage.php:321
+#: modules/profile/profilePage.php:360
 msgid "Delete this call log?"
 msgstr "¿Eliminar este registro de llamada?"
 
-#: modules/profile/profilePage.php:322
+#: modules/profile/profilePage.php:361
 msgid "Delete"
 msgstr "Eliminar"
 
-#: modules/profile/profilePage.php:331
+#: modules/profile/profilePage.php:370
 msgid "No calls logged yet for this user."
 msgstr "Aún no hay llamadas registradas para este usuario."
 
@@ -2098,11 +2090,11 @@ msgstr "Préstamos activos"
 msgid "Finished Lendings"
 msgstr "Préstamos finalizados"
 
-#: modules/profile/profilePage.php:34
+#: modules/profile/profilePage.php:67
 msgid "You must be logged in to view your profile."
 msgstr "Debes iniciar sesión para ver tu perfil."
 
-#: modules/profile/profilePage.php:41
+#: modules/profile/profilePage.php:74
 msgid "Forgot your password?"
 msgstr "¿Olvidaste tu contraseña?"
 
@@ -2307,115 +2299,115 @@ msgstr "Idiomas importados. Creados: %d, actualizados: %d."
 msgid "Media %d missing URL or file path."
 msgstr "El medio %d no tiene URL ni ruta de archivo."
 
-#: modules/migration/tenderMigration.php:1714
-#: modules/migration/tenderMigration.php:2308
+#: modules/migration/tenderMigration.php:1718
+#: modules/migration/tenderMigration.php:2338
 #, php-format
 msgid "Missing media file: %s"
 msgstr "Falta el archivo de medios: %s"
 
-#: modules/migration/tenderMigration.php:1749
+#: modules/migration/tenderMigration.php:1753
 #, php-format
 msgid "Images imported. Created: %d, skipped: %d."
 msgstr "Imágenes importadas. Creadas: %d, omitidas: %d."
 
-#: modules/migration/tenderMigration.php:1772
+#: modules/migration/tenderMigration.php:1797
 #, php-format
 msgid "Could not copy file: %s"
 msgstr "No se pudo copiar el archivo: %s"
 
-#: modules/migration/tenderMigration.php:1992
+#: modules/migration/tenderMigration.php:2022
 #, php-format
 msgid "Users imported. Created: %d, updated: %d."
 msgstr "Usuarias importadas. Creadas: %d, actualizadas: %d."
 
-#: modules/migration/tenderMigration.php:2025
+#: modules/migration/tenderMigration.php:2055
 #, php-format
 msgid "Book %d section error: %s"
 msgstr "Error de sección en el libro %d: %s"
 
-#: modules/migration/tenderMigration.php:2031
+#: modules/migration/tenderMigration.php:2061
 #, php-format
 msgid "Book %d language error: %s"
 msgstr "Error de idioma en el libro %d: %s"
 
 #: modules/migration/tenderMigration.php:1351
-#: modules/migration/tenderMigration.php:2047
+#: modules/migration/tenderMigration.php:2077
 msgid "Untitled book"
 msgstr "Libro sin título"
 
-#: modules/migration/tenderMigration.php:2070
+#: modules/migration/tenderMigration.php:2100
 #, php-format
 msgid "Book %d cover error: %s"
 msgstr "Error de portada en el libro %d: %s"
 
-#: modules/migration/tenderMigration.php:2166
+#: modules/migration/tenderMigration.php:2196
 msgid "Missing language mapping."
 msgstr "Falta la asociación del idioma."
 
-#: modules/migration/tenderMigration.php:2168
+#: modules/migration/tenderMigration.php:2198
 msgid "Missing language_name."
 msgstr "Falta language_name."
 
-#: modules/migration/tenderMigration.php:2368
+#: modules/migration/tenderMigration.php:2398
 #, php-format
 msgid "Lending %d missing book/user mapping."
 msgstr "Al préstamo %d le falta la asociación de libro/usuaria."
 
-#: modules/migration/tenderMigration.php:2394
+#: modules/migration/tenderMigration.php:2424
 #, php-format
 msgid "Failed to insert lending %d."
 msgstr "No se pudo insertar el préstamo %d."
 
-#: modules/migration/tenderMigration.php:2402
+#: modules/migration/tenderMigration.php:2432
 #, php-format
 msgid "Lendings imported. Created: %d, skipped: %d."
 msgstr "Préstamos importados. Creados: %d, omitidos: %d."
 
-#: modules/migration/tenderMigration.php:2438
+#: modules/migration/tenderMigration.php:2468
 #, php-format
 msgid "Call %d missing user mapping."
 msgstr "A la llamada %d le falta la asociación de usuaria."
 
-#: modules/migration/tenderMigration.php:2465
+#: modules/migration/tenderMigration.php:2495
 #, php-format
 msgid "Failed to insert call %d."
 msgstr "No se pudo insertar la llamada %d."
 
-#: modules/migration/tenderMigration.php:2473
+#: modules/migration/tenderMigration.php:2503
 #, php-format
 msgid "Calls imported. Created: %d, skipped: %d."
 msgstr "Llamadas importadas. Creadas: %d, omitidas: %d."
 
-#: modules/profile/profilePage.php:228
-#: modules/profile/profilePage.php:239
+#: modules/profile/profilePage.php:267
+#: modules/profile/profilePage.php:278
 msgid "Call history"
 msgstr "Historial de llamadas"
 
-#: modules/profile/profilePage.php:238
+#: modules/profile/profilePage.php:277
 msgid "Follow-up"
 msgstr "Seguimiento"
 
-#: modules/profile/profilePage.php:240
+#: modules/profile/profilePage.php:279
 msgid "Keep all follow-up calls for this user in one place, ordered by date and easy to edit later."
 msgstr "Mantén todas las llamadas de seguimiento de esta usuaria en un solo lugar, ordenadas por fecha y fáciles de editar después."
 
-#: modules/profile/profilePage.php:244
+#: modules/profile/profilePage.php:283
 msgid "entries"
 msgstr "entradas"
 
-#: modules/profile/profilePage.php:254
+#: modules/profile/profilePage.php:293
 msgid "Edit call entry"
 msgstr "Editar entrada de llamada"
 
-#: modules/profile/profilePage.php:254
+#: modules/profile/profilePage.php:293
 msgid "New call entry"
 msgstr "Nueva entrada de llamada"
 
-#: modules/profile/profilePage.php:293
+#: modules/profile/profilePage.php:332
 msgid "Timeline"
 msgstr "Cronología"
 
-#: modules/profile/profilePage.php:310
+#: modules/profile/profilePage.php:349
 msgid "No comment added."
 msgstr "No se añadió ningún comentario."
 
@@ -2674,16 +2666,16 @@ msgstr ""
 msgid "Failed to insert call row %1$d old_id %2$d."
 msgstr ""
 
-#: modules/migration/tenderMigration.php:2084
+#: modules/migration/tenderMigration.php:2114
 #, php-format
 msgid "Books imported. Created: %d, updated: %d."
 msgstr ""
 
-#: modules/migration/tenderMigration.php:2211
+#: modules/migration/tenderMigration.php:2241
 msgid "No imported section matches the provided section_id."
 msgstr ""
 
-#: modules/migration/tenderMigration.php:2218
+#: modules/migration/tenderMigration.php:2248
 msgid "No imported section matches the provided section_name and section_number."
 msgstr ""
 
@@ -2736,8 +2728,9 @@ msgstr "Añadir al calendario"
 msgid "Subscribe to calendar"
 msgstr "Suscribirse al calendario"
 
-#: modules/tenderRoles.php:52
-#: modules/tenderRoles.php:68
+#: modules/profile/profilePage.php:31
+#: modules/tenderRoles.php:48
+#: modules/tenderRoles.php:64
 msgid "Bibliotecarix"
 msgstr "Bibliotecarix"
 
@@ -2751,158 +2744,162 @@ msgctxt "block description"
 msgid "Display the latest books added to the library in a responsive grid."
 msgstr ""
 
-#: assets/js/book-search/view/CategoryTree.jsx:35
-msgid "Collapse section"
-msgstr ""
+#: modules/emails/passwordSetupEmails.php:15
+msgid "Set your password for the new library website"
+msgstr "Crea tu contraseña para la nueva web de la biblioteca"
 
-#: assets/js/book-search/view/CategoryTree.jsx:35
-msgid "Expand section"
+#: modules/emails/passwordSetupEmails.php:20
+msgid ""
+"Hello {display_name},\n"
+"\n"
+"We have moved the library to a new website and migrated your existing library account.\n"
+"\n"
+"For security reasons, your old password was not migrated. You can create a new password using this secure link:\n"
+"\n"
+"{reset_password_url}\n"
+"\n"
+"If you did not request this or you think this message is a mistake, please contact the library.\n"
+"\n"
+"Thank you,\n"
+"{site_name}"
 msgstr ""
+"Hola {display_name},\n"
+"\n"
+"Hemos trasladado la biblioteca a una nueva web y hemos migrado tu cuenta de la biblioteca.\n"
+"\n"
+"Por motivos de seguridad, tu contraseña anterior no se ha migrado. Puedes crear una nueva contraseña usando este enlace seguro:\n"
+"\n"
+"{reset_password_url}\n"
+"\n"
+"Si no esperabas este mensaje o crees que se trata de un error, ponte en contacto con la biblioteca.\n"
+"\n"
+"Gracias,\n"
+"{site_name}"
 
-#: assets/js/book-search/view/Filters.jsx:76
-msgid "Search"
-msgstr ""
+#: modules/emails/passwordSetupEmails.php:30
+#: modules/emails/passwordSetupEmails.php:31
+#: modules/emails/passwordSetupEmails.php:266
+msgid "Password Setup Emails"
+msgstr "Correos para crear contraseña"
 
-#: assets/js/book-search/view/Filters.jsx:77
-#: assets/js/book-search/view/Filters.jsx:216
-msgid "Sections"
-msgstr ""
+#: modules/emails/passwordSetupEmails.php:155
+msgid "The user does not have a valid email address."
+msgstr "La usuaria no tiene una dirección de correo electrónico válida."
 
-#: assets/js/book-search/view/Filters.jsx:79
-msgid "Page"
-msgstr ""
+#: modules/emails/passwordSetupEmails.php:159
+msgid "The user has a placeholder migration email address."
+msgstr "La usuaria tiene una dirección de correo electrónico provisional de la migración."
 
-#: assets/js/book-search/view/Filters.jsx:80
-msgid "Per Page"
-msgstr ""
+#: modules/emails/passwordSetupEmails.php:174
+msgid "WordPress could not send the email."
+msgstr "WordPress no ha podido enviar el correo electrónico."
 
-#: assets/js/book-search/view/Filters.jsx:81
-msgid "Order By"
-msgstr ""
+#: modules/emails/passwordSetupEmails.php:267
+msgid "Send imported users a secure WordPress password reset link so they can create a password for the new website."
+msgstr "Envía a las usuarias importadas un enlace seguro de restablecimiento de contraseña de WordPress para que puedan crear una contraseña en la nueva web."
 
-#: assets/js/book-search/view/Filters.jsx:82
-msgid "Order"
-msgstr ""
+#: modules/emails/passwordSetupEmails.php:270
+msgid "Email template saved."
+msgstr "Plantilla de correo guardada."
 
-#: assets/js/book-search/view/Filters.jsx:118
-#: assets/js/book-search/view/Filters.jsx:120
-msgid "Show filters"
-msgstr ""
+#: modules/emails/passwordSetupEmails.php:276
+#, php-format
+msgid "Last send run: %1$d sent, %2$d failed at %3$s."
+msgstr "Último envío: %1$d enviados, %2$d fallidos a las %3$s."
 
-#: assets/js/book-search/view/Filters.jsx:124
-msgid "Search by title, author, etc"
-msgstr ""
+#: modules/emails/passwordSetupEmails.php:293
+msgid "Imported users"
+msgstr "Usuarias importadas"
 
-#: assets/js/book-search/view/Filters.jsx:132
-msgid "Books per page"
-msgstr ""
+#: modules/emails/passwordSetupEmails.php:294
+msgid "Skipped placeholder emails"
+msgstr "Correos provisionales omitidos"
 
-#: assets/js/book-search/view/Filters.jsx:178
-#: assets/js/book-search/view/Filters.jsx:206
-msgid "Reset all filters"
-msgstr ""
+#: modules/emails/passwordSetupEmails.php:295
+msgid "Already emailed"
+msgstr "Correos ya enviados"
 
-#: assets/js/book-search/view/Filters.jsx:183
-#: assets/js/book-search/view/Filters.jsx:211
-msgid "Reset Filters"
-msgstr ""
+#: modules/emails/passwordSetupEmails.php:296
+msgid "Waiting to send"
+msgstr "Pendientes de envío"
 
-#: assets/js/book-search/view/Filters.jsx:196
-msgid "Close filters"
-msgstr ""
+#: modules/emails/passwordSetupEmails.php:299
+msgid "Email Template"
+msgstr "Plantilla de correo"
 
-#: assets/js/book-search/view/Filters.jsx:198
-msgid "Hide filters"
-msgstr ""
+#: modules/emails/passwordSetupEmails.php:304
+msgid "Subject"
+msgstr "Asunto"
 
-#: assets/js/book-search/view/Filters.jsx:200
-msgid "Filters"
-msgstr ""
+#: modules/emails/passwordSetupEmails.php:306
+msgid "Body"
+msgstr "Cuerpo"
 
-#. translators: 1: current page, 2: total pages
-#: assets/js/book-search/view/Pagination.jsx:18
-#, js-format
-msgid "Page %1$d of %2$d"
-msgstr ""
+#: modules/emails/passwordSetupEmails.php:308
+msgid "Available placeholders: {display_name}, {user_login}, {user_email}, {site_name}, {reset_password_url}"
+msgstr "Marcadores disponibles: {display_name}, {user_login}, {user_email}, {site_name}, {reset_password_url}"
 
-#: assets/js/book-search/view/Results.jsx:14
-msgid "Loading..."
-msgstr ""
+#: modules/emails/passwordSetupEmails.php:310
+msgid "Save Template"
+msgstr "Guardar plantilla"
 
-#: assets/js/book-search/view/Results.jsx:17
-msgid "No results found."
-msgstr ""
+#: modules/emails/passwordSetupEmails.php:313
+msgid "Send Emails"
+msgstr "Enviar correos"
 
-#: src/book-search/edit.js:9
-msgid "Book search"
-msgstr ""
+#: modules/emails/passwordSetupEmails.php:314
+msgid "Emails are sent only to imported users that do not already have the sent flag."
+msgstr "Los correos se envían solo a usuarias importadas que todavía no tienen la marca de envío."
 
-#: src/book-search/edit.js:10
-msgid "This block can only be seen on the frontend."
-msgstr ""
+#: modules/emails/passwordSetupEmails.php:318
+msgid "Maximum emails in this batch"
+msgstr "Número máximo de correos en este lote"
 
-#: src/book-summary/edit.js:9
-msgid "Book summary"
-msgstr ""
+#: modules/emails/passwordSetupEmails.php:321
+msgid "Send Next Batch"
+msgstr "Enviar siguiente lote"
 
-#: src/latest-books/edit.js:15
-msgid "Latest books settings"
-msgstr ""
+#: modules/emails/passwordSetupEmails.php:321
+msgid "No Emails Left To Send"
+msgstr "No quedan correos por enviar"
 
-#: src/latest-books/edit.js:17
-msgid "Books to show"
-msgstr ""
+#: modules/migration/tenderMigration.php:1763
+msgid "Invalid media source path."
+msgstr "Ruta de origen de medios no válida."
 
-#. translators: %d: number of books shown
-#: src/latest-books/edit.js:30
-#, js-format
-msgid "Preview: showing the latest %d books."
-msgstr ""
+#: modules/migration/tenderMigration.php:1768
+#: modules/migration/tenderMigration.php:1774
+msgid "Media path escapes the configured base directory."
+msgstr "La ruta del medio sale del directorio base configurado."
 
-#: src/latest-books/edit.js:43
-msgid "Latest book title"
-msgstr ""
+#: modules/migration/tenderMigration.php:1824
+msgid "Invalid media URL."
+msgstr "URL de medio no válida."
 
-#: src/latest-books/edit.js:46
-msgid "Author name"
-msgstr ""
+#: modules/profile/profilePage.php:27
+msgid "Administrator"
+msgstr "Administradora"
 
-#: src/mini-book/edit.js:31
-msgid "Book Author"
-msgstr ""
+#: modules/profile/profilePage.php:28
+msgid "Can manage the full website, plugin settings, catalog, readers, lendings, reservations, and follow-up calls."
+msgstr "Puede gestionar toda la web, los ajustes del plugin, el catálogo, las usuarias, los préstamos, las reservas y las llamadas de seguimiento."
 
-#: src/profile-links/edit.js:25
-msgid "Login / Profile (dynamic)"
-msgstr ""
+#: modules/profile/profilePage.php:32
+msgid "Can manage the catalog, sections, languages, readers, lendings, reservations, and follow-up calls."
+msgstr "Puede gestionar el catálogo, las secciones, los idiomas, las usuarias, los préstamos, las reservas y las llamadas de seguimiento."
 
-#: src/upcoming-events/edit.js:14
-msgid "Events adjustments"
-msgstr ""
+#: modules/profile/profilePage.php:36
+msgid "Can manage reader profiles, lendings, reservations, and follow-up calls."
+msgstr "Puede gestionar perfiles de lectoras, préstamos, reservas y llamadas de seguimiento."
 
-#: src/upcoming-events/edit.js:16
-msgid "Visualization mode"
-msgstr ""
+#: modules/profile/profilePage.php:40
+msgid "Can view their profile, manage their reservations, and follow their lending history."
+msgstr "Puede ver su perfil, gestionar sus reservas y consultar su historial de préstamos."
 
-#: src/upcoming-events/edit.js:19
-msgid "Monthly calendar"
-msgstr ""
+#: modules/profile/profilePage.php:52
+msgid "Can access the website with the permissions assigned to this account."
+msgstr "Puede acceder a la web con los permisos asignados a esta cuenta."
 
-#: src/upcoming-events/edit.js:20
-msgid "List of upcoming events"
-msgstr ""
-
-#: src/upcoming-events/edit.js:27
-msgid "Events to show"
-msgstr ""
-
-#: src/upcoming-events/edit.js:39
-msgid "Preview: a monthly calendar of events will be displayed."
-msgstr ""
-
-#: src/upcoming-events/edit.js:42
-msgid "Preview: a list of the next"
-msgstr ""
-
-#: src/upcoming-events/edit.js:42
-msgid "events will be displayed."
-msgstr ""
+#: modules/profile/profilePage.php:236
+msgid "Role"
+msgstr "Rol"

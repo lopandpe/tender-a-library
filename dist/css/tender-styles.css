@@ -2,21 +2,21 @@
   !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./assets/scss/tender-styles.scss ***!
   \*************************************************************************************************************************/
 :root {
-  --primary-color: var(--wp--preset--color--primary, #c4017b);
-  --secondary-color: var(--wp--preset--color--secondary, #6c757d);
-  --success-color: var(--wp--preset--color--success, #28a745);
-  --info-color: var(--wp--preset--color--info, #17a2b8);
-  --warning-color: var(--wp--preset--color--warning, #ffc107);
-  --danger-color: var(--wp--preset--color--danger, #dc3545);
-  --light-color: var(--wp--preset--color--light, #f8f9fa);
-  --dark-color: var(--wp--preset--color--dark, #343a40);
-  --white-color: var(--wp--preset--color--white, #ffffff);
-  --black-color: var(--wp--preset--color--black, #000000);
-  --gray-color: var(--wp--preset--color--gray, #5c5c5c);
-  --gray-dark-color: var(--wp--preset--color--gray-dark, #343a40);
-  --gray-light-color: var(--wp--preset--color--gray-light, #f8f9fa);
-  --gray-lighter-color: var(--wp--preset--color--gray-lighter, #f1f1f1);
-  --gray-lightest-color: var(--wp--preset--color--gray-lightest, #f1f1f1);
+  --tal-primary-color: var(--wp--preset--color--primary, #c4017b);
+  --tal-secondary-color: var(--wp--preset--color--secondary, #6c757d);
+  --tal-success-color: var(--wp--preset--color--success, #28a745);
+  --tal-info-color: var(--wp--preset--color--info, #17a2b8);
+  --tal-warning-color: var(--wp--preset--color--warning, #ffc107);
+  --tal-danger-color: var(--wp--preset--color--danger, #dc3545);
+  --tal-light-color: var(--wp--preset--color--light, #f8f9fa);
+  --tal-dark-color: var(--wp--preset--color--dark, #343a40);
+  --tal-white-color: var(--wp--preset--color--white, #ffffff);
+  --tal-black-color: var(--wp--preset--color--black, #000000);
+  --tal-gray-color: var(--wp--preset--color--gray, #5c5c5c);
+  --tal-gray-dark-color: var(--wp--preset--color--gray-dark, #343a40);
+  --tal-gray-light-color: var(--wp--preset--color--gray-light, #f8f9fa);
+  --tal-gray-lighter-color: var(--wp--preset--color--gray-lighter, #f1f1f1);
+  --tal-gray-lightest-color: var(--wp--preset--color--gray-lightest, #f1f1f1);
 }
 
 .tender-book-preview {
@@ -55,7 +55,7 @@
   line-height: 1.5em;
 }
 .tender-book-preview .cover .dates .return-date {
-  color: var(--primary-color);
+  color: var(--tal-primary-color);
 }
 .tender-book-preview .book-info {
   line-height: 1.25em;
@@ -64,13 +64,13 @@
   word-wrap: break-word;
 }
 .tender-book-preview .book-info .title {
-  color: var(--primary-color);
+  color: var(--tal-primary-color);
   text-decoration: none;
   padding: 10px 0px;
   display: block;
 }
 .tender-book-preview .book-info .author {
-  color: var(--gray-color);
+  color: var(--tal-gray-color);
 }
 .tender-book-preview .book-availability {
   display: flex;
@@ -102,16 +102,16 @@
   background-color: transparent;
 }
 .tender-book-preview .book-availability span.available {
-  color: var(--success-color);
+  color: var(--tal-success-color);
 }
 .tender-book-preview .book-availability span.available:after {
-  background-color: var(--success-color);
+  background-color: var(--tal-success-color);
 }
 .tender-book-preview .book-availability span.unavailable {
-  color: var(--danger-color);
+  color: var(--tal-danger-color);
 }
 .tender-book-preview .book-availability span.unavailable:after {
-  background-color: var(--danger-color);
+  background-color: var(--tal-danger-color);
 }
 .tender-book-preview a:hover {
   opacity: 0.7;
@@ -134,21 +134,21 @@
 }
 .book-pagination .page-numbers li a, .book-pagination .page-numbers li span {
   text-decoration: none;
-  color: var(--primary-color);
+  color: var(--tal-primary-color);
   padding: 5px 10px;
   border-radius: 3px;
   transition: background-color 0.3s;
 }
 .book-pagination .page-numbers li a:hover, .book-pagination .page-numbers li span:hover {
-  background-color: var(--light-color);
+  background-color: var(--tal-light-color);
 }
 .book-pagination .page-numbers li a.current, .book-pagination .page-numbers li span.current {
-  background-color: var(--primary-color);
+  background-color: var(--tal-primary-color);
   color: #fff;
 }
 
 .tender-fieldset {
-  border-color: var(--secondary-color);
+  border-color: var(--tal-secondary-color);
   border-width: 1px;
   border-style: solid;
   padding: 10px 20px 20px;
@@ -176,9 +176,10 @@
 .tender-fieldset input[type=text]:focus,
 .tender-fieldset input[type=search]:focus,
 .tender-fieldset select:focus {
-  border-color: var(--primary-color);
-  outline: none;
-  box-shadow: 0 0 5px rgba(var(--primary-color), 0.5);
+  border-color: var(--tal-primary-color);
+  outline: 2px solid var(--tal-primary-color);
+  outline-offset: 2px;
+  box-shadow: none;
 }
 .tender-fieldset input[type=text]::placeholder,
 .tender-fieldset input[type=search]::placeholder,
@@ -201,7 +202,7 @@
   appearance: none;
   position: relative;
   border: 1px solid;
-  border-color: var(--primary-color);
+  border-color: var(--tal-primary-color);
   border-radius: 3px;
   width: 15px;
   height: 15px;
@@ -211,12 +212,12 @@
   border-width: 2px;
 }
 .tender-fieldset input[type=checkbox]:checked {
-  background-color: var(--primary-color);
-  border-color: var(--primary-color);
+  background-color: var(--tal-primary-color);
+  border-color: var(--tal-primary-color);
   color: #fff;
 }
 .tender-fieldset input[type=checkbox]:focus {
-  outline: 2px solid var(--primary-color);
+  outline: 2px solid var(--tal-primary-color);
   outline-offset: 2px;
   opacity: 1;
 }
@@ -238,9 +239,10 @@
 }
 #loginform input[type=text]:focus,
 #loginform input[type=password]:focus {
-  border-color: var(--primary-color);
-  outline: none;
-  box-shadow: 0 0 5px rgba(var(--primary-color), 0.5);
+  border-color: var(--tal-primary-color);
+  outline: 2px solid var(--tal-primary-color);
+  outline-offset: 2px;
+  box-shadow: none;
 }
 #loginform input[type=text]::placeholder,
 #loginform input[type=password]::placeholder {
@@ -274,7 +276,7 @@
   appearance: none;
   position: relative;
   border: 1px solid;
-  border-color: var(--primary-color);
+  border-color: var(--tal-primary-color);
   border-radius: 3px;
   width: 15px;
   height: 15px;
@@ -284,17 +286,17 @@
   border-width: 2px;
 }
 #loginform input[type=checkbox]:checked {
-  background-color: var(--primary-color);
-  border-color: var(--primary-color);
+  background-color: var(--tal-primary-color);
+  border-color: var(--tal-primary-color);
   color: #fff;
 }
 #loginform input[type=checkbox]:focus {
-  outline: 2px solid var(--primary-color);
+  outline: 2px solid var(--tal-primary-color);
   outline-offset: 2px;
   opacity: 1;
 }
 #loginform input[type=submit] {
-  background-color: var(--primary-color);
+  background-color: var(--tal-primary-color);
   color: #fff;
   border: none;
   padding: 10px 20px;
@@ -308,7 +310,7 @@
   opacity: 0.8;
 }
 #loginform input[type=submit]:focus {
-  outline: 2px solid var(--primary-color);
+  outline: 2px solid var(--tal-primary-color);
   outline-offset: 2px;
 }
 
@@ -363,7 +365,7 @@
 }
 
 .tal-button {
-  background-color: var(--primary-color);
+  background-color: var(--tal-primary-color);
   padding: 5px 10px;
   font-size: inherit;
   border-radius: 0px;
@@ -391,7 +393,7 @@
 
 .calls-button {
   background-color: transparent;
-  color: var(--primary-color);
+  color: var(--tal-primary-color);
   border: none;
   font-weight: normal;
 }
@@ -404,109 +406,161 @@
 }
 
 .no-results {
-  color: var(--primary-color);
+  color: var(--tal-primary-color);
 }
 
 .text-primary {
-  color: var(--primary-color);
+  color: var(--tal-primary-color);
 }
 
 .text-white {
-  color: var(--white-color);
+  color: var(--tal-white-color);
 }
 
 .text-black {
-  color: var(--black-color);
+  color: var(--tal-black-color);
 }
 
 .bg-primary {
-  background-color: var(--primary-color);
+  background-color: var(--tal-primary-color);
 }
 
 .text-success {
-  color: var(--success-color);
+  color: var(--tal-success-color);
 }
 
 .bg-success {
-  background-color: var(--success-color);
+  background-color: var(--tal-success-color);
 }
 
-.profile {
+body.tender-profile-page .profile,
+body.tender-edit-profile-page .profile,
+body.tender-users-list-page .profile {
   font-size: inherit;
   margin-bottom: 50px;
   display: grid;
   gap: 24px;
 }
-.profile .user-info {
-  background: linear-gradient(135deg, #fffaf2 0%, #f4efe5 100%);
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  border-radius: 18px;
-  padding: 24px;
+body.tender-profile-page .profile .user-info,
+body.tender-edit-profile-page .profile .user-info,
+body.tender-users-list-page .profile .user-info {
+  background: var(--tal-white-color);
+  border: 1px solid var(--tal-secondary-color);
+  border-radius: 5px;
+  padding: 20px;
 }
-.profile .user-info ul {
+body.tender-profile-page .profile .user-info ul,
+body.tender-edit-profile-page .profile .user-info ul,
+body.tender-users-list-page .profile .user-info ul {
   display: flex;
   padding: 0px;
   list-style: none;
   flex-direction: column;
   gap: 10px;
 }
-.profile .user-info ul li {
+body.tender-profile-page .profile .user-info ul li,
+body.tender-edit-profile-page .profile .user-info ul li,
+body.tender-users-list-page .profile .user-info ul li {
   display: flex;
   gap: 10px;
 }
-.profile .user-info ul li .label {
-  color: var(--black-color);
+body.tender-profile-page .profile .user-info ul li .label,
+body.tender-edit-profile-page .profile .user-info ul li .label,
+body.tender-users-list-page .profile .user-info ul li .label {
+  color: var(--tal-black-color);
 }
-.profile .user-info ul li .data {
-  color: var(--primary-color);
+body.tender-profile-page .profile .user-info ul li .data,
+body.tender-edit-profile-page .profile .user-info ul li .data,
+body.tender-users-list-page .profile .user-info ul li .data {
+  color: var(--tal-primary-color);
 }
-.profile .profile-actions {
+body.tender-profile-page .profile .tal-profile-role-indicator,
+body.tender-edit-profile-page .profile .tal-profile-role-indicator,
+body.tender-users-list-page .profile .tal-profile-role-indicator {
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+  display: grid;
+  gap: 6px;
+  margin-top: 18px;
+  padding-top: 18px;
+}
+body.tender-profile-page .profile .tal-profile-role-label,
+body.tender-edit-profile-page .profile .tal-profile-role-label,
+body.tender-users-list-page .profile .tal-profile-role-label {
+  color: var(--tal-black-color);
+  font-size: inherit;
+  font-weight: 700;
+}
+body.tender-profile-page .profile .tal-profile-role-name,
+body.tender-edit-profile-page .profile .tal-profile-role-name,
+body.tender-users-list-page .profile .tal-profile-role-name {
+  color: var(--tal-primary-color);
+  display: inline;
+  font-size: 1rem;
+  line-height: 1.35;
+}
+body.tender-profile-page .profile .tal-profile-role-description,
+body.tender-edit-profile-page .profile .tal-profile-role-description,
+body.tender-users-list-page .profile .tal-profile-role-description {
+  color: var(--tal-black-color);
+  line-height: 1.45;
+}
+body.tender-profile-page .profile .profile-actions,
+body.tender-edit-profile-page .profile .profile-actions,
+body.tender-users-list-page .profile .profile-actions {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
 }
-.profile .profile-actions a.edit-profile {
-  background-color: var(--primary-color);
+body.tender-profile-page .profile .profile-actions a.edit-profile,
+body.tender-edit-profile-page .profile .profile-actions a.edit-profile,
+body.tender-users-list-page .profile .profile-actions a.edit-profile {
+  background-color: var(--tal-primary-color);
   color: #fff;
 }
-.profile .profile-actions a.logout {
-  color: var(--danger-color);
+body.tender-profile-page .profile .profile-actions a.logout,
+body.tender-edit-profile-page .profile .profile-actions a.logout,
+body.tender-users-list-page .profile .profile-actions a.logout {
+  color: var(--tal-danger-color);
   background-color: transparent;
 }
-.profile .profile-actions a.logout:hover {
+body.tender-profile-page .profile .profile-actions a.logout:hover,
+body.tender-edit-profile-page .profile .profile-actions a.logout:hover,
+body.tender-users-list-page .profile .profile-actions a.logout:hover {
   opacity: 1;
   background-color: #f8d7da;
 }
-.profile .form-row {
+body.tender-profile-page .profile .form-row,
+body.tender-edit-profile-page .profile .form-row,
+body.tender-users-list-page .profile .form-row {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
   align-items: center;
 }
 
-.profile-lendings {
+body.tender-profile-page .profile-lendings {
   margin-bottom: 50px;
 }
-.profile-lendings .active-lendings {
+body.tender-profile-page .profile-lendings .active-lendings {
   list-style: none;
   display: grid;
   gap: 20px;
   padding: 0px;
 }
-.profile-lendings .past-lendings {
+body.tender-profile-page .profile-lendings .past-lendings {
   list-style: none;
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
   padding: 0px;
 }
-.profile-lendings .past-lendings .lending:hover {
+body.tender-profile-page .profile-lendings .past-lendings .lending:hover {
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
 }
-.profile-lendings .past-lendings .lending:hover h3 {
-  color: var(--primary-color);
+body.tender-profile-page .profile-lendings .past-lendings .lending:hover h3 {
+  color: var(--tal-primary-color);
 }
-.profile-lendings .lending {
+body.tender-profile-page .profile-lendings .lending {
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
   border-radius: 5px;
   padding: 20px;
@@ -517,42 +571,42 @@
   text-decoration: none;
   font-size: inherit;
 }
-.profile-lendings .lending .lending-info {
+body.tender-profile-page .profile-lendings .lending .lending-info {
   color: #000;
 }
-.profile-lendings .lending .lending-info .dates .lending-date {
+body.tender-profile-page .profile-lendings .lending .lending-info .dates .lending-date {
   margin-bottom: 20px;
 }
-.profile-lendings .lending .lending-info .dates .lending-date span {
-  color: var(--primary-color);
+body.tender-profile-page .profile-lendings .lending .lending-info .dates .lending-date span {
+  color: var(--tal-primary-color);
 }
-.profile-lendings .lending .lending-info .lending-actions {
+body.tender-profile-page .profile-lendings .lending .lending-info .lending-actions {
   display: flex;
   flex-direction: column;
   gap: 20px;
   align-items: flex-start;
 }
-.profile-lendings .lending .lending-info .lending-actions button {
+body.tender-profile-page .profile-lendings .lending .lending-info .lending-actions button {
   color: #fff;
 }
-.profile-lendings .lending .lending-info .lending-actions .lending-renewal-limit {
-  color: var(--primary-color);
+body.tender-profile-page .profile-lendings .lending .lending-info .lending-actions .lending-renewal-limit {
+  color: var(--tal-primary-color);
 }
-.profile-lendings .lending .lending-info .lending-actions .lending-return {
+body.tender-profile-page .profile-lendings .lending .lending-info .lending-actions .lending-return {
   background-color: #000;
 }
-.profile-lendings .lending .delayed {
+body.tender-profile-page .profile-lendings .lending .delayed {
   position: absolute;
   top: 10px;
   right: 10px;
-  color: var(--warning-color);
+  color: var(--tal-warning-color);
   width: 20px;
   height: 20px;
 }
-.profile-lendings .lending .delayed img {
+body.tender-profile-page .profile-lendings .lending .delayed img {
   width: 100%;
 }
-.profile-lendings .lending .delayed:after, .profile-lendings .lending .delayed:after {
+body.tender-profile-page .profile-lendings .lending .delayed:after, body.tender-profile-page .profile-lendings .lending .delayed:after {
   position: absolute;
   z-index: 1;
   top: -2.2em;
@@ -564,7 +618,7 @@
   padding: 0 0.7em;
   content: attr(aria-label);
   color: #fff;
-  background: var(--danger-color);
+  background: var(--tal-danger-color);
   font-size: 1em;
   line-height: 2em;
   text-align: left;
@@ -572,18 +626,18 @@
   transition: opacity 0.3s;
   pointer-events: none;
 }
-.profile-lendings .lending .delayed:focus:after, .profile-lendings .lending .delayed:hover:after {
+body.tender-profile-page .profile-lendings .lending .delayed:focus:after, body.tender-profile-page .profile-lendings .lending .delayed:hover:after {
   opacity: 1;
 }
-.profile-lendings .lending.delayed {
+body.tender-profile-page .profile-lendings .lending.delayed {
   box-shadow: 0px 0px 5px rgba(255, 0, 0, 0.5);
 }
 
-.active-reservations {
+body.tender-profile-page .active-reservations {
   list-style: none;
   padding: 0px;
 }
-.active-reservations .reservation {
+body.tender-profile-page .active-reservations .reservation {
   display: flex;
   gap: 20px;
   flex-wrap: wrap;
@@ -592,17 +646,17 @@
   padding: 20px;
   max-width: 500px;
 }
-.active-reservations .reservation .reservation-info {
+body.tender-profile-page .active-reservations .reservation .reservation-info {
   font-size: inherit;
   color: #000;
 }
-.active-reservations .reservation .tender-cancel-reservation {
-  background-color: var(--danger-color);
+body.tender-profile-page .active-reservations .reservation .tender-cancel-reservation {
+  background-color: var(--tal-danger-color);
   color: #fff;
   margin-top: 10px;
 }
 
-.tal-confirmation-modal {
+body.tender-profile-page .tal-confirmation-modal {
   position: fixed;
   inset: 0px;
   background-color: rgba(0, 0, 0, 0.6);
@@ -611,57 +665,57 @@
   align-items: center;
   max-width: 100% !important;
 }
-.tal-confirmation-modal .wrapper {
+body.tender-profile-page .tal-confirmation-modal .wrapper {
   background-color: #fff;
   padding: 20px;
   border-radius: 5px;
   width: 300px;
   max-width: 100%;
 }
-.tal-confirmation-modal .wrapper h3 {
+body.tender-profile-page .tal-confirmation-modal .wrapper h3 {
   font-size: inherit;
   font-weight: 700;
 }
-.tal-confirmation-modal .wrapper .actions {
+body.tender-profile-page .tal-confirmation-modal .wrapper .actions {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
 }
-.tal-confirmation-modal .wrapper #confirm-action {
-  background-color: var(--success-color);
+body.tender-profile-page .tal-confirmation-modal .wrapper #confirm-action {
+  background-color: var(--tal-success-color);
   color: #fff;
   margin-right: 10px;
 }
-.tal-confirmation-modal .wrapper #cancel-action {
-  background-color: var(--danger-color);
+body.tender-profile-page .tal-confirmation-modal .wrapper #cancel-action {
+  background-color: var(--tal-danger-color);
   color: #fff;
 }
-.tal-confirmation-modal .wrapper #accept-action {
-  background-color: var(--primary-color);
+body.tender-profile-page .tal-confirmation-modal .wrapper #accept-action {
+  background-color: var(--tal-primary-color);
   color: #fff;
 }
 
-.user-info form ul {
+body.tender-edit-profile-page .user-info form ul {
   padding: 0;
   margin: 0;
   list-style: none;
 }
-.user-info form ul .form-row {
+body.tender-edit-profile-page .user-info form ul .form-row {
   display: flex;
   align-items: center;
   margin-bottom: 18px;
 }
-.user-info form ul .form-row .label {
+body.tender-edit-profile-page .user-info form ul .form-row .label {
   flex: 0 0 140px;
   font-weight: 500;
   color: #333;
   font-size: inherit;
 }
-.user-info form ul .form-row .data {
+body.tender-edit-profile-page .user-info form ul .form-row .data {
   flex: 1;
 }
-.user-info form ul .form-row .data input[type=text],
-.user-info form ul .form-row .data input[type=email] {
+body.tender-edit-profile-page .user-info form ul .form-row .data input[type=text],
+body.tender-edit-profile-page .user-info form ul .form-row .data input[type=email] {
   width: 100%;
   padding: 8px 10px;
   border: 1px solid #ccc;
@@ -670,236 +724,230 @@
   transition: border 0.2s;
   color: #222;
 }
-.user-info form ul .form-row .data input[type=text]:focus,
-.user-info form ul .form-row .data input[type=email]:focus {
+body.tender-edit-profile-page .user-info form ul .form-row .data input[type=text]:focus,
+body.tender-edit-profile-page .user-info form ul .form-row .data input[type=email]:focus {
   outline: none;
-  border-color: var(--primary-color);
+  border-color: var(--tal-primary-color);
 }
-.user-info form ul .form-row .data input[type=checkbox] {
-  accent-color: var(--primary-color);
+body.tender-edit-profile-page .user-info form ul .form-row .data input[type=checkbox] {
+  accent-color: var(--tal-primary-color);
   width: 18px;
   height: 18px;
   margin-right: 6px;
   vertical-align: middle;
 }
-.user-info form ul .form-row:last-child {
+body.tender-edit-profile-page .user-info form ul .form-row:last-child {
   margin-bottom: 0;
 }
-.user-info form ul .form-row:last-child .tal-button {
+body.tender-edit-profile-page .user-info form ul .form-row:last-child .tal-button {
   padding: 10px 26px;
   border: none;
   border-radius: 4px;
-  background: var(--primary-color);
+  background: var(--tal-primary-color);
   color: #fff;
   font-size: inherit;
   font-weight: 600;
   cursor: pointer;
   transition: background 0.2s;
 }
-.user-info form ul .form-row:last-child .tal-button:hover, .user-info form ul .form-row:last-child .tal-button:focus {
+body.tender-edit-profile-page .user-info form ul .form-row:last-child .tal-button:hover, body.tender-edit-profile-page .user-info form ul .form-row:last-child .tal-button:focus {
   opacity: 0.8;
 }
-.user-info .message.success {
+body.tender-edit-profile-page .user-info .message.success {
   margin: 14px 0;
   border-radius: 4px;
   background: #e5ffd8;
   color: #FFF;
   font-size: inherit;
 }
-.user-info p {
+body.tender-edit-profile-page .user-info p {
   margin-top: 18px;
 }
-.user-info p .go-back {
-  color: var(--primary-color);
+body.tender-edit-profile-page .user-info p .go-back {
+  color: var(--tal-primary-color);
   font-weight: 500;
   text-decoration: none;
   transition: color 0.15s;
 }
-.user-info p .go-back:hover, .user-info p .go-back:focus {
+body.tender-edit-profile-page .user-info p .go-back:hover, body.tender-edit-profile-page .user-info p .go-back:focus {
   opacity: 0.8;
 }
 
-.tal-profile-tabs {
+body.tender-profile-page .tal-profile-tabs {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
   margin: 0 0 32px;
 }
 
-.tal-profile-tab {
+body.tender-profile-page .tal-profile-tab {
   font-size: inherit;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   padding: 10px 18px;
-  border-radius: 999px;
-  border: 1px solid rgba(0, 0, 0, 0.12);
-  background: #f5efe4;
-  color: #3f3428;
-  font-weight: 600;
+  border-radius: 3px;
+  border: 1px solid var(--tal-primary-color);
+  background: var(--tal-white-color);
+  color: var(--tal-primary-color);
+  font-weight: bold;
   text-decoration: none;
   transition: all 0.2s ease;
 }
-.tal-profile-tab:hover, .tal-profile-tab:focus {
-  background: #eadfcb;
-  color: #241b12;
+body.tender-profile-page .tal-profile-tab:hover, body.tender-profile-page .tal-profile-tab:focus {
+  background: var(--tal-primary-color);
+  color: var(--tal-white-color);
 }
-.tal-profile-tab.is-active {
-  background: var(--primary-color);
-  border-color: var(--primary-color);
+body.tender-profile-page .tal-profile-tab.is-active {
+  background: var(--tal-primary-color);
+  border-color: var(--tal-primary-color);
   color: #fff;
 }
 
-.tal-call-logs {
+body.tender-profile-page .tal-call-logs {
   margin: 24px 0 40px;
 }
-.tal-call-logs .tal-call-log-hero {
+body.tender-profile-page .tal-call-logs .tal-call-log-hero {
   font-size: inherit;
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
   gap: 20px;
   margin-bottom: 20px;
-  padding: 28px;
-  border-radius: 22px;
-  background: linear-gradient(135deg, #18120e 0%, #564536 100%);
-  color: #f9f3eb;
+  padding: 20px;
+  border: 1px solid var(--tal-secondary-color);
+  border-left: 4px solid var(--tal-primary-color);
+  border-radius: 5px;
+  background: var(--tal-white-color);
+  color: var(--tal-black-color);
 }
-.tal-call-logs .tal-call-log-eyebrow {
+body.tender-profile-page .tal-call-logs .tal-call-log-eyebrow {
   margin: 0 0 8px;
   font-size: 0.75em;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  opacity: 0.75;
+  font-weight: bold;
+  color: var(--tal-primary-color);
 }
-.tal-call-logs .tal-call-log-hero h2 {
+body.tender-profile-page .tal-call-logs .tal-call-log-hero h2 {
   margin: 0 0 8px;
   color: inherit;
 }
-.tal-call-logs .tal-call-log-intro {
+body.tender-profile-page .tal-call-logs .tal-call-log-intro {
   margin: 0;
   max-width: 58ch;
-  color: rgba(249, 243, 235, 0.88);
+  color: var(--tal-black-color);
 }
-.tal-call-logs .tal-call-log-count {
+body.tender-profile-page .tal-call-logs .tal-call-log-count {
   display: grid;
   justify-items: end;
-  padding: 18px 20px;
-  border-radius: 18px;
-  background: rgba(255, 255, 255, 0.08);
-  min-width: 120px;
+  padding: 0;
+  min-width: 80px;
 }
-.tal-call-logs .tal-call-log-count-number {
+body.tender-profile-page .tal-call-logs .tal-call-log-count-number {
   font-size: 2.75em;
   font-weight: 700;
   line-height: 1;
 }
-.tal-call-logs .tal-call-log-count-label {
+body.tender-profile-page .tal-call-logs .tal-call-log-count-label {
   font-size: 0.8125em;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  opacity: 0.75;
+  color: var(--tal-black-color);
 }
-.tal-call-logs .tal-call-log-layout {
+body.tender-profile-page .tal-call-logs .tal-call-log-layout {
   display: grid;
   grid-template-columns: minmax(280px, 360px) minmax(0, 1fr);
   gap: 24px;
   align-items: start;
 }
-.tal-call-logs .tal-call-log-form-card,
-.tal-call-logs .tal-call-log-list-card {
+body.tender-profile-page .tal-call-logs .tal-call-log-form-card,
+body.tender-profile-page .tal-call-logs .tal-call-log-list-card {
   background: #fff;
   border: 1px solid rgba(0, 0, 0, 0.08);
-  border-radius: 18px;
-  padding: 24px;
-  box-shadow: 0 16px 40px rgba(44, 30, 16, 0.08);
+  border-radius: 5px;
+  padding: 20px;
 }
-.tal-call-logs .tal-call-log-form-card h3,
-.tal-call-logs .tal-call-log-list-card h3 {
+body.tender-profile-page .tal-call-logs .tal-call-log-form-card h3,
+body.tender-profile-page .tal-call-logs .tal-call-log-list-card h3 {
   margin-top: 0;
   margin-bottom: 18px;
 }
-.tal-call-logs .tal-call-log-form-row {
+body.tender-profile-page .tal-call-logs .tal-call-log-form-row {
   display: grid;
   gap: 14px;
 }
-.tal-call-logs .tal-call-field {
+body.tender-profile-page .tal-call-logs .tal-call-field {
   display: flex;
   flex-direction: column;
   gap: 6px;
 }
-.tal-call-logs .tal-call-field input,
-.tal-call-logs .tal-call-field textarea {
+body.tender-profile-page .tal-call-logs .tal-call-field input,
+body.tender-profile-page .tal-call-logs .tal-call-field textarea {
   max-width: 100%;
   width: 100%;
   padding: 12px 14px;
-  border: 1px solid #d8d0c7;
-  border-radius: 12px;
-  background: #fffdfa;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  background: var(--tal-white-color);
   font: inherit;
 }
-.tal-call-logs .tal-call-field textarea {
+body.tender-profile-page .tal-call-logs .tal-call-field textarea {
   resize: vertical;
   min-height: 140px;
 }
-.tal-call-logs .tal-call-actions {
+body.tender-profile-page .tal-call-logs .tal-call-actions {
   margin-top: 16px;
 }
-.tal-call-logs .tal-call-buttons {
+body.tender-profile-page .tal-call-logs .tal-call-buttons {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
 }
-.tal-call-logs .tal-call-label {
-  font-size: 0.75em;
+body.tender-profile-page .tal-call-logs .tal-call-label {
+  font-size: inherit;
   font-weight: 700;
-  color: #5e5347;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
+  color: var(--tal-black-color);
   margin: 0;
 }
-.tal-call-logs .tal-call-log-list {
+body.tender-profile-page .tal-call-logs .tal-call-log-list {
   list-style: none;
   padding-left: 0;
   margin: 0;
   display: grid;
   gap: 16px;
 }
-.tal-call-logs .tal-call-log-item {
+body.tender-profile-page .tal-call-logs .tal-call-log-item {
   display: grid;
   grid-template-columns: 76px minmax(0, 1fr);
   gap: 16px;
   padding: 18px;
-  border-radius: 16px;
-  background: #fcfaf7;
-  border: 1px solid #ece2d6;
+  border-radius: 5px;
+  background: var(--tal-white-color);
+  border: 1px solid #ddd;
 }
-.tal-call-logs .tal-call-log-date-badge {
+body.tender-profile-page .tal-call-logs .tal-call-log-date-badge {
   display: grid;
   align-content: center;
   justify-items: center;
   gap: 4px;
   padding: 10px;
-  border-radius: 14px;
-  background: #f0e4d6;
-  color: #362619;
+  border: 1px solid var(--tal-primary-color);
+  border-radius: 3px;
+  background: var(--tal-white-color);
+  color: var(--tal-primary-color);
   min-height: 74px;
 }
-.tal-call-logs .tal-call-log-date-day {
+body.tender-profile-page .tal-call-logs .tal-call-log-date-day {
   font-size: 1.75em;
   font-weight: 700;
   line-height: 1;
 }
-.tal-call-logs .tal-call-log-date-month {
+body.tender-profile-page .tal-call-logs .tal-call-log-date-month {
   font-size: 0.6875em;
   font-weight: 700;
-  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
-.tal-call-logs .tal-call-log-body {
+body.tender-profile-page .tal-call-logs .tal-call-log-body {
   min-width: 0;
 }
-.tal-call-logs .tal-call-log-head {
+body.tender-profile-page .tal-call-logs .tal-call-log-head {
   margin: 0 0 10px 0;
   display: flex;
   flex-wrap: wrap;
@@ -907,59 +955,61 @@
   gap: 8px;
   align-items: baseline;
 }
-.tal-call-logs .tal-call-log-comment,
-.tal-call-logs .tal-call-log-comment-empty {
+body.tender-profile-page .tal-call-logs .tal-call-log-comment,
+body.tender-profile-page .tal-call-logs .tal-call-log-comment-empty {
   margin: 0 0 14px;
   color: #3e342d;
 }
-.tal-call-logs .tal-call-log-comment-empty {
+body.tender-profile-page .tal-call-logs .tal-call-log-comment-empty {
   font-style: italic;
   opacity: 0.7;
 }
-.tal-call-logs .tal-call-log-item-actions {
+body.tender-profile-page .tal-call-logs .tal-call-log-item-actions {
   display: flex;
   align-items: center;
   gap: 8px;
   flex-wrap: wrap;
 }
-.tal-call-logs .tal-call-delete-form {
+body.tender-profile-page .tal-call-logs .tal-call-delete-form {
   display: inline;
   margin: 0;
 }
 
 @media screen and (max-width: 768px) {
-  .profile-lendings .active-lendings {
+  body.tender-profile-page .profile-lendings .active-lendings {
     grid-template-columns: 1fr;
   }
-  .profile-lendings .past-lendings {
+  body.tender-profile-page .profile-lendings .past-lendings {
     grid-template-columns: 1fr 1fr;
   }
-  .profile-lendings .lending {
+  body.tender-profile-page .profile-lendings .lending {
     width: 100%;
   }
-  .profile .user-info {
+  body.tender-profile-page .profile .user-info,
+  body.tender-edit-profile-page .profile .user-info,
+  body.tender-users-list-page .profile .user-info {
     padding: 18px;
   }
-  .tal-call-logs .tal-call-log-hero {
+  body.tender-profile-page .tal-call-logs .tal-call-log-hero {
     flex-direction: column;
     align-items: stretch;
   }
-  .tal-call-logs .tal-call-log-count {
+  body.tender-profile-page .tal-call-logs .tal-call-log-count {
     justify-items: start;
   }
-  .tal-call-logs .tal-call-log-layout {
+  body.tender-profile-page .tal-call-logs .tal-call-log-layout {
     grid-template-columns: 1fr;
   }
-  .tal-call-logs .tal-call-log-item {
+  body.tender-profile-page .tal-call-logs .tal-call-log-item {
     grid-template-columns: 1fr;
   }
-  .tal-call-logs .tal-call-log-date-badge {
+  body.tender-profile-page .tal-call-logs .tal-call-log-date-badge {
     grid-auto-flow: column;
     justify-content: start;
     min-height: auto;
     padding: 12px 14px;
   }
-  .tal-call-logs .tal-call-log-head {
+  body.tender-profile-page .tal-call-logs .tal-call-log-head {
     flex-direction: column;
     align-items: flex-start;
   }
@@ -1043,9 +1093,9 @@
 .tender-filters-toggle,
 .tender-filters-reset,
 #library-search-root .tender-book-search .tender-pagination button {
-  background: var(--white-color);
-  border: 1px solid var(--primary-color);
-  color: var(--primary-color);
+  background: var(--tal-white-color);
+  border: 1px solid var(--tal-primary-color);
+  color: var(--tal-primary-color);
   font-size: 0.75em;
   text-transform: uppercase;
   font-weight: bold;
@@ -1063,20 +1113,20 @@
 .tender-filters-toggle:hover,
 .tender-filters-reset:hover,
 #library-search-root .tender-book-search .tender-pagination button:hover {
-  background: var(--primary-color);
-  color: var(--white-color);
+  background: var(--tal-primary-color);
+  color: var(--tal-white-color);
 }
 .tender-filters-toggle:focus,
 .tender-filters-reset:focus,
 #library-search-root .tender-book-search .tender-pagination button:focus {
-  outline: 2px solid var(--primary-color);
+  outline: 2px solid var(--tal-primary-color);
   outline-offset: 2px;
 }
 
 #library-search-root .tender-book-search .tender-search-input {
-  background: var(--white-color);
-  border: 1px solid var(--primary-color);
-  color: var(--primary-color);
+  background: var(--tal-white-color);
+  border: 1px solid var(--tal-primary-color);
+  color: var(--tal-primary-color);
   font-size: 0.75em;
   text-transform: uppercase;
   padding: 8px 16px;
@@ -1089,7 +1139,7 @@
   max-width: 100%;
 }
 #library-search-root .tender-book-search .tender-search-input:focus {
-  outline: 2px solid var(--primary-color);
+  outline: 2px solid var(--tal-primary-color);
   outline-offset: 2px;
 }
 
@@ -1113,7 +1163,7 @@
   font-weight: bold;
 }
 #library-search-root .tender-book-search .tender-pagination span {
-  color: var(--primary-color);
+  color: var(--tal-primary-color);
   padding: 8px 4px;
   line-height: 1.2;
 }
@@ -1123,11 +1173,11 @@
   text-transform: inherit;
 }
 #library-search-root .tender-book-search .tender-pagination button:hover:not(:disabled) {
-  background: var(--primary-color);
-  color: var(--white-color);
+  background: var(--tal-primary-color);
+  color: var(--tal-white-color);
 }
 #library-search-root .tender-book-search .tender-pagination button:focus {
-  outline: 2px solid var(--primary-color);
+  outline: 2px solid var(--tal-primary-color);
   outline-offset: 2px;
 }
 #library-search-root .tender-book-search .tender-pagination button:disabled {
@@ -1152,7 +1202,7 @@
   font-size: 0.85em;
   text-transform: uppercase;
   font-weight: bold;
-  color: var(--primary-color);
+  color: var(--tal-primary-color);
 }
 .tender-filters-summary .tender-per-page-control span {
   white-space: nowrap;
@@ -1161,16 +1211,16 @@
   font-size: inherit;
   font-weight: inherit;
   text-transform: inherit;
-  color: var(--primary-color);
-  border: 1px solid var(--primary-color);
-  background: var(--white-color);
+  color: var(--tal-primary-color);
+  border: 1px solid var(--tal-primary-color);
+  background: var(--tal-white-color);
   padding: 8px 12px;
   border-radius: 3px;
   line-height: 1.2;
   cursor: pointer;
 }
 .tender-filters-summary .tender-per-page-control select:focus {
-  outline: 2px solid var(--primary-color);
+  outline: 2px solid var(--tal-primary-color);
   outline-offset: 2px;
 }
 .tender-filters-summary #selected-filters {
@@ -1179,10 +1229,10 @@
   gap: 10px;
   font-size: 0.85em;
   text-transform: uppercase;
-  color: var(--primary-color);
+  color: var(--tal-primary-color);
 }
 .tender-filters-summary #selected-filters strong {
-  color: var(--black-color);
+  color: var(--tal-black-color);
 }
 .tender-filters-summary .tender-filters-reset {
   margin: 0;
@@ -1297,7 +1347,7 @@
 #filters-wrapper fieldset .category-tree .category-node-header label .section-number {
   font-weight: bold;
   margin-right: 0.35rem;
-  color: var(--primary-color);
+  color: var(--tal-primary-color);
 }
 #filters-wrapper fieldset .category-tree .category-node-header label .item-count {
   font-size: 0.75em;
@@ -1316,7 +1366,7 @@
   flex: 0 0 18px;
   text-align: center;
   font-weight: bold;
-  color: var(--primary-color);
+  color: var(--tal-primary-color);
   transition: transform 0.2s ease;
   padding: 0;
 }
@@ -1327,7 +1377,7 @@
   transform: rotate(90deg);
 }
 #filters-wrapper fieldset .category-tree .toggle-children:hover {
-  color: var(--primary-color), 10%;
+  color: var(--tal-primary-color);
 }
 #filters-wrapper fieldset .category-tree .toggle-placeholder {
   visibility: hidden;
@@ -1341,7 +1391,7 @@
 }
 #filters-wrapper fieldset .category-tree .category-node.active > .category-node-header {
   background-color: #f8f8f8;
-  border-left: 3px solid var(--primary-color);
+  border-left: 3px solid var(--tal-primary-color);
   padding-left: 7px;
 }
 

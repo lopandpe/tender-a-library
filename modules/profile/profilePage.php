@@ -20,6 +20,40 @@ function tal_profile_tab_url($user, $tab = 'overview', $args = array())
 	return empty($query_args) ? $base_url : add_query_arg($query_args, $base_url);
 }
 
+function tal_get_profile_role_summary($user)
+{
+	$roles = (array) $user->roles;
+	$role_summaries = array(
+		'administrator' => array(
+			'label' => __('Administrator', 'tender-library'),
+			'description' => __('Can manage the full website, plugin settings, catalog, readers, lendings, reservations, and follow-up calls.', 'tender-library'),
+		),
+		'librarian' => array(
+			'label' => __('Bibliotecarix', 'tender-library'),
+			'description' => __('Can manage the catalog, sections, languages, readers, lendings, reservations, and follow-up calls.', 'tender-library'),
+		),
+		'opener' => array(
+			'label' => __('Opener', 'tender-library'),
+			'description' => __('Can manage reader profiles, lendings, reservations, and follow-up calls.', 'tender-library'),
+		),
+		'reader' => array(
+			'label' => __('Reader', 'tender-library'),
+			'description' => __('Can view their profile, manage their reservations, and follow their lending history.', 'tender-library'),
+		),
+	);
+
+	foreach (array_keys($role_summaries) as $role) {
+		if (in_array($role, $roles, true)) {
+			return $role_summaries[$role];
+		}
+	}
+
+	return array(
+		'label' => __('User', 'tender-library'),
+		'description' => __('Can access the website with the permissions assigned to this account.', 'tender-library'),
+	);
+}
+
 // Mostrar el perfil en la página seleccionada
 function tal_profile_template($content)
 {
@@ -106,6 +140,7 @@ function tal_profile_template($content)
 			<?php return ob_get_clean();
 		}
 		else {
+			$role_summary = tal_get_profile_role_summary($current_user);
 			if ($is_call_logs_manager) {
 				$edit_call_id = isset($_GET['tal_edit_call']) ? absint($_GET['tal_edit_call']) : 0;
 				if ($edit_call_id > 0) {
@@ -198,6 +233,11 @@ function tal_profile_template($content)
 							<span class="data"><?php carbon_get_user_meta($current_user->ID, 'newsletter') ? _e('Yes', 'tender-library') : _e('No', 'tender-library')  ?></span>
 						</li>
 					</ul>
+					<div class="tal-profile-role-indicator">
+						<span class="tal-profile-role-label"><?php echo esc_html__('Role', 'tender-library'); ?></span>
+						<strong class="tal-profile-role-name"><?php echo esc_html($role_summary['label']); ?></strong>
+						<span class="tal-profile-role-description"><?php echo esc_html($role_summary['description']); ?></span>
+					</div>
 				</div>
 				<div class="profile-actions">
 					<?php if (tal_can_edit_profile($current_user->ID)) : ?>

@@ -100,23 +100,29 @@ function tal_users_list_template($content)
 
                         $('#tender-search-loading').show();
                         typingTimer = setTimeout(function() {
-                            $.post('<?php echo admin_url('admin-ajax.php'); ?>', {
-                                action: 'tender_search_users',
+                            $.post("<?php echo esc_url(admin_url("admin-ajax.php")); ?>", {
+                                action: "tender_search_users",
                                 query: searchTerm,
                                 nonce: searchUsersNonce
                             }, function(response) {
-                                $('#tender-search-loading').hide();
+                                $("#tender-search-loading").hide();
                                 if (response) {
-                                    let users = JSON.parse(response).data;
+                                    usersList.empty();
+                                    let parsedResponse = JSON.parse(response);
+                                    let users = parsedResponse.data || [];
                                     users.forEach(user => {
-                                        usersList.append(`<li><a href="${user.user_link}">${user.display_name} (${user.user_email})</a></option>`);
+                                        $("<li>").append(
+                                            $("<a>")
+                                                .attr("href", user.user_link || "#")
+                                                .text((user.display_name || "") + " (" + (user.user_email || "") + ")")
+                                        ).appendTo(usersList);
                                     });
                                     usersList.show();
                                 } else {
-                                    usersList.html('<li><?php _e('No users found', 'tender-library'); ?></li>').show();
-                                    $('.tender-search-container').removeClass('active');
+                                    usersList.html("<li><?php echo esc_js(__("No users found", "tender-library")); ?></li>").show();
+                                    $(".tender-search-container").removeClass("active");
                                 }
-                            }, 'html');
+                            }, "html");
                         }, doneTypingInterval);
                     });
                 });

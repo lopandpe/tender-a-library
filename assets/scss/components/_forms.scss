@@ -27,8 +27,9 @@
         margin-bottom: 10px;
         &:focus {
             border-color: $primary-color;
-            outline: none;
-            box-shadow: 0 0 5px rgba($primary-color, 0.5);
+            outline: 2px solid $primary-color;
+            outline-offset: 2px;
+            box-shadow: none;
         }
         &::placeholder {
             color: #999;
@@ -88,8 +89,9 @@
         margin-bottom: 10px;
         &:focus {
             border-color: $primary-color;
-            outline: none;
-            box-shadow: 0 0 5px rgba($primary-color, 0.5);
+            outline: 2px solid $primary-color;
+            outline-offset: 2px;
+            box-shadow: none;
         }
         &::placeholder {
             color: #999;
