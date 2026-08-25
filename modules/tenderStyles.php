@@ -95,6 +95,58 @@ function tender_should_load_search_assets()
 	return tender_current_content_has_tender_block(array('tender-a-library/book-search'));
 }
 
+function tender_library_asset_base_path()
+{
+	if (defined('TENDER_LIBRARY_PLUGIN_FILE')) {
+		return plugin_dir_path(TENDER_LIBRARY_PLUGIN_FILE);
+	}
+
+	return plugin_dir_path(__FILE__) . '../';
+}
+
+function tender_library_asset_base_url()
+{
+	if (defined('TENDER_LIBRARY_PLUGIN_FILE')) {
+		return plugin_dir_url(TENDER_LIBRARY_PLUGIN_FILE);
+	}
+
+	return plugin_dir_url(__FILE__) . '../';
+}
+
+function tender_library_asset_version($path)
+{
+	$asset_path = tender_library_asset_base_path() . ltrim($path, '/');
+
+	if (file_exists($asset_path)) {
+		return (string) filemtime($asset_path);
+	}
+
+	return defined('TENDER_LIBRARY_VERSION') ? TENDER_LIBRARY_VERSION : '1.0.0';
+}
+
+function tender_library_version_plugin_stylesheet_url($src, $handle)
+{
+	$plugin_url = tender_library_asset_base_url();
+
+	if (strpos($src, $plugin_url) !== 0) {
+		return $src;
+	}
+
+	$relative_url = substr($src, strlen($plugin_url));
+	$relative_path = strtok($relative_url, '?');
+
+	if (!$relative_path || substr($relative_path, -4) !== '.css') {
+		return $src;
+	}
+
+	return add_query_arg(
+		'ver',
+		tender_library_asset_version(rawurldecode($relative_path)),
+		remove_query_arg('ver', $src)
+	);
+}
+add_filter('style_loader_src', 'tender_library_version_plugin_stylesheet_url', 10, 2);
+
 function tender_load_styles()
 {
 	if (!tender_should_load_public_assets()) {
@@ -111,9 +163,9 @@ function tender_load_styles()
 		foreach ($style_set as $handle => $path) {
 			wp_enqueue_style(
 				$handle,
-				plugin_dir_url(__FILE__) . '../' . $path,
+				tender_library_asset_base_url() . $path,
 				[],
-				defined('TENDER_LIBRARY_VERSION') ? TENDER_LIBRARY_VERSION : '1.0.0',
+				tender_library_asset_version($path),
 				'all'
 			);
 		}
@@ -132,9 +184,9 @@ function tender_load_admin_styles()
 		foreach ($style_set as $handle => $path) {
 			wp_enqueue_style(
 				$handle,
-				plugin_dir_url(__FILE__) . '../' . $path,
+				tender_library_asset_base_url() . $path,
 				[],
-				defined('TENDER_LIBRARY_VERSION') ? TENDER_LIBRARY_VERSION : '1.0.0',
+				tender_library_asset_version($path),
 				'all'
 			);
 		}
