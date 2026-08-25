@@ -1,7 +1,7 @@
 import CategoryTree from "./CategoryTree";
 import { useEffect, useRef, useState } from "@wordpress/element";
 
-const Filters = ({ filters, setFilters, options }) => {
+const Filters = ({ filters, setFilters, options, perPageOptions }) => {
 	const [active, setActive] = useState(false);
 	const wrapperRef = useRef(null);
 	const toggleRef = useRef(null);
@@ -137,10 +137,11 @@ const Filters = ({ filters, setFilters, options }) => {
 							update("page", 1);
 						}}
 					>
-						<option value="12">12</option>
-						<option value="24">24</option>
-						<option value="68">68</option>
-						<option value="92">92</option>
+						{perPageOptions.map((option) => (
+							<option key={option} value={option}>
+								{option}
+							</option>
+						))}
 					</select>
 				</label>
 				<div id="selected-filters">

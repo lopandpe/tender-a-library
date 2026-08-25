@@ -10,8 +10,9 @@ function tender_api_build_query_args($request) {
     $sections  = $request->get_param("sections");
     $languages = $request->get_param("languages");
 
+    $max_posts_per_page = 92;
     $paged          = $request->get_param("page") ? max(1, min(1000, absint($request->get_param("page")))) : 1;
-    $posts_per_page = $request->get_param("per_page") ? max(1, min(50, absint($request->get_param("per_page")))) : 10;
+    $posts_per_page = $request->get_param("per_page") ? max(1, min($max_posts_per_page, absint($request->get_param("per_page")))) : 10;
     $candidate_limit = max(50, min(1000, (int) apply_filters("tal_search_candidate_limit", 500)));
     $orderby = sanitize_key($request->get_param("orderby") ?: "date");
     $allowed_orderby = ["date", "title", "menu_order", "rand"];

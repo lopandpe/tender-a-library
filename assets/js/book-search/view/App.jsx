@@ -6,6 +6,9 @@ import Filters from "./Filters";
 import Results from "./Results";
 import Pagination from "./Pagination";
 
+const PER_PAGE_OPTIONS = ["12", "24", "68", "92"];
+const MAX_PER_PAGE = 92;
+
 const defaultFilters = {
     q: '',
     sections: [],
@@ -16,8 +19,23 @@ const defaultFilters = {
     order: 'desc',
 };
 
+const normalizePerPage = (value) => {
+    const perPage = Number.parseInt(value, 10);
+
+    if (!Number.isFinite(perPage) || perPage < 1) {
+        return defaultFilters.per_page;
+    }
+
+    return String(Math.min(perPage, MAX_PER_PAGE));
+};
+
+const normalizeFilters = (filters) => ({
+    ...filters,
+    per_page: normalizePerPage(filters.per_page),
+});
+
 const App = ({ apiUrl, filtersUrl }) => {
-    const [filters, setFilters] = useState(() => ({
+    const [filters, setFilters] = useState(() => normalizeFilters({
         ...defaultFilters,
         ...qs.parse(window.location.search, { ignoreQueryPrefix: true }),
     }));
@@ -67,7 +85,7 @@ const App = ({ apiUrl, filtersUrl }) => {
     }, [filters]);
 
     useEffect(() => {
-        setFilters((prev) => ({
+        setFilters((prev) => normalizeFilters({
             ...defaultFilters,
             ...prev,
             sections: Array.isArray(prev.sections)
@@ -87,7 +105,7 @@ const App = ({ apiUrl, filtersUrl }) => {
 
     return (
         <div className="tender-book-search">
-            <Filters filters={filters} setFilters={setFilters} options={options} />
+            <Filters filters={filters} setFilters={setFilters} options={options} perPageOptions={PER_PAGE_OPTIONS} />
             <Results books={results} loading={loading} />
             <Pagination filters={filters} setFilters={setFilters} pagination={pagination} />
         </div>
