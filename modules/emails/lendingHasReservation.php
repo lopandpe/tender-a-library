@@ -4,7 +4,7 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
-function tal_notify_current_borrower_about_hold($book_id){
+function tal_notify_current_borrower_about_hold($book_id, $reservation_id = 0){
 
     $borrowers_id = tender_get_current_lending_users_for_book($book_id);
     if(is_array($borrowers_id)){
@@ -19,7 +19,15 @@ function tal_notify_current_borrower_about_hold($book_id){
             // Puedes personalizar el remitente aquí si lo deseas
             $headers = ['Content-Type: text/html; charset=UTF-8'];
 
-            wp_mail($borrower->user_email, $subject, $message, $headers);
+            tal_email_queue_enqueue([
+                'type' => 'borrower_hold',
+                'recipient' => $borrower->user_email,
+                'subject' => $subject,
+                'message' => $message,
+                'headers' => $headers,
+                'deduplication_key' => 'hold_' . $reservation_id . '_' . $user_id,
+                'priority' => 50,
+            ]);
         }
     }
 
@@ -45,7 +53,7 @@ function tal_get_your_loan_has_reservation_email_html($user, $book) {
         <p><?php _e('From now, the book loan can not be renewed, and we ask you to please return it as soon as you finish reading it.', 'tender-library'); ?></p>
 
             <ul>
-                <li><strong><?php _e('Title:', 'tender-library'); ?></strong> <?php echo esc_html($book->get_the_title()); ?></li>
+                <li><strong><?php _e('Title:', 'tender-library'); ?></strong> <?php echo esc_html(get_the_title($book->ID)); ?></li>
                 <li><?php _e('Author:', 'tender-library'); ?> <?php echo esc_html(carbon_get_post_meta($book->ID, 'tender_book_author')); ?></li>
             </ul>
 

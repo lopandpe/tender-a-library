@@ -10,6 +10,7 @@ define('TENDER_TABLE_RENEWALS', $wpdb->prefix . 'tender_renewals');
 define('TENDER_TABLE_RESERVATIONS', $wpdb->prefix . 'tender_reservations');
 define('TENDER_TABLE_USER_CALLS', $wpdb->prefix . 'tender_user_calls');
 define('TENDER_TABLE_MIGRATION_JOBS', $wpdb->prefix . 'tal_migration_jobs');
+define('TENDER_TABLE_EMAIL_QUEUE', $wpdb->prefix . 'tal_email_queue');
 
 
 /**
@@ -26,6 +27,7 @@ function tender_create_database_tables()
 	$table_reservations = TENDER_TABLE_RESERVATIONS;
 	$table_user_calls = TENDER_TABLE_USER_CALLS;
 	$table_migration_jobs = TENDER_TABLE_MIGRATION_JOBS;
+	$table_email_queue = TENDER_TABLE_EMAIL_QUEUE;
 
 	// SQL para crear la tabla de préstamos
 	$sql_lendings = "CREATE TABLE IF NOT EXISTS $table_lendings (
@@ -119,10 +121,34 @@ function tender_create_database_tables()
 	) $charset_collate;";
 
 
+	$sql_email_queue = "CREATE TABLE IF NOT EXISTS $table_email_queue (
+		id BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+		type VARCHAR(50) NOT NULL,
+		recipient VARCHAR(320) NOT NULL,
+		subject TEXT NULL,
+		message LONGTEXT NULL,
+		headers LONGTEXT NULL,
+		payload LONGTEXT NULL,
+		deduplication_key VARCHAR(191) NOT NULL,
+		priority TINYINT UNSIGNED NOT NULL DEFAULT 10,
+		status VARCHAR(20) NOT NULL DEFAULT 'pending',
+		attempts TINYINT UNSIGNED NOT NULL DEFAULT 0,
+		available_at DATETIME NOT NULL,
+		started_at DATETIME NULL,
+		sent_at DATETIME NULL,
+		last_error TEXT NULL,
+		created_at DATETIME NOT NULL,
+		updated_at DATETIME NOT NULL,
+		UNIQUE KEY deduplication_key (deduplication_key),
+		KEY pending_queue (status, available_at, priority),
+		KEY sent_at (sent_at)
+	) $charset_collate;";
+
 	require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 	dbDelta($sql_lendings);
 	dbDelta($sql_renewals);
 	dbDelta($sql_reservations);
 	dbDelta($sql_user_calls);
 	dbDelta($sql_migration_jobs);
+	dbDelta($sql_email_queue);
 }

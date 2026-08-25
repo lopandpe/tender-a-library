@@ -90,7 +90,15 @@ function tal_send_late_books_reminders() {
         // Puedes personalizar el remitente aquí si lo deseas
         $headers = ['Content-Type: text/html; charset=UTF-8'];
 
-        wp_mail($user->user_email, $subject, $message, $headers);
+        tal_email_queue_enqueue([
+            'type' => 'overdue_reminder',
+            'recipient' => $user->user_email,
+            'subject' => $subject,
+            'message' => $message,
+            'headers' => $headers,
+            'deduplication_key' => 'overdue_' . $user_id . '_' . gmdate('o_W'),
+            'priority' => 20,
+        ]);
 
         // Opcional: log de envío (puedes implementar con una tabla o fichero)
         // tal_log_lending_notice($user_id, $lendings);

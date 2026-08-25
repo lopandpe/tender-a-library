@@ -181,7 +181,7 @@ function tal_create_reservation($book_id, $user_id){
     $wpdb->query('COMMIT');
 
     $res_id = $wpdb->insert_id;
-    tal_notify_current_borrower_about_hold($book_id);
+    tal_notify_current_borrower_about_hold($book_id, $res_id);
     return $res_id;
 }
 
@@ -269,7 +269,7 @@ function tender_user_reservations_shortcode() {
     ?>
     <div class="profile-reservations">
 
-        <h2 class=""><?php _e('My active reservations', 'tender-library'); ?></h2>
+        <h2 class=""><?php _e('Active reservations', 'tender-library'); ?></h2>
 
         <?php if ( empty( $rows ) ) : ?>
             <p><?php esc_html_e('You do not have active reservations.', 'tender-library'); ?></p>

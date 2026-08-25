@@ -855,8 +855,8 @@ msgid "Unexpected error. Please try again."
 msgstr "Error inesperado. Por favor, inténtalo de nuevo."
 
 #: modules/reservations/reservationFunctions.php:272
-msgid "My active reservations"
-msgstr "Mis reservas activas"
+msgid "Active reservations"
+msgstr "Reservas activas"
 
 #: modules/reservations/reservationFunctions.php:275
 msgid "You do not have active reservations."

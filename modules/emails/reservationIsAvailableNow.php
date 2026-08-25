@@ -12,7 +12,15 @@ function tal_notify_availability_of_reservation($reservation, $book_id){
     // Puedes personalizar el remitente aquí si lo deseas
     $headers = ['Content-Type: text/html; charset=UTF-8'];
 
-    wp_mail($user->user_email, $subject, $message, $headers);
+    tal_email_queue_enqueue([
+        'type' => 'reservation_available',
+        'recipient' => $user->user_email,
+        'subject' => $subject,
+        'message' => $message,
+        'headers' => $headers,
+        'deduplication_key' => 'available_' . $reservation->id,
+        'priority' => 100,
+    ]);
 
 }
 

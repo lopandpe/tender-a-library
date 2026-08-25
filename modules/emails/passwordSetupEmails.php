@@ -8,7 +8,6 @@ define('TAL_PASSWORD_SETUP_SENT_META_KEY', 'tal_password_setup_email_sent_at');
 define('TAL_PASSWORD_SETUP_LAST_ERROR_META_KEY', 'tal_password_setup_email_last_error');
 define('TAL_PASSWORD_SETUP_SUBJECT_OPTION', 'tal_password_setup_email_subject');
 define('TAL_PASSWORD_SETUP_BODY_OPTION', 'tal_password_setup_email_body');
-define('TAL_PASSWORD_SETUP_BATCH_SIZE', 50);
 
 function tal_password_setup_default_subject()
 {
@@ -86,7 +85,7 @@ function tal_password_setup_filter_emailable_user_ids($user_ids)
 
 	foreach ($user_ids as $user_id) {
 		$user = get_userdata($user_id);
-		if (tal_password_setup_user_can_receive_email($user)) {
+		if (tal_password_setup_user_can_receive_email($user) && !tal_email_queue_has_active_key('password_setup_' . $user_id)) {
 			$emailable_ids[] = (int) $user_id;
 		}
 	}
@@ -159,25 +158,7 @@ function tal_password_setup_send_email_to_user($user, $subject_template, $body_t
 		return new WP_Error('placeholder_email', __('The user has a placeholder migration email address.', 'tender-library'));
 	}
 
-	$reset_url = tal_password_setup_get_reset_url($user);
-	if (is_wp_error($reset_url)) {
-		return $reset_url;
-	}
-
-	$subject = tal_password_setup_replace_placeholders($subject_template, $user, $reset_url, false);
-	$body = tal_password_setup_replace_placeholders($body_template, $user, $reset_url, true);
-	$message = wpautop($body);
-	$headers = ['Content-Type: text/html; charset=UTF-8'];
-
-	$sent = wp_mail($user->user_email, $subject, $message, $headers);
-	if (!$sent) {
-		return new WP_Error('mail_failed', __('WordPress could not send the email.', 'tender-library'));
-	}
-
-	update_user_meta($user->ID, TAL_PASSWORD_SETUP_SENT_META_KEY, current_time('mysql'));
-	delete_user_meta($user->ID, TAL_PASSWORD_SETUP_LAST_ERROR_META_KEY);
-
-	return true;
+	return tal_password_setup_queue_email_for_user($user, $subject_template, $body_template);
 }
 
 function tal_password_setup_handle_save()
@@ -211,18 +192,17 @@ function tal_password_setup_handle_send()
 
 	check_admin_referer('tal_password_setup_send');
 
-	$limit = isset($_POST['tal_password_setup_limit']) ? (int) $_POST['tal_password_setup_limit'] : TAL_PASSWORD_SETUP_BATCH_SIZE;
-	$limit = max(1, min(200, $limit));
+
 	$subject_template = tal_password_setup_get_subject_template();
 	$body_template = tal_password_setup_get_body_template();
-	$user_ids = tal_password_setup_get_emailable_imported_user_ids(true, $limit);
+	$user_ids = tal_password_setup_get_emailable_imported_user_ids(true);
 	$sent = 0;
 	$failed = 0;
 	$errors = [];
 
 	foreach ($user_ids as $user_id) {
 		$user = get_userdata($user_id);
-		$result = tal_password_setup_send_email_to_user($user, $subject_template, $body_template);
+		$result = tal_password_setup_queue_email_for_user($user, $subject_template, $body_template);
 
 		if (is_wp_error($result)) {
 			$failed++;
@@ -273,7 +253,7 @@ function tal_password_setup_render_page()
 	if (is_array($last_result)) {
 		echo '<div class="notice notice-info"><p>';
 		echo esc_html(sprintf(
-			__('Last send run: %1$d sent, %2$d failed at %3$s.', 'tender-library'),
+			__('Last queue run: %1$d queued, %2$d failed at %3$s.', 'tender-library'),
 			(int) $last_result['sent'],
 			(int) $last_result['failed'],
 			(string) $last_result['timestamp']
@@ -315,10 +295,9 @@ function tal_password_setup_render_page()
 	echo '<form method="post" action="' . esc_url(admin_url('admin-post.php')) . '">';
 	wp_nonce_field('tal_password_setup_send');
 	echo '<input type="hidden" name="action" value="tal_password_setup_send" />';
-	echo '<p><label for="tal_password_setup_limit">' . esc_html__('Maximum emails in this batch', 'tender-library') . '</label> ';
-	echo '<input id="tal_password_setup_limit" name="tal_password_setup_limit" type="number" min="1" max="200" value="' . esc_attr((string) TAL_PASSWORD_SETUP_BATCH_SIZE) . '" /></p>';
+
 	submit_button(
-		$remaining > 0 ? __('Send Next Batch', 'tender-library') : __('No Emails Left To Send', 'tender-library'),
+		$remaining > 0 ? __('Queue Emails For All Remaining Users', 'tender-library') : __('No Emails Left To Send', 'tender-library'),
 		'primary',
 		'submit',
 		true,
@@ -328,3 +307,67 @@ function tal_password_setup_render_page()
 
 	echo '</div>';
 }
+
+function tal_password_setup_queue_email_for_user($user, $subject_template, $body_template)
+{
+	if (!tal_password_setup_user_can_receive_email($user)) {
+		return new WP_Error('invalid_user_email', __('The user does not have a valid email address.', 'tender-library'));
+	}
+
+	$result = tal_email_queue_enqueue([
+		'type' => 'password_setup',
+		'recipient' => $user->user_email,
+		'payload' => [
+			'user_id' => (int) $user->ID,
+			'subject_template' => $subject_template,
+			'body_template' => $body_template,
+		],
+		'deduplication_key' => 'password_setup_' . $user->ID,
+		'priority' => 90,
+	]);
+
+	return is_wp_error($result) ? $result : true;
+}
+
+function tal_password_setup_prepare_queued_email($prepared, $item)
+{
+	if ($item->type !== 'password_setup') {
+		return $prepared;
+	}
+
+	$payload = json_decode($item->payload, true);
+	$user = !empty($payload['user_id']) ? get_userdata((int) $payload['user_id']) : false;
+	if (!tal_password_setup_user_can_receive_email($user)) {
+		return new WP_Error('invalid_user_email', __('The user does not have a valid email address.', 'tender-library'));
+	}
+
+	$reset_url = tal_password_setup_get_reset_url($user);
+	if (is_wp_error($reset_url)) {
+		return $reset_url;
+	}
+
+	$subject = tal_password_setup_replace_placeholders((string) $payload['subject_template'], $user, $reset_url, false);
+	$body = tal_password_setup_replace_placeholders((string) $payload['body_template'], $user, $reset_url, true);
+
+	return [
+		'recipient' => $user->user_email,
+		'subject' => $subject,
+		'message' => wpautop($body),
+		'headers' => ['Content-Type: text/html; charset=UTF-8'],
+	];
+}
+add_filter('tal_email_queue_prepare_message', 'tal_password_setup_prepare_queued_email', 10, 2);
+
+function tal_password_setup_mark_queued_email_sent($item)
+{
+	if ($item->type !== 'password_setup') {
+		return;
+	}
+
+	$payload = json_decode($item->payload, true);
+	if (!empty($payload['user_id'])) {
+		update_user_meta((int) $payload['user_id'], TAL_PASSWORD_SETUP_SENT_META_KEY, current_time('mysql'));
+		delete_user_meta((int) $payload['user_id'], TAL_PASSWORD_SETUP_LAST_ERROR_META_KEY);
+	}
+}
+add_action('tal_email_queue_sent', 'tal_password_setup_mark_queued_email_sent');

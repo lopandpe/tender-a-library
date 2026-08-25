@@ -60,7 +60,11 @@ if (isset($_POST['tal_create_user'])) {
                 carbon_set_user_meta($user_id, 'newsletter', $form_data['newsletter']);
             }
             // Opcional: enviar email de bienvenida
-            wp_new_user_notification($user_id, null, 'user');
+            tal_password_setup_queue_email_for_user(
+                get_userdata($user_id),
+                __('Set your password for the library website', 'tender-library'),
+                __('Hello {display_name},\n\nYour library account has been created. Set your password using this secure link:\n\n{reset_password_url}\n\nThank you,\n{site_name}', 'tender-library')
+            );
             $success = true;
             $mensaje = '<p class="text-success text-sm font-medium">' . __('User created successfully.', 'tender-library') . '</p>';
             $form_data = [

@@ -3,7 +3,7 @@
 /**
  * Plugin Name: Tender Library
  * Description: Private library/tender management plugin.
- * Version: 1.0.0
+ * Version: 1.0.1
  * Author: Luis Gómez
  * Text Domain: tender-library
  * Domain Path: /languages
@@ -15,7 +15,7 @@
  */
 
 
-define('TENDER_LIBRARY_VERSION', '1.0.0');
+define('TENDER_LIBRARY_VERSION', '1.0.1');
 define('TENDER_LIBRARY_UPDATE_URI', 'https://localanarquistamagdalena.org/');
 define('TENDER_LIBRARY_UPDATE_METADATA_URL', 'https://localanarquistamagdalena.org/tender-library/releases/update.json');
 define('TENDER_LIBRARY_PLUGIN_FILE', __FILE__);
@@ -31,6 +31,7 @@ function tender_library_run_version_migrations()
 	$installed_version = get_option('tender_library_version', '0.0.0');
 
 	if (version_compare($installed_version, TENDER_LIBRARY_VERSION, '<')) {
+		tender_create_database_tables();
 		update_option('tender_library_version', TENDER_LIBRARY_VERSION);
 	}
 }
@@ -50,7 +51,7 @@ function tender_library_register_private_updater()
 	$updater->register();
 }
 add_action('plugins_loaded', 'tender_library_register_private_updater');
-add_action('admin_init', 'tender_library_run_version_migrations');
+add_action('plugins_loaded', 'tender_library_run_version_migrations', 20);
 
 function tender_activate()
 {
@@ -64,6 +65,7 @@ function tender_activate()
 function tender_deactivate()
 {
 	wp_clear_scheduled_hook('tal_send_not_returned_emails');
+	wp_clear_scheduled_hook('tal_process_email_queue');
 	flush_rewrite_rules(); // Flush rewrite rules
 }
 
@@ -158,6 +160,7 @@ function tender_bootstrap()
 			"modules/search/api-filters",
 			"modules/search/searchPage",
             "modules/search/filteredURLs",
+            "modules/emails/emailQueue",
             "modules/emails/notReturnedEmails",
 			"modules/emails/lendingHasReservation",
 			"modules/emails/reservationIsAvailableNow",
