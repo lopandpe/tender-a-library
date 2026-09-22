@@ -4,7 +4,7 @@ Tags: library, books, lending, reservations, carbon-fields, custom-post-type, gu
 Requires at least: 6.4
 Tested up to: 6.7.1
 Requires PHP: 8.1
-Stable tag: 1.0.2
+Stable tag: 1.0.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -205,6 +205,11 @@ Calls (`calls-template.csv`)
 Check that `vendor/` exists in the deployed plugin. Without it, Carbon Fields cannot boot.
 
 == Changelog ==
+
+= 1.0.3 =
+* Consolidated CSV migration, email queue, and password setup controls under Biblioteca → Settings.
+* Added configurable rate-limited transactional email delivery and retries.
+* Added Spanish translations for the new settings and migration interface.
 
 = 1.0.0 =
 * Initial public project structure and module set.
