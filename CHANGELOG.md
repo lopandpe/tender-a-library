@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.0.5
+- Point the dashboard Users screen View link to each user's configured Tender Library profile URL.
+
 ## 1.0.4
 - Fixed imported user phone numbers by synchronizing the Carbon Fields profile value.
 - Re-importing users now refreshes their phone number when the CSV includes `phone`.

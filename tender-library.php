@@ -3,7 +3,7 @@
 /**
  * Plugin Name: Tender Library
  * Description: Private library/tender management plugin.
- * Version: 1.0.4
+ * Version: 1.0.5
  * Author: Luis Gómez
  * Text Domain: tender-library
  * Domain Path: /languages
@@ -15,7 +15,7 @@
  */
 
 
-define('TENDER_LIBRARY_VERSION', '1.0.4');
+define('TENDER_LIBRARY_VERSION', '1.0.5');
 define('TENDER_LIBRARY_UPDATE_URI', 'https://localanarquistamagdalena.org/');
 define('TENDER_LIBRARY_UPDATE_METADATA_URL', 'https://localanarquistamagdalena.org/tender-library/releases/update.json');
 define('TENDER_LIBRARY_PLUGIN_FILE', __FILE__);

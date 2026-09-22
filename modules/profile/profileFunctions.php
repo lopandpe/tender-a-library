@@ -122,3 +122,32 @@ function get_user_profile_url_by_id($user_id)
 
 	return false;
 }
+
+
+/**
+ * Point the Users screen's "View" action to the profile route configured by
+ * Tender A Library instead of WordPress's default author archive.
+ *
+ * @param array   $actions Existing row actions.
+ * @param WP_User $user    User for the current row.
+ * @return array
+ */
+function tal_use_profile_url_for_dashboard_user_view($actions, $user)
+{
+	$profile_urls = get_user_profile_url_by_id($user->ID);
+	$profile_url = is_array($profile_urls) ? $profile_urls['profile'] : '';
+
+	if (!$profile_url || 'error' === $profile_url) {
+		return $actions;
+	}
+
+	$actions['view'] = sprintf(
+		'<a href="%1$s" aria-label="%2$s">%3$s</a>',
+		esc_url($profile_url),
+		esc_attr(sprintf(__('View %s', 'tender-library'), $user->display_name)),
+		esc_html__('View', 'tender-library')
+	);
+
+	return $actions;
+}
+add_filter('user_row_actions', 'tal_use_profile_url_for_dashboard_user_view', 10, 2);
