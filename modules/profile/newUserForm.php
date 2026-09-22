@@ -45,6 +45,7 @@ if (isset($_POST['tal_create_user'])) {
             'user_email'   => $form_data['email'],
             'first_name'   => $form_data['first_name'],
             'last_name'    => $form_data['last_name'],
+			'display_name' => trim($form_data['first_name'] . ' ' . $form_data['last_name']),
             'user_pass'    => $random_password,
             'role'         => 'reader'
         ]);

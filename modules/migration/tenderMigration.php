@@ -1240,6 +1240,7 @@ function tal_migration_import_users_batch($path, $offset, $limit, $dry_run = fal
 		if (isset($map[$old_id])) {
 			if (!$dry_run) {
 				tal_migration_set_user_phone($map[$old_id], $row['phone'] ?? '');
+				tal_migration_set_user_name($map[$old_id], $row['name'] ?? '');
 			}
 			$result['updated']++;
 			continue;
@@ -1254,6 +1255,7 @@ function tal_migration_import_users_batch($path, $offset, $limit, $dry_run = fal
 			if (!$dry_run) {
 				update_user_meta($existing_user->ID, TAL_MIGRATION_META_KEY, $old_id);
 				tal_migration_set_user_phone($existing_user->ID, $row['phone'] ?? '');
+				tal_migration_set_user_name($existing_user->ID, $row['name'] ?? '');
 				$map[$old_id] = $existing_user->ID;
 			}
 			$result['updated']++;
@@ -1274,11 +1276,14 @@ function tal_migration_import_users_batch($path, $offset, $limit, $dry_run = fal
 			continue;
 		}
 
+		$name_parts = tal_migration_parse_user_name($name);
 		$user_id = wp_insert_user([
 			'user_login' => $user_login,
 			'user_pass' => wp_generate_password(20, true, true),
 			'user_email' => $email,
-			'display_name' => $name ?: $user_login,
+			'first_name' => $name_parts['first_name'],
+			'last_name' => $name_parts['last_name'],
+			'display_name' => $name_parts['display_name'] ?: $user_login,
 			'role' => $role,
 		]);
 
@@ -1963,6 +1968,7 @@ function tal_migration_import_users($path, $dry_run = false)
 		if (isset($map[$old_id])) {
 			if (!$dry_run) {
 				tal_migration_set_user_phone($map[$old_id], $row['phone'] ?? '');
+				tal_migration_set_user_name($map[$old_id], $row['name'] ?? '');
 			}
 			$updated++;
 			continue;
@@ -1977,6 +1983,7 @@ function tal_migration_import_users($path, $dry_run = false)
 			if (!$dry_run) {
 				update_user_meta($existing_user->ID, TAL_MIGRATION_META_KEY, $old_id);
 				tal_migration_set_user_phone($existing_user->ID, $row['phone'] ?? '');
+				tal_migration_set_user_name($existing_user->ID, $row['name'] ?? '');
 				$map[$old_id] = $existing_user->ID;
 			}
 			$updated++;
@@ -1997,11 +2004,14 @@ function tal_migration_import_users($path, $dry_run = false)
 			continue;
 		}
 
+		$name_parts = tal_migration_parse_user_name($name);
 		$user_id = wp_insert_user([
 			'user_login' => $user_login,
 			'user_pass' => wp_generate_password(20, true, true),
 			'user_email' => $email,
-			'display_name' => $name ?: $user_login,
+			'first_name' => $name_parts['first_name'],
+			'last_name' => $name_parts['last_name'],
+			'display_name' => $name_parts['display_name'] ?: $user_login,
 			'role' => $role,
 		]);
 
@@ -2033,6 +2043,33 @@ function tal_migration_set_user_phone($user_id, $phone)
 	if (function_exists('carbon_set_user_meta')) {
 		carbon_set_user_meta($user_id, 'phone_number', $phone);
 	}
+}
+
+function tal_migration_parse_user_name($name)
+{
+	$display_name = sanitize_text_field((string) $name);
+	$parts = preg_split('/\s+/u', $display_name, 2, PREG_SPLIT_NO_EMPTY);
+
+	return [
+		'first_name' => $parts[0] ?? '',
+		'last_name' => $parts[1] ?? '',
+		'display_name' => $display_name,
+	];
+}
+
+function tal_migration_set_user_name($user_id, $name)
+{
+	$name_parts = tal_migration_parse_user_name($name);
+	if ($name_parts['display_name'] === '') {
+		return;
+	}
+
+	wp_update_user([
+		'ID' => $user_id,
+		'first_name' => $name_parts['first_name'],
+		'last_name' => $name_parts['last_name'],
+		'display_name' => $name_parts['display_name'],
+	]);
 }
 
 function tal_migration_import_books($path, $media_base = '', $dry_run = false)

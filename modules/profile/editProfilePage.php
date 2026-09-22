@@ -48,6 +48,7 @@ function tal_edit_profile_template($content)
 					'ID'         => $user_id,
 					'first_name' => $first_name,
 					'last_name'  => $last_name,
+					'display_name' => trim($first_name . ' ' . $last_name),
 					'user_email' => $email,
 				]);
 				carbon_set_user_meta($user_id, 'phone_number', $phone);

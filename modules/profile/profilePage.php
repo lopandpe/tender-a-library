@@ -218,7 +218,7 @@ function tal_profile_template($content)
 					<ul class="">
 						<li class="">
 							<span class="label"><?php _e('Name', 'tender-library') ?>:</span>
-							<span class="data"><?php echo esc_html($current_user->first_name); ?> <?php echo esc_html($current_user->last_name); ?></span>
+							<span class="data"><?php echo esc_html(trim($current_user->first_name . ' ' . $current_user->last_name) ?: $current_user->display_name); ?></span>
 						</li>
 						<li class="">
 							<span class="label"><?php _e('E-mail', 'tender-library') ?>:</span>
