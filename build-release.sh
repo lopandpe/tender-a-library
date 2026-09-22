@@ -31,6 +31,7 @@ rm -rf "$BUILD_ROOT" "$ZIP_PATH"
 mkdir -p "$PACKAGE_DIR"
 
 rsync -a "$ROOT_DIR/" "$PACKAGE_DIR/" \
+  --exclude '.git' \
   --exclude '.git/' \
   --exclude '.github/' \
   --exclude '.gitignore' \
