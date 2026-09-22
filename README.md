@@ -86,6 +86,7 @@ A minimal metadata file looks like this:
   "slug": "tender-library",
   "version": "1.0.1",
   "download_url": "https://example.com/tender-library/releases/tender-library-1.0.1.zip",
+  "sha256": "SHA-256 of the exact release ZIP",
   "requires": "6.4",
   "tested": "6.6",
   "requires_php": "8.1",

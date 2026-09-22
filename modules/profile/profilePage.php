@@ -403,8 +403,8 @@ function tal_profile_template($content)
 											<img src="<?php echo plugin_dir_url(__FILE__); ?>../../assets/svg/default-book.svg"" alt=" No cover"> <?php endif; ?>
 									</div>
 									<div class="book-info">
-										<a class="title" href="<?php echo get_permalink($lending->book_id); ?>"><?php echo get_the_title($lending->book_id); ?></a>
-										<div class="author"><?php echo carbon_get_post_meta($lending->book_id, 'tender_book_author'); ?></div>
+										<a class="title" href="<?php echo esc_url(get_permalink($lending->book_id)); ?>"><?php echo esc_html(get_the_title($lending->book_id)); ?></a>
+										<div class="author"><?php echo esc_html(carbon_get_post_meta($lending->book_id, 'tender_book_author')); ?></div>
 
 									</div>
 								</div>
@@ -474,7 +474,7 @@ function tal_profile_template($content)
 							$cover_id = carbon_get_post_meta($lending->book_id, 'tender_book_cover');
 						?>
 
-							<a class="tender-book-preview" href="<?php echo get_permalink($lending->book_id); ?>">
+							<a class="tender-book-preview" href="<?php echo esc_url(get_permalink($lending->book_id)); ?>">
 								<div class="cover">
 									<?php if ($cover_id): ?>
 										<?php echo wp_get_attachment_image($cover_id, 'medium'); ?>
@@ -486,8 +486,8 @@ function tal_profile_template($content)
 									</div>
 								</div>
 								<div class="book-info">
-									<div class="title" href="<?php echo get_permalink($lending->book_id); ?>"><?php echo get_the_title($lending->book_id); ?></div>
-									<div class="author"><?php echo carbon_get_post_meta($lending->book_id, 'tender_book_author'); ?></div>
+									<div class="title"><?php echo esc_html(get_the_title($lending->book_id)); ?></div>
+									<div class="author"><?php echo esc_html(carbon_get_post_meta($lending->book_id, 'tender_book_author')); ?></div>
 
 								</div>
 							</a>

@@ -39,6 +39,7 @@ class Tender_Library_Updater
 	{
 		add_filter('pre_set_site_transient_update_plugins', array($this, 'filter_update_transient'));
 		add_filter('plugins_api', array($this, 'filter_plugin_information'), 20, 3);
+		add_filter('upgrader_pre_download', array($this, 'verify_package_download'), 10, 4);
 		add_action('upgrader_process_complete', array($this, 'clear_update_cache'), 10, 2);
 	}
 
@@ -62,11 +63,27 @@ class Tender_Library_Updater
 		$update->package = $metadata['download_url'];
 		$update->tested = $metadata['tested'];
 		$update->requires = $metadata['requires'];
+		$update->tal_sha256 = $metadata['sha256'];
 		$update->requires_php = $metadata['requires_php'];
 
 		$transient->response[$this->plugin_basename] = $update;
 
 		return $transient;
+	}
+
+	public function verify_package_download($reply, $package, $upgrader, $hook_extra)
+	{
+		if (false !== $reply || empty($hook_extra['plugin']) || $hook_extra['plugin'] !== $this->plugin_basename) { return $reply; }
+		$updates = get_site_transient('update_plugins');
+		$update = is_object($updates) && isset($updates->response[$this->plugin_basename]) ? $updates->response[$this->plugin_basename] : null;
+		$expected = is_object($update) && isset($update->tal_sha256) ? $update->tal_sha256 : '';
+		if (!preg_match('/^[a-f0-9]{64}$/', $expected) || !isset($update->package) || !hash_equals((string) $update->package, (string) $package)) { return new WP_Error('tender_library_checksum_missing', __('The Tender Library update is missing a valid checksum.', 'tender-library')); }
+		require_once ABSPATH . 'wp-admin/includes/file.php';
+		$downloaded = download_url($package);
+		if (is_wp_error($downloaded)) { return $downloaded; }
+		$actual = hash_file('sha256', $downloaded);
+		if (!is_string($actual) || !hash_equals($expected, $actual)) { wp_delete_file($downloaded); return new WP_Error('tender_library_checksum_mismatch', __('The Tender Library update failed its integrity check.', 'tender-library')); }
+		return $downloaded;
 	}
 
 	public function filter_plugin_information($result, $action, $args)
@@ -153,7 +170,8 @@ class Tender_Library_Updater
 		$download_url = isset($data['download_url']) ? esc_url_raw($data['download_url']) : '';
 		$slug = isset($data['slug']) ? sanitize_key($data['slug']) : '';
 
-		if ($slug !== "tender-library" || !$version || !$this->is_valid_http_url($download_url) || !$this->is_same_host_as_metadata($download_url)) {
+		$sha256 = isset($data['sha256']) ? strtolower(sanitize_text_field($data['sha256'])) : '';
+		if ($slug !== "tender-library" || !$version || !preg_match('/^[a-f0-9]{64}$/', $sha256) || !$this->is_valid_http_url($download_url) || !$this->is_same_host_as_metadata($download_url)) {
 			return false;
 		}
 
@@ -173,6 +191,7 @@ class Tender_Library_Updater
 			'slug' => $slug,
 			'version' => $version,
 			'download_url' => $download_url,
+			'sha256' => $sha256,
 			'requires' => isset($data['requires']) ? sanitize_text_field($data['requires']) : '6.4',
 			'tested' => isset($data['tested']) ? sanitize_text_field($data['tested']) : '',
 			'requires_php' => isset($data['requires_php']) ? sanitize_text_field($data['requires_php']) : '8.1',

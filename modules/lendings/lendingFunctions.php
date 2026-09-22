@@ -57,6 +57,9 @@ function tender_register_renewal($lending_id, $new_return_date = null)
 {
 	global $wpdb;
 
+	$lending = $lending_id ? $wpdb->get_row($wpdb->prepare('SELECT returned FROM ' . TENDER_TABLE_LENDINGS . ' WHERE id = %d', $lending_id)) : null;
+	if (!$lending || (int) $lending->returned !== 0) { return new WP_Error('inactive_lending', __('This loan is no longer active.', 'tender-library')); }
+
 	// Si no se ha proporcionado una nueva fecha de retorno, calculamos 21 días a partir de hoy
 	if (empty($new_return_date)) {
 		$new_return_date = date('Y-m-d', strtotime('+21 days'));  // Calcula la fecha 21 días después de hoy
@@ -67,6 +70,7 @@ function tender_register_renewal($lending_id, $new_return_date = null)
 		"SELECT COUNT(*) FROM " . TENDER_TABLE_RENEWALS . " WHERE lending_id = %d",
 		$lending_id
 	));
+	if ((int) $extensions >= 4) { return new WP_Error('renewal_limit_reached', __('This loan cannot be extended further.', 'tender-library')); }
 
 	// Insertar renovación
 	$wpdb->insert(
@@ -414,62 +418,21 @@ function tender_create_lending_ajax()
 function tender_handle_lending_action()
 {
 	global $wpdb;
-
-	if (!is_user_logged_in()) {
-		wp_send_json_error(['message' => __('Not authorized.', 'tender-library')], 401);
-	}
-
+	if (!is_user_logged_in()) { wp_send_json_error(['message' => __('Not authorized.', 'tender-library')], 401); }
 	check_ajax_referer('tal_lending_action', 'nonce');
-
-	$lending_id = isset($_POST['lending_id']) ? intval($_POST['lending_id']) : 0;
-	$action_type = isset($_POST['action_type']) ? sanitize_text_field($_POST['action_type']) : '';
-
-	$current_user_id = get_current_user_id();
-	$lending_owner_id = $lending_id > 0
-		? (int) $wpdb->get_var($wpdb->prepare("SELECT user_id FROM " . TENDER_TABLE_LENDINGS . " WHERE id = %d", $lending_id))
-		: 0;
-
+	$lending_id = isset($_POST['lending_id']) ? absint($_POST['lending_id']) : 0;
+	$action_type = isset($_POST['action_type']) ? sanitize_key($_POST['action_type']) : '';
+	if (!$lending_id || !in_array($action_type, ['return', 'renew'], true)) { wp_send_json_error(['message' => __('Action could not be performed.', 'tender-library')], 400); }
+	$lending = $wpdb->get_row($wpdb->prepare('SELECT user_id, returned FROM ' . TENDER_TABLE_LENDINGS . ' WHERE id = %d', $lending_id));
+	if (!$lending || (int) $lending->returned !== 0) { wp_send_json_error(['message' => __('This loan is no longer active.', 'tender-library')], 409); }
 	$is_staff = tal_user_can_manage_lendings();
-	if (!$is_staff && $lending_owner_id !== $current_user_id) {
-		wp_send_json_error(['message' => __('Insufficient permissions.', 'tender-library')], 403);
-	}
-
-	$result = false;
-	$message = '';
-	if ($lending_id && in_array($action_type, ['return', 'renew'])) {
-		if ($action_type == 'return') {
-			if (tender_mark_as_returned($lending_id)) {
-				$message = __('Loan successfully returned.', 'tender-library');
-				$result = true;
-			} else {
-				$message = __('Could not return the loan.', 'tender-library');
-			}
-		} elseif ($action_type == 'renew') {
-			if (tender_register_renewal($lending_id)) {
-				// Mejor consulta la nueva fecha desde la DB
-				$new_date = $wpdb->get_var($wpdb->prepare(
-					"SELECT stimated_return_date FROM {$wpdb->prefix}tender_lendings WHERE id = %d",
-					$lending_id
-				));
-				$message = sprintf(
-					__('Loan renewed successfully. New return date: %s', 'tender-library'),
-					$new_date ? date_i18n('d/m/Y', strtotime($new_date)) : '-'
-				);
-				$result = true;
-			} else {
-				$message = __('Could not renew the loan.', 'tender-library');
-			}
-		}
-		if ($result) {
-			wp_send_json_success(['message' => $message]);
-		} else {
-			wp_send_json_error(['message' => $message]);
-		}
-	} else {
-		wp_send_json_error(['message' => __('Action could not be performed.', 'tender-library')]);
-	}
-
-	wp_die();
+	if ($action_type === 'return' && !$is_staff) { wp_send_json_error(['message' => __('Insufficient permissions.', 'tender-library')], 403); }
+	if ($action_type === 'renew' && !$is_staff && (int) $lending->user_id !== get_current_user_id()) { wp_send_json_error(['message' => __('Insufficient permissions.', 'tender-library')], 403); }
+	$result = $action_type === 'return' ? tender_mark_as_returned($lending_id) : tender_register_renewal($lending_id);
+	if (is_wp_error($result)) { wp_send_json_error(['message' => $result->get_error_message()], 409); }
+	if (!$result) { wp_send_json_error(['message' => $action_type === 'return' ? __('Could not return the loan.', 'tender-library') : __('Could not renew the loan.', 'tender-library')]); }
+	if ($action_type === 'renew') { $new_date = $wpdb->get_var($wpdb->prepare('SELECT stimated_return_date FROM ' . TENDER_TABLE_LENDINGS . ' WHERE id = %d', $lending_id)); wp_send_json_success(['message' => sprintf(__('Loan renewed successfully. New return date: %s', 'tender-library'), $new_date ? date_i18n('d/m/Y', strtotime($new_date)) : '-')]); }
+	wp_send_json_success(['message' => __('Loan successfully returned.', 'tender-library')]);
 }
 
 add_action('wp_ajax_tender_handle_lending_action', 'tender_handle_lending_action');

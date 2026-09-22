@@ -3,6 +3,7 @@
   "slug": "tender-library",
   "version": "1.0.1",
   "download_url": "https://example.com/tender-library/releases/tender-library-1.0.1.zip",
+  "sha256": "REPLACE_WITH_THE_RELEASE_ZIP_SHA256",
   "requires": "6.4",
   "tested": "6.6",
   "requires_php": "8.1",

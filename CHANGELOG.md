@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.0.6
+- Hardened lending actions, profile output escaping, and update-package integrity verification.
+
 ## 1.0.5
 - Point the dashboard Users screen View link to each user's configured Tender Library profile URL.
 
