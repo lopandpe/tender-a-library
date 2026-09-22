@@ -4,7 +4,7 @@ Tags: library, books, lending, reservations, carbon-fields, custom-post-type, gu
 Requires at least: 6.4
 Tested up to: 6.7.1
 Requires PHP: 8.1
-Stable tag: 1.0.3
+Stable tag: 1.0.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -205,6 +205,10 @@ Calls (`calls-template.csv`)
 Check that `vendor/` exists in the deployed plugin. Without it, Carbon Fields cannot boot.
 
 == Changelog ==
+
+= 1.0.4 =
+* Fixed imported user phone numbers by synchronizing the Carbon Fields profile value.
+* Re-importing users now refreshes their phone number when the CSV includes `phone`.
 
 = 1.0.3 =
 * Consolidated CSV migration, email queue, and password setup controls under Biblioteca → Settings.

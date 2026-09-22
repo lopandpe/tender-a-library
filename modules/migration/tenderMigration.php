@@ -1238,6 +1238,9 @@ function tal_migration_import_users_batch($path, $offset, $limit, $dry_run = fal
 		}
 
 		if (isset($map[$old_id])) {
+			if (!$dry_run) {
+				tal_migration_set_user_phone($map[$old_id], $row['phone'] ?? '');
+			}
 			$result['updated']++;
 			continue;
 		}
@@ -1250,6 +1253,7 @@ function tal_migration_import_users_batch($path, $offset, $limit, $dry_run = fal
 		if ($existing_user) {
 			if (!$dry_run) {
 				update_user_meta($existing_user->ID, TAL_MIGRATION_META_KEY, $old_id);
+				tal_migration_set_user_phone($existing_user->ID, $row['phone'] ?? '');
 				$map[$old_id] = $existing_user->ID;
 			}
 			$result['updated']++;
@@ -1284,9 +1288,7 @@ function tal_migration_import_users_batch($path, $offset, $limit, $dry_run = fal
 		}
 
 		update_user_meta($user_id, TAL_MIGRATION_META_KEY, $old_id);
-		if (!empty($row['phone'])) {
-			update_user_meta($user_id, 'phone_number', $row['phone']);
-		}
+		tal_migration_set_user_phone($user_id, $row['phone'] ?? '');
 		$map[$old_id] = $user_id;
 		$result['created']++;
 	}
@@ -1959,6 +1961,9 @@ function tal_migration_import_users($path, $dry_run = false)
 		}
 
 		if (isset($map[$old_id])) {
+			if (!$dry_run) {
+				tal_migration_set_user_phone($map[$old_id], $row['phone'] ?? '');
+			}
 			$updated++;
 			continue;
 		}
@@ -1971,6 +1976,7 @@ function tal_migration_import_users($path, $dry_run = false)
 		if ($existing_user) {
 			if (!$dry_run) {
 				update_user_meta($existing_user->ID, TAL_MIGRATION_META_KEY, $old_id);
+				tal_migration_set_user_phone($existing_user->ID, $row['phone'] ?? '');
 				$map[$old_id] = $existing_user->ID;
 			}
 			$updated++;
@@ -2005,9 +2011,7 @@ function tal_migration_import_users($path, $dry_run = false)
 		}
 
 		update_user_meta($user_id, TAL_MIGRATION_META_KEY, $old_id);
-		if (!empty($row['phone'])) {
-			update_user_meta($user_id, 'phone_number', $row['phone']);
-		}
+		tal_migration_set_user_phone($user_id, $row['phone'] ?? '');
 		$map[$old_id] = $user_id;
 		$created++;
 	}
@@ -2016,6 +2020,19 @@ function tal_migration_import_users($path, $dry_run = false)
 		'messages' => [sprintf(__('Users imported. Created: %d, updated: %d.', 'tender-library'), $created, $updated)],
 		'errors' => $errors,
 	];
+}
+
+function tal_migration_set_user_phone($user_id, $phone)
+{
+	$phone = sanitize_text_field((string) $phone);
+	if ($phone === '') {
+		return;
+	}
+
+	update_user_meta($user_id, 'phone_number', $phone);
+	if (function_exists('carbon_set_user_meta')) {
+		carbon_set_user_meta($user_id, 'phone_number', $phone);
+	}
 }
 
 function tal_migration_import_books($path, $media_base = '', $dry_run = false)
