@@ -7,7 +7,7 @@ if (!defined('ABSPATH')) {
 define('TAL_EMAIL_RATE_LIMIT_OPTION', 'tal_email_rate_limit');
 define('TAL_EMAIL_QUEUE_CRON_HOOK', 'tal_process_email_queue');
 define('TAL_EMAIL_QUEUE_MAX_ATTEMPTS', 4);
-define('TAL_EMAIL_QUEUE_MAX_RATE', 50);
+define('TAL_EMAIL_QUEUE_MAX_RATE', 10000);
 define('TAL_EMAIL_QUEUE_DEFAULT_RATE', 40);
 
 function tal_email_queue_utc_now()
@@ -15,10 +15,15 @@ function tal_email_queue_utc_now()
 	return current_time('mysql', true);
 }
 
+function tal_email_queue_get_max_rate_limit()
+{
+	return max(1, (int) apply_filters('tal_email_queue_max_rate_limit', TAL_EMAIL_QUEUE_MAX_RATE));
+}
+
 function tal_email_queue_get_rate_limit()
 {
 	$rate = (int) get_option(TAL_EMAIL_RATE_LIMIT_OPTION, TAL_EMAIL_QUEUE_DEFAULT_RATE);
-	return max(1, min(TAL_EMAIL_QUEUE_MAX_RATE, $rate));
+	return max(1, min(tal_email_queue_get_max_rate_limit(), $rate));
 }
 
 function tal_email_queue_register_schedule($schedules)
@@ -240,29 +245,16 @@ function tal_email_queue_mark_failed($item, $error)
 	);
 }
 
-function tal_email_queue_register_menu()
-{
-	add_submenu_page(
-		'tender-library',
-		__('Email Queue', 'tender-library'),
-		__('Email Queue', 'tender-library'),
-		'manage_options',
-		'tal-email-queue',
-		'tal_email_queue_render_page'
-	);
-}
-add_action('admin_menu', 'tal_email_queue_register_menu');
-
 function tal_email_queue_handle_settings()
 {
-	if (!current_user_can('manage_options')) {
+	if (!tal_settings_user_can_access()) {
 		wp_die(__('Insufficient permissions.', 'tender-library'));
 	}
 	check_admin_referer('tal_email_queue_settings');
 
 	$rate = isset($_POST['tal_email_rate_limit']) ? absint($_POST['tal_email_rate_limit']) : TAL_EMAIL_QUEUE_DEFAULT_RATE;
-	update_option(TAL_EMAIL_RATE_LIMIT_OPTION, max(1, min(TAL_EMAIL_QUEUE_MAX_RATE, $rate)), false);
-	wp_safe_redirect(add_query_arg('updated', '1', admin_url('admin.php?page=tal-email-queue')));
+	update_option(TAL_EMAIL_RATE_LIMIT_OPTION, max(1, min(tal_email_queue_get_max_rate_limit(), $rate)), false);
+	wp_safe_redirect(add_query_arg('updated', '1', tal_settings_page_url('email-queue')));
 	exit;
 }
 add_action('admin_post_tal_email_queue_settings', 'tal_email_queue_handle_settings');
@@ -271,7 +263,7 @@ function tal_email_queue_handle_retry_failed()
 {
 	global $wpdb;
 
-	if (!current_user_can('manage_options')) {
+	if (!tal_settings_user_can_access()) {
 		wp_die(__('Insufficient permissions.', 'tender-library'));
 	}
 	check_admin_referer('tal_email_queue_retry_failed');
@@ -284,16 +276,16 @@ function tal_email_queue_handle_retry_failed()
 		['%s', '%d', '%s', '%s'],
 		['%s']
 	);
-	wp_safe_redirect(add_query_arg('retried', '1', admin_url('admin.php?page=tal-email-queue')));
+	wp_safe_redirect(add_query_arg('retried', '1', tal_settings_page_url('email-queue')));
 	exit;
 }
 add_action('admin_post_tal_email_queue_retry_failed', 'tal_email_queue_handle_retry_failed');
 
-function tal_email_queue_render_page()
+function tal_email_queue_render_content()
 {
 	global $wpdb;
 
-	if (!current_user_can('manage_options')) {
+	if (!tal_settings_user_can_access()) {
 		wp_die(__('Insufficient permissions.', 'tender-library'));
 	}
 
@@ -304,7 +296,6 @@ function tal_email_queue_render_page()
 	}
 	$failed = $wpdb->get_results("SELECT recipient, type, attempts, last_error FROM " . TENDER_TABLE_EMAIL_QUEUE . " WHERE status = 'failed' ORDER BY updated_at DESC LIMIT 20");
 
-	echo '<div class="wrap"><h1>' . esc_html__('Email Queue', 'tender-library') . '</h1>';
 	if (isset($_GET['updated'])) {
 		echo '<div class="notice notice-success"><p>' . esc_html__('Email rate limit saved.', 'tender-library') . '</p></div>';
 	}
@@ -316,7 +307,7 @@ function tal_email_queue_render_page()
 	echo '<form method="post" action="' . esc_url(admin_url('admin-post.php')) . '">';
 	wp_nonce_field('tal_email_queue_settings');
 	echo '<input type="hidden" name="action" value="tal_email_queue_settings" />';
-	echo '<table class="form-table"><tr><th scope="row"><label for="tal_email_rate_limit">' . esc_html__('Maximum emails per minute', 'tender-library') . '</label></th><td><input id="tal_email_rate_limit" name="tal_email_rate_limit" type="number" min="1" max="50" value="' . esc_attr((string) tal_email_queue_get_rate_limit()) . '" /> <p class="description">' . esc_html__('The server allows 50 emails per minute. The default of 40 reserves capacity for other WordPress emails.', 'tender-library') . '</p></td></tr></table>';
+	echo '<table class="form-table"><tr><th scope="row"><label for="tal_email_rate_limit">' . esc_html__('Maximum emails per minute', 'tender-library') . '</label></th><td><input id="tal_email_rate_limit" name="tal_email_rate_limit" type="number" min="1" max="' . esc_attr((string) tal_email_queue_get_max_rate_limit()) . '" value="' . esc_attr((string) tal_email_queue_get_rate_limit()) . '" /> <p class="description">' . esc_html__('Set a delivery limit that matches your email provider. The default reserves capacity for other WordPress emails.', 'tender-library') . '</p></td></tr></table>';
 	submit_button(__('Save Changes', 'tender-library'));
 	echo '</form>';
 
@@ -331,5 +322,4 @@ function tal_email_queue_render_page()
 		}
 		echo '</tbody></table>';
 	}
-	echo '</div>';
 }

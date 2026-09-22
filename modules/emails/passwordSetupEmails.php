@@ -22,19 +22,6 @@ function tal_password_setup_default_body()
 	);
 }
 
-function tal_password_setup_register_menu()
-{
-	add_submenu_page(
-		'tender-library',
-		__('Password Setup Emails', 'tender-library'),
-		__('Password Setup Emails', 'tender-library'),
-		'manage_options',
-		'tal-password-setup-emails',
-		'tal_password_setup_render_page'
-	);
-}
-add_action('admin_menu', 'tal_password_setup_register_menu');
-
 function tal_password_setup_get_subject_template()
 {
 	return get_option(TAL_PASSWORD_SETUP_SUBJECT_OPTION, tal_password_setup_default_subject());
@@ -163,7 +150,7 @@ function tal_password_setup_send_email_to_user($user, $subject_template, $body_t
 
 function tal_password_setup_handle_save()
 {
-	if (!current_user_can('manage_options')) {
+	if (!tal_settings_user_can_access()) {
 		wp_die(__('Insufficient permissions.', 'tender-library'));
 	}
 
@@ -179,14 +166,14 @@ function tal_password_setup_handle_save()
 	update_option(TAL_PASSWORD_SETUP_SUBJECT_OPTION, $subject, false);
 	update_option(TAL_PASSWORD_SETUP_BODY_OPTION, $body, false);
 
-	wp_safe_redirect(add_query_arg('tal_password_setup_saved', '1', admin_url('admin.php?page=tal-password-setup-emails')));
+	wp_safe_redirect(add_query_arg('tal_password_setup_saved', '1', tal_settings_page_url('password-setup')));
 	exit;
 }
 add_action('admin_post_tal_password_setup_save', 'tal_password_setup_handle_save');
 
 function tal_password_setup_handle_send()
 {
-	if (!current_user_can('manage_options')) {
+	if (!tal_settings_user_can_access()) {
 		wp_die(__('Insufficient permissions.', 'tender-library'));
 	}
 
@@ -222,14 +209,14 @@ function tal_password_setup_handle_send()
 		'timestamp' => current_time('mysql'),
 	], 10 * MINUTE_IN_SECONDS);
 
-	wp_safe_redirect(admin_url('admin.php?page=tal-password-setup-emails'));
+	wp_safe_redirect(tal_settings_page_url('password-setup'));
 	exit;
 }
 add_action('admin_post_tal_password_setup_send', 'tal_password_setup_handle_send');
 
-function tal_password_setup_render_page()
+function tal_password_setup_render_content()
 {
-	if (!current_user_can('manage_options')) {
+	if (!tal_settings_user_can_access()) {
 		wp_die(__('Insufficient permissions.', 'tender-library'));
 	}
 
@@ -242,8 +229,6 @@ function tal_password_setup_render_page()
 	$skipped_count = max(0, $total_imported - $total_emailable);
 	$last_result = get_transient('tal_password_setup_last_result');
 
-	echo '<div class="wrap">';
-	echo '<h1>' . esc_html__('Password Setup Emails', 'tender-library') . '</h1>';
 	echo '<p>' . esc_html__('Send imported users a secure WordPress password reset link so they can create a password for the new website.', 'tender-library') . '</p>';
 
 	if (!empty($_GET['tal_password_setup_saved'])) {
@@ -305,7 +290,6 @@ function tal_password_setup_render_page()
 	);
 	echo '</form>';
 
-	echo '</div>';
 }
 
 function tal_password_setup_queue_email_for_user($user, $subject_template, $body_template)

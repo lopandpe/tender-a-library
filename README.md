@@ -1,6 +1,6 @@
 # Tender Library
 
-Private WordPress plugin for small local libraries. It provides book/event custom post types, Carbon Fields metadata, lending and reservation workflows, user/profile pages, search blocks, event feeds, email reminders, and CSV migration tools.
+Private WordPress plugin for small local libraries. It provides book/event custom post types, Carbon Fields metadata, lending and reservation workflows, user/profile pages, search blocks, event feeds, a rate-limited transactional email queue, and CSV migration tools.
 
 This plugin is **not** distributed through WordPress.org. The first install is done manually from a ZIP file. Future releases are delivered through a private update metadata endpoint and can be installed from the WordPress dashboard.
 
@@ -213,6 +213,24 @@ tender_library_version
 ```
 
 Current migration logic only records the installed version. Add version-gated migrations there when schema/data changes are needed.
+
+## Library Settings
+
+Site administrators manage migration and email tools from:
+
+```text
+WordPress Admin > Biblioteca > Settings
+```
+
+The page has three tabs:
+
+- **CSV Migration** imports legacy sections, books, users, lendings, and calls. Migration jobs run in small background batches and can be monitored or stopped from this tab.
+- **Email Queue** shows pending, processing, failed, and sent transactional emails. Set the maximum emails per minute to match the mail provider, and retry failed emails after resolving the delivery problem.
+- **Password Setup Emails** lets administrators edit the password-reset email template and queue messages for every remaining imported user with a valid, non-placeholder email address.
+
+Queued email delivery uses WordPress cron. Ensure the site receives regular traffic or configure a real server cron to call WordPress cron; otherwise queued messages will wait until cron runs. Each queue item is retried up to four times with an increasing delay. Password-reset links are generated only when the queued email is dispatched, and an imported user is marked emailed only after successful delivery.
+
+Previous direct menu URLs for migration and email tools redirect to their corresponding Settings tab.
 
 ## Manual Test Checklist
 

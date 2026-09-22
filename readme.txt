@@ -20,7 +20,9 @@ Tender Library extends WordPress with:
 * Library operations: lendings, reservations, profile and dashboard pages
 * REST endpoints for frontend search and filters
 * Custom Gutenberg blocks for book/event display
-* Email notifications related to reservations and overdue returns
+* Rate-limited transactional email queue for reservation, lending, overdue-return, and password-setup notifications
+* Email Queue controls for delivery rate, queue status, failed-message inspection, and retries
+* Password setup email templates and queued password-reset delivery for imported users
 * CSV migration tools for importing legacy library data (books, users, lendings, calls, sections, languages, media)
 
 Carbon Fields is included as a Composer dependency in `vendor/`, so users do not need to install a second Carbon Fields plugin.
@@ -111,6 +113,22 @@ Recommended branch/release workflow:
 
 == Frequently Asked Questions ==
 
+= Where are migration and email settings? =
+
+Go to **Dashboard → Biblioteca → Settings**. The page has tabs for:
+
+* **CSV Migration**: run, monitor, or stop background migration jobs.
+* **Email Queue**: inspect queue status, choose the maximum emails per minute for the site’s mail provider, and retry failed messages.
+* **Password Setup Emails**: customize the email template and queue password-reset emails for imported users who have not yet been emailed.
+
+The legacy direct menu URLs redirect to their matching Settings tab.
+
+= How does the email queue work? =
+
+Tender Library sends its transactional messages through a WordPress-cron queue rather than sending a large batch during a browser request. The worker runs once per minute, respects the configured emails-per-minute limit, and retries failed messages up to four times with an increasing delay.
+
+For reliable delivery, make sure WordPress cron runs regularly. Low-traffic sites should configure a server cron to trigger WordPress cron. Password-reset links are generated when a queued message is dispatched, and imported users are marked as emailed only after a successful delivery.
+
 = Do users need to install Carbon Fields separately? =
 
 No. Carbon Fields is bundled through Composer in `vendor/`.
@@ -121,7 +139,7 @@ Because only compiled assets are needed in production. `node_modules/` is develo
 
 = How do I import legacy data from CSV? =
 
-Go to **Dashboard → Biblioteca → CSV Migration**.
+Go to **Dashboard → Biblioteca → Settings → CSV Migration**.
 
 Features:
 * Dry-run mode (no data written) to preview counts and missing mappings.

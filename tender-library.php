@@ -165,6 +165,7 @@ function tender_bootstrap()
 			"modules/emails/lendingHasReservation",
 			"modules/emails/reservationIsAvailableNow",
 			"modules/emails/passwordSetupEmails",
+			"modules/settingsPage",
 			"modules/tender-event/eventFeeds",
 			"modules/tender-event/customPostEvent",
 			"modules/tender-event/tenderEventFields",

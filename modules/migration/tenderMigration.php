@@ -22,19 +22,6 @@ add_action('wp_ajax_tal_migration_job_status', 'tal_migration_ajax_job_status');
 add_action('wp_ajax_tal_migration_cancel_job', 'tal_migration_ajax_cancel_job');
 add_action('tal_migration_process_job', 'tal_migration_process_job_runner', 10, 1);
 
-function tal_migration_register_menu()
-{
-	add_submenu_page(
-		'tender-library',
-		__('CSV Migration', 'tender-library'),
-		__('CSV Migration', 'tender-library'),
-		'manage_options',
-		'tal-csv-migration',
-		'tal_migration_render_page'
-	);
-}
-add_action('admin_menu', 'tal_migration_register_menu');
-
 function tal_migration_ensure_storage()
 {
 	static $checked = false;
@@ -346,7 +333,7 @@ function tal_migration_store_last_result_from_job($job)
 
 function tal_migration_ajax_job_status()
 {
-	if (!current_user_can('manage_options')) {
+	if (!tal_settings_user_can_access()) {
 		wp_send_json_error(['message' => __('Insufficient permissions.', 'tender-library')], 403);
 	}
 
@@ -398,7 +385,7 @@ function tal_migration_cancel_job($job_id)
 
 function tal_migration_ajax_cancel_job()
 {
-	if (!current_user_can('manage_options')) {
+	if (!tal_settings_user_can_access()) {
 		wp_send_json_error(['message' => __('Insufficient permissions.', 'tender-library')], 403);
 	}
 
@@ -433,10 +420,10 @@ function tal_migration_render_job_panel($job)
 	echo '<div style="max-width:720px;background:#e2e4e7;height:18px;border-radius:999px;overflow:hidden;">';
 	echo '<div data-tal-job-progress-bar style="background:#2271b1;height:100%;width:' . esc_attr((string) $job['progress_percent']) . '%;"></div>';
 	echo '</div>';
-	echo '<p data-tal-job-progress-text>' . esc_html(sprintf('%d%% · %d / %d rows', $job['progress_percent'], $job['processed_rows'], $job['total_rows'])) . '</p>';
+	echo '<p data-tal-job-progress-text>' . esc_html(sprintf(__('%1$d%% · %2$d / %3$d rows', 'tender-library'), $job['progress_percent'], $job['processed_rows'], $job['total_rows'])) . '</p>';
 	echo '<p data-tal-job-counts>';
 	echo esc_html(sprintf(
-		'Created: %d · Updated: %d · Skipped: %d · Errors: %d',
+		__('Created: %1$d · Updated: %2$d · Skipped: %3$d · Errors: %4$d', 'tender-library'),
 		$job['created_count'],
 		$job['updated_count'],
 		$job['skipped_count'],
@@ -450,7 +437,7 @@ function tal_migration_render_job_panel($job)
 	foreach ((array) $job['step_totals'] as $step => $count) {
 		echo '<div style="background:#fff;border:1px solid #ccd0d4;padding:8px 10px;">';
 		echo '<strong>' . esc_html(ucfirst($step)) . '</strong><br />';
-		echo '<span>' . esc_html(sprintf('%d rows', (int) $count)) . '</span>';
+		echo '<span>' . esc_html(sprintf(_n('%d row', '%d rows', (int) $count, 'tender-library'), (int) $count)) . '</span>';
 		echo '</div>';
 	}
 	echo '</div>';
@@ -478,6 +465,14 @@ function tal_migration_render_job_panel_script($job)
 	$ajax_url = admin_url('admin-ajax.php');
 	$nonce = wp_create_nonce('tal_migration_job_status');
 	$job_id = (int) $job['id'];
+	$strings = [
+		'progress' => __('%1$d%% · %2$d / %3$d rows', 'tender-library'),
+		'counts' => __('Created: %1$d · Updated: %2$d · Skipped: %3$d · Errors: %4$d', 'tender-library'),
+		'recent_errors' => __('Recent errors', 'tender-library'),
+		'stop_migration' => __('Stop Migration', 'tender-library'),
+		'migration_stopped' => __('Migration Stopped', 'tender-library'),
+		'stopping' => __('Stopping...', 'tender-library'),
+	];
 
 	echo '<script>';
 	echo '(function(){';
@@ -486,18 +481,20 @@ function tal_migration_render_job_panel_script($job)
 	echo 'const jobId=' . wp_json_encode($job_id) . ';';
 	echo 'const ajaxUrl=' . wp_json_encode($ajax_url) . ';';
 	echo 'const nonce=' . wp_json_encode($nonce) . ';';
+	echo 'const strings=' . wp_json_encode($strings) . ';';
+	echo 'function format(template,...values){return template.replace(/%(\d+)\$d/g,(_,index)=>String(values[Number(index)-1] ?? ""));}';
 	echo 'const cancelButton=panel.querySelector("[data-tal-cancel-job]");';
 	echo 'function esc(str){const div=document.createElement("div");div.textContent=String(str ?? "");return div.innerHTML;}';
 	echo 'function render(job){';
 	echo 'const statusEl=panel.querySelector("[data-tal-job-status]"); if(statusEl){statusEl.textContent=job.status;}';
 	echo 'const stepEl=panel.querySelector("[data-tal-job-step]"); if(stepEl){stepEl.textContent=job.current_step || "-";}';
 	echo 'const barEl=panel.querySelector("[data-tal-job-progress-bar]"); if(barEl){barEl.style.width=(job.progress_percent || 0)+"%";}';
-	echo 'const progressEl=panel.querySelector("[data-tal-job-progress-text]"); if(progressEl){progressEl.textContent=(job.progress_percent || 0)+"% · "+(job.processed_rows || 0)+" / "+(job.total_rows || 0)+" rows";}';
-	echo 'const countsEl=panel.querySelector("[data-tal-job-counts]"); if(countsEl){countsEl.textContent="Created: "+(job.created_count || 0)+" · Updated: "+(job.updated_count || 0)+" · Skipped: "+(job.skipped_count || 0)+" · Errors: "+(job.error_count || 0);}';
-	echo 'const errorsEl=panel.querySelector("[data-tal-job-errors]"); if(errorsEl){if(job.errors && job.errors.length){errorsEl.innerHTML="<div class=\"tal-migration-log-box\"><p><strong>Recent errors</strong></p><ul>"+job.errors.slice(-20).map((item)=>"<li>"+esc(item)+"</li>").join("")+"</ul></div>";}else{errorsEl.innerHTML="";}}';
-	echo 'if(cancelButton){cancelButton.disabled=!(job.status==="pending" || job.status==="running"); cancelButton.textContent=(job.status==="pending" || job.status==="running") ? "Stop Migration" : "Migration Stopped";}';
+	echo 'const progressEl=panel.querySelector("[data-tal-job-progress-text]"); if(progressEl){progressEl.textContent=format(strings.progress,job.progress_percent || 0,job.processed_rows || 0,job.total_rows || 0);}';
+	echo 'const countsEl=panel.querySelector("[data-tal-job-counts]"); if(countsEl){countsEl.textContent=format(strings.counts,job.created_count || 0,job.updated_count || 0,job.skipped_count || 0,job.error_count || 0);}';
+	echo 'const errorsEl=panel.querySelector("[data-tal-job-errors]"); if(errorsEl){if(job.errors && job.errors.length){errorsEl.innerHTML="<div class=\"tal-migration-log-box\"><p><strong>"+esc(strings.recent_errors)+"</strong></p><ul>"+job.errors.slice(-20).map((item)=>"<li>"+esc(item)+"</li>").join("")+"</ul></div>";}else{errorsEl.innerHTML="";}}';
+	echo 'if(cancelButton){cancelButton.disabled=!(job.status==="pending" || job.status==="running"); cancelButton.textContent=(job.status==="pending" || job.status==="running") ? strings.stop_migration : strings.migration_stopped;}';
 	echo '}';
-	echo 'function cancelJob(){ if(!cancelButton || cancelButton.disabled){return;} cancelButton.disabled=true; cancelButton.textContent="Stopping..."; const body=new URLSearchParams(); body.set("action","tal_migration_cancel_job"); body.set("job_id", String(jobId)); body.set("nonce", nonce); fetch(ajaxUrl,{method:"POST",credentials:"same-origin",headers:{"Content-Type":"application/x-www-form-urlencoded; charset=UTF-8"},body:body.toString()}).then((res)=>res.json()).then((payload)=>{ if(payload && payload.success && payload.data && payload.data.job){ render(payload.data.job); } else { cancelButton.disabled=false; cancelButton.textContent="Stop Migration"; } }).catch(()=>{ cancelButton.disabled=false; cancelButton.textContent="Stop Migration"; }); }';
+	echo 'function cancelJob(){ if(!cancelButton || cancelButton.disabled){return;} cancelButton.disabled=true; cancelButton.textContent=strings.stopping; const body=new URLSearchParams(); body.set("action","tal_migration_cancel_job"); body.set("job_id", String(jobId)); body.set("nonce", nonce); fetch(ajaxUrl,{method:"POST",credentials:"same-origin",headers:{"Content-Type":"application/x-www-form-urlencoded; charset=UTF-8"},body:body.toString()}).then((res)=>res.json()).then((payload)=>{ if(payload && payload.success && payload.data && payload.data.job){ render(payload.data.job); } else { cancelButton.disabled=false; cancelButton.textContent=strings.stop_migration; } }).catch(()=>{ cancelButton.disabled=false; cancelButton.textContent=strings.stop_migration; }); }';
 	echo 'function poll(){';
 	echo 'fetch(ajaxUrl+"?action=tal_migration_job_status&job_id="+encodeURIComponent(jobId)+"&nonce="+encodeURIComponent(nonce),{credentials:"same-origin"})';
 	echo '.then((res)=>res.json())';
@@ -513,9 +510,9 @@ function tal_migration_render_job_panel_script($job)
 	echo '</script>';
 }
 
-function tal_migration_render_page()
+function tal_migration_render_content()
 {
-	if (!current_user_can('manage_options')) {
+	if (!tal_settings_user_can_access()) {
 		wp_die(__('Insufficient permissions.', 'tender-library'));
 	}
 
@@ -540,8 +537,6 @@ function tal_migration_render_page()
 		'biblio_calls.csv' => 'calls-template.csv',
 	];
 
-	echo '<div class="wrap">';
-	echo '<h1>' . esc_html__('CSV Migration', 'tender-library') . '</h1>';
 	echo '<p>' . esc_html__('Run one step at a time or the full migration. Jobs are processed in the background in small batches so large imports can continue safely without keeping the browser request open.', 'tender-library') . '</p>';
 	echo '<style>
 	.tal-migration-log-box {max-height:240px; overflow:auto; background:#fff; border:1px solid #ccd0d4; padding:10px 14px; margin:10px 0;}
@@ -621,11 +616,11 @@ function tal_migration_render_page()
 	.tal-migration-note {background:#f6f7f7; border:1px solid #ccd0d4; padding:12px 14px; margin:12px 0;}
 	</style>';
 	echo '<div class="tal-migration-steps">';
-	echo '<div class="tal-migration-step"><strong>1. Sections</strong>Taxonomy terms + numbers + hierarchy.</div>';
-	echo '<div class="tal-migration-step"><strong>2. Books</strong>Books + languages + cover downloads.</div>';
-	echo '<div class="tal-migration-step"><strong>3. Users</strong>WP users + meta.</div>';
-	echo '<div class="tal-migration-step"><strong>4. Lendings</strong>Custom table rows.</div>';
-	echo '<div class="tal-migration-step"><strong>5. Calls</strong>Custom table rows.</div>';
+	echo '<div class="tal-migration-step"><strong>' . esc_html__('1. Sections', 'tender-library') . '</strong>' . esc_html__('Taxonomy terms, numbers, and hierarchy.', 'tender-library') . '</div>';
+	echo '<div class="tal-migration-step"><strong>' . esc_html__('2. Books', 'tender-library') . '</strong>' . esc_html__('Books, languages, and cover downloads.', 'tender-library') . '</div>';
+	echo '<div class="tal-migration-step"><strong>' . esc_html__('3. Users', 'tender-library') . '</strong>' . esc_html__('WordPress users and metadata.', 'tender-library') . '</div>';
+	echo '<div class="tal-migration-step"><strong>' . esc_html__('4. Lendings', 'tender-library') . '</strong>' . esc_html__('Custom table rows.', 'tender-library') . '</div>';
+	echo '<div class="tal-migration-step"><strong>' . esc_html__('5. Calls', 'tender-library') . '</strong>' . esc_html__('Custom table rows.', 'tender-library') . '</div>';
 	echo '</div>';
 	echo '<div class="tal-migration-note">';
 	echo '<label><input type="checkbox" name="tal_migration_dry_run" value="1" /> ' . esc_html__('Dry run (no data will be written)', 'tender-library') . '</label>';
@@ -646,12 +641,11 @@ function tal_migration_render_page()
 
 	echo '</form>';
 	tal_migration_render_job_panel_script($job);
-	echo '</div>';
 }
 
 function tal_migration_handle_run()
 {
-	if (!current_user_can('manage_options')) {
+	if (!tal_settings_user_can_access()) {
 		wp_die(__('Insufficient permissions.', 'tender-library'));
 	}
 
@@ -676,7 +670,7 @@ function tal_migration_handle_run()
 			'messages' => [],
 			'errors' => [__('Another migration job is already running.', 'tender-library')],
 		], 30 * MINUTE_IN_SECONDS);
-		wp_safe_redirect(admin_url('admin.php?page=tal-csv-migration'));
+		wp_safe_redirect(tal_settings_page_url('migration'));
 		exit;
 	}
 
@@ -696,12 +690,12 @@ function tal_migration_handle_run()
 			'messages' => [],
 			'errors' => [$job->get_error_message()],
 		], 30 * MINUTE_IN_SECONDS);
-		wp_safe_redirect(admin_url('admin.php?page=tal-csv-migration'));
+		wp_safe_redirect(tal_settings_page_url('migration'));
 		exit;
 	}
 
 	tal_migration_schedule_job($job['id'], 1);
-	wp_safe_redirect(admin_url('admin.php?page=tal-csv-migration&job_id=' . $job['id']));
+	wp_safe_redirect(tal_settings_page_url('migration', ['job_id' => $job['id']]));
 	exit;
 }
 add_action('admin_post_tal_run_migration', 'tal_migration_handle_run');
@@ -797,7 +791,7 @@ function tal_migration_template_download_url($template)
 
 function tal_migration_handle_template_download()
 {
-	if (!current_user_can('manage_options')) {
+	if (!tal_settings_user_can_access()) {
 		wp_die(__('Insufficient permissions.', 'tender-library'));
 	}
 
