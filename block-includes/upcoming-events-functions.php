@@ -17,10 +17,10 @@ function tender_upcoming_events_render_callback( $attributes, $content = '', $bl
 }
 
 function tender_render_events_list( $limit = 5 ) {
-    $now_ts       = current_time( 'timestamp' );
-    $range_start  = $now_ts;
+    $now          = current_datetime();
+    $range_start  = $now->getTimestamp();
     // For example, next 6 months
-    $range_end    = strtotime( '+6 months', $now_ts );
+    $range_end    = $now->modify( '+6 months' )->getTimestamp();
 
     $occurrences = tender_get_event_occurrences_in_range( $range_start, $range_end, $limit );
 
@@ -46,7 +46,7 @@ function tender_render_events_list( $limit = 5 ) {
                 )
             );
 
-            $is_recurrent = (bool) carbon_get_post_meta( $post_id, 'tender_event_recurrent' );
+            $is_recurrent = tender_upcoming_events_is_recurrent( $post_id );
 
             echo '<li class="tender-events-list__item">';
                 echo '<div class="tender-events-list__thumb">';
@@ -61,7 +61,7 @@ function tender_render_events_list( $limit = 5 ) {
                 echo '<div class="tender-events-list__content">';
 
                     echo '<span class="tender-events-list__time">';
-                        echo '<strong>' . esc_html( date_i18n( 'd M.', $ts ) ) . '</strong> - ' . esc_html( date_i18n( 'H:i', $ts ) );
+                        echo '<strong>' . esc_html( wp_date( 'd M.', $ts ) ) . '</strong> - ' . esc_html( wp_date( 'H:i', $ts ) );
                     echo '</span>';
                     echo '<a href="' . esc_url( get_permalink( $post_id ) ) . '" class="tender-events-list__link">';
                         echo esc_html( get_the_title( $post_id ) );
@@ -82,22 +82,25 @@ function tender_render_events_list( $limit = 5 ) {
 }
 
 function tender_render_events_calendar() {
-    $year  = isset( $_GET['te_year'] ) ? (int) $_GET['te_year'] : (int) date_i18n( 'Y' );
-    $month = isset( $_GET['te_month'] ) ? (int) $_GET['te_month'] : (int) date_i18n( 'n' );
+    $now   = current_datetime();
+    $year  = isset( $_GET['te_year'] ) ? absint( $_GET['te_year'] ) : (int) $now->format( 'Y' );
+    $month = isset( $_GET['te_month'] ) ? absint( $_GET['te_month'] ) : (int) $now->format( 'n' );
+    $month = min( 12, max( 1, $month ) );
 
-    $first_of_month = mktime( 0, 0, 0, $month, 1, $year );
-    $days_in_month  = (int) date( 't', $first_of_month );
-    $start_week_day = (int) date( 'N', $first_of_month ); // 1–7 (Mon–Sun)
+    $first_of_month = $now->setDate( $year, $month, 1 )->setTime( 0, 0, 0 );
+    $last_of_month  = $first_of_month->modify( 'last day of this month' )->setTime( 23, 59, 59 );
+    $days_in_month  = (int) $last_of_month->format( 'j' );
+    $start_week_day = (int) $first_of_month->format( 'N' ); // 1–7 (Mon–Sun)
 
-    $month_start_ts = $first_of_month;
-    $month_end_ts   = mktime( 23, 59, 59, $month, $days_in_month, $year );
+    $month_start_ts = $first_of_month->getTimestamp();
+    $month_end_ts   = $last_of_month->getTimestamp();
 
     $occurrences = tender_get_event_occurrences_in_range( $month_start_ts, $month_end_ts );
 
     // Group by day
     $events_by_day = array();
     foreach ( $occurrences as $occ ) {
-        $day = (int) date( 'j', $occ['ts'] );
+        $day = (int) wp_date( 'j', $occ['ts'] );
         if ( ! isset( $events_by_day[ $day ] ) ) {
             $events_by_day[ $day ] = array();
         }
@@ -129,7 +132,7 @@ function tender_render_events_calendar() {
         <div class="tender-calendar__header">
 
             <h2 class="tender-calendar__title">
-                <?php echo esc_html( date_i18n( 'F Y', $first_of_month ) ); ?>
+                <?php echo esc_html( wp_date( 'F Y', $month_start_ts ) ); ?>
             </h2>
             <?php if ( function_exists( 'tal_render_calendar_feed_links' ) ) : ?>
                 <?php echo tal_render_calendar_feed_links(); ?>
@@ -175,14 +178,14 @@ function tender_render_events_calendar() {
                                 $event_post = $occ['post'];
                                 $ts         = $occ['ts'];
                                 $post_id    = $event_post->ID;
-                                $is_recurrent = (bool) carbon_get_post_meta( $post_id, 'tender_event_recurrent' );
+                                $is_recurrent = tender_upcoming_events_is_recurrent( $post_id );
                                 ?>
                                 <li class="tender-calendar__event">
                                     <a href="<?php echo esc_url( get_permalink( $post_id ) ); ?>"
                                        class="tender-calendar__event-link"><?php echo esc_html( get_the_title( $post_id ) ); ?></a>
 
                                     <span class="tender-calendar__event-time">
-                                        &nbsp;(<?php echo esc_html( date_i18n( 'H:i', $ts ) ); ?>)
+                                        &nbsp;(<?php echo esc_html( wp_date( 'H:i', $ts ) ); ?>)
                                     </span>
 
                                     <?php if ( $is_recurrent ) : ?>
@@ -214,6 +217,9 @@ function tender_render_events_calendar() {
  */
 function tender_get_event_occurrences_in_range( $range_start_ts, $range_end_ts, $limit = 0 ) {
     $occurrences = array();
+    $timezone    = wp_timezone();
+    $range_start = ( new DateTimeImmutable( '@' . (int) $range_start_ts ) )->setTimezone( $timezone );
+    $range_end   = ( new DateTimeImmutable( '@' . (int) $range_end_ts ) )->setTimezone( $timezone );
 
     // Query: todos los eventos ordenados por fecha de inicio
     $events_q = new WP_Query( array(
@@ -236,24 +242,24 @@ function tender_get_event_occurrences_in_range( $range_start_ts, $range_end_ts, 
                 continue;
             }
 
-            $start_ts = strtotime( $raw_start );
-            if ( ! $start_ts ) {
+            $start = tender_upcoming_events_parse_datetime( $raw_start, $timezone );
+            if ( ! $start ) {
                 continue;
             }
 
             
             // Recurrente semanal o no
-            $is_recurrent = (bool) carbon_get_post_meta( $post_id, 'tender_event_recurrent' ); // checkbox yes/no
+            $is_recurrent = tender_upcoming_events_is_recurrent( $post_id );
 
             // Fecha fin de evento recurrente (date, Y-m-d)
             $raw_end = carbon_get_post_meta( $post_id, 'tender_event_enddate' ); // ← CAMBIO
 
             if ( ! $is_recurrent ) {
                 // Evento “simple”: solo cuenta si cae dentro del rango
-                if ( $start_ts >= $range_start_ts && $start_ts <= $range_end_ts ) {
+                if ( $start >= $range_start && $start <= $range_end ) {
                     $occurrences[] = array(
                         'post' => $event_obj,
-                        'ts'   => $start_ts,
+                        'ts'   => $start->getTimestamp(),
                     );
                 }
                 continue;
@@ -263,30 +269,34 @@ function tender_get_event_occurrences_in_range( $range_start_ts, $range_end_ts, 
             // Si no hay fecha de fin, limitamos al final del rango para no generar infinitos
             if ( $raw_end ) {
                 // tender_event_enddate se guarda como Y-m-d → añadimos fin de día
-                $until_ts = strtotime( $raw_end . ' 23:59:59' );
+                $until = tender_upcoming_events_parse_datetime( $raw_end . ' 23:59:59', $timezone );
+                if ( ! $until ) {
+                    continue;
+                }
             } else {
-                $until_ts = $range_end_ts;
+                $until = $range_end;
             }
 
             // Si termina antes de que empiece el rango, nada que hacer
-            if ( $until_ts < $range_start_ts ) {
+            if ( $until < $range_start ) {
                 continue;
             }
 
-            $occ_ts = $start_ts;
+            $occurrence = $start;
 
             // Avanzamos hasta llegar al inicio del rango
-            while ( $occ_ts < $range_start_ts && $occ_ts <= $until_ts ) {
-                $occ_ts = strtotime( '+1 week', $occ_ts );
+            while ( $occurrence < $range_start && $occurrence <= $until ) {
+                // DateTime keeps the event's local wall-clock time over DST changes.
+                $occurrence = $occurrence->modify( '+1 week' );
             }
 
             // Generamos ocurrencias dentro del rango
-            while ( $occ_ts >= $range_start_ts && $occ_ts <= $range_end_ts && $occ_ts <= $until_ts ) {
+            while ( $occurrence >= $range_start && $occurrence <= $range_end && $occurrence <= $until ) {
                 $occurrences[] = array(
                     'post' => $event_obj,
-                    'ts'   => $occ_ts,
+                    'ts'   => $occurrence->getTimestamp(),
                 );
-                $occ_ts = strtotime( '+1 week', $occ_ts );
+                $occurrence = $occurrence->modify( '+1 week' );
             }
         }
         wp_reset_postdata();
@@ -302,4 +312,25 @@ function tender_get_event_occurrences_in_range( $range_start_ts, $range_end_ts, 
     }
 
     return $occurrences;
+}
+
+/**
+ * Parses stored Carbon Fields event values in the site's configured timezone.
+ */
+function tender_upcoming_events_parse_datetime( $value, DateTimeZone $timezone ) {
+    foreach ( array( 'Y-m-d H:i:s', 'Y-m-d H:i', 'Y-m-d' ) as $format ) {
+        $date = DateTimeImmutable::createFromFormat( '!' . $format, (string) $value, $timezone );
+        $errors = DateTimeImmutable::getLastErrors();
+        if ( $date instanceof DateTimeImmutable && ( false === $errors || ( 0 === $errors['warning_count'] && 0 === $errors['error_count'] ) ) ) {
+            return $date;
+        }
+    }
+
+    return false;
+}
+
+function tender_upcoming_events_is_recurrent( $post_id ) {
+    $value = carbon_get_post_meta( $post_id, 'tender_event_recurrent' );
+
+    return in_array( $value, array( 'yes', '1', 1, true ), true );
 }

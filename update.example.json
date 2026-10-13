@@ -1,17 +1,17 @@
 {
   "name": "Tender Library",
   "slug": "tender-library",
-  "version": "1.0.1",
-  "download_url": "https://example.com/tender-library/releases/tender-library-1.0.1.zip",
-  "sha256": "REPLACE_WITH_THE_RELEASE_ZIP_SHA256",
+  "version": "1.0.7",
+  "download_url": "https://localanarquistamagdalena.org/tender-library/releases/tender-library-1.0.7.zip",
+  "sha256": "6b9f0e4ee7e99636847b952ef82d806243ef22bdd92d1b51d52a31c195414c7a",
   "requires": "6.4",
   "tested": "6.6",
   "requires_php": "8.1",
-  "last_updated": "2026-06-02",
-  "homepage": "https://example.com/tender-library",
+  "last_updated": "2026-10-13",
+  "homepage": "https://localanarquistamagdalena.org/",
   "author": "Luis Gómez",
   "sections": {
     "description": "Private library/tender management plugin.",
-    "changelog": "<h4>1.0.1</h4><ul><li>Describe changes here.</li></ul>"
+    "changelog": "<h4>1.0.7</h4><ul><li>Fixed upcoming recurring events so their weekly occurrences use the WordPress site timezone and retain their local time across daylight-saving changes.</li></ul>"
   }
 }
