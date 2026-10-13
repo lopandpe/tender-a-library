@@ -18,7 +18,8 @@ function tender_upcoming_events_render_callback( $attributes, $content = '', $bl
 
 function tender_render_events_list( $limit = 5 ) {
     $now          = current_datetime();
-    $range_start  = $now->getTimestamp();
+    // "Upcoming" includes the whole current local day, regardless of event time.
+    $range_start  = $now->setTime( 0, 0, 0 )->getTimestamp();
     // For example, next 6 months
     $range_end    = $now->modify( '+6 months' )->getTimestamp();
 
