@@ -65,6 +65,8 @@ function create_librarian_role()
 		array(
 			// Para acceder al Dashboard, ver su perfil
 			'read' => true,
+			// Standard Media Library access: browse, select, and upload files.
+			'upload_files' => true,
 
 			// Capacidades de tu Custom Post Type (CPT) tender_book (igual que antes):
 			'edit_tender_book'               => true,
@@ -158,6 +160,7 @@ function tal_add_librarian_caps() {
         if (!$role) {
             continue;
         }
+        $role->add_cap('upload_files');
         $role->add_cap('manage_tender_sections');
         $role->add_cap('edit_tender_sections');
         $role->add_cap('delete_tender_sections');

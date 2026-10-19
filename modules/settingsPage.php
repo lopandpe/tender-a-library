@@ -43,6 +43,7 @@ function tal_settings_render_page()
 
 	$tabs = [
 		'migration' => __('CSV Migration', 'tender-library'),
+		'signature-labels' => __('Signature Labels', 'tender-library'),
 		'email-queue' => __('Email Queue', 'tender-library'),
 		'password-setup' => __('Password Setup Emails', 'tender-library'),
 	];
@@ -61,6 +62,9 @@ function tal_settings_render_page()
 	echo '</nav>';
 
 	switch ($tab) {
+		case 'signature-labels':
+			tal_signature_pdf_render_settings();
+			break;
 		case 'email-queue':
 			tal_email_queue_render_content();
 			break;

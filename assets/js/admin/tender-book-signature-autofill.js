@@ -21,7 +21,8 @@
 
 	function generateSig2(title) {
 		var clean = removeAccents(title).toLowerCase();
-		clean = clean.replace(/^(el|lo|la|los|las|un|una|uno|unos|the|a|si)\b\s*/i, '');
+		var nonFilingWords = 'el|la|lo|los|las|un|una|unos|unas|yo|tu|ella|ello|nosotros|nosotras|vosotros|vosotras|ellos|ellas|me|te|se|nos|os|le|les|mi|mis|ti|tus|su|sus|mio|mia|mios|mias|tuyo|tuya|tuyos|tuyas|suyo|suya|suyos|suyas|nuestro|nuestra|nuestros|nuestras|vuestro|vuestra|vuestros|vuestras|este|esta|estos|estas|ese|esa|esos|esas|aquel|aquella|aquellos|aquellas|esto|eso|aquello|quien|quienes|que|cual|cuales|algo|alguien|nadie|nada|todo|toda|todos|todas';
+		clean = clean.replace(new RegExp('^(?:(?:' + nonFilingWords + '|[a-z0-9]{1,2})\\b(?:\\s*[,.:;!?¡¿]\\s*|\\s*)?)+', 'i'), '');
 		clean = clean.trim();
 		if (!clean || clean.length < 3) {
 			return '';

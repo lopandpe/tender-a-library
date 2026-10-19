@@ -56,7 +56,9 @@ function generate_tender_sig1($author)
 function generate_tender_sig2($title)
 {
 	$title = remove_accents($title);
-	$shortened_title = preg_replace("/^(el|lo|la|los|las|un|una|uno|unos|un|the|a|si)\b\ */i", "", strtolower($title));
+	// Ignore leading articles, pronouns, and words shorter than three characters.
+	$non_filing_words = 'el|la|lo|los|las|un|una|unos|unas|yo|tu|ella|ello|nosotros|nosotras|vosotros|vosotras|ellos|ellas|me|te|se|nos|os|le|les|mi|mis|ti|tus|su|sus|mio|mia|mios|mias|tuyo|tuya|tuyos|tuyas|suyo|suya|suyos|suyas|nuestro|nuestra|nuestros|nuestras|vuestro|vuestra|vuestros|vuestras|este|esta|estos|estas|ese|esa|esos|esas|aquel|aquella|aquellos|aquellas|esto|eso|aquello|quien|quienes|que|cual|cuales|algo|alguien|nadie|nada|todo|toda|todos|todas';
+	$shortened_title = preg_replace('/^(?:(?:' . $non_filing_words . '|[[:alnum:]]{1,2})\b(?:\s*[,.:;!?¡¿]\s*|\s*)?)+/i', '', strtolower($title));
 	$signature = substr($shortened_title, 0, 3);
 	return strtolower($signature);
 }

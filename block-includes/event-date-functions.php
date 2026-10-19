@@ -1,33 +1,46 @@
 <?php
 
-function tender_event_parse_start_ts( $post_id ): int {
-	$raw = carbon_get_post_meta( $post_id, 'tender_event_startdate' );
-	if ( ! $raw ) return 0;
-	return is_numeric( $raw ) ? (int) $raw : ( ( $ts = strtotime( (string) $raw ) ) ? (int) $ts : 0 );
-}
-
-function tender_event_parse_until_ts( $post_id, int $fallback_range_end = 0 ): int {
-	$raw_end = carbon_get_post_meta( $post_id, 'tender_event_enddate' ); // Y-m-d
-	if ( $raw_end && ( $until = strtotime( $raw_end . ' 23:59:59' ) ) ) {
-		return (int) $until;
+function tender_event_parse_datetime( $value, DateTimeZone $timezone ) {
+	foreach ( array( 'Y-m-d H:i:s', 'Y-m-d H:i', 'Y-m-d' ) as $format ) {
+		$date   = DateTimeImmutable::createFromFormat( '!' . $format, (string) $value, $timezone );
+		$errors = DateTimeImmutable::getLastErrors();
+		if ( $date instanceof DateTimeImmutable && ( false === $errors || ( 0 === $errors['warning_count'] && 0 === $errors['error_count'] ) ) ) {
+			return $date;
+		}
 	}
-	return $fallback_range_end > 0 ? $fallback_range_end : PHP_INT_MAX;
+
+	return false;
 }
 
-function tender_event_next_occurrence_ts( int $start_ts, int $from_ts, int $until_ts ): int {
-	if ( ! $start_ts ) return 0;
-	if ( $from_ts <= $start_ts ) return ( $start_ts <= $until_ts ) ? $start_ts : 0;
+function tender_event_next_occurrence( DateTimeImmutable $start, DateTimeImmutable $from, $until = null ) {
+	$occurrence = $start;
 
-	$week = WEEK_IN_SECONDS;
-	$k    = (int) floor( ( $from_ts - $start_ts ) / $week );
-	$occ  = $start_ts + ( $k * $week );
-	if ( $occ < $from_ts ) $occ += $week;
+	while ( $occurrence < $from && ( ! $until || $occurrence <= $until ) ) {
+		// Calendar arithmetic retains the local event time across DST changes.
+		$occurrence = $occurrence->modify( '+1 week' );
+	}
 
-	return ( $occ <= $until_ts ) ? $occ : 0;
+	return ( ! $until || $occurrence <= $until ) ? $occurrence : false;
+}
+
+function tender_event_is_valid_occurrence( DateTimeImmutable $candidate, DateTimeImmutable $start, $until = null ): bool {
+	$occurrence = $start;
+
+	while ( $occurrence < $candidate && ( ! $until || $occurrence <= $until ) ) {
+		$occurrence = $occurrence->modify( '+1 week' );
+	}
+
+	return $occurrence == $candidate && ( ! $until || $candidate <= $until );
+}
+
+function tender_event_is_recurrent( $post_id ): bool {
+	$value = carbon_get_post_meta( $post_id, 'tender_event_recurrent' );
+
+	return in_array( $value, array( 'yes', '1', 1, true ), true );
 }
 
 function tender_event_recurrence_label_from_start_ts( int $start_ts ): string {
-	$weekday = date_i18n( 'l', $start_ts );
+	$weekday = wp_date( 'l', $start_ts );
 	return sprintf(
 		/* translators: %s: weekday (e.g., martes) */
 		__( 'Recurring event, every %s', 'tender-library' ),
@@ -43,15 +56,19 @@ function tender_event_date_render_callback( $block_attributes, $block_content ) 
 	);
 
 	$post_id      = get_the_ID();
-	$is_recurrent = (bool) carbon_get_post_meta( $post_id, 'tender_event_recurrent' );
+	$is_recurrent = tender_event_is_recurrent( $post_id );
+	$timezone     = wp_timezone();
+	$raw_start    = carbon_get_post_meta( $post_id, 'tender_event_startdate' );
+	$start         = tender_event_parse_datetime( $raw_start, $timezone );
 
-	$start_ts = tender_event_parse_start_ts( $post_id );
-	if ( ! $start_ts ) return '';
+	if ( ! $start ) return '';
+
+	$start_ts = $start->getTimestamp();
 
 	$date_format = get_option( 'date_format' );
 	$time_format = get_option( 'time_format' );
 
-	$forced_occ_ts = isset( $_GET['occ_ts'] ) ? (int) $_GET['occ_ts'] : 0;
+	$forced_occ_ts = isset( $_GET['occ_ts'] ) ? absint( $_GET['occ_ts'] ) : 0;
 
 	// Defaults (evento no recurrente)
 	$occ_ts    = $start_ts;
@@ -60,18 +77,25 @@ function tender_event_date_render_callback( $block_attributes, $block_content ) 
 
 	if ( $is_recurrent ) {
 		$raw_end  = carbon_get_post_meta( $post_id, 'tender_event_enddate' ); // Y-m-d (se lee una vez)
-		$until_ts = $raw_end ? (int) strtotime( $raw_end . ' 23:59:59' ) : PHP_INT_MAX;
+		$until    = $raw_end ? tender_event_parse_datetime( $raw_end . ' 23:59:59', $timezone ) : null;
+		$from     = current_datetime();
+		$forced   = $forced_occ_ts ? ( new DateTimeImmutable( '@' . $forced_occ_ts ) )->setTimezone( $timezone ) : null;
 
-		$occ_ts = $forced_occ_ts ?: tender_event_next_occurrence_ts( $start_ts, current_time( 'timestamp' ), $until_ts );
-		$occ_ts = $occ_ts ?: $start_ts;
+		if ( $forced && tender_event_is_valid_occurrence( $forced, $start, $until ) ) {
+			$occurrence = $forced;
+		} else {
+			$occurrence = tender_event_next_occurrence( $start, $from, $until );
+		}
+
+		$occ_ts = $occurrence ? $occurrence->getTimestamp() : $start_ts;
 
 		$rec_label = tender_event_recurrence_label_from_start_ts( $start_ts );
 
-		if ( $raw_end && ( $end_day_ts = strtotime( $raw_end . ' 00:00:00' ) ) ) {
+		if ( $until ) {
 			$end_date = sprintf(
 				/* translators: %s: end date */
 				__( 'until %s', 'tender-library' ),
-				date_i18n( $date_format, $end_day_ts )
+				wp_date( $date_format, $until->setTime( 0, 0, 0 )->getTimestamp() )
 			);
 		}
 	}
@@ -83,7 +107,7 @@ function tender_event_date_render_callback( $block_attributes, $block_content ) 
 
 			<p class="tender-event-date">
 				<span class="tender-event-date__dt">
-					<?php echo esc_html( date_i18n( $date_format . ' ' . $time_format, $occ_ts ) ); ?>
+					<?php echo esc_html( wp_date( $date_format . ' ' . $time_format, $occ_ts ) ); ?>
 				</span>
 			</p>
 
@@ -99,7 +123,7 @@ function tender_event_date_render_callback( $block_attributes, $block_content ) 
 					// Mismo resultado visual: "Since {date} {until ...}"
 					echo esc_html( sprintf(
 						__( 'Since %1$s %2$s', 'tender-library' ),
-						date_i18n( $date_format, $start_ts ),
+							wp_date( $date_format, $start_ts ),
 						$end_date
 					) );
 					?>

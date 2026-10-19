@@ -34,6 +34,9 @@ rsync -a "$ROOT_DIR/" "$PACKAGE_DIR/" \
   --exclude '.git' \
   --exclude '.git/' \
   --exclude '.github/' \
+  --exclude '.agents/' \
+  --exclude '.aws/' \
+  --exclude '.codex/' \
   --exclude '.gitignore' \
   --exclude '.distignore' \
   --exclude '.editorconfig' \

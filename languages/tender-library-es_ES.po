@@ -31,6 +31,10 @@ msgctxt "Post Type Singular Name"
 msgid "Book"
 msgstr "Libro"
 
+#: modules/tender-book/tenderBookSignaturePdf.php
+msgid "Print signatures (PDF)"
+msgstr "Imprimir tejuelos (PDF)"
+
 #: modules/customPostBook.php:16
 msgid "Books"
 msgstr "Libros"

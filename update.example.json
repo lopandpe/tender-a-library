@@ -1,9 +1,9 @@
 {
   "name": "Tender Library",
   "slug": "tender-library",
-  "version": "1.0.8",
-  "download_url": "https://localanarquistamagdalena.org/tender-library/releases/tender-library-1.0.8.zip",
-  "sha256": "5469234fc97ec238a6c0ac919c3a7f73a454d6dc68fed21837da53ee9a5c65ea",
+  "version": "1.0.10",
+  "download_url": "https://localanarquistamagdalena.org/tender-library/releases/tender-library-1.0.10.zip",
+  "sha256": "de58729753a2efc07a3d41eaa6a170ef3621bc4011a3f6a5a2ba7aeffcbe9807",
   "requires": "6.4",
   "tested": "6.6",
   "requires_php": "8.1",
@@ -12,6 +12,6 @@
   "author": "Luis Gómez",
   "sections": {
     "description": "Private library/tender management plugin.",
-    "changelog": "<h4>1.0.8</h4><ul><li>Upcoming Events now includes all events scheduled for the current day, regardless of their start time or whether they recur.</li><li>Fixed recurring events so their weekly occurrences use the WordPress site timezone and retain their local time across daylight-saving changes.</li></ul>"
+    "changelog": "<h4>1.0.10</h4><ul><li>Added printable PDF signature labels (tejuelos) from the Books list, with configurable A4 label layout settings.</li><li>Librarians can use the WordPress Media Library to browse, select, and upload files.</li><li>Improved automatic title signatures by ignoring initial articles, pronouns, and short words.</li><li>Fixed recurring-event dates on event detail pages by calculating weekly occurrences in the WordPress site timezone.</li></ul>"
   }
 }
