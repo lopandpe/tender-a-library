@@ -1,0 +1,17 @@
+{
+  "name": "Tender Library",
+  "slug": "tender-library",
+  "version": "1.0.10",
+  "download_url": "https://localanarquistamagdalena.org/tender-library/releases/tender-library-1.0.10.zip",
+  "sha256": "de58729753a2efc07a3d41eaa6a170ef3621bc4011a3f6a5a2ba7aeffcbe9807",
+  "requires": "6.4",
+  "tested": "6.6",
+  "requires_php": "8.1",
+  "last_updated": "2026-10-19",
+  "homepage": "https://localanarquistamagdalena.org/",
+  "author": "Luis Gómez",
+  "sections": {
+    "description": "Private library/tender management plugin.",
+    "changelog": "<h4>1.0.10</h4><ul><li>Added printable PDF signature labels (tejuelos) from the Books list, with configurable A4 label layout settings.</li><li>Librarians can use the WordPress Media Library to browse, select, and upload files.</li><li>Improved automatic title signatures by ignoring initial articles, pronouns, and short words.</li><li>Fixed recurring-event dates on event detail pages by calculating weekly occurrences in the WordPress site timezone.</li></ul>"
+  }
+}
