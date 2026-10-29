@@ -48,6 +48,7 @@ rsync -a "$ROOT_DIR/" "$PACKAGE_DIR/" \
   --exclude 'bin/' \
   --exclude 'temp/' \
   --exclude 'release-build/' \
+  --exclude 'release/' \
   --exclude '*.zip' \
   --exclude '*.tar.gz' \
   --exclude '*.sql' \

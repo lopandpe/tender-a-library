@@ -111,6 +111,9 @@ function tender_api_build_query_args($request) {
         $final_args["fields"] = null; // get full posts
         $final_args["posts_per_page"] = $posts_per_page;
         $final_args["paged"] = $paged;
+        // The REST response uses WP_Query's found-post and page counts.
+        // Keep counting enabled for the catalog listing so its pagination works.
+        $final_args["no_found_rows"] = false;
         return $final_args;
     }
 

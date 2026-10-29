@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.0.11
+- Restored pagination for the unfiltered public library catalog when more than one results page exists.
+
 ## 1.0.6
 - Hardened lending actions, profile output escaping, and update-package integrity verification.
 

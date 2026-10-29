@@ -2,6 +2,8 @@
 
 Private WordPress plugin for small local libraries. It provides book/event custom post types, Carbon Fields metadata, lending and reservation workflows, user/profile pages, search blocks, event feeds, a rate-limited transactional email queue, and CSV migration tools.
 
+Current release: **1.0.11**. This release restores pagination on the unfiltered library catalog whenever the catalog has more than one page of books.
+
 This plugin is **not** distributed through WordPress.org. The first install is done manually from a ZIP file. Future releases are delivered through a private update metadata endpoint and can be installed from the WordPress dashboard.
 
 ## Requirements
@@ -204,7 +206,7 @@ It:
 The source of truth for runtime code is:
 
 ```php
-define('TENDER_LIBRARY_VERSION', '1.0.0');
+define('TENDER_LIBRARY_VERSION', '1.0.11');
 ```
 
 The plugin stores the installed version in:
