@@ -54,7 +54,7 @@ function tal_export_lendings_to_csv() {
         __('Signature', 'tender-library'),
         __('Loan date', 'tender-library'),
         __('Estimated return date', 'tender-library')
-    ]);
+    ], ',', '"', '\\');
 
     foreach ($lendings as $lending) {
         // USER
@@ -78,7 +78,7 @@ function tal_export_lendings_to_csv() {
             get_tender_signature($lending->book_id),
             $lending->lending_date,
             $lending->stimated_return_date,
-        ]);
+        ], ',', '"', '\\');
     }
     fclose($output);
     exit;

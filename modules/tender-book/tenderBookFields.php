@@ -88,9 +88,11 @@ Container::make('post_meta', 'Signatura')
 		Field::make('text', 'tender_book_sig1', __('Author', 'tender-library'))
 			->set_required(true)
 			->set_attribute('placeholder', 'XXX')
+			->set_attribute('maxLength', 3)
 			->set_help_text(__('First three letters of the author\'s first surname.', 'tender-library')),
 		Field::make('text', 'tender_book_sig2', __('Title', 'tender-library'))
 			->set_required(true)
 			->set_attribute('placeholder', 'yyy')
+			->set_attribute('maxLength', 3)
 			->set_help_text(__('Three first letters of the first word of more than three characters in the title, avoiding articles.', 'tender-library')),
 	));

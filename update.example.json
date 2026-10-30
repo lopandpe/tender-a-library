@@ -1,17 +1,17 @@
 {
   "name": "Tender Library",
   "slug": "tender-library",
-  "version": "1.0.11",
-  "download_url": "https://localanarquistamagdalena.org/tender-library/releases/tender-library-1.0.11.zip",
-  "sha256": "6a415a066a95b685613c476df2c0a591162b75978e8ce93086b18359ef21b166",
+  "version": "1.0.12",
+  "download_url": "https://localanarquistamagdalena.org/tender-library/releases/tender-library-1.0.12.zip",
+  "sha256": "5eb8fd716a92ac25397152e1d956880047e057cf8774449fa7719efaffc5a77d",
   "requires": "6.4",
   "tested": "6.6",
   "requires_php": "8.1",
-  "last_updated": "2026-10-29",
+  "last_updated": "2026-10-30",
   "homepage": "https://localanarquistamagdalena.org/",
   "author": "Luis Gómez",
   "sections": {
     "description": "Private library/tender management plugin.",
-    "changelog": "<h4>1.0.11</h4><ul><li>Restored pagination for the unfiltered public library catalog when more than one results page exists.</li></ul>"
+    "changelog": "<h4>1.0.12</h4><ul><li>Fixed active-lendings CSV exports for current PHP versions.</li><li>Limited the author and title components of book signatures to three characters.</li></ul>"
   }
 }

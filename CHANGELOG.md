@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.12
+- Fixed active-lendings CSV exports for current PHP versions by explicitly setting the CSV escape parameter.
+- Limited the author and title components of book signatures to three characters.
+
 ## 1.0.11
 - Restored pagination for the unfiltered public library catalog when more than one results page exists.
 
